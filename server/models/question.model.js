@@ -10,7 +10,7 @@ const QuestionSchema = new mongoose.Schema({
 
     question: {type: String,
     required: [true, "Question is required"],
-    minlength: [5, "Question must be at least 10 characters long"],
+    minlength: [2, "Question must be at least 10 characters long"],
     maxlength: [100, "Question must be less than 100 characters long"],},
 
     answer: {type: String,
@@ -18,16 +18,16 @@ const QuestionSchema = new mongoose.Schema({
     minlength: [2, "Answer must be at least 10 characters long"],
     maxlength: [100, "Answer must be less than 100 characters long"],},
 
+    submitted_by: {
+    type: String,
+    required: [true, "Submitted by is required"],
+    },
+
     public_id: {
         type: String,
         required: [true, "Public ID is required"],
         },
 
-    difficulty: {type: Number,
-    required: [true, "Difficulty is required"],
-    min: [1, "Difficulty must be between 1 and 5"],
-    max: [5, "Difficulty must be between 1 and 5"]
-    },
 
 },{timestamps: true});
 

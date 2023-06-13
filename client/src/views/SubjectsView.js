@@ -3,7 +3,6 @@ import NavBar from "../components/NavBar";
 import SubjectTable from "../components/SubjectTable";
 import SubjectForm from "../components/SubjectForm";
 
-
 const SubjectsView = props => {
 
 

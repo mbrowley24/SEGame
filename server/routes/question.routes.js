@@ -4,5 +4,7 @@ const {authenticate } = require('../config/jwt.config');
 module.exports =(app)=>{
 
     app.get('/api/v1/questions/subjects', authenticate, QuestionController.get_subjects);
+    app.get('/api/v1/questions/subjects/:id', authenticate, QuestionController.get_questions_by_subject);
+    app.post('/api/v1/questions/subjects/:id', authenticate, QuestionController.new_question);
 };
 

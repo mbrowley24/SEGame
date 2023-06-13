@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import useHttp from "../hooks/useHttp";
 import {useSelector} from "react-redux";
+import {Link} from "react-router-dom";
 
 const SubjectTableBody = props => {
     const update = useSelector((state)=>state.miscData.update);
@@ -38,9 +39,10 @@ const SubjectTableBody = props => {
         <tbody>
         {
             subjects.map((subject, index) => {
+
                 return(
                     <tr key={index}>
-                        <td>{subject.name}</td>
+                        <td><Link to={`/subjects/${subject.public_id}/questions/subject`}>{subject.name}</Link></td>
                         <td>{subject.questions}</td>
                     </tr>
                 )
