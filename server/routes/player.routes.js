@@ -1,5 +1,5 @@
 const SEController = require('../controllers/player.controller');
-const {authenticate } = require('../config/jwt.config');
+
 
 
 

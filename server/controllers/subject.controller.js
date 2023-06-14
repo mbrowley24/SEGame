@@ -64,11 +64,42 @@ module.exports = {
             console.log(err);
             res.status(400).json(err);
         }
+        
+    },
+    get_all_subjects: async (req, res) => {
 
+            try{
 
+                let results  = await Subject.find({},'name public_id -_id', {} );
 
+                if(results !== null){
 
+                    const subjectResults = [...results]
 
+                    let result = [];
 
-    }
+                    for(let i = 0; i < subjectResults.length; i++){
+                            result.push({
+                                name: subjectResults[i].name,
+                                id: subjectResults[i].public_id
+                            })
+                    }
+
+                    console.log(result);
+                    console.log("Successfully retrieved all subjects");
+                    res.status(200).json(result);
+
+                }else{
+
+                    console.log("No subjects found");
+                    res.status(400).json({message: "No subjects found"});
+                }
+
+            }catch(err){
+
+                console.log("Failed to retrieve all subjects");
+                console.log(err);
+                res.status(400).json(err);
+            }
+    },
 };

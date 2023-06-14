@@ -21,6 +21,7 @@ require('./config/config');
 require('./routes/player.routes')(app);
 require('./routes/question.routes')(app);
 require('./routes/subject.routes')(app);
+require('./routes/category.routes')(app);
 
 const server = app.listen(process.env.PORT || 8000, () => {
     console.log(`Listening on port ${process.env.PORT}`);

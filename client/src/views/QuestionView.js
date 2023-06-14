@@ -55,6 +55,7 @@ const QuestionView = props => {
                     <QuestionForm
                         question={question}
                         submit={submit}
+                        setQuestion={setQuestion}
                         inputChange={inputChange}
                     />
                 </div>

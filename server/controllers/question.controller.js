@@ -39,8 +39,6 @@ module.exports = {
 
             }
 
-            console.log(returnSubjects);
-
             res.json({subjects: returnSubjects});
 
         }catch(err){
@@ -66,9 +64,7 @@ module.exports = {
         const question = new Question(req.body);
 
         question.public_id = public_id.randomString(30);
-
-        console.log(req.cookies);
-        console.log(process.env.JWT_SECRET);
+        
         const decodedJWT = jwt.decode(req.cookies.usertoken, process.env.JWT_SECRET);
 
         const userId = decodedJWT._id;
@@ -149,12 +145,28 @@ module.exports = {
                 const questions =
                     await Question.find({subject: subject.name}, 'question answer public_id -_id');
 
+                const question_results = [...questions];
+
+                const question_obj_list = [];
+
+                for(let i = 0; i < question_results.length; i++){
+
+                        const question_obj = {
+                            question: question_results[i].question,
+                            answer: question_results[i].answer,
+                            id: question_results[i].public_id
+                        }
+
+                        question_obj_list.push(question_obj);
+
+                }
+
                 const questionData={
                     subject: {
                         name: subject.name,
                         id: subject.public_id
                     },
-                    questions: questions
+                    questions: question_obj_list
 
                 }
 

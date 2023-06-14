@@ -4,6 +4,8 @@ import Login from "./components/Login";
 import Dashboard from "./views/Dashboard";
 import SubjectsView from "./views/SubjectsView";
 import QuestionView from "./views/QuestionView";
+import CategoryView from "./views/CategoryView";
+
 
 function App() {
   return (
@@ -16,6 +18,9 @@ function App() {
                 <Route path={''} element={<SubjectsView/>} />
                 <Route path={':id/questions'} element={<SubjectsView/>} />
                 <Route path={':id/questions/subject'} element={<QuestionView/>}/>
+            </Route>
+            <Route path={'/categories'}>
+                <Route path={''} element={<CategoryView/>} />
             </Route>
           </Routes>
       </Router>

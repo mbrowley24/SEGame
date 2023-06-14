@@ -1,31 +1,81 @@
 const mongoose = require('mongoose');
-const question = require('./question.model');
+
+
 
 const CategorySchema = new mongoose.Schema({
 
+    public_id: {
+        type: String,
+        required: [true, "Public ID is required"],
+    },
     name: {
         type: String,
         required: [true, "Category name is required"],
     },
+    completed: {
+        type: Boolean,
+        default: false,
+    },
+    created_by:{
+            username:{
+                type: String,
+                required: [true, "Username is required"],
+            },
+            name:{
+                type: String,
+                required: [true, "Name is required"],
+            }
+    },
+    edited_by:{
+            username:{
+                type: String,
+                required: [true, "Username is required"],
+            },
+            name:{
+                type: String,
+                required: [true, "Name is required"],
+            }
+    },
     200: {
-        type: question,
-        required: [true, "Question is required"],
+        question:{
+            type: String,
+        },
+        answer: {
+            type: String,
+        }
     },
     400: {
-        type: question,
-        required: [true, "Question is required"],
+        question:{
+            type: String,
+        },
+        answer: {
+            type: String,
+        }
     },
     600:{
-        type: question,
-        required: [true, "Question is required"],
+        question:{
+            type: String,
+        },
+        answer: {
+            type: String,
+        }
+
     },
     800:{
-        type: question,
-        required: [true, "Question is required"],
+        question:{
+            type: String,
+        },
+        answer: {
+            type: String,
+        }
     },
     1000:{
-        type: question,
-        required: [true, "Question is required"],
+        question:{
+            type: String,
+        },
+        answer: {
+            type: String,
+        }
     }
 });
 

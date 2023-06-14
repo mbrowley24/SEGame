@@ -4,6 +4,7 @@ import SubjectTable from "../components/SubjectTable";
 import {BsFillPlusSquareFill} from "react-icons/bs";
 import {Link} from "react-router-dom";
 import { IconContext } from "react-icons";
+import CategoryTable from "../components/CategoryTable";
 
 const Dashboard = props => {
 
@@ -25,7 +26,15 @@ const Dashboard = props => {
                         <SubjectTable/>
                     </div>
                     <div className={'col'}>
-
+                        <h4 className={'text-center text-capitalize'}>
+                            categories
+                            <Link className={'ms-1'} to={'/categories'}>
+                                <IconContext.Provider value={{ color: "grey", size: ".75em" }}>
+                                    <BsFillPlusSquareFill/>
+                                </IconContext.Provider>
+                            </Link>
+                        </h4>
+                        <CategoryTable/>
                     </div>
                 </div>
             </div>
