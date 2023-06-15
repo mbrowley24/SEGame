@@ -20,7 +20,7 @@ const CategoryQuestions = props => {
                 }
 
                 const applyData = (res)=>{
-                    console.log(res.data.questions)
+                    console.log(res)
                     setQuestions(res.data.questions)
                 }
 
@@ -41,7 +41,10 @@ const CategoryQuestions = props => {
                 questions.map((item, index)=>{
 
                     return(
-                        <QuestionAnswer key={index} data={item}/>
+                        <QuestionAnswer key={`${index}${item.id}`}
+                                        data={item}
+
+                        />
                     )
                 })
             }

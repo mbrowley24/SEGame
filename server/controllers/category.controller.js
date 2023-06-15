@@ -1,6 +1,6 @@
 const Category = require('../models/category.model');
 const Player = require('../models/player.model');
-const randomString = require("../config/randomstring.config");
+const {randomString} = require("../config/randomstring.config");
 const jwt = require('jsonwebtoken');
 
 module.exports = {
@@ -11,25 +11,53 @@ module.exports = {
 
         const player_id = decodedJwt.payload._id;
 
-        if(player_id.length > 0){
+        const category = new Category(req.body);
 
-            try{
+        category.public_id = randomString(30);
 
-                const player = await Player.findOne({_id: player_id})
+        // console.log("Player ID: ", player_id);
+        // console.log("Request body: ", req.body);
 
-                console.log(req.body)
+        try{
 
+            let count = Category.find().count({public_id: category.public_id});
 
-                category.created_by.username = player.username;
-                category.created_by.name = `${player.first_name} ${player.last_name}`;
+            while(count > 0){
 
-
-            }catch(err){
-                console.log("Failed to find player", err);
-                res.status(400).json(err);
+                category.public_id = randomString(30);
+                count = Category.find().count({public_id: category.public_id});
             }
 
+            if(player_id.length > 0){
+
+                try{
+
+                    const player = await Player.findOne({_id: player_id})
+
+
+                    category.created_by.username = player.username;
+                    category.created_by.name = `${player.first_name} ${player.last_name}`;
+                    category.edited_by.username = player.username;
+                    category.edited_by.name = `${player.first_name} ${player.last_name}`;
+
+                    category.save()
+
+                }catch(err){
+                    console.log("Failed to find player", err);
+                    res.status(400).json(err);
+                }
+
+            }
+
+
+        }catch(err){
+
+            console.log("Failed to check for public_id", err);
+            res.status(400).json(err);
         }
+
+
+
 
     },
     my_categories: async (req, res) => {
@@ -43,10 +71,24 @@ module.exports = {
 
             try{
 
-                const categories = await Category.find({"created_by.username": username}, "name completed",{});
+                const categories = await Category.find({"created_by.username": username}, "name public_id",{});
 
-                console.log("Found categories: ", categories);
-                res.status(200).json(categories);
+                const categoryResults = [...categories];
+                const results = [];
+
+                for(let i = 0; i < categoryResults.length; i++){
+
+                    console.log("Category: ", categoryResults[i]);
+                    const categoryObj = {
+                        name: categoryResults[i].name,
+                        id: categoryResults[i].public_id,
+                    }
+
+                    results.push(categoryObj);
+                }
+
+                // console.log("Found categories: ", results);
+                res.status(200).json(results);
 
             }catch(err){
                 console.log("Failed to find player", err);
@@ -58,5 +100,71 @@ module.exports = {
             console.log("Player must be logged in required");
             res.status(400).json({message: "Player ID is required"});
         }
-    }
+    },
+    get_category: async (req, res) => {
+
+            const id = req.params.id;
+
+            try{
+
+                const category = await Category.findOne({public_id: id},"-_id",{});
+
+                if(category){
+
+                    const categoryObj = {
+                        name: category.name,
+                        id: category.public_id,
+                        200: category[200],
+                        400: category[400],
+                        600: category[600],
+                        800: category[800],
+                        1000: category[1000],
+                    }
+
+                    //console.log("Found category: ", categoryObj);
+                    res.status(200).json(categoryObj);
+
+                }else{
+                    console.log("Failed to find category");
+                    res.status(400).json({message: "Failed to find category"});
+                }
+
+            }catch(err){
+                console.log("Failed to find category", err);
+                res.status(400).json(err);
+            }
+    },
+    update_category: async (req, res) => {
+
+        console.log("Request body: ", req.body);
+        const id = req.params.id;
+
+        try{
+                console.log("Request body: ", req.body);
+                const category = await Category.findOne({public_id: id});
+
+                if(category){
+
+                    category.name = req.body.name;
+                    category[200] = req.body[200];
+                    category[400] = req.body[400];
+                    category[600] = req.body[600];
+                    category[800] = req.body[800];
+                    category[1000] = req.body[1000];
+
+                    category.save();
+
+                    console.log("Updated category: ", category);
+                    res.status(200).json({message: "Category updated"});
+
+                }else{
+                    console.log("Failed to find category");
+                    res.status(400).json({message: "Failed to find category"});
+                }
+
+        }catch (err){
+            console.log("Failed to update category", err);
+            res.status(400).json(err);
+        }
+    },
 };

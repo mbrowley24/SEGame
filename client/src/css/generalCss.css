@@ -1,0 +1,12 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.height100{
+    height: 100vh;
+}
+
+.height30{
+    height: 30vh;
+}

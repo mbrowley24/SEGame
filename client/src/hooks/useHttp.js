@@ -73,11 +73,43 @@ const useHttp = () =>{
         }
 
     },[navigate])
+    const putHttpRequest = useCallback(async(requestConfig, applyData)=>{
+
+        try{
+            setIsLoading(true);
+            const httpResponse = await  axios.put(`http://localhost:8000/api/v1/${requestConfig.url}`, requestConfig.data , {
+                withCredentials: true,
+
+            })
+
+            // console.log(requestConfig)
+            if(httpResponse.status === 200){
+                applyData(httpResponse);
+                setIsLoading(false)
+            }
+
+        }catch(error){
+            console.log(error)
+            if(error && error.response){
+
+                if(error.response.status === 403){
+
+                    navigate('/login')
+                }else{
+
+                    applyData(error);
+                }
+
+            }
+        }
+
+    },[navigate])
 
     return(
         {
             getHttpRequest,
             postHttpRequest,
+            putHttpRequest,
             isLoading
         }
     )

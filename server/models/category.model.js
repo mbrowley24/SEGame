@@ -12,10 +12,6 @@ const CategorySchema = new mongoose.Schema({
         type: String,
         required: [true, "Category name is required"],
     },
-    completed: {
-        type: Boolean,
-        default: false,
-    },
     created_by:{
             username:{
                 type: String,

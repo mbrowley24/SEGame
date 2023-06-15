@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 import useHttp from "../hooks/useHttp";
 
 
@@ -18,8 +19,8 @@ const CategoryTableBody = props => {
             }
 
             const applyData = (res)=>{
-
-                console.log(res);
+                console.log(res.data);
+                setCategories(res.data)
             }
 
             await getHttpRequest(configRequest, applyData);
@@ -31,6 +32,17 @@ const CategoryTableBody = props => {
     return(
         <tbody>
 
+            {categories.map((category, index) => {
+                console.log(category);
+                return(
+                    <tr key={index}>
+
+                        <td className={'text-capitalize text-center'}>
+                            <Link to={`/categories/${category.id}`}>{category.name}</Link></td>
+                    </tr>
+                )
+                })
+            }
         </tbody>
     )
 };

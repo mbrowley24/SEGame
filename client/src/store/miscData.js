@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const miscData = {
-    update: true
+    update: true,
+    types: [],
 }
 
 
@@ -15,7 +16,21 @@ const miscSlice = createSlice({
 
             state.update = !state.update;
 
-        },
+        },setTypes(state, action) {
+
+            const types = [...state.types];
+
+            const filteredTypes = types.filter(type => type === action.payload);
+
+            if(filteredTypes.length === 0) {
+                types.push(action.payload);
+            }
+
+            state.types = [...types];
+
+            console.log(JSON.parse(JSON.stringify(state.types)));
+
+        }
 
     }
 })

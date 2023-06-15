@@ -1,16 +1,17 @@
-import React, {useCallback, useState} from "react";
-import useCategory from "../hooks/useCategory";
+import React, {useCallback, useState, useEffect} from "react";
 import NavBar from "../components/NavBar";
 import CategoryForm from "../components/CategoryForm";
 import QuestionsFromCategory from "../components/QuestionsFromCategory";
+import useCategory from "../hooks/useCategory";
 import useHttp from "../hooks/useHttp";
-import {useNavigate} from "react-router-dom";
+import {useParams, useNavigate} from "react-router-dom";
 
-const CategoryView = props => {
+const CategoryEditView = props => {
+    const {id} = useParams();
     const navigate = useNavigate();
     const {categoryInitialState, categoryInputRegex} = useCategory();
     const [category, setCategory] = useState(categoryInitialState);
-    const {postHttpRequest} = useHttp();
+    const {getHttpRequest,putHttpRequest} = useHttp();
 
     const inputChange = useCallback((e)=>{
         const {name, value} = e.target;
@@ -25,24 +26,50 @@ const CategoryView = props => {
 
     },[category])
 
+
+    useEffect(() => {
+
+        const controller = new AbortController();
+
+        (async () => {
+
+                const configRequest={
+                    url:`myCategories/${id}`,
+                    signal: controller.signal,
+                }
+
+                const applyData = (res)=>{
+                    console.log(res.data);
+                    setCategory(res.data)
+                }
+
+                await getHttpRequest(configRequest, applyData);
+        })();
+
+        return () => {
+            controller.abort();
+        };
+
+    }, [id]);
+
     const submit = async (e) =>{
         e.preventDefault();
         console.log(category);
         const configRequest={
-            url: 'myCategories',
+            url: `myCategories/${id}`,
             data: category
         }
 
         const applyData = (res)=>{
             console.log(res);
-            setCategory(categoryInitialState);
             navigate('/dashboard');
 
         }
 
-        await postHttpRequest(configRequest, applyData);
+        await putHttpRequest(configRequest, applyData);
 
     };
+
 
 
     return(
@@ -66,4 +93,4 @@ const CategoryView = props => {
     )
 };
 
-export default CategoryView;
+export default CategoryEditView;

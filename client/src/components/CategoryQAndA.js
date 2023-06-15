@@ -1,32 +1,47 @@
-import React, {useState} from "react";
+import React, {useMemo,useState} from "react";
 import {useDrop} from "react-dnd";
-
-
+import "../css/category.css"
+import useCategory from "../hooks/useCategory";
+import {useSelector} from "react-redux";
 const QuestionQAndA= props => {
     const {data, value, setCategory} = props;
+    const {duplicate} = useCategory();
+    const types = useSelector(state => state.miscData.types);
     const [view, setView] = useState(false);
+    const duplicateQuestion = useMemo(()=>duplicate(data, value), [data]);
     const [collect, drop] = useDrop(()=>({
-        accept: 'question',
+        accept: "question",
+
         drop: (item, monitor)=>{
+
             setCategory(prevState => {
 
                 return {
                     ...prevState,
-                    [value]: item.data
+                    [value]: item
                 }
-            })
-            console.log(item.data)
-            console.log(monitor)
+            });
         }
     }));
 
+
+
+
     return(
-        <div ref={drop} className={'border'}>
-            <div hidden={!view}>
-                <p>{data.question}</p>
+        <div ref={drop}
+             className={duplicateQuestion?
+             'd-flex height100  w-50 m-auto border justify-content-center overflow-auto p-1'
+                 :
+            'd-flex height100 border border-danger w-50 m-auto border justify-content-center overflow-auto p-1'
+        }
+                onMouseEnter={()=>setView(true)}
+                onMouseLeave={()=>setView(false)}
+        >
+            <div className={view?"": "align-self-center"} hidden={view}>
+                <p className={'text-center'}>{data[value].question}</p>
             </div>
-            <div hidden={view}>
-                <p>{data.answer}</p>
+            <div className={!view? "": "align-self-center"} hidden={!view}>
+                <p className={'text-center'}>{data[value].answer}</p>
             </div>
         </div>
     )

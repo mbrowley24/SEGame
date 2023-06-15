@@ -10,7 +10,7 @@ const SubjectForm = props => {
     const {postHttpRequest} = useHttp();
     const {subjectInputRegex, subjectValidation} = useSubject();
     const dispatch = useDispatch();
-    const update = useSelector((state)=>state.miscData.update);
+
 
     const inputChange = useCallback((e) => {
         console.log(e.target.value)
@@ -31,7 +31,7 @@ const SubjectForm = props => {
     }, [subject]);
 
     const submitSubject = async (e) => {
-        e.preventDefault();
+        
 
         if (subjectValidation(subject.payload)) {
 
@@ -50,6 +50,8 @@ const SubjectForm = props => {
 
                     }else{
                         setSubjectError("")
+                        dispatch(miscDataActions.setUpdate());
+
                     }
 
                 }

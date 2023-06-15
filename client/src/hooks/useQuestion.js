@@ -16,7 +16,7 @@ const useQuestion = () => {
             return false;
         }
 
-        const pattern = /^([A-Za-z0-9\s%^$#@+()!]){0,100}$/;
+        const pattern = /^([A-Za-z0-9\s%^,.\-$#@+()!]){0,100}$/;
 
         return pattern.test(text);
     }
@@ -39,7 +39,7 @@ const useQuestion = () => {
             return false;
         }
 
-        const pattern = /^([A-Za-z0-9\s%^$#@+()!]){2,100}$/;
+        const pattern = /^([A-Za-z0-9\s%^,.\-$#@+()!]){2,100}$/;
 
         return pattern.test(question.answer) && pattern.test(question.question);
     }

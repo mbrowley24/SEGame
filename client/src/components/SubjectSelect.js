@@ -20,7 +20,7 @@ const SubjectSelect = props => {
                 }
 
                 const applyData = (res)=>{
-                    console.log(res.data)
+                    //console.log(res.data)
                     setSubjects(res.data)
                 }
 
@@ -33,7 +33,7 @@ const SubjectSelect = props => {
     return(
         <React.Fragment>
             <select name="subject"
-                    className={'form-select'}
+                    className={'form-select w-50 m-auto'}
                     onChange={(e)=>inputChange(e)}>
                 <option className={'text-center text-capitalize'}
                         value=""

@@ -5,6 +5,7 @@ import Dashboard from "./views/Dashboard";
 import SubjectsView from "./views/SubjectsView";
 import QuestionView from "./views/QuestionView";
 import CategoryView from "./views/CategoryView";
+import CategoryEditView from "./views/CategoryEditView";
 
 
 function App() {
@@ -20,7 +21,8 @@ function App() {
                 <Route path={':id/questions/subject'} element={<QuestionView/>}/>
             </Route>
             <Route path={'/categories'}>
-                <Route path={''} element={<CategoryView/>} />
+                <Route path={''} element={<CategoryView/>}/>
+                <Route path={':id'} element={<CategoryEditView/>}/>
             </Route>
           </Routes>
       </Router>

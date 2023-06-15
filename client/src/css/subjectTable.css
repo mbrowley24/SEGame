@@ -12,7 +12,16 @@
 
 .tableFixHead thead th{
     position: sticky;
+    background-color: #fff;
+    opacity: 1;
     top: 0;
+}
+
+.sticky{
+    position: sticky;
+    top: auto;
+    background-color: #fff;
+    opacity: 1;
 }
 
 

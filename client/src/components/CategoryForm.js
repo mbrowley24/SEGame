@@ -1,28 +1,29 @@
-import React,{useState} from "react";
-import {useDrop, useDrag} from "react-dnd";
-import QuestionAnswer from "./QuestionAnswer";
+import React,{useMemo, useState} from "react";
 import CategoryQAndA from "./CategoryQAndA";
+import useCategory from "../hooks/useCategory";
 
 
 const CategoryForm = props => {
-    const {inputChange, category, setCategory} = props;
-
-
+    const {inputChange, category, setCategory, submit} = props;
+    const {questionValidation} = useCategory();
+    const validCategory = useMemo(()=>questionValidation(category),[category])
     return(
-        <form action="">
+        <form onSubmit={submit}>
             <div>
                 <label htmlFor="">name</label>
                 <input type="text"
                        name={'name'}
+                       maxLength={25}
+                       minLength={2}
                        value={category.name}
-                       className={'form-control w-25 m-auto'}
+                       className={'form-control w-50 m-auto text-center'}
                         onChange={(e)=>inputChange(e)}
                 />
             </div>
-            <div>
+            <div className={""}>
                 <label htmlFor="">$200</label>
                 <CategoryQAndA
-                    data={category[200]}
+                    data={category}
                     value={200}
                     setCategory={setCategory}
                 />
@@ -30,7 +31,7 @@ const CategoryForm = props => {
             <div>
                 <label htmlFor="">$400</label>
                 <CategoryQAndA
-                    data={category[400]}
+                    data={category}
                     value={400}
                     setCategory={setCategory}
                 />
@@ -38,7 +39,7 @@ const CategoryForm = props => {
             <div>
                 <label htmlFor="">$600</label>
                 <CategoryQAndA
-                    data={category[600]}
+                    data={category}
                     value={600}
                     setCategory={setCategory}
                 />
@@ -46,7 +47,7 @@ const CategoryForm = props => {
             <div>
                 <label htmlFor="">$800</label>
                 <CategoryQAndA
-                    data={category[800]}
+                    data={category}
                     value={800}
                     setCategory={setCategory}
                 />
@@ -55,10 +56,17 @@ const CategoryForm = props => {
             <div>
                 <label htmlFor="">$1000</label>
                 <CategoryQAndA
-                    data={category[1000]}
+                    data={category}
                     value={1000}
                     setCategory={setCategory}
                 />
+            </div>
+            <div className={'py-1'}>
+                <button
+                    className={'btn btn-sm btn-success'}
+                    disabled={!validCategory}
+
+                >submit</button>
             </div>
         </form>
     )
