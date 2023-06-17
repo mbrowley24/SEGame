@@ -9,7 +9,7 @@ const SubjectTableBody = props => {
     const {getHttpRequest} = useHttp();
 
     useEffect(() => {
-        console.log("update inner: " + JSON.parse(JSON.stringify(update)));
+
         const controller = new AbortController();
 
         (async () => {
@@ -19,7 +19,7 @@ const SubjectTableBody = props => {
             }
 
             const applyData = (res) => {
-                console.log(res);
+
                 setSubjects(res.data.subjects);
             }
 

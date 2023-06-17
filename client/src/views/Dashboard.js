@@ -1,6 +1,7 @@
 import React from "react";
 import NavBar from "../components/NavBar";
 import DashboardTopRow from "../components/DashboardTopRow";
+import DashboardBottomRow from "../components/DashboardBottomRow";
 
 const Dashboard = props => {
 
@@ -10,11 +11,8 @@ const Dashboard = props => {
             <h1>Jeopardy Dashboard</h1>
             <div className="container border">
                 <DashboardTopRow/>
-                <div className={'row'}>
-                    <div className={'col'}>
+                <DashboardBottomRow/>
 
-                    </div>
-                </div>
             </div>
         </div>
     )

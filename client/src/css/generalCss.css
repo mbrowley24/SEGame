@@ -7,6 +7,29 @@
     height: 100vh;
 }
 
+.height100Px{
+    height: 120px;
+}
+
+.text-small{
+    font-size: 0.7rem;
+}
+
+.height200{
+    height: 200vh;
+}
+
 .height30{
     height: 30vh;
+}
+
+.w-15{
+    width: 15%;
+}
+.w-10{
+
+}
+
+.w-85{
+    width: 85%;
 }

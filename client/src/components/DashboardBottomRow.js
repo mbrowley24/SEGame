@@ -4,40 +4,44 @@ import {IconContext} from "react-icons";
 import {BsFillPlusSquareFill} from "react-icons/bs";
 import SubjectTable from "./SubjectTable";
 import CategoryTable from "./CategoryTable";
-import "../css/generalCss.css"
+import BoardTable from "./BoardTable";
+import GameTable from "./GameTable";
 
-const DashboardTopRow = props => {
+
+
+
+const DashboardBottomRow = (props) => {
 
     return(
         <div className={'row p-2 '}>
             <div className={'col border'}>
                 <h4 className={'text-center text-capitalize sticky'}>
-                    question subjects
-                    <Link className={'ms-1'} to={'/subjects'}>
+                    games boards
+                    <Link className={'ms-1'} to={'/board'}>
                         <IconContext.Provider value={{ color: "grey", size: ".75em" }}>
                             <BsFillPlusSquareFill/>
                         </IconContext.Provider>
                     </Link>
                 </h4>
                 <div className={'height30 overflow-auto'}>
-                    <SubjectTable/>
+                    <BoardTable/>
                 </div>
             </div>
-            <div className={'col border'}>
+            <div className={'col'}>
                 <h4 className={'text-center text-capitalize'}>
-                    categories
-                    <Link className={'ms-1'} to={'/categories'}>
+                    games
+                    <Link className={'ms-1'} to={'/games'}>
                         <IconContext.Provider value={{ color: "grey", size: ".75em" }}>
                             <BsFillPlusSquareFill/>
                         </IconContext.Provider>
                     </Link>
                 </h4>
                 <div className={'height30 overflow-auto'}>
-                    <CategoryTable/>
+                    <GameTable/>
                 </div>
             </div>
         </div>
     )
 };
 
-export default DashboardTopRow;
+export default DashboardBottomRow;

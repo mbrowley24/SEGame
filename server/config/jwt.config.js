@@ -8,7 +8,7 @@ module.exports = {
             (err, payload) => {
                 if(err) {
                     console.log(err);
-                    res.status(401).json({ verified: false })
+                    res.status(403).json({ verified: false })
                 } else {
                     console.log("You are authenticated");
                     next();

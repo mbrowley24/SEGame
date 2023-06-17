@@ -1,5 +1,54 @@
 const mongoose = require('mongoose');
-const category = require('./category.model');
+
+
+const category={
+    name: {
+        type: String,
+        required: [true, "Category name is required"],
+    },
+    200: {
+        question:{
+            type: String,
+        },
+        answer: {
+            type: String,
+        }
+    },
+    400: {
+        question:{
+            type: String,
+        },
+        answer: {
+            type: String,
+        }
+    },
+    600:{
+        question:{
+            type: String,
+        },
+        answer: {
+            type: String,
+        }
+
+    },
+    800:{
+        question:{
+            type: String,
+        },
+        answer: {
+            type: String,
+        }
+    },
+    1000:{
+        question:{
+            type: String,
+        },
+        answer: {
+            type: String,
+        }
+    }
+}
+
 
 const BoardSchema = new mongoose.Schema({
 
@@ -9,6 +58,10 @@ const BoardSchema = new mongoose.Schema({
     category4: category,
     category5: category,
     category6: category,
+    public_id:{
+        type: String,
+        required: [true, "Category public id is required"],
+    },
     created_by: {
         name:{
             type: String,
@@ -36,4 +89,4 @@ const BoardSchema = new mongoose.Schema({
 });
 
 const board = mongoose.model('boards', BoardSchema);
-export default board;
+module.exports = board;

@@ -19,7 +19,7 @@ const CategoryTableBody = props => {
             }
 
             const applyData = (res)=>{
-                console.log(res.data);
+
                 setCategories(res.data)
             }
 
@@ -33,12 +33,15 @@ const CategoryTableBody = props => {
         <tbody>
 
             {categories.map((category, index) => {
-                console.log(category);
                 return(
                     <tr key={index}>
 
                         <td className={'text-capitalize text-center'}>
-                            <Link to={`/categories/${category.id}`}>{category.name}</Link></td>
+                            <Link to={`/categories/${category.id}`}>{category.name}</Link>
+                        </td>
+                        <td className={'text-capitalize text-center'}>
+                            {category.created_by}
+                        </td>
                     </tr>
                 )
                 })

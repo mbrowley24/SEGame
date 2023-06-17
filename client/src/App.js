@@ -6,7 +6,8 @@ import SubjectsView from "./views/SubjectsView";
 import QuestionView from "./views/QuestionView";
 import CategoryView from "./views/CategoryView";
 import CategoryEditView from "./views/CategoryEditView";
-
+import NewBoardView from "./views/NewBoardView";
+import NewGameView from "./views/NewGameView";
 
 function App() {
   return (
@@ -24,6 +25,12 @@ function App() {
                 <Route path={''} element={<CategoryView/>}/>
                 <Route path={':id'} element={<CategoryEditView/>}/>
             </Route>
+              <Route path={'/board'}>
+                  <Route path={''} element={<NewBoardView/>}/>
+              </Route>
+              <Route path={'/games'}>
+                    <Route path={''} element={<NewGameView/>}/>
+              </Route>
           </Routes>
       </Router>
     </div>

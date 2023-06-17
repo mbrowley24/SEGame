@@ -1,5 +1,5 @@
 const Player = require("../models/player.model");
-const randomString = require("../config/randomstring.config");
+const {randomString} = require("../config/randomstring.config");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -54,7 +54,8 @@ module.exports = {
 
                             jwt.sign({
                                     _id: playerRecord._id,
-                                    username: playerRecord.username
+                                    username: playerRecord.username,
+                                    email: playerRecord.email
                                 },
                                 process.env.JWT_SECRET),
                             {

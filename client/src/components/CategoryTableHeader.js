@@ -7,6 +7,7 @@ const CategoryTableHeader = props => {
         <thead>
             <tr>
                 <th className={'text-capitalize text-center'}>category</th>
+                <th  className={'text-capitalize text-center'}>created by</th>
             </tr>
         </thead>
     )

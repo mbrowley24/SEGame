@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import SubjectSelect from "./SubjectSelect";
 import CategoryQuestions from "./CategoryQuestions";
 import {useDispatch} from "react-redux";
-import {miscDataActions} from "../store/miscData";
+
 
 
 const QuestionsFromCategory = props => {
