@@ -31,7 +31,7 @@ const useHttp = () =>{
 
                 if(error.response.status === 403){
 
-                    navigate('/login')
+                    navigate('/')
                 }else{
 
                     applyData(error);
@@ -63,7 +63,7 @@ const useHttp = () =>{
 
                 if(error.response.status === 403){
 
-                    navigate('/login')
+                    navigate('/')
                 }else{
 
                     applyData(error);
@@ -94,7 +94,7 @@ const useHttp = () =>{
 
                 if(error.response.status === 403){
 
-                    navigate('/login')
+                    navigate('/')
                 }else{
 
                     applyData(error);

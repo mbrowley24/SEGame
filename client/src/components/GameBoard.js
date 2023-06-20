@@ -6,7 +6,8 @@ import GameFormCategory from "./GameFormCategory";
 const GameBoard = props => {
     const {data} = props;
 
-    console.log(data.category1)
+
+
     return(
         <div className={'d-flex p-2 '}>
             <GameFormCategory data={data.category1}/>

@@ -53,9 +53,10 @@ module.exports = {
                         res.cookie("usertoken",
 
                             jwt.sign({
-                                    _id: playerRecord._id,
                                     username: playerRecord.username,
-                                    email: playerRecord.email
+                                    email: playerRecord.email,
+                                    first_name: playerRecord.first_name,
+                                    last_name: playerRecord.last_name,
                                 },
                                 process.env.JWT_SECRET),
                             {

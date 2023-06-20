@@ -5,7 +5,7 @@ const useGame = () => {
     const namePattern = /^[a-zA-Z\s.\-?";:{}()&*%!@$,]{2,25}$/
 
 
-    const ValidateGame = (game) => {
+    const validateGame = (game) => {
 
         if(!namePattern.test(game.name)){
 
@@ -19,7 +19,7 @@ const useGame = () => {
 
     return(
         {
-            ValidateGame,
+            validateGame,
             namePattern
         }
     )

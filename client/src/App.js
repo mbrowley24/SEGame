@@ -8,6 +8,7 @@ import CategoryView from "./views/CategoryView";
 import CategoryEditView from "./views/CategoryEditView";
 import NewBoardView from "./views/NewBoardView";
 import NewGameView from "./views/NewGameView";
+import StartGameView from "./views/StartGameView";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
               </Route>
               <Route path={'/games'}>
                     <Route path={''} element={<NewGameView/>}/>
+                    <Route path={':id'} element={<StartGameView/>}/>
               </Route>
           </Routes>
       </Router>

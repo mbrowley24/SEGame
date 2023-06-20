@@ -11,7 +11,6 @@ const BoardGameTableBodyRow = props => {
     });
 
 
-    console.log(data);
     return(
         <React.Fragment>
             <tr ref={drag}>

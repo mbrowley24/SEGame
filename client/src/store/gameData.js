@@ -1,7 +1,9 @@
 import {createSlice} from "@reduxjs/toolkit";
-const {namePattern} = require("../hooks/useGame")
+
+const namePattern = /^[a-zA-Z\s.\-?";:{}()&*%!@$,]{0,25}$/
 
 const category={
+    id:"",
     name: "",
     200: {
         question: "",
@@ -102,7 +104,15 @@ const gameSlice = createSlice({
     initialState: gameData,
     reducers: {
         resetGame(state) {
-            state = {...gameData};
+            state.name = gameData.name;
+            state.timer = gameData.timer;
+            state.finalTimer = gameData.finalTimer;
+            state.buzzer = gameData.buzzer;
+            state.board = gameData.board;
+            state.judges = gameData.judges;
+            state.players = gameData.players;
+
+
         },
         setName(state, action) {
 
@@ -112,16 +122,15 @@ const gameSlice = createSlice({
         },
         setBoard(state, action) {
 
-            console.log(action.payload)
-            state.board.name = action.payload.name
-            state.board.category1 = action.payload.category1
-            state.board.category2 = action.payload.category2
-            state.board.category3 = action.payload.category3
-            state.board.category4 = action.payload.category4
-            state.board.category5 = action.payload.category5
-            state.board.category6 = action.payload.category6
 
-            console.log(JSON.parse(JSON.stringify(state.board)))
+            state.board.name = action.payload.board.name
+            state.board.category1 = action.payload.board.category1
+            state.board.category2 = action.payload.board.category2
+            state.board.category3 = action.payload.board.category3
+            state.board.category4 = action.payload.board.category4
+            state.board.category5 = action.payload.board.category5
+            state.board.category6 = action.payload.board.category6
+
         },
     }
 })

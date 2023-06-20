@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import useHttp from "../hooks/useHttp";
-
+import {Link} from "react-router-dom";
 
 const GameTableBody = props => {
     const [game, setGame] = useState([]);
@@ -17,7 +17,7 @@ const GameTableBody = props => {
             };
 
             const applyData = (res) =>{
-                console.log(res);
+
                 setGame(res.data);
             }
 
@@ -35,8 +35,8 @@ const GameTableBody = props => {
 
                 return(
                     <tr key={index}>
-                        <td>{data.name}</td>
-                        <td>{data.created_by}</td>
+                        <td className={'text-capitalize'}><Link to={`/games/${data.id}`}>{data.name}</Link></td>
+                        <td className={'text-capitalize'} >{data.created_by}</td>
                     </tr>
                 )
             })

@@ -13,11 +13,10 @@ const judge = {
 const player = {
     name:{
         type:String,
-        required:[true, "Player name is required"],
     },
     username:{
         type:String,
-        required:[true, "Username is required"],
+
     },
     score:{
         type:Number,
@@ -198,7 +197,17 @@ const GameSchema = new mongoose.Schema({
         19:player,
         20:player,
     },
-    createdBy:{
+    created_by:{
+        name:{
+            type:String,
+            required:[true, "Created By name is required"],
+        },
+        username:{
+            type:String,
+            required:[true, "Created By username is required"],
+        }
+    },
+    updated_by:{
         name:{
             type:String,
             required:[true, "Created By name is required"],
@@ -208,6 +217,7 @@ const GameSchema = new mongoose.Schema({
             required:[true, "Created By username is required"],
         }
     }
+
 }, {timestamps: true});
 
 const game = mongoose.model('games', GameSchema);

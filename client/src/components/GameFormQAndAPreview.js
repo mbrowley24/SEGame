@@ -22,7 +22,7 @@ const GameFormQAndAPreview = props => {
         },
     );
 
-    console.log(data)
+
 
     return(
         <React.Fragment>
@@ -34,7 +34,7 @@ const GameFormQAndAPreview = props => {
                             onHide={!show}
                             overlay={
                                 <UpdatePopOver>
-                                    {data[value].answer}
+                                    {data[value].answer?  data[value].answer : `${value}`}
                                 </UpdatePopOver>
                             }
             >

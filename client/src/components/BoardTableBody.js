@@ -37,7 +37,7 @@ const BoardTableBody = (props) => {
         <tbody>
         {
             boards.map((board, index) => {
-                console.log(board);
+
                 return(
                     <tr key={index}>
                         <td className={'text-capitalize text-center'} scope="row"><Link to={''}>{board.name}</Link></td>

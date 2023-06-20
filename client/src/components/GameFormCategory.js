@@ -8,7 +8,7 @@ import GameFormQAndAPreview from "./GameFormQAndAPreview";
 const GameFormCategory = props => {
  const {data} = props;
 
-        console.log(data)
+
         return(
             <div className={'w-25'}>
                 <GameFormQAndAPreview data={data} value={200}/>
