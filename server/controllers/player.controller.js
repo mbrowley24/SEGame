@@ -65,7 +65,10 @@ module.exports = {
                             })
                             .json({
                                 message: "Successfully logged in!",
-                                userLoggedIn: playerRecord.username
+                                userLoggedIn: {
+                                    username: playerRecord.username,
+                                    name : `${playerRecord.first_name} ${playerRecord.last_name}`
+                                }
                             })
 
                     }else{

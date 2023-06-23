@@ -95,23 +95,27 @@ module.exports = {
 
              const result = await Game.findOne({public_id: public_id})
 
+             console.log(result.board.name);
+
              const gameData = {
                     id: result.public_id,
                     name: result.name,
                     timer: result.timer,
                     finalTimer: result.finalTimer,
                     board:{
+                        name: result.board.name,
                         category1: {...result.board.category1},
-                        category2: result.board.category2,
-                        category3: result.board.category3,
-                        category4: result.board.category4,
-                        category5: result.board.category5,
-                        category6: result.board.category6,
+                        category2: {...result.board.category2},
+                        category3: {...result.board.category3},
+                        category4: {...result.board.category4},
+                        category5: {...result.board.category5},
+                        category6: {...result.board.category6},
                     },
                     players: {...result.players},
                     judges: {...result.judges}
              };
 
+             // console.log(gameData);
                 res.status(200).json(gameData);
 
          }catch(err){
@@ -121,5 +125,27 @@ module.exports = {
          }
 
 
+    },game_exists: async (req, res) => {
+
+            const public_id = req.params.id;
+
+            try{
+
+                const result = await Game.findOne({public_id: public_id})
+
+                if(result){
+
+                    res.status(200).json(true);
+
+                }else{
+
+                    res.status(200).json(false);
+                }
+
+            }catch(err){
+
+                console.log("game not found");
+                res.status(400).json(err);
+            }
     },
 };

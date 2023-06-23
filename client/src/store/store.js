@@ -3,7 +3,8 @@ import miscDataReducer from "./miscData";
 import boardDataReducer from "./boardData";
 import gameReducer from "./gameData";
 import playerReducer from "./playerData";
-
+import questionAndAnswerReducer from "./questionAndAnswerData";
+import socketReducer from "./socketStore";
 
 const store = configureStore({
     reducer: {
@@ -11,6 +12,8 @@ const store = configureStore({
         boardData: boardDataReducer,
         gameData: gameReducer,
         playerData: playerReducer,
+        qAndAData: questionAndAnswerReducer,
+        socketData: socketReducer
     }
 });
 

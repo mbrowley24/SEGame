@@ -1,5 +1,13 @@
 import {createSlice} from "@reduxjs/toolkit";
 
+const namePattern = /^[a-zA-Z\s.\-?";:{}()&*%!@$,]{0,25}$/
+const usernamePattern = /^[a-zA-Z.\-?";:{}()&*%!@$,]{0,15}$/
+const whiteSpaceCheck = (string) => {
+
+    const pattern = /\s\s/;
+
+    return pattern.test(string);
+}
 
 const player={
     name:"",
@@ -13,8 +21,34 @@ const playerSlice = createSlice({
     reducers:{
         setData(state,action){
 
-            state.name=action.payload.name;
-            state.username=action.payload.username;
+            const {name,value} = action.payload;
+
+            if(name === "name"){
+
+                if(!whiteSpaceCheck(value)){
+                    if(namePattern.test(value)){
+
+                        state.name = value;
+                    }
+                }
+
+            }else if(name === "username"){
+
+                if(!whiteSpaceCheck(value)){
+                    if(usernamePattern.test(value)){
+
+                        state.username = value;
+                    }
+                }
+            }
+
+        },
+        setPlayer(state,action){
+            const {name,username} = action.payload;
+            state.name = name;
+            state.username = username;
+
+            //console.log("playerSlice setPlayer",JSON.parse(JSON.stringify(state)));
         },
         resetData(state){
             state.name="";

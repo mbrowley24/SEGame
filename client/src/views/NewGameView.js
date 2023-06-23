@@ -33,6 +33,7 @@ const NewGameView = props => {
      await postHttpRequest(configRequest, applyData);
  };
 
+
     return(
         <div>
             <NavBar/>

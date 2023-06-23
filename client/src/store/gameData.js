@@ -54,6 +54,7 @@ const player={
 }
 
 const gameData = {
+
     name:"",
     timer: 5,
     finalTimer:30,
@@ -74,6 +75,10 @@ const gameData = {
         1:judge,
         2:judge,
         3:judge,
+    },
+    host:{
+        name:"",
+        username:"",
     },
     players:{
         1:player,
@@ -122,7 +127,8 @@ const gameSlice = createSlice({
         },
         setBoard(state, action) {
 
-
+            state.name = action.payload.name;
+            state.id = action.payload.id
             state.board.name = action.payload.board.name
             state.board.category1 = action.payload.board.category1
             state.board.category2 = action.payload.board.category2
@@ -131,7 +137,65 @@ const gameSlice = createSlice({
             state.board.category5 = action.payload.board.category5
             state.board.category6 = action.payload.board.category6
 
+        },correctAnswer(state, action) {
+
+            const playerKeys = Object.keys(state.players);
+            const player = {...state.buzzer}
+
+            for(let i = 0; i < playerKeys.length; i++){
+
+                if(state.players[playerKeys[i]].username === player.player){
+
+                    state.players[playerKeys[i]].score += action.payload;
+                    state.buzzer.buzz = false;
+                    state.buzzer.player = "";
+                    break;
+
+                }
+            }
+
+        },incorrectAnswer(state, action) {
+
+            const playerKeys = Object.keys(state.players);
+            const player = {...state.buzzer}
+
+            for(let i = 0; i < playerKeys.length; i++){
+
+                if(state.players[playerKeys[i]].username === player.player){
+
+                    state.players[playerKeys[i]].score -= action.payload;
+                    state.buzzer.buzz = false;
+                    state.buzzer.player = "";
+                    break;
+
+                }
+            }
+        },setPlayers(state, action) {
+
+            state.players = action.payload;
+            console.log(JSON.parse(JSON.stringify(state.players)))
         },
+        setGame(state, action) {
+
+            state.name = action.payload.name;
+            state.timer = action.payload.timer;
+            state.finalTimer = action.payload.finalTimer;
+            state.buzzer = action.payload.buzzer;
+            state.board = action.payload.board;
+            state.board.host = action.payload.host;
+            state.judges = action.payload.judges;
+            state.players = action.payload.players;
+
+            console.log(JSON.parse(JSON.stringify(state)))
+
+        },setHost(state, action) {
+
+            console.log(action.payload.name)
+            state.host.name = action.payload.name;
+            state.host.username = action.payload.username;
+
+            console.log(JSON.parse(JSON.stringify(state.host)))
+        }
     }
 })
 

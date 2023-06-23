@@ -11,6 +11,26 @@
     height: 120px;
 }
 
+.height600px{
+    height: 600px;
+}
+
+.height700Px{
+    height: 700px;
+}
+.height800Px{
+    height: 800px;
+}
+
+
+.height500px{
+    height: 500px;
+}
+
+.height400px{
+    height: 400px;
+}
+
 .text-small{
     font-size: 0.7rem;
 }

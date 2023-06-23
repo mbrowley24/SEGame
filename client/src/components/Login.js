@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import useHttp from "../hooks/useHttp";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import {useDispatch } from "react-redux";
+import {playerActions} from "../store/playerData";
 
 
 const Login = props =>{
@@ -33,7 +34,8 @@ const Login = props =>{
             console.log(res);
 
             if(res.status === 200){
-
+                console.log(res.data.userLoggedIn);
+                dispatch(playerActions.setPlayer(res.data.userLoggedIn));
                 // console.log(res.headers.authorization);
                 navigate("/dashboard")
             }
@@ -69,9 +71,13 @@ const Login = props =>{
                     </div>
                     <div className="text-center m-auto my-3 ">
                         <button className="m-auto btn btn-light btn-sm" label={'Login'} onClick={(e)=>submitLogin(e)} >Login</button><br/>
-                        {/* <Link to={'/registration'}>Registration</Link> */}
+                        <div className={'p-3'}>
+                             <Link
+                                className={"text-capitalize text-dark"}
+                                 to={'/join'}
+                             >join game</Link>
+                        </div>
                     </div>
-                    
             </div>
             
         </div>
