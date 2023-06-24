@@ -58,18 +58,23 @@ jeopardyNameSpace.on("connection", (socket) => {
     socket.on("add_player", (data) =>{
 
         console.log("add_player event received on server side");
-
+        console.log(data);
         socket.to(data.room).emit("player", data.players);
     })
 
     socket.on("join_game_host", (data) =>{
         console.log("join_game_host event received on server side");
 
-
         socket.join(data.room);
-
         socket.to(data.room).emit("host", data.game);
     })
+
+    socket.on("attempted_question", (data) =>{
+
+        console.log("attempted_question event received on server side");
+        console.log(data)
+        socket.to(data.room).emit("question", data);
+    });
 
 
      // console.log("server side socket id: ", socket.id);

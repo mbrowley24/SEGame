@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const namePattern = /^[a-zA-Z\s.\-?";:{}()&*%!@$,]{0,25}$/
-const usernamePattern = /^[a-zA-Z.\-?";:{}()&*%!@$,]{0,15}$/
+const usernamePattern = /^[a-zA-Z0-9_.\-?";:{}()&*%!@$,]{0,15}$/
 const whiteSpaceCheck = (string) => {
 
     const pattern = /\s\s/;

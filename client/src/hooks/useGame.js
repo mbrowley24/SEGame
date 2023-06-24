@@ -23,19 +23,6 @@ const useGame = () => {
 
     };
 
-    const hasPlayers = (players) => {
-        let playerCount = 0;
-        const playerKeys = Object.keys(players);
-
-        for(let i = 0; i < playerKeys.length; i++){
-
-            if(players[playerKeys[i]].name.length > 0){
-                playerCount++;
-            }
-        }
-
-        return playerCount > 1;
-    };
 
     const getPlayers = (players) => {
 
@@ -57,38 +44,27 @@ const useGame = () => {
 
 
 
-    const addPlayer = (game, player) => {
+    const addPlayer = (player) => {
 
-        const gameObj = JSON.parse(JSON.stringify(game));
-
-        for(let i = 1; i < 21; i++){
-
-            if(gameObj.players[i].username.length === 0){
-                gameObj.players[i].name = player.name;
-                gameObj.players[i].username = player.username;
-                break;
-            }
+        return {
+            name: player.name,
+            username:  Math.random().toString(36).substring(2,10),
+            score: 0,
         };
-
-        return gameObj.players;
-
     };
 
 
     const anonymousPlayers = (players) => {
         let returnValue = false;
 
-        const namePattern = /^[a-zA-Z\s.\-?";:{}()&*%!@$,]{2,25}$/
-        const usernamePattern = /^[a-zA-Z.\-?";:{}()&*%!@$,]{2,15}$/
+        const namePattern = /^[a-zA-Z0-9\s.\-?";:{}()&*%!@$,]{2,25}$/
+        const usernamePattern = /^[a-zA-Z0-9_.\-?";:{}()&*%!@$,]{2,15}$/
 
         if(!whiteSpaceCheck(players.name)){
 
             if(namePattern.test(players.name)){
 
-
-                if(usernamePattern.test(players.username)){
-                    returnValue =  true;
-                }
+                returnValue =  true;
 
             }
         }
@@ -124,14 +100,53 @@ const useGame = () => {
 
     };
 
+    const updateHost = (game, host) => {
+
+        if(game){
+
+            const gameObj = JSON.parse(JSON.stringify(game));
+
+            if(host){
+
+                if(host.name){
+
+                    if(host.username){
+
+                        gameObj.host.name = host.name;
+                        gameObj.host.username = host.username;
+
+                    }
+                }
+
+            }
+
+            return gameObj;
+        }
+
+        return game;
+
+    };
+
+    const questionAttempted = (data, value, id) => {
+
+        return {
+            question: data[value].question,
+            answer: data[value].answer,
+            value: value,
+            attempt: true,
+            room: id
+        };
+    };
+
     return(
         {
             addPlayer,
             anonymousPlayers,
             getPlayers,
-            hasPlayers,
             hostJoined,
             playerFull,
+            updateHost,
+            questionAttempted,
             validateGame,
             namePattern
         }

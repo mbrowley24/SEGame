@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-const namePattern = /^[a-zA-Z\s.\-?";:{}()&*%!@$,]{0,25}$/
+const namePattern = /^[a-zA-Z0-9_\s.\-?";:{}()&*%!@$,]{0,25}$/
 
 const category={
     id:"",
@@ -80,28 +80,7 @@ const gameData = {
         name:"",
         username:"",
     },
-    players:{
-        1:player,
-        2:player,
-        3:player,
-        4:player,
-        5:player,
-        6:player,
-        7:player,
-        8:player,
-        9:player,
-        10:player,
-        11:player,
-        12:player,
-        13:player,
-        14:player,
-        15:player,
-        16:player,
-        17:player,
-        18:player,
-        19:player,
-        20:player,
-    }
+    players:[]
 };
 
 const gameSlice = createSlice({
@@ -172,17 +151,58 @@ const gameSlice = createSlice({
             }
         },setPlayers(state, action) {
 
-            state.players = action.payload;
+            const filteredPlayers = state.players.filter(player => player.username === action.payload.username);
+
+            if(filteredPlayers.length === 0){
+
+                function filterName(player){
+                    const name = player.name.split("(")[0];
+                    return name === action.payload.name;
+                }
+
+                const filterNameResult = state.players.filter(filterName);
+
+                if(filterNameResult.length > 0){
+
+                    const player={
+                        name: `${action.payload.name}(${filterName.length})`,
+                        username: action.payload.username,
+                        score:0,
+                    }
+
+                    state.players = [...state.players, player];
+
+                }else{
+                    state.players = [...state.players, action.payload];
+                }
+
+            }
+
             console.log(JSON.parse(JSON.stringify(state.players)))
         },
         setGame(state, action) {
+
+            let name = "";
+            let username = "";
+
+            if(state.host.name.length > 0){
+                name = state.host.name;
+                username = state.host.username;
+            }
+
+            if(action.payload.host.name.length > 0){
+                name = action.payload.host.name;
+                username = action.payload.host.username;
+            }
 
             state.name = action.payload.name;
             state.timer = action.payload.timer;
             state.finalTimer = action.payload.finalTimer;
             state.buzzer = action.payload.buzzer;
+            state.host.name = name;
+            state.host.username = username;
             state.board = action.payload.board;
-            state.board.host = action.payload.host;
+            state.host = action.payload.host;
             state.judges = action.payload.judges;
             state.players = action.payload.players;
 

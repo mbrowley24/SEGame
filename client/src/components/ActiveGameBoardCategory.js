@@ -4,16 +4,16 @@ import ActiveGameBoardQandA from "./ActiveGameBoardQandA";
 
 
 const ActiveGameBoardCategory = props => {
-    const {data} = props;
+    const {data, id} = props;
     return(
         <div className={'col'}>
             <h6>{data.name}</h6>
             <div>
-                <ActiveGameBoardQandA data={data} value={200}/>
-                <ActiveGameBoardQandA data={data} value={400}/>
-                <ActiveGameBoardQandA data={data} value={600}/>
-                <ActiveGameBoardQandA data={data} value={800}/>
-                <ActiveGameBoardQandA data={data} value={1000}/>
+                <ActiveGameBoardQandA data={data} value={200} id={id}/>
+                <ActiveGameBoardQandA data={data} value={400} id={id}/>
+                <ActiveGameBoardQandA data={data} value={600} id={id}/>
+                <ActiveGameBoardQandA data={data} value={800} id={id}/>
+                <ActiveGameBoardQandA data={data} value={1000} id={id}/>
             </div>
         </div>
     )

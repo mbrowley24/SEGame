@@ -5,8 +5,7 @@ import useGame from "../hooks/useGame";
 
 const PlayersPanel = props => {
     const {game} = props;
-    const {getPlayers} = useGame();
-    const players = useMemo(() => getPlayers(game.players), [game.players]);
+
 
 
     return(
@@ -15,9 +14,9 @@ const PlayersPanel = props => {
 
             <ul className={'list-group'}>
                 {
-                    players.map((player, i) => {
+                    game.players.map((player, i) => {
 
-
+                        console.log(player);
 
                         return(
 
