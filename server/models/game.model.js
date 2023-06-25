@@ -43,7 +43,7 @@ const category={
             type:String,
         },
         attempted:{
-            type:Array,
+            type:Boolean,
         },
         points:{
             type:Number,
@@ -63,7 +63,7 @@ const category={
             type:String,
         },
         attempted:{
-            type:Array,
+            type:Boolean,
         },
         points:{
             type:Number,
@@ -83,7 +83,7 @@ const category={
             type:String,
         },
         attempted:{
-            type:Array,
+            type:Boolean,
         },
         points:{
             type:Number,
@@ -103,7 +103,7 @@ const category={
             type:String,
         },
         attempted:{
-            type:Array,
+            type:Boolean,
         }
         ,
         points:{
@@ -124,7 +124,7 @@ const category={
             type:String,
         },
         attempted:{
-            type:Array,
+            type:Boolean,
         },
         points:{
             type:Number,

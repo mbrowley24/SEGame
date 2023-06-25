@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useMemo} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {qAndAActions} from "../store/questionAndAnswerData";
 import SocketContext from "../context/SocketContext";
 import useGame from "../hooks/useGame";
@@ -12,6 +12,9 @@ const ActiveGameBoardQandA = props => {
     const dispatch = useDispatch();
     const {questionAttempted} = useGame();
     const question = useMemo(() => questionAttempted(data, value, id), [data, value, id]);
+    const host = useSelector(state => state.gameData.host);
+    const player = useSelector(state => state.playerData);
+    const isHost = useMemo(() => host.username === player.username, [host, player]);
 
 
 
@@ -29,13 +32,21 @@ const ActiveGameBoardQandA = props => {
 
     return(
         <div className={'border d-flex height100Px justify-content-center bg-primary'}>
-            <h5 className={'align-self-center'}>
-                <button className={'btn btn-link text-warning fw-bold'}
-                        onClick={attemptedQuestions}
+            <h5 className={'align-self-center'} hidden={data[value].attempted}>
 
-                >
-                    {`$${value}`}
-                </button>
+                {
+                    isHost ?
+                            <button className={'btn btn-link text-warning fw-bold'}
+                                    onClick={attemptedQuestions}
+                            >
+                                {`$${value}`}
+                            </button>
+                        :
+
+                        <span className={'text-warning'}>${value}</span>
+
+                }
+
 
             </h5>
         </div>

@@ -1,51 +1,43 @@
-import React, {useCallback} from "react";
+import React, {useCallback, useContext, useEffect, useMemo} from "react";
+import Buzzer from "./Buzzer";
 import {useDispatch, useSelector} from "react-redux";
-import {AiOutlineCheck, AiOutlineClose} from "react-icons/ai";
-import {IconContext} from "react-icons";
-import {qAndAActions} from "../store/questionAndAnswerData";
-import {gameActions} from "../store/gameData";
+import CorrectIncorrect from "./CorrectIncorrect";
+import SocketContext from "../context/SocketContext";
+import {useParams} from "react-router-dom";
+import "../css/generalCss.css";
 
 const ActiveQuestion = props => {
-    const dispatch = useDispatch();
+
+    const {id} = useParams();
+    const {socket} = useContext(SocketContext);
     const question = useSelector(state => state.qAndAData);
+    const game = useSelector(state => state.gameData);
+    const myData = useSelector(state => state.playerData);
+    const isHost = useMemo(() => game.host.username === myData.username, [game.host, myData]);
 
-    const correctAnswer = useCallback(() => {
 
-        dispatch(gameActions.correctAnswer(question.value));
-        dispatch(qAndAActions.resetQAndA());
+    useEffect(() => {
 
-    }, []);
+        socket.on("buzzer", data => {
+            console.log(data);
+        });
 
-    const incorrectAnswer = useCallback(() => {
+    }, [socket]);
 
-            dispatch(qAndAActions.resetQAndA());
-            dispatch(gameActions.incorrectAnswer(question.value));
-
-    }, []);
-
+    console.log(question);
 
     return(
-        <div>
-            <p className={'text-center p-1'}>
-                {question.question}
-            </p>
-            <div>
-                <button
-                    className={'btn btn-success'}
-                    onClick={() => correctAnswer()}
-                >
-                    <IconContext.Provider value={{ color: "green", size: ".75em" }}>
-                        <AiOutlineCheck/>
-                    </IconContext.Provider>
-                </button>
-                <button
-                    className={'btn btn-danger'}
-                    onClick={() => incorrectAnswer()}
-                >
-                    <IconContext.Provider value={{ color: "red", size: ".75em" }}>
-                        <AiOutlineClose/>
-                    </IconContext.Provider>
-                </button>
+        <div className={'pt-3 border'}>
+            <div className={'d-flex height400px justify-content-center border height200Px'}>
+                <div className={'p-1 text-md-center align-self-center'}>
+                    <h3>{question.question}</h3>
+                </div>
+            </div>
+            <div className={'height150Px'} hidden={!isHost}>
+                <CorrectIncorrect id={id} question={question}/>
+            </div>
+            <div className={'p-5 m-5 border'} hidden={isHost}>
+                <Buzzer/>
             </div>
         </div>
 

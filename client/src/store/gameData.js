@@ -1,4 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
+import {json} from "react-router-dom";
 
 const namePattern = /^[a-zA-Z0-9_\s.\-?";:{}()&*%!@$,]{0,25}$/
 
@@ -8,36 +9,32 @@ const category={
     200: {
         question: "",
         answer: "",
-        winner: "",
-        attempted:[],
+        attempted:false,
         points:200,
     },
     400: {
         question: "",
         answer: "",
-        winner: "",
-        attempted:[],
+        attempted:false,
         points:400,
     },
     600: {
         question: "",
         answer: "",
-        winner: "",
-        attempted:[],
+        attempted:false,
         points:600,
     },
     800: {
         question: "",
         answer: "",
         winner: "",
-        attempted:[],
+        attempted:false,
         points:800,
     },
     1000: {
         question: "",
         answer: "",
-        winner: "",
-        attempted:[],
+        attempted:false,
         points:1000,
     }
 }
@@ -118,37 +115,72 @@ const gameSlice = createSlice({
 
         },correctAnswer(state, action) {
 
-            const playerKeys = Object.keys(state.players);
-            const player = {...state.buzzer}
+            console.log(action.payload);
+            const username = state.buzzer.player;
 
-            for(let i = 0; i < playerKeys.length; i++){
+            for(let i = 0; i < state.players.length; i++){
 
-                if(state.players[playerKeys[i]].username === player.player){
+                    if(state.players[i].username === username){
 
-                    state.players[playerKeys[i]].score += action.payload;
-                    state.buzzer.buzz = false;
-                    state.buzzer.player = "";
-                    break;
-
-                }
+                        state.players[i].score += action.payload.value;
+                        state.buzzer.buzz = false;
+                        state.buzzer.player = "";
+                        break;
+                    }
             }
+
+            const question = action.payload.question;
+            console.log(question);
+            console.log(state.board.category1[action.payload.value].question);
+            console.log(state.board.category1[action.payload.value].question === question);
+            console.log(state.board.category1[action.payload.value].attempted);
+            if(state.board.category1[action.payload.value].question === question){
+
+                state.board.category1[action.payload.value].attempted = true;
+
+
+            }else if(state.board.category2[action.payload.value].question === question){
+
+                console.log("here");
+                state.board.category2[action.payload.value].attempted = true;
+
+            }else if(state.board.category3[action.payload.value].question === question) {
+
+                state.board.category3[action.payload.value].attempted = true;
+
+            }else if(state.board.category4[action.payload.value].question === question) {
+
+                state.board.category4[action.payload.value].attempted = true;
+
+            }else if(state.board.category5[action.payload.value].question === question) {
+
+                state.board.category5[action.payload.value].attempted = true;
+
+            }else if(state.board.category6[action.payload.value].question === question) {
+
+
+                state.board.category6[action.payload.value].attempted = true
+
+            }
+
+            console.log(JSON.parse(JSON.stringify(state.board)));
 
         },incorrectAnswer(state, action) {
 
-            const playerKeys = Object.keys(state.players);
-            const player = {...state.buzzer}
+            const username = state.buzzer.player;
 
-            for(let i = 0; i < playerKeys.length; i++){
+            for(let i = 0; i < state.players.length; i++){
 
-                if(state.players[playerKeys[i]].username === player.player){
+                if(state.players[i].username === username){
 
-                    state.players[playerKeys[i]].score -= action.payload;
+                    state.players[i].score -= action.payload;
                     state.buzzer.buzz = false;
                     state.buzzer.player = "";
                     break;
-
                 }
             }
+
+
         },setPlayers(state, action) {
 
             const filteredPlayers = state.players.filter(player => player.username === action.payload.username);
@@ -182,25 +214,26 @@ const gameSlice = createSlice({
         },
         setGame(state, action) {
 
-            let name = "";
-            let username = "";
+            console.log(action.payload)
+            // let name = "";
+            // let username = "";
 
-            if(state.host.name.length > 0){
-                name = state.host.name;
-                username = state.host.username;
-            }
-
-            if(action.payload.host.name.length > 0){
-                name = action.payload.host.name;
-                username = action.payload.host.username;
-            }
+            // if(state.host.name.length > 0){
+            //     name = state.host.name;
+            //     username = state.host.username;
+            // }
+            //
+            // if(action.payload.host.name.length === 0){
+            //     name = action.payload.host.name;
+            //     username = action.payload.host.username;
+            // }
 
             state.name = action.payload.name;
             state.timer = action.payload.timer;
             state.finalTimer = action.payload.finalTimer;
             state.buzzer = action.payload.buzzer;
-            state.host.name = name;
-            state.host.username = username;
+            // state.host.name = name;
+            // state.host.username = username;
             state.board = action.payload.board;
             state.host = action.payload.host;
             state.judges = action.payload.judges;
@@ -211,11 +244,19 @@ const gameSlice = createSlice({
         },setHost(state, action) {
 
             console.log(action.payload.name)
+            console.log(action.payload.username)
             state.host.name = action.payload.name;
             state.host.username = action.payload.username;
 
-            console.log(JSON.parse(JSON.stringify(state.host)))
-        }
+            console.log(JSON.parse(JSON.stringify(state)))
+        },
+        setBuzzer(state, action) {
+
+            if(!state.buzzer.buzz){
+                state.buzzer.buzz = true;
+                state.buzzer.player = action.payload;
+            }
+        },
     }
 })
 

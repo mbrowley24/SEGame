@@ -10,7 +10,7 @@ const PlayGame = props => {
     return(
         <React.Fragment>
             {!attempt && <ActiveGameBoard data={data} id={id}/>}
-            {attempt && <ActiveQuestion/>}
+            {attempt && <ActiveQuestion  id={id}/>}
         </React.Fragment>
     )
 };

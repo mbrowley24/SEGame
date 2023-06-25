@@ -45,13 +45,13 @@ jeopardyNameSpace.on("connection", (socket) => {
 
         socket.join(data.room);
 
-        socket.to(data.room).emit("new_participant", data.game);
+        // socket.to(data.room).emit("new_participant", data.game);
 
     })
 
     socket.on("update_participants", (data) =>{
         console.log("update_participants event received on server side");
-
+        console.log(data);
         socket.to(data.room).emit("host_update", data.game);
     });
 
@@ -69,13 +69,28 @@ jeopardyNameSpace.on("connection", (socket) => {
         socket.to(data.room).emit("host", data.game);
     })
 
+    socket.on("correct_answer", (data)=>{
+
+        console.log("correct_answer event received on server side");
+
+        console.log(data);
+
+        socket.to(data.room).emit("correct_answer_update", data.question);
+    })
+
     socket.on("attempted_question", (data) =>{
 
         console.log("attempted_question event received on server side");
-        console.log(data)
+        console.log(data.room)
         socket.to(data.room).emit("question", data);
+
     });
 
+    socket.on("buzzer", (data) =>{
+        console.log("buzzer event received on server side");
+        console.log(data);
+        socket.to(data.room).emit("buzzed", data.username);
+    });
 
      // console.log("server side socket id: ", socket.id);
 })

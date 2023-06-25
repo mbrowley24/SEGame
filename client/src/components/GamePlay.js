@@ -9,55 +9,78 @@ import PlayGame from "./PlayGame";
 import useGame from "../hooks/useGame";
 import '../css/generalCss.css'
 import SocketContext from "../context/SocketContext";
+import {playerActions} from "../store/playerData";
 
 const GamePlay = props => {
 
     const {id} = useParams();
     const dispatch = useDispatch();
     const {socket} = useContext(SocketContext);
-    const {hasPlayers, playerFull, addPlayer, hostJoined} = useGame();
+    const {hasPlayers, canJoin, addPlayer, hostJoined} = useGame();
     const game = useSelector(state => state.gameData);
     const myData = useSelector(state => state.playerData);
     const players = useMemo(() => game.players.length > 1, [game.players]);
     const fullGame = useMemo(() => game.players.length > 19, [game.players]);
     const host = useMemo(() => hostJoined(game.host) , [game.host]);
     const isHost = useMemo(() => game.host.username === myData.username, [host, myData]);
+    const join = useMemo(() => canJoin(game.players, myData.username), [game.players, myData]);
 
     useEffect(()=>{
 
         socket.on('player', data => {
             console.log(data);
             dispatch(gameActions.setPlayers(data));
+
         });
 
         socket.on('host', data =>{
+            console.log(data);
+            dispatch(gameActions.setGame(data));
+        });
 
-            dispatch(gameActions.setHost(data.host));
+        socket.on("correct_answer_update", (data) => {
+
+            console.log("correct_answer_update");
+            console.log(data);
+            dispatch(gameActions.correctAnswer(data));
+            dispatch(qAndAActions.resetQAndA());
+        });
+
+        socket.on('question', data => {
+
+            console.log(data);
+            dispatch(qAndAActions.setQAndA(data));
         });
 
 
-        if(game.host.username === myData.username) {
 
-            console.log(game.host.username);
 
-            socket.on('new_participant', () => {
 
-                socket.emit('update_participants', {room: id, game: game});
-            });
+        // socket.on('new_participant', () => {
+        //
+        //     console.log(game.host.username);
+        //     console.log(myData.username);
+        //     console.log(game);
+        //     if(game.host.username === myData.username){
+        //         console.log("new_participant");
+        //         console.log(game);
+        //         socket.emit('update_participants', {room: id, game: game});
+        //     }
+        //
+        // });
 
-        }else{
 
-            socket.on('host_update', data => {
+        socket.on('host_update', data => {
 
-                dispatch(gameActions.setGame(data));
-            });
-
-            socket.on('question', data => {
-
+            if(game.host.username !== myData.username){
+                console.log("host_update");
                 console.log(data);
-                dispatch(qAndAActions.setQAndA(data));
-            });
-        }
+                dispatch(gameActions.setGame(data));
+            }
+
+        });
+
+
 
     }, [socket]);
 
@@ -69,6 +92,7 @@ const GamePlay = props => {
         const newPlayer = addPlayer(myData);
 
         dispatch(gameActions.setPlayers(newPlayer));
+        dispatch(playerActions.setPlayer(newPlayer));
         socket.emit('add_player', {room:id, players:newPlayer});
     },[]);
 
@@ -82,7 +106,7 @@ const GamePlay = props => {
             <div className={'d-flex w-100 py-3'}>
                 <div className={'w-25  m-auto height600px me-2 border'}>
                     <h4 className={'text-capitalize'}>host: {game.host.name}</h4>
-                    {!fullGame && !isHost && <button
+                    {!fullGame && !isHost && join && <button
                         className={'btn btn-link'}
                         onClick={addNewPlayer}
                         disabled={!host}

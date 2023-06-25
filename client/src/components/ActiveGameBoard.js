@@ -6,7 +6,7 @@ import ActiveGameBoardCategory from "./ActiveGameBoardCategory";
 
 const ActiveGameBoard = props => {
     const {data, id} = props;
-    console.log(data);
+
     return(
         <div className={'d-flex m-auto'}
         >

@@ -53,6 +53,13 @@ const useGame = () => {
         };
     };
 
+    const canJoin = (players, username) => {
+
+        const playersList = JSON.parse(JSON.stringify(players));
+
+        return playersList.filter(player => player.username === username).length === 0;
+    }
+
 
     const anonymousPlayers = (players) => {
         let returnValue = false;
@@ -143,6 +150,7 @@ const useGame = () => {
             addPlayer,
             anonymousPlayers,
             getPlayers,
+            canJoin,
             hostJoined,
             playerFull,
             updateHost,

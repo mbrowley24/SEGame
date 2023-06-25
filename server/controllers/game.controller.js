@@ -93,10 +93,12 @@ module.exports = {
 
          try{
 
+             console.log(public_id);
              const result = await Game.findOne({public_id: public_id})
 
              console.log(result.board.name);
-
+             console.log(result.players);
+             console.log(result.board.category1[200]);
              const gameData = {
                     id: result.public_id,
                     name: result.name,
@@ -104,22 +106,22 @@ module.exports = {
                     finalTimer: result.finalTimer,
                     board:{
                         name: result.board.name,
-                        category1: {...result.board.category1},
-                        category2: {...result.board.category2},
-                        category3: {...result.board.category3},
-                        category4: {...result.board.category4},
-                        category5: {...result.board.category5},
-                        category6: {...result.board.category6},
+                        category1: JSON.parse(JSON.stringify(result.board.category1)),
+                        category2: JSON.parse(JSON.stringify(result.board.category2)),
+                        category3: JSON.parse(JSON.stringify(result.board.category3)),
+                        category4: JSON.parse(JSON.stringify(result.board.category4)),
+                        category5: JSON.parse(JSON.stringify(result.board.category5)),
+                        category6: JSON.parse(JSON.stringify(result.board.category6)),
                     },
-                    players: {...result.players},
-                    judges: {...result.judges}
+                    players: JSON.parse(JSON.stringify(result.players)),
+                    judges: JSON.parse(JSON.stringify(result.judges)),
              };
 
-             // console.log(gameData);
+              console.log(gameData);
                 res.status(200).json(gameData);
 
          }catch(err){
-
+        console.log(err);
          console.log("game not found");
             res.status(400).json(err);
          }
