@@ -7,6 +7,7 @@ import {useParams} from "react-router-dom";
 import "../css/generalCss.css";
 import Counter from "./Counter";
 import {gameActions} from "../store/gameData";
+import {qAndAActions} from "../store/questionAndAnswerData";
 
 const ActiveQuestion = props => {
 
@@ -22,9 +23,23 @@ const ActiveQuestion = props => {
     useEffect(() => {
 
         socket.on("buzzed", data => {
-            console.log("buzzer");
-            console.log(data);
+
             dispatch(gameActions.setBuzzer(data));
+        });
+
+        socket.on("correct_answer_update", (data) => {
+
+        });
+
+        socket.on("incorrect_answer_update", (data) => {
+
+            dispatch(gameActions.incorrectAnswer(data.question));
+            dispatch(qAndAActions.attemptedBy(data.player));
+        });
+
+        socket.on('not_attempted_update', data => {
+            dispatch(gameActions.notAttempted(data));
+            dispatch(qAndAActions.resetQAndA());
         });
 
     }, [socket]);

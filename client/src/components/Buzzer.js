@@ -10,9 +10,11 @@ const Buzzer = props => {
     const {socket} = useContext(SocketContext);
     const dispatch = useDispatch();
     const game = useSelector(state => state.gameData);
+    const question = useSelector(state => state.qAndAData);
     const myData = useSelector(state => state.playerData);
     const buzzed = useMemo(() => game.buzzer.player.length > 0, [game]);
     const myBuzzer = useMemo(() => game.buzzer.player === myData.username, [game, myData]);
+    const attempted = useMemo(() => question.attempted_by.includes(myData.username) , [game, myData]);
 
 
     const buzzer = useCallback(() => {
@@ -40,10 +42,8 @@ const Buzzer = props => {
     return(
         <React.Fragment>
             <button
-                className={
-                    'bg-success btn-lg py-5 d-block w-100 text-uppercase'
-            }
-                disabled={buzzed}
+                className={'bg-success btn-lg py-5 d-block w-100 text-uppercase'}
+                disabled={attempted || buzzed}
                 onClick={() => buzzer()}
             >buzzer</button>
         </React.Fragment>

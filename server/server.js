@@ -78,6 +78,19 @@ jeopardyNameSpace.on("connection", (socket) => {
         socket.to(data.room).emit("correct_answer_update", data.question);
     })
 
+    socket.on("incorrect_answer", (data)=>{
+
+        console.log("incorrect_answer event received on server side");
+        console.log(data);
+
+        socket.to(data.room).emit("incorrect_answer_update", {question :data.question, player: data.player});
+    })
+
+    socket.on("not_attempted", (data) =>{
+
+        socket.to(data.room).emit("not_attempted_update", data.question);
+    });
+
     socket.on("attempted_question", (data) =>{
 
         console.log("attempted_question event received on server side");

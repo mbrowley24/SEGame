@@ -6,6 +6,7 @@ const qAndAData={
     question: "",
     answer: "",
     value: 0,
+    attempted_by:[],
     attempt: false
 }
 
@@ -17,6 +18,7 @@ const qAndAData={
             state.question = "";
             state.answer = "";
             state.value = 0;
+            state.attempted_by = [];
             state.attempt = false;
         },
 
@@ -25,6 +27,11 @@ const qAndAData={
             state.answer = action.payload.answer;
             state.value = Number(action.payload.value);
             state.attempt = true;
+            state.attempted_by = [];
+        },
+        attemptedBy(state, action){
+            state.attempted_by.push(action.payload);
+            console.log(JSON.parse(JSON.stringify(state)));
         },
 
     },

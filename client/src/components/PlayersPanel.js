@@ -22,7 +22,7 @@ const PlayersPanel = props => {
 
                                 player.name.length > 0?
                                     <li key={i} className={'list-group-item'}>
-                                        {`${player.name} - ${player.score}`}
+                                        {`${player.name} : ${player.score}`}
                                     </li>
                                     : null
                         )

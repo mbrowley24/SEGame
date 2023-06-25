@@ -1,7 +1,6 @@
 import React, {useCallback, useContext} from "react";
-import {IconContext} from "react-icons";
 import {useDispatch, useSelector} from "react-redux";
-import {AiOutlineCheck, AiOutlineClose} from "react-icons/ai";
+import {FaSadTear} from "react-icons/fa";
 import SocketContext from "../context/SocketContext";
 import {gameActions} from "../store/gameData";
 import {qAndAActions} from "../store/questionAndAnswerData";
@@ -10,7 +9,7 @@ const CorrectIncorrect = props => {
     const {id, question} = props;
     const dispatch = useDispatch();
     const {socket} = useContext(SocketContext);
-
+    const buzzedPlayer = useSelector(state => state.gameData.buzzer.player);
     const correctAnswer = useCallback(() => {
 
         dispatch(gameActions.correctAnswer(question));
@@ -24,10 +23,20 @@ const CorrectIncorrect = props => {
 
     const incorrectAnswer = useCallback(() => {
 
-        dispatch(qAndAActions.resetQAndA());
+        dispatch(qAndAActions.attemptedBy(buzzedPlayer));
         dispatch(gameActions.incorrectAnswer(question));
+        socket.emit('incorrect_answer', {room: id, question: question, player: buzzedPlayer});
 
     }, []);
+
+    const notAttempted = useCallback(() => {
+
+            socket.emit('not_attempted', {room: id, question: question});
+            dispatch(gameActions.notAttempted(question));
+            dispatch(qAndAActions.resetQAndA());
+
+
+    },[])
 
     return(
         <React.Fragment>
@@ -39,9 +48,14 @@ const CorrectIncorrect = props => {
             </button>
             <button
                 className={'btn btn-danger text-capitalize ms-2'}
-                onClick={() => incorrectAnswer()}
+                onClick={incorrectAnswer}
             >
                 incorrect
+            </button>
+            <button  className={'btn btn-warning text-capitalize ms-2'}
+                onClick={notAttempted}
+            >
+                <FaSadTear/> attempted
             </button>
         </React.Fragment>
     )

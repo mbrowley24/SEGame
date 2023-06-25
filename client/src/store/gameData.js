@@ -130,10 +130,7 @@ const gameSlice = createSlice({
             }
 
             const question = action.payload.question;
-            console.log(question);
-            console.log(state.board.category1[action.payload.value].question);
-            console.log(state.board.category1[action.payload.value].question === question);
-            console.log(state.board.category1[action.payload.value].attempted);
+
             if(state.board.category1[action.payload.value].question === question){
 
                 state.board.category1[action.payload.value].attempted = true;
@@ -167,19 +164,52 @@ const gameSlice = createSlice({
 
         },incorrectAnswer(state, action) {
 
+            console.log(action.payload);
             const username = state.buzzer.player;
 
             for(let i = 0; i < state.players.length; i++){
 
                 if(state.players[i].username === username){
 
-                    state.players[i].score -= action.payload;
+                    state.players[i].score -= action.payload.value;
                     state.buzzer.buzz = false;
                     state.buzzer.player = "";
                     break;
                 }
             }
 
+
+        },notAttempted(state, action){
+
+            state.buzzer.buzz = false;
+            state.buzzer.player = "";
+            const question = action.payload.question;
+
+            if(state.board.category1[action.payload.value].question === question){
+
+                state.board.category1[action.payload.value].attempted = true;
+
+            }else if(state.board.category2[action.payload.value].question === question){
+
+                state.board.category2[action.payload.value].attempted = true;
+
+            }else if(state.board.category3[action.payload.value].question === question) {
+
+                state.board.category3[action.payload.value].attempted = true;
+
+            }else if(state.board.category4[action.payload.value].question === question) {
+
+                state.board.category4[action.payload.value].attempted = true;
+
+            }else if(state.board.category5[action.payload.value].question === question) {
+
+                state.board.category5[action.payload.value].attempted = true;
+
+            }else if(state.board.category6[action.payload.value].question === question) {
+
+                state.board.category6[action.payload.value].attempted = true
+
+            }
 
         },setPlayers(state, action) {
 
@@ -215,25 +245,12 @@ const gameSlice = createSlice({
         setGame(state, action) {
 
             console.log(action.payload)
-            // let name = "";
-            // let username = "";
 
-            // if(state.host.name.length > 0){
-            //     name = state.host.name;
-            //     username = state.host.username;
-            // }
-            //
-            // if(action.payload.host.name.length === 0){
-            //     name = action.payload.host.name;
-            //     username = action.payload.host.username;
-            // }
 
             state.name = action.payload.name;
             state.timer = action.payload.timer;
             state.finalTimer = action.payload.finalTimer;
             state.buzzer = action.payload.buzzer;
-            // state.host.name = name;
-            // state.host.username = username;
             state.board = action.payload.board;
             state.host = action.payload.host;
             state.judges = action.payload.judges;
@@ -255,6 +272,7 @@ const gameSlice = createSlice({
             state.buzzer.buzz = true;
             state.buzzer.player = action.payload;
             console.log(JSON.parse(JSON.stringify(state)))
+
         },resetBuzzer(state) {
             state.buzzer.buzz = false;
             state.buzzer.player = "";
