@@ -32,20 +32,16 @@ const CorrectIncorrect = props => {
     return(
         <React.Fragment>
             <button
-                className={'btn btn-success'}
+                className={'btn btn-success me-2 text-capitalize'}
                 onClick={correctAnswer}
             >
-                <IconContext.Provider value={{ color: "green", size: ".75em" }}>
-                    <AiOutlineCheck/>
-                </IconContext.Provider>
+                correct
             </button>
             <button
-                className={'btn btn-danger'}
+                className={'btn btn-danger text-capitalize ms-2'}
                 onClick={() => incorrectAnswer()}
             >
-                <IconContext.Provider value={{ color: "red", size: ".75em" }}>
-                    <AiOutlineClose/>
-                </IconContext.Provider>
+                incorrect
             </button>
         </React.Fragment>
     )

@@ -41,8 +41,7 @@ const Buzzer = props => {
         <React.Fragment>
             <button
                 className={
-                    myBuzzer ? 'bg-success btn-lg py-5 d-block w-100 text-uppercase'
-                : 'bg-danger btn-lg py-5 d-block w-100 text-uppercase'
+                    'bg-success btn-lg py-5 d-block w-100 text-uppercase'
             }
                 disabled={buzzed}
                 onClick={() => buzzer()}

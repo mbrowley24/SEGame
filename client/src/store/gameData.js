@@ -252,11 +252,15 @@ const gameSlice = createSlice({
         },
         setBuzzer(state, action) {
 
-            if(!state.buzzer.buzz){
-                state.buzzer.buzz = true;
-                state.buzzer.player = action.payload;
-            }
-        },
+            state.buzzer.buzz = true;
+            state.buzzer.player = action.payload;
+            console.log(JSON.parse(JSON.stringify(state)))
+        },resetBuzzer(state) {
+            state.buzzer.buzz = false;
+            state.buzzer.player = "";
+        },buzzerTimeout(state) {
+            state.buzzer.buzz = false;
+        }
     }
 })
 

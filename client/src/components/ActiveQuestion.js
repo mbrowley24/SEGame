@@ -5,27 +5,34 @@ import CorrectIncorrect from "./CorrectIncorrect";
 import SocketContext from "../context/SocketContext";
 import {useParams} from "react-router-dom";
 import "../css/generalCss.css";
+import Counter from "./Counter";
+import {gameActions} from "../store/gameData";
 
 const ActiveQuestion = props => {
 
     const {id} = useParams();
+    const dispatch = useDispatch();
     const {socket} = useContext(SocketContext);
     const question = useSelector(state => state.qAndAData);
     const game = useSelector(state => state.gameData);
     const myData = useSelector(state => state.playerData);
     const isHost = useMemo(() => game.host.username === myData.username, [game.host, myData]);
-
+    const timer = useMemo(() => game.buzzer.buzz, [game.buzzer.buzz]);
 
     useEffect(() => {
 
-        socket.on("buzzer", data => {
+        socket.on("buzzed", data => {
+            console.log("buzzer");
             console.log(data);
+            dispatch(gameActions.setBuzzer(data));
         });
 
     }, [socket]);
 
-    console.log(question);
+    console.log(myData);
+    console.log(game.host);
 
+    console.log(game.buzzer.buzz);
     return(
         <div className={'pt-3 border'}>
             <div className={'d-flex height400px justify-content-center border height200Px'}>
@@ -33,12 +40,14 @@ const ActiveQuestion = props => {
                     <h3>{question.question}</h3>
                 </div>
             </div>
-            <div className={'height150Px'} hidden={!isHost}>
-                <CorrectIncorrect id={id} question={question}/>
-            </div>
-            <div className={'p-5 m-5 border'} hidden={isHost}>
-                <Buzzer/>
-            </div>
+            {isHost &&  <div className={'height150Px'}>
+                {!timer && <CorrectIncorrect id={id} question={question}/>}
+                {timer && <Counter/>}
+            </div> }
+            {!isHost && <div className={'p-5 m-5 border'}>
+                {!timer && <Buzzer/>}
+                {timer && <Counter/>}
+            </div>}
         </div>
 
     )

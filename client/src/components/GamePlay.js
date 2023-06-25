@@ -53,23 +53,6 @@ const GamePlay = props => {
         });
 
 
-
-
-
-        // socket.on('new_participant', () => {
-        //
-        //     console.log(game.host.username);
-        //     console.log(myData.username);
-        //     console.log(game);
-        //     if(game.host.username === myData.username){
-        //         console.log("new_participant");
-        //         console.log(game);
-        //         socket.emit('update_participants', {room: id, game: game});
-        //     }
-        //
-        // });
-
-
         socket.on('host_update', data => {
 
             if(game.host.username !== myData.username){
