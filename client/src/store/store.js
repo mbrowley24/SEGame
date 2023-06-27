@@ -5,6 +5,7 @@ import gameReducer from "./gameData";
 import playerReducer from "./playerData";
 import questionAndAnswerReducer from "./questionAndAnswerData";
 import socketReducer from "./socketStore";
+import lobbyReducer from "./lobbyData";
 
 const store = configureStore({
     reducer: {
@@ -13,7 +14,8 @@ const store = configureStore({
         gameData: gameReducer,
         playerData: playerReducer,
         qAndAData: questionAndAnswerReducer,
-        socketData: socketReducer
+        socketData: socketReducer,
+        lobbyData: lobbyReducer
     }
 });
 

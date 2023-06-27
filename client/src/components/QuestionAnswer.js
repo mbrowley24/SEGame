@@ -25,7 +25,7 @@ const QuestionAnswer = props => {
 
     return(
         <div ref={drag}
-             className={'border w-50 m-auto height100 overflow-auto d-flex justify-content-center p-1'}
+             className={'border bg-light height150Px w-75 m-auto my-2 d-flex justify-content-center p-1'}
              onMouseEnter={()=>onMouseEnter()}
              onMouseLeave={()=>setView(false)}
         >

@@ -13,7 +13,7 @@ const BoardForm = props => {
                 <label htmlFor="">board name</label>
                 <input type="text"
                        value={board.name}
-                       className={'form-control-sm'}
+                       className={'form-control-sm text-center'}
                         name={'name'}
                         onChange={(e) =>inputChange(e)}
                 />

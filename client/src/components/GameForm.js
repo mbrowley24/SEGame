@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo} from "react";
+import React, {useEffect, useCallback, useMemo} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useDrop} from "react-dnd";
 import {gameActions} from "../store/gameData";
@@ -14,10 +14,18 @@ const GameForm = props => {
         accept: 'board',
         drop: (item, monitor) => {
 
-            dispatch(gameActions.setBoard(item));
+            dispatch(gameActions.setBoardOnly(item));
         }
 
     })
+
+    useEffect(() => {
+
+        dispatch(gameActions.resetGame());
+
+        return () => {};
+
+    }, []);
 
 
     const inputChange = useCallback((e) => {

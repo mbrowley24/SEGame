@@ -9,7 +9,7 @@ import "../css/generalCss.css"
 const DashboardTopRow = props => {
 
     return(
-        <div className={'row p-2 '}>
+        <div className={'row p-2'}>
             <div className={'col border'}>
                 <h4 className={'text-center text-capitalize sticky'}>
                     question subjects
@@ -19,7 +19,7 @@ const DashboardTopRow = props => {
                         </IconContext.Provider>
                     </Link>
                 </h4>
-                <div className={'height30 overflow-auto'}>
+                <div className={'height30 overflow-auto skinny_black_scroll_bar'}>
                     <SubjectTable/>
                 </div>
             </div>

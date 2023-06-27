@@ -3,8 +3,45 @@
     margin: 0;
 }
 
+
+.question{
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.background-Lapis-lazuli{
+    background-color: #006494;
+}
+
+/* Works on Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: black grey;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 9px;
+}
+
+*::-webkit-scrollbar-track {
+    background: grey
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 100px;
+    border: 3px solid black;
+}
+
+
+
 .height100{
     height: 100vh;
+}
+
+.height60px{
+    height: 60px;
 }
 
 .height100Px{
@@ -18,6 +55,11 @@
 .height200Px{
     height: 200px;
 }
+
+.height300Px{
+    height: 300px;
+}
+
 
 .height600px{
     height: 600px;

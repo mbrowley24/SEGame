@@ -52,10 +52,10 @@ const CorrectIncorrect = props => {
             >
                 incorrect
             </button>
-            <button  className={'btn btn-warning text-capitalize ms-2'}
+            <button  className={'btn btn-dark text-capitalize ms-2'}
                 onClick={notAttempted}
             >
-                <FaSadTear/> attempted
+                <FaSadTear/> not answered
             </button>
         </React.Fragment>
     )

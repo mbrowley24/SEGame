@@ -1,11 +1,11 @@
 import React, {useMemo} from "react";
-import useGame from "../hooks/useGame";
-
-
+import {useSelector} from "react-redux";
+import {FaSadCry} from "react-icons/fa";
+import {RiAlarmWarningLine} from "react-icons/ri";
+import PlayerPanelListItem from "./PlayerPanelListItem";
 
 const PlayersPanel = props => {
     const {game} = props;
-
 
 
     return(
@@ -21,9 +21,10 @@ const PlayersPanel = props => {
                         return(
 
                                 player.name.length > 0?
-                                    <li key={i} className={'list-group-item'}>
-                                        {`${player.name} : ${player.score}`}
-                                    </li>
+                                    <React.Fragment key={i}>
+                                        <PlayerPanelListItem player={player} i={i} game={game}/>
+                                    </React.Fragment>
+
                                     : null
                         )
                     })

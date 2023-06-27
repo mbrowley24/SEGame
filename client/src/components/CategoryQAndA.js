@@ -30,9 +30,9 @@ const QuestionQAndA= props => {
     return(
         <div ref={drop}
              className={duplicateQuestion?
-             'd-flex height100  w-50 m-auto border justify-content-center overflow-auto p-1'
+             'd-flex height150Px w-75 m-auto border justify-content-center overflow-auto p-1'
                  :
-            'd-flex height100 border border-danger w-50 m-auto border justify-content-center overflow-auto p-1'
+            'd-flex height150Px border border-danger w-75 m-auto border justify-content-center overflow-auto p-1'
         }
                 onMouseEnter={()=>setView(true)}
                 onMouseLeave={()=>setView(false)}

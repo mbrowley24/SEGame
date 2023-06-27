@@ -42,16 +42,18 @@ jeopardyNameSpace.on("connection", (socket) => {
     socket.on("join_game", (data) =>{
 
         console.log("join game event received on server side");
-
+        console.log(data);
         socket.join(data.room);
-
-        // socket.to(data.room).emit("new_participant", data.game);
+        socket.to(data.room).emit("lobby", data.player);
 
     })
 
     socket.on("update_participants", (data) =>{
         console.log("update_participants event received on server side");
-        console.log(data);
+
+        console.log(data.game);
+        console.log(data.game.players);
+
         socket.to(data.room).emit("host_update", data.game);
     });
 
@@ -59,7 +61,7 @@ jeopardyNameSpace.on("connection", (socket) => {
 
         console.log("add_player event received on server side");
         console.log(data);
-        socket.to(data.room).emit("player", data.players);
+        socket.to(data.room).emit("player", {players: data.players, game: data.game });
     })
 
     socket.on("join_game_host", (data) =>{
@@ -109,6 +111,6 @@ jeopardyNameSpace.on("connection", (socket) => {
 })
 
 
-server.listen(process.env.PORT || 8000, () => {
+server.listen(process.env.PORT || 8080, () => {
     console.log(`Listening on port ${process.env.PORT}`);
 });

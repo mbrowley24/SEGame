@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import useHttp from "../hooks/useHttp";
 import QuestionAnswer from "./QuestionAnswer";
+import "../css/generalCss.css"
 
 const CategoryQuestions = props => {
     const {id} = props;
@@ -29,6 +30,10 @@ const CategoryQuestions = props => {
             })();
         }
 
+        if(id.length === 0){
+            setQuestions([])
+        }
+
         return ()=>{
             controller.abort();
         }
@@ -36,7 +41,11 @@ const CategoryQuestions = props => {
     },[id])
 
     return(
-        <div>
+        <div className={'height600px overflow-auto'}>
+            {
+                questions.length === 0 &&
+                <p className={'text-capitalize'}>no questions</p>
+            }
             {
                 questions.map((item, index)=>{
 

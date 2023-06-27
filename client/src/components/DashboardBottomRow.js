@@ -27,7 +27,7 @@ const DashboardBottomRow = (props) => {
                     <BoardTable/>
                 </div>
             </div>
-            <div className={'col'}>
+            <div className={'col border'}>
                 <h4 className={'text-center text-capitalize'}>
                     games
                     <Link className={'ms-1'} to={'/games'}>

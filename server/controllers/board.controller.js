@@ -113,6 +113,7 @@ module.exports = {
     },
     boards_for_game_data: async (req, res) => {
 
+        console.log("boards_for_game_data");
         const decodedJWT = jwt.decode(req.cookies.usertoken, {complete: true});
         const {email} = decodedJWT.payload;
 
@@ -145,5 +146,52 @@ module.exports = {
             console.log("Failed to find user", err);
             res.status(400).json(err);
         }
+    },
+    board_data: async (req, res) => {
+
+        const public_id = req.params.id;
+
+        try{
+
+            const result = await Board.findOne({public_id: public_id});
+
+            const board = {
+                id: result.public_id,
+                name: result.name,
+                category1: result.category1,
+                category2: result.category2,
+                category3: result.category3,
+                category4: result.category4,
+                category5: result.category5,
+                category6: result.category6,
+            };
+
+            res.status(200).json(board);
+
+        }catch (err){
+
+            console.log("Failed to find board", err);
+            res.status(400).json(err);
+        }
+    },
+
+    edit_board: async (req, res) => {
+
+        const public_id = req.params.id;
+
+        try{
+
+           await Board.findOneAndUpdate({public_id: public_id}, req.body, {
+                new: true,
+                runValidators: true
+            })
+
+            res.status(200).json("Board updated");
+        }catch(err){
+
+            res.status(400).json(err);
+
+        }
+
     },
 };

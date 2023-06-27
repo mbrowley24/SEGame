@@ -1,6 +1,8 @@
 {
-  "name": "client",
+  "name": "SE Game",
   "version": "0.1.0",
+  "author": "Michael Browley",
+  "license": "GPL",
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",

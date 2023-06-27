@@ -229,6 +229,7 @@ const boardSlice = createSlice({
             state.category4 = boardData.category4;
             state.category5 = boardData.category5;
             state.category6 = boardData.category6;
+
         }
     }
 })

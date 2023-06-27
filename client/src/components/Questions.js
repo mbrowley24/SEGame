@@ -41,19 +41,22 @@ const Questions = props => {
     }, [update]);
 
     return(
-        <div className={'m-auto border border-danger p-2'}>
-            <h1 className={'text-capitalize text-center'}>{questionData.subject.name} questions</h1>
-            {
-                questionData.questions.length === 0 ? <h6>No questions</h6> : null
-            }
-            {
-                questionData.questions.map((question, index) => {
-                    console.log(question)
-                    return(
-                        <QuestionsPanel key={`${index}/${question.id}`} question={question}/>
-                    )
-                })
-            }
+        <div className={'m-auto p-2 '}>
+            <h1 className={'text-capitalize text-center mb-3  bg-light'}>{questionData.subject.name} questions</h1>
+            <div className={'overflow-auto height400px'}>
+                {
+                    questionData.questions.length === 0 ? <h6>No questions</h6> : null
+                }
+                {
+                    questionData.questions.map((question, index) => {
+                        console.log(question)
+                        return(
+                            <QuestionsPanel key={`${index}/${question.id}`} question={question}/>
+                        )
+                    })
+                }
+            </div>
+
         </div>
     )
 };

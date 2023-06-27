@@ -23,6 +23,10 @@ const playerSlice = createSlice({
 
             const {name,value} = action.payload;
 
+            if(state.username === ""){
+                state.username = Math.random().toString(36).substring(2,10);
+            }
+
             if(name === "name"){
 
                 if(!whiteSpaceCheck(value)){
@@ -32,14 +36,6 @@ const playerSlice = createSlice({
                     }
                 }
 
-            }else if(name === "username"){
-
-                if(!whiteSpaceCheck(value)){
-                    if(usernamePattern.test(value)){
-
-                        state.username = value;
-                    }
-                }
             }
 
         },

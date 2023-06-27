@@ -6,7 +6,7 @@ const QuestionForm = props => {
     const {questionValidation} = useQuestion();
 
     return(
-        <form onSubmit={submit}>
+        <form onSubmit={submit} className={'p-1'}>
             <div className={''}>
                 <label htmlFor="question">Question</label>
                 <textarea
@@ -31,7 +31,7 @@ const QuestionForm = props => {
                        onChange={(e)=>inputChange(e)}
                 ></textarea>
             </div>
-            <div>
+            <div className={'my-1'}>
                 <button
                     className={'btn btn-success'}
                     disabled={!questionValidation(question)}

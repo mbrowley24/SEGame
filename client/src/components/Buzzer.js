@@ -13,7 +13,6 @@ const Buzzer = props => {
     const question = useSelector(state => state.qAndAData);
     const myData = useSelector(state => state.playerData);
     const buzzed = useMemo(() => game.buzzer.player.length > 0, [game]);
-    const myBuzzer = useMemo(() => game.buzzer.player === myData.username, [game, myData]);
     const attempted = useMemo(() => question.attempted_by.includes(myData.username) , [game, myData]);
 
 

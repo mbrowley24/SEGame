@@ -96,6 +96,7 @@ const useGame = () => {
 
     const hostJoined = (host) => {
 
+        console.log(host);
         let returnValue = false;
 
         if(host.name){
@@ -145,6 +146,22 @@ const useGame = () => {
         };
     };
 
+    const playerPanelCss = (buzzed, attempted) => {
+
+        let returnedCss = 'list-group-item list-group-item-success' ;
+
+        if(buzzed){
+            returnedCss = 'list-group-item list-group-item-warning';
+        }
+
+        if(attempted){
+            returnedCss = 'list-group-item list-group-item-danger text-decoration-line-through';
+        }
+
+
+        return returnedCss;
+    }
+
     return(
         {
             addPlayer,
@@ -153,6 +170,7 @@ const useGame = () => {
             canJoin,
             hostJoined,
             playerFull,
+            playerPanelCss,
             updateHost,
             questionAttempted,
             validateGame,

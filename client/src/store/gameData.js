@@ -68,11 +68,7 @@ const gameData = {
         category5: category,
         category6: category,
     },
-    judges:{
-        1:judge,
-        2:judge,
-        3:judge,
-    },
+    lobby:[],
     host:{
         name:"",
         username:"",
@@ -100,9 +96,79 @@ const gameSlice = createSlice({
             if(namePattern.test(action.payload)){
                 state.name = action.payload;
             }
+        },addLobby(state, action) {
+
+            console.log(action.payload);
+            const lobbyList = JSON.parse(JSON.stringify(state.lobby));
+            let username = action.payload.username;
+
+            let usernameCheck = lobbyList.filter((player) => player.username === username);
+
+            if(usernameCheck.length === 0){
+
+                function filterName(player){
+
+
+                    if(player.name === action.payload.name){
+                        return true
+                    }
+
+                    const name = player.name.split("(");
+
+                    if(name.length >= 1){
+
+                        if(name[0] === action.payload.name){
+                            return true;
+                        }
+                    }
+
+                    return false;
+                }
+
+                const filteredLobby = lobbyList.filter(filterName);
+                console.log("filteredLobby")
+                console.log(filteredLobby);
+
+                if(filteredLobby.length === 0){
+
+                    const newPlayer = {
+                        name: action.payload.name,
+                        username: username,
+                        score: 0
+                    }
+
+                    lobbyList.push(newPlayer);
+
+                    state.lobby = lobbyList;
+
+                }else{
+
+                    let name = `${action.payload.name}(${filteredLobby.length})`;
+
+                    let filteredNameCheck = lobbyList.filter((player) => player.name === name);
+
+                    while(filteredNameCheck.length > 0){
+
+                        name = `${action.payload.name}(${filteredNameCheck.length+1})`;
+                        filteredNameCheck = lobbyList.filter((player) => player.name === name);
+                    }
+
+                    const newPlayer = {
+                        name: name,
+                        username: username,
+                        score: 0
+                    }
+
+                    lobbyList.push(newPlayer);
+
+                    state.lobby = lobbyList;
+                }
+            }
+
+
         },
         setBoard(state, action) {
-
+            console.log(action.payload);
             state.name = action.payload.name;
             state.id = action.payload.id
             state.board.name = action.payload.board.name
@@ -112,6 +178,17 @@ const gameSlice = createSlice({
             state.board.category4 = action.payload.board.category4
             state.board.category5 = action.payload.board.category5
             state.board.category6 = action.payload.board.category6
+
+        },setBoardOnly(state, action){
+
+            console.log(action.payload);
+            state.board.name = action.payload.name
+            state.board.category1 = action.payload.category1
+            state.board.category2 = action.payload.category2
+            state.board.category3 = action.payload.category3
+            state.board.category4 = action.payload.category4
+            state.board.category5 = action.payload.category5
+            state.board.category6 = action.payload.category6
 
         },correctAnswer(state, action) {
 
@@ -213,34 +290,50 @@ const gameSlice = createSlice({
 
         },setPlayers(state, action) {
 
-            const filteredPlayers = state.players.filter(player => player.username === action.payload.username);
+            console.log(action.payload);
+            const currentPlayers = [...state.players];
+            const newPlayers = [...action.payload.players];
 
-            if(filteredPlayers.length === 0){
+            function filterLobby(player) {
 
-                function filterName(player){
-                    const name = player.name.split("(")[0];
-                    return name === action.payload.name;
-                }
+                const filterPlayers = newPlayers.filter(newPlayer => newPlayer.username === player.username);
 
-                const filterNameResult = state.players.filter(filterName);
-
-                if(filterNameResult.length > 0){
-
-                    const player={
-                        name: `${action.payload.name}(${filterName.length})`,
-                        username: action.payload.username,
-                        score:0,
-                    }
-
-                    state.players = [...state.players, player];
-
-                }else{
-                    state.players = [...state.players, action.payload];
-                }
-
+                return filterPlayers.length === 0;
             }
 
-            console.log(JSON.parse(JSON.stringify(state.players)))
+            if(state.players.length === 0){
+                    state.lobby = state.lobby.filter(filterLobby);
+                    state.players = newPlayers;
+                    console.log(JSON.parse(JSON.stringify(state)))
+                    return;
+            }
+
+            function filterPlayer(player) {
+
+                const filterPlayers = currentPlayers.filter(newPlayer => newPlayer.username !== player.username);
+
+                return filterPlayers.length >0;
+            }
+
+
+            if(action.payload.game){
+
+                console.log(action.payload);
+                state.name = action.payload.game.name;
+                state.timer = action.payload.game.timer;
+                state.finalTimer = action.payload.game.finalTimer;
+                state.buzzer = action.payload.game.buzzer;
+                state.board = action.payload.game.board;
+                state.host = action.payload.game.host;
+            }
+
+
+            state.lobby = state.lobby.filter(filterLobby);
+
+            state.players = newPlayers.filter(filterPlayer);
+
+
+            console.log(JSON.parse(JSON.stringify(state)))
         },
         setGame(state, action) {
 
@@ -253,7 +346,6 @@ const gameSlice = createSlice({
             state.buzzer = action.payload.buzzer;
             state.board = action.payload.board;
             state.host = action.payload.host;
-            state.judges = action.payload.judges;
             state.players = action.payload.players;
 
             console.log(JSON.parse(JSON.stringify(state)))

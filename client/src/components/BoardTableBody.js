@@ -40,7 +40,9 @@ const BoardTableBody = (props) => {
 
                 return(
                     <tr key={index}>
-                        <td className={'text-capitalize text-center'} scope="row"><Link to={''}>{board.name}</Link></td>
+                        <td className={'text-capitalize text-center'} scope="row">
+                            <Link to={`/board/${board.id}`}>{board.name}</Link>
+                        </td>
                         <td className={'text-capitalize text-center'} scope="row">{board.created_by}</td>
                     </tr>
                 )

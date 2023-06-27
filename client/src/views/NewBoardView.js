@@ -46,10 +46,10 @@ const NewBoardView = () => {
             <NavBar/>
             <h1>New Board</h1>
             <div className={'d-flex'}>
-                <div className={'w-10 border'}>
+                <div className={'w-15 height600px border-3 rounded-2 '}>
                     <CategorySelectionTable/>
                 </div>
-                <div className={"w-100 ms-3 heig border"}>
+                <div className={"w-100 ms-3 border"}>
                     <BoardForm
                         inputChange={inputChange}
                         submit={submit}

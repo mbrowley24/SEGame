@@ -29,7 +29,7 @@ const JoinGame = props => {
 
     const joinGame = () =>{
 
-        socket.emit("join_game", {room: id});
+        socket.emit("join_game", {room: id, player:player});
         navigate(`/games/${id}/game`);
 
     }
@@ -43,6 +43,7 @@ const JoinGame = props => {
 
             // do something after 300ms
 
+            if(id.length > 0){
                 (async () => {
 
                     const configRequest = {
@@ -59,6 +60,8 @@ const JoinGame = props => {
 
                     await getHttpRequest(configRequest, applyData);
                 })();
+            }
+
 
 
         }, 300);

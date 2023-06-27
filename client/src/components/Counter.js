@@ -40,7 +40,7 @@ const Counter = props => {
 
     return(
         <React.Fragment>
-            <h1 className={'display-1'}>{counter}</h1>
+            <h1 className={'display-1 text-warning '}>{counter}</h1>
         </React.Fragment>
     )
 };

@@ -12,6 +12,7 @@ import StartGameView from "./views/StartGameView";
 import GamePlay from "./components/GamePlay";
 import JoinGameView from "./views/JoinGameView";
 import {SocketProvider} from "./context/SocketContext";
+import EditBoardView from "./views/EditBoardView";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
                 </Route>
                   <Route path={'/board'}>
                       <Route path={''} element={<NewBoardView/>}/>
+                      <Route path={':id'} element={<EditBoardView/>}/>
                   </Route>
                   <Route path={'/games'}>
                         <Route path={''} element={<NewGameView/>}/>

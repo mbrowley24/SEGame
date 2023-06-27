@@ -15,12 +15,12 @@ const BoardGameTableBody = props => {
         (async () => {
 
             const configRequest={
-                    url: "board/game",
+                    url: "board/myBoards/game",
                     signal: controller.signal,
             }
 
             const applyData = (res) =>{
-                console.log(res.data);
+                console.log(res);
                 setData(res.data);
             }
 
