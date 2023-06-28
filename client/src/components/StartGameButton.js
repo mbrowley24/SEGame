@@ -27,7 +27,7 @@ const StartGameButton = props => {
 
 
         socket.on("connect_error", (err) => {
-            console.log(`connect_error due to ${err.message}`);
+            console.log(`connect_error due to ${err}`);
         })
 
         console.log("join game host");

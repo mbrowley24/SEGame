@@ -38,7 +38,7 @@ const io = new Server(server, {
 
 
 const jeopardyNameSpace = io.of(/^\/jeopardy-[a-zA-Z0-9]{3,50}$/);
-io.on("connection", (socket) => {
+jeopardyNameSpace.on("connection", (socket) => {
     
     console.log("connection established");
     
