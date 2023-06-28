@@ -29,7 +29,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: "https://urchin-app-voqyy.ondigitalocean.app",
+        origin: "https://urchin-app-voqyy.ondigitalocean.app/",
         methods: ["GET", "POST"],
         credentials: false
     }
