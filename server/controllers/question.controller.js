@@ -61,64 +61,45 @@ module.exports = {
     },
     new_question: async (req, res) => {
 
-        const question = new Question(req.body);
+       const question = new Question(req.body);
 
         question.public_id = public_id.randomString(30);
         
         const decodedJWT = jwt.decode(req.cookies.usertoken, process.env.JWT_SECRET);
 
-        const userId = decodedJWT._id;
-        if(userId.length > 0){
+        const {name} = decodedJWT;
+        question.submitted_by = name;
+
+        try{
+
+            const subject = await Subject.findOne({public_id: req.params.id});
+
+            question.subject = subject.name;
 
             try{
 
-                const player = await Player.findOne({_id: userId});
+                let currentQuestion = await Question.findOne({public_id: question.public_id});
 
-                question.submitted_by = `${player.first_name} ${player.last_name}`;
+                while(currentQuestion !== null){
+
+                    question.public_id = public_id.randomString(30);
+
+                    currentQuestion = await Question.findOne({public_id: question.public_id});
+                }
+
 
                 try{
+                    await question.save();
 
-                    const subject = await Subject.findOne({public_id: req.params.id});
-
-                    question.subject = subject.name;
-
-                    try{
-
-                        let currentQuestion = await Question.findOne({public_id: question.public_id});
-
-                        while(currentQuestion !== null){
-
-                            question.public_id = public_id.randomString(30);
-
-                            currentQuestion = await Question.findOne({public_id: question.public_id});
-                        }
+                    console.log("Successfully created a new question");
+                    res.status(200).json({message: "Successfully created a new question"});
 
 
-                        try{
-                            await question.save();
-
-                            console.log("Successfully created a new question");
-                            res.status(200).json({message: "Successfully created a new question"});
-
-
-                        }catch(err){
-
-                            console.log("Failed to create a new question", err);
-                            res.status(400).json(err);
-
-                        }
-
-                    }catch(err){
-
-                        console.log("Failed to create a new question", err);
-                        res.status(400).json(err);
-                    }
-
-
-                }catch (err){
+                }catch(err){
 
                     console.log("Failed to create a new question", err);
                     res.status(400).json(err);
+
                 }
 
             }catch(err){
@@ -127,10 +108,13 @@ module.exports = {
                 res.status(400).json(err);
             }
 
-        }else{
-            console.log("You must be logged in to create a question");
-            res.status(400).json({message: "You must be logged in to create a question"});
+
+        }catch (err){
+
+            console.log("Failed to create a new question", err);
+            res.status(400).json(err);
         }
+
 
     },
 
