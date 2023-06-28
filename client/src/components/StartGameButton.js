@@ -34,7 +34,7 @@ const StartGameButton = props => {
 
     return(
         <button className={'btn btn-success'}
-            onClick={()=>startGame()}
+            onClick={startGame}
         >
             Start Game
         </button>
