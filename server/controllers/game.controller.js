@@ -1,6 +1,6 @@
 const Game = require('../models/game.model');
 const jwt = require('jsonwebtoken');
-const {randomString} = require('../config/randomString.config');
+const {randomString} = require('../config/randomstring.config');
 
 module.exports = {
 
