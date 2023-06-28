@@ -4,6 +4,7 @@ import {gameActions} from "../store/gameData";
 import {useNavigate} from "react-router-dom";
 import SocketContext from "../context/SocketContext";
 import useGame from "../hooks/useGame";
+import * as constants from "constants";
 const StartGameButton = props => {
     const {game, id} = props;
     const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const StartGameButton = props => {
         console.log(gameUpdate);
         dispatch(gameActions.setGame(gameUpdate));
 
+        console.log("join game host");
         socket.emit("join_game_host", {room:id, game: gameUpdate});
 
         navigate(`/games/${game.id}/game`);
