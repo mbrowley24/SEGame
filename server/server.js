@@ -36,7 +36,7 @@ const io = new Server(server, {
 })
 
 
-const jeopardyNameSpace = io.of(/^\/jeopardy-[a-zA-Z0-9]{0,50}$/);
+const jeopardyNameSpace = io.of(/^\/jeopardy-[a-zA-Z0-9]{3,50}$/);
 jeopardyNameSpace.on("connection", (socket) => {
 
     socket.on("join_game", (data) =>{

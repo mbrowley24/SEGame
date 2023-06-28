@@ -10,7 +10,7 @@ const StartGameButton = props => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {updateHost} = useGame();
-    const {socket, setId, url} = useContext(SocketContext);
+    const {socket, setId, socketUrl} = useContext(SocketContext);
     const {name, username} = useSelector(state => state.playerData);
 
     useLayoutEffect(() => {
@@ -20,7 +20,7 @@ const StartGameButton = props => {
     }, [id]);
 
     const startGame = () => {
-        console.log(url)
+        console.log(socketUrl)
         const gameUpdate = updateHost(game, {name, username});
         console.log(gameUpdate);
         dispatch(gameActions.setGame(gameUpdate));
