@@ -34,6 +34,10 @@ const GamePlay = props => {
 
         });
 
+        socket.on("connect_error", (err) => {
+            console.log(`connect_error due to ${err.message}`);
+        })
+
         socket.on('host', data =>{
             console.log(data);
             dispatch(gameActions.setGame(data));

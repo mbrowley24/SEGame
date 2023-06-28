@@ -26,6 +26,10 @@ const StartGameButton = props => {
         dispatch(gameActions.setGame(gameUpdate));
 
 
+        socket.on("connect_error", (err) => {
+            console.log(`connect_error due to ${err.message}`);
+        })
+
         console.log("join game host");
         socket.emit("join_game_host", {room:id, game: gameUpdate});
 
