@@ -29,6 +29,8 @@ const JoinGame = props => {
 
     const joinGame = () =>{
 
+        console.log("join game");
+        console.log(player);
         socket.emit("join_game", {room: id, player:player});
         navigate(`/games/${id}/game`);
 

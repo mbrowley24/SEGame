@@ -27,7 +27,7 @@ const CategoryView = props => {
 
     const submit = async (e) =>{
         e.preventDefault();
-        console.log(category);
+
         const configRequest={
             url: 'myCategories',
             data: category
