@@ -28,6 +28,7 @@ const server = http.createServer(app);
 
 
 const io = new Server(server, {
+
     cors: {
         origin: "https://urchin-app-voqyy.ondigitalocean.app/",
         methods: ["GET", "POST"],
@@ -38,7 +39,9 @@ const io = new Server(server, {
 
 const jeopardyNameSpace = io.of(/^\/jeopardy-[a-zA-Z0-9]{3,50}$/);
 jeopardyNameSpace.on("connection", (socket) => {
-
+    
+    console.log("connection established");
+    
     socket.on("join_game", (data) =>{
 
         console.log("join game event received on server side");

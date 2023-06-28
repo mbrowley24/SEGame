@@ -12,7 +12,7 @@ const JoinGame = props => {
     const player = useSelector(state => state.playerData);
     const [validGame, setValidGame] = useState(false);
     const {getHttpRequest} = useHttp();
-    const {socket, id, setId} = useContext(SocketContext);
+    const {socket, id, setId, socketUrl} = useContext(SocketContext);
 
     const {anonymousPlayers} = useGame();
     const passUserData = useMemo(()=>anonymousPlayers(player),[player]);
@@ -29,6 +29,7 @@ const JoinGame = props => {
 
     const joinGame = () =>{
 
+        console.log(socketUrl)
         console.log("join game");
         console.log(player);
         socket.emit("join_game", {room: id, player:player});
