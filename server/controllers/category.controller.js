@@ -65,7 +65,7 @@ module.exports = {
 
                 for(let i = 0; i < categoryResults.length; i++){
 
-                    console.log("Category: ", categoryResults[i]);
+
                     const categoryObj = {
                         name: categoryResults[i].name,
                         created_by: categoryResults[i].created_by.name,

@@ -33,9 +33,6 @@ module.exports = {
         try{
             const playerRecord = await Player.findOne({username: req.body.username});
 
-            console.log("Player record: ");
-            console.log(playerRecord);
-
             if(playerRecord === null){
 
                 console.log("Username not found");

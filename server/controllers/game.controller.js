@@ -93,12 +93,10 @@ module.exports = {
 
          try{
 
-             console.log(public_id);
+
              const result = await Game.findOne({public_id: public_id})
 
-             console.log(result.board.name);
-             console.log(result.players);
-             console.log(result.board.category1[200]);
+
              const gameData = {
                     id: result.public_id,
                     name: result.name,
@@ -117,7 +115,7 @@ module.exports = {
                     judges: JSON.parse(JSON.stringify(result.judges)),
              };
 
-              console.log(gameData);
+
                 res.status(200).json(gameData);
 
          }catch(err){
