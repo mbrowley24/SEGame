@@ -25,6 +25,8 @@ const StartGameButton = props => {
         console.log(gameUpdate);
         dispatch(gameActions.setGame(gameUpdate));
 
+        console.log("start game host");
+
         console.log("join game host");
         socket.emit("join_game_host", {room:id, game: gameUpdate});
 
