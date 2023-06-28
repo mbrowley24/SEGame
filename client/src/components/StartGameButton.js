@@ -4,7 +4,7 @@ import {gameActions} from "../store/gameData";
 import {useNavigate} from "react-router-dom";
 import SocketContext from "../context/SocketContext";
 import useGame from "../hooks/useGame";
-import * as constants from "constants";
+
 const StartGameButton = props => {
     const {game, id} = props;
     const dispatch = useDispatch();
