@@ -4,14 +4,13 @@ const app = express();
 const http = require('http');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const port = 8000;
 const {Server} = require("socket.io");
 
 
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+app.use(cors({credentials: true, origin: 'https://urchin-app-voqyy.ondigitalocean.app/'}));
 app.use(cookieParser());
 
 require('./config/config');
@@ -30,7 +29,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: "https://urchin-app-voqyy.ondigitalocean.app/",
         methods: ["GET", "POST"],
     }
 })
