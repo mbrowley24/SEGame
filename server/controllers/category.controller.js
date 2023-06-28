@@ -9,14 +9,12 @@ module.exports = {
 
         const decodedJwt = jwt.decode(req.cookies.usertoken, {complete: true});
 
-        const player_id = decodedJwt.payload._id;
+        const {username, first_name, last_name} = decodedJwt.payload
 
         const category = new Category(req.body);
 
         category.public_id = randomString(30);
 
-        // console.log("Player ID: ", player_id);
-        // console.log("Request body: ", req.body);
 
         try{
 
@@ -28,26 +26,15 @@ module.exports = {
                 count = Category.find().count({public_id: category.public_id});
             }
 
-            if(player_id.length > 0){
-
-                try{
-
-                    const player = await Player.findOne({_id: player_id})
 
 
-                    category.created_by.username = player.username;
-                    category.created_by.name = `${player.first_name} ${player.last_name}`;
-                    category.edited_by.username = player.username;
-                    category.edited_by.name = `${player.first_name} ${player.last_name}`;
 
-                    category.save()
+            category.created_by.username = username;
+            category.created_by.name = `${first_name} ${last_name}`;
+            category.edited_by.username = username;
+            category.edited_by.name = `${first_name} ${last_name}`;
 
-                }catch(err){
-                    console.log("Failed to find player", err);
-                    res.status(400).json(err);
-                }
-
-            }
+            category.save()
 
 
         }catch(err){
@@ -64,7 +51,7 @@ module.exports = {
 
         const decodedJwt = jwt.decode(req.cookies.usertoken, {complete: true});
 
-        const username = decodedJwt.payload.username;
+        const {username} = decodedJwt.payload;
 
 
         if(username.length > 0){

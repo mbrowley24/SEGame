@@ -67,8 +67,9 @@ module.exports = {
         
         const decodedJWT = jwt.decode(req.cookies.usertoken, process.env.JWT_SECRET);
 
-        const {name} = decodedJWT;
-        question.submitted_by = name;
+        console.log(decodedJWT);
+        const {first_name, last_name} = decodedJWT;
+        question.submitted_by = `${first_name} ${last_name}`;
 
         try{
 

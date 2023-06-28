@@ -3,7 +3,7 @@ import useHttp from "../hooks/useHttp";
 import QuestionsPanel from "./QuestionsPanel";
 import useQuestion from "../hooks/useQuestion";
 import {useSelector} from "react-redux";
-import {miscDataActions} from "../store/miscData";
+import {Link} from "react-router-dom";
 
 const Questions = props => {
     const {id} = props;
@@ -43,6 +43,7 @@ const Questions = props => {
     return(
         <div className={'m-auto p-2 '}>
             <h1 className={'text-capitalize text-center mb-3  bg-light'}>{questionData.subject.name} questions</h1>
+            <Link to={'dashboard'}>dashboard</Link>
             <div className={'overflow-auto height400px'}>
                 {
                     questionData.questions.length === 0 ? <h6>No questions</h6> : null

@@ -28,7 +28,7 @@ const QuestionView = props => {
 
     const submit = async (e) => {
         e.preventDefault();
-         console.log(question);
+
         if(questionValidation(question)){
 
             const requestConfig={
