@@ -10,7 +10,7 @@ const StartGameButton = props => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {updateHost} = useGame();
-    const {socket, setId} = useContext(SocketContext);
+    const {socket, setId, url} = useContext(SocketContext);
     const {name, username} = useSelector(state => state.playerData);
 
     useLayoutEffect(() => {
@@ -20,12 +20,11 @@ const StartGameButton = props => {
     }, [id]);
 
     const startGame = () => {
-
+        console.log(url)
         const gameUpdate = updateHost(game, {name, username});
         console.log(gameUpdate);
         dispatch(gameActions.setGame(gameUpdate));
 
-        console.log(socket.url);
 
         console.log("join game host");
         socket.emit("join_game_host", {room:id, game: gameUpdate});
