@@ -8,7 +8,7 @@ export const SocketProvider = ({children}) => {
 
     const [url, setUrl] = useState("https://urchin-app-voqyy.ondigitalocean.app/se-game/jeopardy-");
     const [id, setId] = useState("");
-    const socketUrl = useMemo(() => `${url}${id}:8080`, [url, id]);
+    const socketUrl = useMemo(() => `${url}${id}`, [url, id]);
     const socket = io(socketUrl, {autoConnect: true});
     return(
         <SocketContext.Provider value={
