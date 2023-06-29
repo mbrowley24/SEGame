@@ -23,7 +23,7 @@ const Login = props =>{
     const submitLogin = async(e) =>{
         e.preventDefault()
 
-        // console.log(login);
+        console.log(login);
         const requestConfig= {
             url: "login",
             data: login,

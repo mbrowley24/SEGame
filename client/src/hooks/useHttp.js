@@ -51,7 +51,7 @@ const useHttp = () =>{
 
             })
 
-            // console.log(requestConfig)
+            console.log(requestConfig)
             if(httpResponse.status === 200){
                 applyData(httpResponse);
                 setIsLoading(false)
