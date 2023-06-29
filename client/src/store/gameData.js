@@ -382,7 +382,9 @@ const gameSlice = createSlice({
         },
         removePlayer(state, action) {
 
-            state.players = state.players.filter(player => player.username !== action.payload);
+            const players = JSON.parse(JSON.stringify(state.players));
+
+            state.players = players.filter(player => player.username !== action.payload);
 
         }
     }

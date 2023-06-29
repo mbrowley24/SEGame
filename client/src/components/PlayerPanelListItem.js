@@ -29,7 +29,7 @@ const PlayerPanelListItem = props => {
                 isHost &&
                 <button
                     className={'btn btn-sm float-end'}
-                    onClick={remove(player.username)}
+                    onClick={()=>remove(player.username)}
                 >{<GiBootKick/>}</button>
             }
         </li>

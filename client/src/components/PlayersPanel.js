@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useCallback} from "react";
 import {useDispatch} from "react-redux";
 import SocketContext from "../context/SocketContext";
 import {gameActions} from "../store/gameData";
@@ -8,15 +8,17 @@ const PlayersPanel = props => {
     const {game, id} = props;
     const dispatch = useDispatch();
     const {socket} = useContext(SocketContext);
-    const removePlayer = (player) => {
+    const removePlayer = useCallback((player) => {
 
         if(id){
+
+            console.log(player);
             dispatch(gameActions.removePlayer(player));
 
             socket.emit('remove_player', {room:id, player:player});
         }
 
-    };
+    },[]);
 
 
     return(
