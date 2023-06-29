@@ -89,17 +89,6 @@ const JoinGame = props => {
                                onChange={(e)=>changeName(e)}
                         />
                     </div>
-                    {/*<div>*/}
-                    {/*    <label className={'text-capitalize'}>*/}
-                    {/*        username*/}
-                    {/*    </label><br/>*/}
-                    {/*    <input type={'text'}*/}
-                    {/*           className={' form-control'}*/}
-                    {/*           value={player.username}*/}
-                    {/*           name={'username'}*/}
-                    {/*           onChange={(e)=>changeName(e)}*/}
-                    {/*    />*/}
-                    {/*</div>*/}
                 </div>
                 <label>Game ID</label><br/>
                 <input type="text"

@@ -15,6 +15,7 @@ const GamePlay = props => {
     const {id} = useParams();
     const dispatch = useDispatch();
     const [viewLobby, setViewLobby] = useState(false);
+    const [checkin, setCheckin] = useState(false);
     const {socket} = useContext(SocketContext);
     const {hostJoined, isHostCheck} = useGame();
     const game = useSelector(state => state.gameData);
@@ -50,6 +51,29 @@ const GamePlay = props => {
 
 
     }, [socket]);
+
+
+    useEffect(() => {
+
+        if(game.host.username !== ""){
+            return
+        }
+
+        const timer = setTimeout(() => {
+            socket.emit('join_game', {room:id, player:myData});
+        }, 1000);
+
+        if(checkin){
+            setCheckin(false)
+        }else{
+            setCheckin(true);
+        }
+
+        console.log('checkin', checkin);
+
+        return () => clearTimeout(timer);
+
+    }, [checkin, myData, id]);
 
     return(
         <div className={'container'}>
