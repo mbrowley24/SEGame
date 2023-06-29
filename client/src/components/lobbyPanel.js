@@ -52,7 +52,7 @@ const LobbyPanel = props => {
             <button
                 className={'text-warning btn'}
                 disabled={players.length === 0}
-                onClick={() => addPlayers()}
+                onClick={addPlayers}
             >add players
             </button>
             <ul className={'list-group'}>

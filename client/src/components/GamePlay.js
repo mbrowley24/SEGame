@@ -16,12 +16,12 @@ const GamePlay = props => {
     const dispatch = useDispatch();
     const [viewLobby, setViewLobby] = useState(false);
     const {socket} = useContext(SocketContext);
-    const {hostJoined} = useGame();
+    const {hostJoined, isHostCheck} = useGame();
     const game = useSelector(state => state.gameData);
     const myData = useSelector(state => state.playerData);
     const players = useMemo(() => game.players.length > 1, [game.players]);
     const host = useMemo(() => hostJoined(game.host) , [game.host]);
-    const isHost = useMemo(() => game.host.username === myData.username, [host, myData]);
+    const isHost = useMemo(() => isHostCheck(game.host.username,myData.username), [host, myData]);
 
     const showLobby = () => setViewLobby(true);
     const hideLobby = () => setViewLobby(false);

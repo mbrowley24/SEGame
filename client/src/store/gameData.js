@@ -291,8 +291,15 @@ const gameSlice = createSlice({
         },setPlayers(state, action) {
 
             console.log(action.payload);
-            const currentPlayers = [...state.players];
+            const currentPlayers = JSON.parse(JSON.stringify(state.players));
             const newPlayers = [...action.payload.players];
+
+            function filterPlayer(player) {
+
+                const filterPlayers = currentPlayers.filter(newPlayer => newPlayer.username === player.username);
+                console.log(player.username)
+                return filterPlayers.length === 0;
+            }
 
             function filterLobby(player) {
 
@@ -306,14 +313,16 @@ const gameSlice = createSlice({
                     state.players = newPlayers;
                     console.log(JSON.parse(JSON.stringify(state)))
                     return;
+            }else{
+
+                state.lobby = state.lobby.filter(filterLobby);
+                const addPlayers = newPlayers.filter(filterPlayer);
+
+                state.players = currentPlayers.concat(addPlayers);
+
             }
 
-            function filterPlayer(player) {
 
-                const filterPlayers = currentPlayers.filter(newPlayer => newPlayer.username !== player.username);
-
-                return filterPlayers.length >0;
-            }
 
 
             if(action.payload.game){
@@ -328,9 +337,8 @@ const gameSlice = createSlice({
             }
 
 
-            state.lobby = state.lobby.filter(filterLobby);
 
-            state.players = newPlayers.filter(filterPlayer);
+
 
 
             console.log(JSON.parse(JSON.stringify(state)))

@@ -43,7 +43,7 @@ const useHttp = () =>{
     }, [ navigate])
 
     const postHttpRequest = useCallback(async(requestConfig, applyData)=>{
-
+        console.log(requestConfig)
         try{
             setIsLoading(true);
             const httpResponse = await  axios.post(`http://localhost:8080/api/v1/${requestConfig.url}`, requestConfig.data , {

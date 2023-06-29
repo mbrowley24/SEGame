@@ -94,6 +94,18 @@ const useGame = () => {
         return true;
     };
 
+    const isHostCheck = (host, username) => {
+
+        let returnValue = false;
+
+        if(host.length > 0){
+            if(username.length > 0){
+                returnValue = host === username;
+            }
+        }
+
+        return returnValue;
+    }
     const hostJoined = (host) => {
 
         console.log(host);
@@ -167,6 +179,7 @@ const useGame = () => {
             addPlayer,
             anonymousPlayers,
             getPlayers,
+            isHostCheck,
             canJoin,
             hostJoined,
             playerFull,
