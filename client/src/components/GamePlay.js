@@ -107,7 +107,7 @@ const GamePlay = props => {
                 <div className={'m-auto w-75 ms-2'}>
                     {players && host && <PlayGame data={game} id={id}/>}
                     {!players && host && <h1 className={'text-center'}>Waiting for players to join</h1>}
-                    {!players && !host && <h1 className={'text-center'}>Waiting for host to join</h1>}
+                    {!players && !host && <h1 className={'text-center'}>Waiting for host</h1>}
                 </div>
             </div>
         </div>

@@ -58,7 +58,7 @@ const Login = props =>{
     return(
         <div className={'height1100 border login-background px-3'}>
             <div className={'m-auto w-100 height100'}>
-                <h1 className="text-dark pt-5">Discovery</h1>
+                <h1 className="text-dark pt-5">Se Arena </h1>
             </div>
             <div className=" overflow-hidden m-auto earth"></div>
             <div className="m-auto w-25 my-5 py-5 ">
