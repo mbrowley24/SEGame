@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import useHttp from "../hooks/useHttp";
 import { useNavigate, Link } from "react-router-dom";
 import {useDispatch } from "react-redux";
 import {playerActions} from "../store/playerData";
-
+import {gameActions} from "../store/gameData";
 
 const Login = props =>{
     const dispatch = useDispatch();
@@ -19,6 +19,16 @@ const Login = props =>{
 
         setLogin(loginObj);
     }
+
+    useEffect(() => {
+
+        dispatch(gameActions.resetGame());
+        dispatch(playerActions.resetData());
+
+        return () => {};
+
+    }, []);
+
 
     const submitLogin = async(e) =>{
         e.preventDefault()

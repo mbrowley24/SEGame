@@ -1,13 +1,13 @@
 import {useState, useCallback} from 'react'
 import axios from 'axios';
 import {useNavigate} from "react-router-dom"
-
+import {useSelector} from "react-redux";
 
 
 const useHttp = () =>{
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
-
+    const myData = useSelector(state => state.playerData);
 
     const getHttpRequest = useCallback(async(requestConfig, applyData)=>{
         // console.log(requestConfig);
@@ -18,12 +18,18 @@ const useHttp = () =>{
                 signal: requestConfig.signal,
                 withCredentials: true,
             })
-            
+
+            if(myData.username.length === 0){
+                navigate('/')
+            }
+
             // console.log(requestConfig)
             if(httpResponse.status === 200){
                 applyData(httpResponse);
                 setIsLoading(false)
             }
+
+
             
         }catch(error){
               console.log(error)
@@ -51,11 +57,17 @@ const useHttp = () =>{
 
             })
 
+            if(myData.username.length === 0){
+                navigate('/')
+            }
+
             console.log(requestConfig)
             if(httpResponse.status === 200){
                 applyData(httpResponse);
                 setIsLoading(false)
             }
+
+
 
         }catch(error){
             console.log(error)
@@ -81,6 +93,10 @@ const useHttp = () =>{
                 withCredentials: true,
 
             })
+
+            if(myData.username.length === 0){
+                navigate('/')
+            }
 
             // console.log(requestConfig)
             if(httpResponse.status === 200){

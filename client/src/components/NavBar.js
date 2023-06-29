@@ -1,8 +1,30 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
-
+import { Link, useNavigate } from "react-router-dom";
+import useHttp from "../hooks/useHttp";
+import {useDispatch, useSelector} from "react-redux";
+import {playerActions} from "../store/playerData";
+import {gameActions} from "../store/gameData";
 const NavBar = props =>{
+    const {postHttpRequest} = useHttp();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const logout = async () =>{
+
+        const configRequest = {
+            url: 'logout',
+            data: null
+        };
+
+        const applyData = res =>{
+            console.log(res.data);
+            dispatch(playerActions.resetData());
+            dispatch(gameActions.resetGame());
+            navigate("/")
+        };
+
+        await postHttpRequest(configRequest, applyData);
+    }
 
     return(
         <div className="container-fluid">
@@ -54,7 +76,10 @@ const NavBar = props =>{
                         {/*</li> *!/*/}
                     </ul>
                     <form className="d-flex">
-                        <button className="btn btn-outline-success" type="submit">LogOut</button>
+                        <button className="btn btn-outline-success"
+                                type="submit"
+                                onClick={logout}
+                        >LogOut</button>
                     </form>
                     {/* <form className="d-flex">
                         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>

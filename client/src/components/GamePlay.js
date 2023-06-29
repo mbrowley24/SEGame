@@ -1,6 +1,6 @@
 import React, {useEffect, useMemo, useContext, useState} from "react";
 import NavBar from "./NavBar";
-import {useParams} from "react-router-dom";
+import {useParams, useNavigate} from "react-router-dom";
 import {useDispatch,useSelector} from "react-redux";
 import PlayersPanel from "./PlayersPanel";
 import {gameActions} from "../store/gameData";
@@ -14,6 +14,7 @@ const GamePlay = props => {
 
     const {id} = useParams();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [viewLobby, setViewLobby] = useState(false);
     const [checkin, setCheckin] = useState(false);
     const {socket} = useContext(SocketContext);
@@ -21,7 +22,7 @@ const GamePlay = props => {
     const game = useSelector(state => state.gameData);
     const myData = useSelector(state => state.playerData);
     const players = useMemo(() => game.players.length > 1, [game.players]);
-    const host = useMemo(() => hostJoined(game.host) , [game.host]);
+    const host = useMemo(() =>{if(myData.name.length > 0) hostJoined(game.host)} , [game.host]);
     const isHost = useMemo(() => isHostCheck(game.host.username,myData.username), [host, myData]);
 
     const showLobby = () => setViewLobby(true);
@@ -55,7 +56,15 @@ const GamePlay = props => {
 
     useEffect(() => {
 
+        if(myData.username.length === 0){
+            navigate('/')
+        }
+
         if(game.host.username !== ""){
+            return
+        }
+
+        if(game.lobby.length === 0){
             return
         }
 
@@ -70,6 +79,7 @@ const GamePlay = props => {
         }
 
         console.log('checkin', checkin);
+
 
         return () => clearTimeout(timer);
 
@@ -97,7 +107,7 @@ const GamePlay = props => {
                 <div className={'m-auto w-75 ms-2'}>
                     {players && host && <PlayGame data={game} id={id}/>}
                     {!players && host && <h1 className={'text-center'}>Waiting for players to join</h1>}
-
+                    {!players && !host && <h1 className={'text-center'}>Waiting for host to join</h1>}
                 </div>
             </div>
         </div>
