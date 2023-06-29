@@ -7,7 +7,7 @@ const ActiveGameBoardCategory = props => {
     const {data, id} = props;
     return(
         <div className={'col'}>
-            <h6 className={'text-capitalize text-warning fw-bold'}>{data.name}</h6>
+            <h6 className={'text-capitalize text-warning fw-bold bg-dark'}>{data.name}</h6>
             <div>
                 <ActiveGameBoardQandA data={data} value={200} id={id}/>
                 <ActiveGameBoardQandA data={data} value={400} id={id}/>
