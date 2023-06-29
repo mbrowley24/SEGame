@@ -5,6 +5,9 @@ COPY package*.json ./
 
 RUN npm install
 COPY . .
+
+COPY env .
+
 EXPOSE 8080
 
 CMD [ "node", "server.js"]
