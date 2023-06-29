@@ -14,7 +14,7 @@ const useHttp = () =>{
         //  console.log(token)
         try{
             setIsLoading(true);
-            const httpResponse = await  axios.get(`https://urchin-app-voqyy.ondigitalocean.app/se-game/api/v1/${requestConfig.url}`, {
+            const httpResponse = await  axios.get(`http://localhost:8080/api/v1/${requestConfig.url}`, {
                 signal: requestConfig.signal,
                 withCredentials: true,
             })
