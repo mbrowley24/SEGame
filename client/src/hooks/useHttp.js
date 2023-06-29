@@ -14,7 +14,7 @@ const useHttp = () =>{
         //  console.log(token)
         try{
             setIsLoading(true);
-            const httpResponse = await  axios.get(`http://localhost/api/v1/${requestConfig.url}`, {
+            const httpResponse = await  axios.get(`http://localhost:8080/api/v1/${requestConfig.url}`, {
                 signal: requestConfig.signal,
                 withCredentials: true,
             })
@@ -46,7 +46,7 @@ const useHttp = () =>{
 
         try{
             setIsLoading(true);
-            const httpResponse = await  axios.post(`http://localhost/api/v1/${requestConfig.url}`, requestConfig.data , {
+            const httpResponse = await  axios.post(`http://localhost:8080/api/v1/${requestConfig.url}`, requestConfig.data , {
                 withCredentials: true,
 
             })
@@ -77,7 +77,7 @@ const useHttp = () =>{
 
         try{
             setIsLoading(true);
-            const httpResponse = await  axios.put(`http://localhost/api/v1/${requestConfig.url}`, requestConfig.data , {
+            const httpResponse = await  axios.put(`http://localhost:8080/api/v1/${requestConfig.url}`, requestConfig.data , {
                 withCredentials: true,
 
             })
