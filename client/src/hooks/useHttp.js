@@ -26,7 +26,7 @@ const useHttp = () =>{
             }
             
         }catch(error){
-              
+              console.log(error)
             if(error && error.response){
 
                 if(error.response.status === 403){
