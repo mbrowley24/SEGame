@@ -317,6 +317,7 @@ const gameSlice = createSlice({
                 state.buzzer = action.payload.game.buzzer;
                 state.board = action.payload.game.board;
                 state.host = action.payload.game.host;
+                state.players = action.payload.game.players;
 
                 currentPlayers = [];
                 currentPlayers = [...action.payload.game.players]
