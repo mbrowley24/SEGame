@@ -19,9 +19,6 @@ const useHttp = () =>{
                 withCredentials: true,
             })
 
-            if(myData.username.length === 0){
-                navigate('/')
-            }
 
             // console.log(requestConfig)
             if(httpResponse.status === 200){
