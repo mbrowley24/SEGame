@@ -10,7 +10,7 @@ const {Server} = require("socket.io");
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(cors({credentials: true, origin: 'http://localhost'}));
+app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(cookieParser());
 
 require('./config/config');
@@ -29,7 +29,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost",
+        origin: "http://localhost:3000",
         methods: ["GET", "POST"],
     }
 })
