@@ -54,9 +54,6 @@ const useHttp = () =>{
 
             })
 
-            if(myData.username.length === 0){
-                navigate('/')
-            }
 
             console.log(requestConfig)
             if(httpResponse.status === 200){
@@ -91,9 +88,6 @@ const useHttp = () =>{
 
             })
 
-            if(myData.username.length === 0){
-                navigate('/')
-            }
 
             // console.log(requestConfig)
             if(httpResponse.status === 200){
