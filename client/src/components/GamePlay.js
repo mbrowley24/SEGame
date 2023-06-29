@@ -22,7 +22,7 @@ const GamePlay = props => {
     const game = useSelector(state => state.gameData);
     const myData = useSelector(state => state.playerData);
     const players = useMemo(() => game.players.length > 1, [game.players]);
-    const host = useMemo(() =>{if(myData.name.length > 0) hostJoined(game.host)} , [game.host]);
+    const host = useMemo(() => hostJoined(game.host) , [game.host]);
     const isHost = useMemo(() => isHostCheck(game.host.username,myData.username), [host, myData]);
 
     const showLobby = () => setViewLobby(true);
