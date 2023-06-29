@@ -44,7 +44,7 @@ const GamePlayHostPanel = props => {
                     </button>
                 </li>
             </ul>
-            {!viewLobby &&  <PlayersPanel game={game}/>}
+            {!viewLobby &&  <PlayersPanel game={game} id={id}/>}
             <LobbyPanel show={viewLobby} id={id} game={game}/>
         </React.Fragment>
 

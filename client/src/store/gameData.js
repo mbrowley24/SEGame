@@ -379,6 +379,11 @@ const gameSlice = createSlice({
             state.buzzer.player = "";
         },buzzerTimeout(state) {
             state.buzzer.buzz = false;
+        },
+        removePlayer(state, action) {
+
+            state.players = state.players.filter(player => player.username !== action.payload);
+
         }
     }
 })

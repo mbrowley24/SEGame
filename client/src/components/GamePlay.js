@@ -36,6 +36,10 @@ const GamePlay = props => {
 
         });
 
+        socket.on("remove_player_update", data => {
+            dispatch(gameActions.removePlayer(data));
+        })
+
         socket.on('host', data =>{
             console.log(data);
             dispatch(gameActions.setGame(data));

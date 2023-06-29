@@ -1,11 +1,22 @@
-import React, {useMemo} from "react";
-import {useSelector} from "react-redux";
-import {FaSadCry} from "react-icons/fa";
-import {RiAlarmWarningLine} from "react-icons/ri";
+import React, {useContext} from "react";
+import {useDispatch} from "react-redux";
+import SocketContext from "../context/SocketContext";
+import {gameActions} from "../store/gameData";
 import PlayerPanelListItem from "./PlayerPanelListItem";
 
 const PlayersPanel = props => {
-    const {game} = props;
+    const {game, id} = props;
+    const dispatch = useDispatch();
+    const {socket} = useContext(SocketContext);
+    const removePlayer = (player) => {
+
+        if(id){
+            dispatch(gameActions.removePlayer(player));
+
+            socket.emit('remove_player', {room:id, player:player});
+        }
+
+    };
 
 
     return(
@@ -22,7 +33,7 @@ const PlayersPanel = props => {
 
                                 player.name.length > 0?
                                     <React.Fragment key={i}>
-                                        <PlayerPanelListItem player={player} i={i} game={game}/>
+                                        <PlayerPanelListItem player={player} i={i} remove={removePlayer} game={game}/>
                                     </React.Fragment>
 
                                     : null

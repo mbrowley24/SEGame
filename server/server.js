@@ -47,6 +47,11 @@ jeopardyNameSpace.on("connection", (socket) => {
 
     })
 
+    socket.on("remove_player", (data) =>{
+
+        socket.to(data.room).emit("remove_player_update", data.player);
+    });
+
     socket.on("update_participants", (data) =>{
         console.log("update_participants event received on server side");
 
