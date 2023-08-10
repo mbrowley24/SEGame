@@ -91,15 +91,15 @@ const GamePlay = props => {
     }, [checkin, myData, id]);
 
     return(
-        <div className={'container'}>
+        <div className={'container-fluid height700Px'}>
             <NavBar/>
-            <div className={'d-flex w-100 py-3 border justify-content-center bg-primary p-1'}>
-                <div className={`w-25 m-auto height600px p-1 me-2 border border-dark overflow-auto 
+            <div className={'d-flex w-100 py-3 border justify-content-start bg-primary'}>
+                <div className={`w-15 m-auto height800px p-1 me-2 border border-dark overflow-auto 
                     rounded-2 align-self-start background-Lapis-lazuli`}
                 >
-                    <h4 className={'text-capitalize'}>host: {game.host.name}</h4>
+                    <h6 className={'text-capitalize'}>host: {game.host.name}</h6>
 
-                    {!isHost && <h6 className={'text-capitalize '}>players</h6>}
+
                     {!isHost && <PlayersPanel game={game}/>}
                     { isHost && <GamePlayHostPanel show={showLobby}
                                                    hide={hideLobby}
@@ -109,7 +109,7 @@ const GamePlay = props => {
 
 
                 </div>
-                <div className={'m-auto w-75 ms-2'}>
+                <div className={'m-auto w-75 ms-2 height800px'}>
                     {players && host && <PlayGame data={game} id={id}/>}
                     {!players && host && <h1 className={'text-center'}>Waiting for players to join</h1>}
                     {!players && !host && <h1 className={'text-center'}>Waiting for host</h1>}

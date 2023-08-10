@@ -9,7 +9,7 @@ const Dashboard = props => {
         <div>
             <NavBar/>
             <h1>Jeopardy Dashboard</h1>
-            <div className="container border">
+            <div className="container border rounded">
                 <DashboardTopRow/>
                 <DashboardBottomRow/>
 

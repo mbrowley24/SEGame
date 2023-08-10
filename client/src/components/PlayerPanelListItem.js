@@ -22,7 +22,7 @@ const PlayerPanelListItem = props => {
         <li key={player.username} className={playerCss}>
 
             {buzzed &&  <RiAlarmWarningLine/>}
-            <span className={'text-capitalize'}>{` ${player.name}`}</span> {`: ${player.score}`}
+            <span className={'text-capitalize'}>{player.name.length > 10?`${player.name}`: `${player.name.substring(0, 10)}` }</span> {`: ${player.score}`}
             <small>{me && '(you)'}</small>
             {attempted && <FaSadCry/>}
             {

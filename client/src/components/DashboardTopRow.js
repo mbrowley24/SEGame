@@ -9,8 +9,8 @@ import "../css/generalCss.css"
 const DashboardTopRow = props => {
 
     return(
-        <div className={'row p-2'}>
-            <div className={'col border'}>
+        <div className={'row p-2 border rounded'}>
+            <div className={'col border rounded'}>
                 <h4 className={'text-center text-capitalize sticky'}>
                     question subjects
                     <Link className={'ms-1'} to={'/subjects'}>
