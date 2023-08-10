@@ -20,6 +20,7 @@ const ActiveQuestion = props => {
     const myData = useSelector(state => state.playerData);
     const isHost = useMemo(() => game.host.username === myData.username, [game.host, myData]);
     const timer = useMemo(() => game.buzzer.buzz, [game.buzzer.buzz]);
+    const showAnswer = useSelector(state => state.qAndAData.showAnswer);
 
     useEffect(() => {
 
@@ -28,8 +29,9 @@ const ActiveQuestion = props => {
             dispatch(gameActions.setBuzzer(data));
         });
 
-        socket.on("correct_answer_update", (data) => {
-
+        socket.on("show_answer_update", () => {
+            console.log("correct_answer_update");
+            dispatch(qAndAActions.showAnswer());
         });
 
         socket.on("incorrect_answer_update", (data) => {
@@ -45,13 +47,9 @@ const ActiveQuestion = props => {
 
     }, [socket]);
 
-    console.log(myData);
-    console.log(game.host);
-
-    console.log(game.buzzer.buzz);
     return(
         <div className={'p-2 border-1 border-dark height600px bg-primary'}>
-            { !isHost &&
+            { (!isHost && !showAnswer) &&
             <div
                 className={`d-flex justify-content-center bg-primary
                     height300Px border-3 rounded-1 border-dark`}
@@ -61,7 +59,17 @@ const ActiveQuestion = props => {
                 </div>
             </div>
             }
-
+            {
+                !isHost && showAnswer &&
+                <div
+                    className={`d-flex justify-content-center bg-primary
+                height300Px border-3 rounded-1 border-dark`}
+                >
+                    <div className={'p-1 text-md-center align-self-center'}>
+                        <h3 className={'text-warning'}>{question.answer}</h3>
+                    </div>
+                </div>
+            }
             {
                 isHost &&
                 <div

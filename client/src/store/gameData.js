@@ -73,7 +73,7 @@ const gameData = {
         name:"",
         username:"",
     },
-    players:[]
+    players:[],
 };
 
 const gameSlice = createSlice({
@@ -386,7 +386,7 @@ const gameSlice = createSlice({
 
             state.players = players.filter(player => player.username !== action.payload);
 
-        }
+        },
     }
 })
 

@@ -7,9 +7,16 @@ import {qAndAActions} from "../store/questionAndAnswerData";
 
 const CorrectIncorrect = props => {
     const {id, question} = props;
+    const showAnswer = useSelector(state => state.qAndAData.showAnswer);
     const dispatch = useDispatch();
     const {socket} = useContext(SocketContext);
     const buzzedPlayer = useSelector(state => state.gameData.buzzer.player);
+    console.log(buzzedPlayer);
+    const showAnswerHandler = useCallback(() => {
+        dispatch(qAndAActions.showAnswer());
+        socket.emit('show_answer', {room: id});
+    }, []);
+
     const correctAnswer = useCallback(() => {
 
         dispatch(gameActions.correctAnswer(question));
@@ -17,7 +24,6 @@ const CorrectIncorrect = props => {
         console.log(question);
         socket.emit('correct_answer', {room: id, question: question});
         dispatch(qAndAActions.resetQAndA());
-
 
     }, []);
 
@@ -41,19 +47,28 @@ const CorrectIncorrect = props => {
     return(
         <React.Fragment>
             <button
+                className={'btn btn-primary me-2 text-capitalize'}
+                onClick={showAnswerHandler}
+            >
+                show answer
+            </button>
+            <button
                 className={'btn btn-success me-2 text-capitalize'}
                 onClick={correctAnswer}
+                disabled={!showAnswer && buzzedPlayer.length === 0}
             >
                 correct
             </button>
             <button
                 className={'btn btn-danger text-capitalize ms-2'}
                 onClick={incorrectAnswer}
+                disabled={!showAnswer && buzzedPlayer.length === 0}
             >
                 incorrect
             </button>
             <button  className={'btn btn-dark text-capitalize ms-2'}
                 onClick={notAttempted}
+
             >
                 <FaSadTear/> not answered
             </button>

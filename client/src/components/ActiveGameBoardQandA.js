@@ -31,7 +31,10 @@ const ActiveGameBoardQandA = props => {
 
 
     return(
-        <div className={'border d-flex height100Px justify-content-center bg-primary'}>
+        <div className={'border d-flex height150Px justify-content-center bg-primary'}
+            onMouseEnter={e => e.target.classList.add('border-warning', 'border-4', 'shadow-lg')}
+            onMouseLeave={e => e.target.classList.remove('border-warning', 'border-4', 'shadow-lg')}
+        >
             <h5 className={'align-self-center'} hidden={data[value].attempted}>
 
                 {
