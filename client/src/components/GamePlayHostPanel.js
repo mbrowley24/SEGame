@@ -28,7 +28,7 @@ const GamePlayHostPanel = props => {
 
     return(
         <React.Fragment>
-            <ul className="nav nav-pills text-center m-auto">
+            <ul className="nav nav-pills text-center w-75 m-auto">
                 <li className="nav-item">
                     <button className={!viewLobby?'btn btn-link text-warning bg-dark' : 'btn btn-link text-warning'}
                             onClick={hide}
@@ -45,7 +45,7 @@ const GamePlayHostPanel = props => {
                 </li>
             </ul>
             {!viewLobby &&  <PlayersPanel game={game} id={id}/>}
-            <LobbyPanel show={viewLobby} id={id} game={game}/>
+            {viewLobby && <LobbyPanel show={viewLobby} id={id} game={game}/>}
         </React.Fragment>
 
     )

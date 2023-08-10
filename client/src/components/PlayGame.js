@@ -24,6 +24,12 @@ const PlayGame = props => {
             dispatch(qAndAActions.resetQAndA());
         });
 
+        socket.on("show_answer_update", () => {
+
+            dispatch(qAndAActions.showAnswer());
+
+        });
+
         return () => {};
     }, [socket]);
 

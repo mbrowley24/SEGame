@@ -12,7 +12,6 @@ const PlayersPanel = props => {
 
         if(id){
 
-            console.log(player);
             dispatch(gameActions.removePlayer(player));
 
             socket.emit('remove_player', {room:id, player:player});
@@ -25,11 +24,10 @@ const PlayersPanel = props => {
         <React.Fragment>
 
 
-            <ul className={'list-group'}>
+            <ul className={'list-group w-75 my-2 m-auto'}>
                 {
                     game.players.map((player, i) => {
 
-                        console.log(player);
 
                         return(
 

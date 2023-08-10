@@ -39,7 +39,17 @@
 .height100{
     height: 100vh;
 }
+.height30px{
+    height: 30px;
+}
 
+.height40px{
+    height: 40px;
+}
+
+.height50px{
+    height: 50px;
+}
 .height60px{
     height: 60px;
 }
@@ -65,11 +75,19 @@
     height: 600px;
 }
 
-.height700Px{
+.height700px{
     height: 700px;
 }
-.height800Px{
+.height800px{
     height: 800px;
+}
+
+.height850px{
+    height: 850px;
+}
+
+.height900px{
+    height: 900px;
 }
 
 
@@ -93,13 +111,26 @@
     height: 30vh;
 }
 
+
+.w-10{
+    width: 10%;
+}
+
 .w-15{
     width: 15%;
 }
-.w-10{
 
+.w-20{
+    width: 20%;
 }
 
 .w-85{
     width: 85%;
+}
+
+.game_question{
+
+}
+.game_question:hover{
+    border: yellow  3px solid;
 }
