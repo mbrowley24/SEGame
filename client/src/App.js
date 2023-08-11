@@ -16,7 +16,7 @@ import EditBoardView from "./views/EditBoardView";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App complement-board-bg ">
         <SocketProvider>
           <Router>
               <Routes>
