@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useHttp from "../hooks/useHttp";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {playerActions} from "../store/playerData";
 import {gameActions} from "../store/gameData";
 import '../css/navBarCss.css';
