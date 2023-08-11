@@ -42,8 +42,14 @@ const SubjectTableBody = props => {
 
                 return(
                     <tr key={index}>
-                        <td><Link to={`/subjects/${subject.public_id}/questions/subject`}>{subject.name}</Link></td>
-                        <td>{subject.questions}</td>
+                        <td className={'text-jeopardy-yellow'}>
+                            <Link
+                                to={`/subjects/${subject.public_id}/questions/subject`}
+                                className={'text-jeopardy-yellow'}
+                            >
+                                {subject.name}</Link>
+                        </td>
+                        <td className={'text-jeopardy-yellow'}>{subject.questions}</td>
                     </tr>
                 )
             })

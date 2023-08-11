@@ -9,25 +9,27 @@ import "../css/generalCss.css"
 const DashboardTopRow = props => {
 
     return(
-        <div className={'row p-2 border rounded'}>
-            <div className={'col border rounded'}>
-                <h4 className={'text-center text-capitalize sticky'}>
+        <div className={'row p-2 border-bottom border-dark border-2 complement-board-bg'}>
+            <div className={'col border-end border-dark rounded'}>
+                <h4 className={'text-center text-capitalize p-2 m-auto my-1 p-1 w-50 rounded-3 background-jeopardy' +
+                    ' text-jeopardy-orange fw-bolder sticky'}>
                     question subjects
                     <Link className={'ms-1'} to={'/subjects'}>
-                        <IconContext.Provider value={{ color: "grey", size: ".75em" }}>
+                        <IconContext.Provider value={{className:'text-jeopardy-orange',  color: "", size: ".75em" }}>
                             <BsFillPlusSquareFill/>
                         </IconContext.Provider>
                     </Link>
                 </h4>
-                <div className={'height30 overflow-auto skinny_black_scroll_bar'}>
+                <div className={'height30 overflow-auto skinny_black_scroll_bar complement-board-bg'}>
                     <SubjectTable/>
                 </div>
             </div>
-            <div className={'col border'}>
-                <h4 className={'text-center text-capitalize'}>
+            <div className={'col border-start border-dark'}>
+                <h4 className={'text-center text-capitalize p-2 m-auto my-1 p-1 w-50 rounded-3 background-jeopardy' +
+                    ' text-jeopardy-orange fw-bolder sticky'}>
                     categories
                     <Link className={'ms-1'} to={'/categories'}>
-                        <IconContext.Provider value={{ color: "grey", size: ".75em" }}>
+                        <IconContext.Provider value={{className:'text-jeopardy-orange',  color: "", size: ".75em" }}>
                             <BsFillPlusSquareFill/>
                         </IconContext.Provider>
                     </Link>

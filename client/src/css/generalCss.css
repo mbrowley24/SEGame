@@ -43,6 +43,10 @@
     color: #FDED0D;
 }
 
+.text-jeopardy-orange{
+    color: #FD9D0D;
+}
+
 /* Works on Firefox */
 * {
     scrollbar-width: thin;

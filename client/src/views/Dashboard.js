@@ -6,10 +6,10 @@ import DashboardBottomRow from "../components/DashboardBottomRow";
 const Dashboard = props => {
 
     return(
-        <div>
+        <div className={'background-jeopardy height925px'}>
             <NavBar/>
-            <h1>Jeopardy Dashboard</h1>
-            <div className="container border rounded">
+            <h1 className={'py-3 my-2 text-jeopardy-yellow'}>Jeopardy Dashboard</h1>
+            <div className="container border border-dark border-2 rounded">
                 <DashboardTopRow/>
                 <DashboardBottomRow/>
 

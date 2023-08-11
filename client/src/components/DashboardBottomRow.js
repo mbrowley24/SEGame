@@ -13,12 +13,13 @@ import GameTable from "./GameTable";
 const DashboardBottomRow = (props) => {
 
     return(
-        <div className={'row p-2 '}>
-            <div className={'col border'}>
-                <h4 className={'text-center text-capitalize sticky'}>
+        <div className={'row p-2 complement-board-bg '}>
+            <div className={'col border-end border-dark'}>
+                <h4 className={'text-center text-capitalize p-2 m-auto my-1 p-1 w-50 rounded-3 background-jeopardy' +
+                    ' text-jeopardy-orange fw-bolder sticky'}>
                     games boards
                     <Link className={'ms-1'} to={'/board'}>
-                        <IconContext.Provider value={{ color: "grey", size: ".75em" }}>
+                        <IconContext.Provider value={{className:'text-jeopardy-orange',  color: "", size: ".75em" }}>
                             <BsFillPlusSquareFill/>
                         </IconContext.Provider>
                     </Link>
@@ -27,11 +28,12 @@ const DashboardBottomRow = (props) => {
                     <BoardTable/>
                 </div>
             </div>
-            <div className={'col border'}>
-                <h4 className={'text-center text-capitalize'}>
+            <div className={'col border-start border-dark'}>
+                <h4 className={'text-center text-capitalize p-2 m-auto my-1 p-1 w-50 rounded-3 background-jeopardy' +
+                    ' text-jeopardy-orange fw-bolder sticky'}>
                     games
                     <Link className={'ms-1'} to={'/games'}>
-                        <IconContext.Provider value={{ color: "grey", size: ".75em" }}>
+                        <IconContext.Provider value={{className:'text-jeopardy-orange',  color: "", size: ".75em" }}>
                             <BsFillPlusSquareFill/>
                         </IconContext.Provider>
                     </Link>
