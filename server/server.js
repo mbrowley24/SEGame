@@ -38,6 +38,13 @@ const io = new Server(server, {
 const jeopardyNameSpace = io.of(/^\/jeopardy-[a-zA-Z0-9]{5,35}$/);
 jeopardyNameSpace.on("connection", (socket) => {
 
+    socket.on("show_answer", (data) =>{
+        console.log("show_answer event received on server side");
+        console.log(data.room);
+
+        socket.to(data.room).emit("show_answer_update");
+    })
+
     socket.on("join_game", (data) =>{
 
         console.log("join game event received on server side");
