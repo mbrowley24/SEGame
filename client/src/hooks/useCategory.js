@@ -153,7 +153,7 @@ const useCategory = props => {
     const categoryFillBox = (condition) =>{
 
         const empty =  'form-control w-50 m-auto text-center text-jeopardy-yellow complement-board-bg'
-        const filled = 'form-control w-50 m-auto text-center text-jeopardy-yellow background-jeopardy'
+        const filled = 'form-control w-50 m-auto text-center input-jeopardy-blue'
 
         return condition? filled: empty;
     }

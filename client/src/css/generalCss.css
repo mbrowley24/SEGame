@@ -58,6 +58,19 @@
     scrollbar-color: black grey;
 }
 
+.input-jeopardy-blue{
+    background-color: #2054E8;
+    color: #FDED0D;
+}
+
+.input-jeopardy-blue:focus{
+    background-color: #0D6EFD;
+    color: #FDED0D;
+
+}
+
+
+
 .jeopardy-scrollbar{
     scrollbar-width: thin;
     scrollbar-color: #FD9D0D #FDED0D;

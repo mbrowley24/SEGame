@@ -38,11 +38,13 @@ const GameForm = props => {
     return(
         <form onSubmit={submit}>
             <div>
-                <label htmlFor="question">Name</label>
+                <label htmlFor="question"
+                    className={'fw-bold form-label text-jeopardy-yellow'}
+                >Name</label>
                 <input type="text"
                        name={'question'}
                        id={'question'}
-                       className={'form-control w-25 text-center m-auto'}
+                       className={'form-control w-25 text-center m-auto input-jeopardy-blue'}
                        value={game.name}
                           onChange={(e)=>inputChange(e)}
                 />
@@ -53,7 +55,7 @@ const GameForm = props => {
             <div>
                 <button
                     disabled={!gameValid}
-                    className={'btn btn-sm btn-success'}
+                    className={'btn btn-sm button-jeopardy-orange'}
                 >submit</button>
             </div>
         </form>

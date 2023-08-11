@@ -20,7 +20,7 @@ const BoardCategory = props => {
 
     return(
         <div ref={drop} className={'p-1'}>
-            <h6 className={'py-1'}>
+            <h6 className={'py-1 text-jeopardy-yellow fw-bold'}>
                 {data.name? data.name: "add Category"}
                 {data.name?
                     <button className={'btn btn-sm btn-link'}
