@@ -45,6 +45,7 @@ const GamePlay = props => {
             console.log(data);
             dispatch(gameActions.setGame(data));
 
+            console.log('join_game socket');
             socket.emit('join_game', {room:id, player:myData});
         });
 
@@ -74,7 +75,11 @@ const GamePlay = props => {
         }
 
         const timer = setTimeout(() => {
-            socket.emit('join_game', {room:id, player:myData});
+            if(myData.username !== game.host.username){
+                console.log('not the host');
+                socket.emit('join_game', {room:id, player:myData});
+            }
+
         }, 1000);
 
         if(checkin){

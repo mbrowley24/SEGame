@@ -20,8 +20,9 @@ const StartGameButton = props => {
 
     const startGame = () => {
 
+        console.log("game data");
         const gameUpdate = updateHost(game, {name, username});
-        console.log(gameUpdate);
+
         dispatch(gameActions.setGame(gameUpdate));
 
         socket.emit("join_game_host", {room:id, game: gameUpdate});

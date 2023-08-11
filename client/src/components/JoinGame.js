@@ -76,7 +76,7 @@ const JoinGame = props => {
 
     return(
         <React.Fragment>
-            <div>
+            <div className={''}>
                 <div>
                     <div>
                         <label className={'text-capitalize'}>
@@ -98,7 +98,7 @@ const JoinGame = props => {
                 />
                 <div className={'py-2'}>
                     <button
-                        className={'btn btn-primary text-capitalize'}
+                        className={'btn btn-primary text-capitalize button-jeopardy-orange'}
                         disabled={!validGame || !passUserData}
                         onClick={()=>joinGame()}
                     >

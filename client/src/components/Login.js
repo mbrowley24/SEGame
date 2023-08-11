@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import {useDispatch } from "react-redux";
 import {playerActions} from "../store/playerData";
 import {gameActions} from "../store/gameData";
+import "../css/generalCss.css"
 
 const Login = props =>{
     const dispatch = useDispatch();
@@ -56,14 +57,14 @@ const Login = props =>{
 
 
     return(
-        <div className={'height1100 border login-background px-3'}>
+        <div className={'height925px border login-background px-3'}>
             <div className={'m-auto w-100 height100'}>
-                <h1 className="text-dark pt-5">Se Arena </h1>
+                <h1 className="pt-5 text-jeopardy-yellow">SE Jeopardy</h1>
             </div>
             <div className=" overflow-hidden m-auto earth"></div>
             <div className="m-auto w-25 my-5 py-5 ">
                     <div className="w-50 m-auto">
-                        <label className="text-dark">Username</label>
+                        <label className="text-jeopardy-yellow fw-bold">Username</label>
                         <input className={'form-control form-control-sm'}
                             name={"username"}
                             value={login.username}
@@ -71,7 +72,8 @@ const Login = props =>{
                         />
                     </div>
                     <div className="w-50 m-auto">
-                        <label className="text-dark">Password</label>
+                        <label className="text-jeopardy-yellow fw-bold"
+                        >Password</label>
                         <input className={'form-control form-control-sm'}
                             type={'password'}
                             name={'password'}
@@ -80,10 +82,10 @@ const Login = props =>{
                         />
                     </div>
                     <div className="text-center m-auto my-3 ">
-                        <button className="m-auto btn btn-light btn-sm" label={'Login'} onClick={(e)=>submitLogin(e)} >Login</button><br/>
+                        <button className="m-auto btn btn-sm button-jeopardy-orange" label={'Login'} onClick={(e)=>submitLogin(e)} >Login</button><br/>
                         <div className={'p-3'}>
                              <Link
-                                className={"text-capitalize text-dark"}
+                                className={"text-capitalize text-jeopardy-yellow"}
                                  to={'/join'}
                              >join game</Link>
                         </div>
