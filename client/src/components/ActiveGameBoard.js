@@ -8,7 +8,7 @@ const ActiveGameBoard = props => {
     const {data, id} = props;
 
     return(
-        <div className={'d-flex m-auto height800px'}
+        <div className={'d-flex m-auto height800px container-fluid'}
         >
             <ActiveGameBoardCategory data={data.board.category1} id={id}/>
             <ActiveGameBoardCategory data={data.board.category2} id={id}/>
