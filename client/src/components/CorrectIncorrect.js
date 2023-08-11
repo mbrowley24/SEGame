@@ -1,4 +1,4 @@
-import React, {useCallback, useContext} from "react";
+import React, {useCallback, useContext, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {FaSadTear} from "react-icons/fa";
 import SocketContext from "../context/SocketContext";
@@ -12,9 +12,14 @@ const CorrectIncorrect = props => {
     const {socket} = useContext(SocketContext);
     const buzzedPlayer = useSelector(state => state.gameData.buzzer.player);
     console.log(buzzedPlayer);
+
     const showAnswerHandler = useCallback(() => {
-        dispatch(qAndAActions.showAnswer());
-        socket.emit('show_answer', {room: id});
+
+        console.log(showAnswer);
+
+        dispatch(qAndAActions.hostShowAnswer(showAnswer));
+
+
     }, []);
 
     const correctAnswer = useCallback(() => {
@@ -43,6 +48,10 @@ const CorrectIncorrect = props => {
 
 
     },[])
+
+    useEffect(() => {
+        socket.emit('show_answer', {room: id, show: showAnswer});
+    },[showAnswer])
 
     return(
         <React.Fragment>

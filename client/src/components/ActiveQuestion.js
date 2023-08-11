@@ -29,9 +29,15 @@ const ActiveQuestion = props => {
             dispatch(gameActions.setBuzzer(data));
         });
 
-        socket.on("show_answer_update", () => {
-            console.log("correct_answer_update");
-            dispatch(qAndAActions.showAnswer());
+        socket.on("show_answer_update", (data) => {
+
+            if(!isHost) {
+                console.log("show_answer_update");
+                console.log(data)
+                dispatch(qAndAActions.showAnswer(data));
+                console.log(showAnswer)
+            }
+
         });
 
         socket.on("incorrect_answer_update", (data) => {
@@ -45,7 +51,10 @@ const ActiveQuestion = props => {
             dispatch(qAndAActions.resetQAndA());
         });
 
+
     }, [socket]);
+
+    useEffect(() => {}, [showAnswer]);
 
     return(
         <div className={'p-2 border-1 border-dark height600px bg-primary'}>
