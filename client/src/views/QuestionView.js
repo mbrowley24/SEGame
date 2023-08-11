@@ -50,8 +50,8 @@ const QuestionView = props => {
     return(
         <div>
             <NavBar/>
-            <div className={'container d-flex justify-content-center'}>
-                <div className={'w-25 border'}>
+            <div className={'container d-flex justify-content-center height875px'}>
+                <div className={'w-25 border-end border-dark border-2 p-3'}>
                     <QuestionForm
                         question={question}
                         submit={submit}
@@ -59,7 +59,7 @@ const QuestionView = props => {
                         inputChange={inputChange}
                     />
                 </div>
-                <div className={'w-75 border p-2'}>
+                <div className={'w-75 border-start  border-dark p-2'}>
                     <Questions id={id}/>
                 </div>
             </div>

@@ -10,9 +10,11 @@ const SubjectsView = props => {
         return (
             <div>
                 <NavBar/>
-                <div className={''}>
-                    <h1 className={'text-center'}>Question Topics</h1>
-                    <div className={'d-flex w-75 m-auto justify-content-center'}>
+                <div className={'height875px'}>
+                    <h1 className={'text-center my-2 text-jeopardy-orange w-25 m-auto' +
+                        ' background-jeopardy border rounded border-dark p-2'}
+                    >Question Topics</h1>
+                    <div className={'d-flex w-75 m-auto justify-content-center '}>
                         <div className={'w-25 py-5 px-3 mx-4 border'}>
                             <SubjectForm
                             />

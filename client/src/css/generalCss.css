@@ -43,6 +43,11 @@
     color: #FDED0D;
 }
 
+.text-jeopardy-yellow:hover{
+    color: #FD9D0D;
+    font-weight: bolder;
+}
+
 .text-jeopardy-orange{
     color: #FD9D0D;
 }
@@ -51,6 +56,11 @@
 * {
     scrollbar-width: thin;
     scrollbar-color: black grey;
+}
+
+.jeopardy-scrollbar{
+    scrollbar-width: thin;
+    scrollbar-color: #FD9D0D #FDED0D;
 }
 
 /* Works on Chrome, Edge, and Safari */
@@ -116,8 +126,16 @@
     height: 800px;
 }
 
+.height825x{
+    height: 825px;
+}
 .height850px{
     height: 850px;
+}
+
+
+.height875px{
+    height: 875px;
 }
 
 .height900px{
