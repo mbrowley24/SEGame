@@ -39,6 +39,7 @@ const category={
     }
 }
 
+
 const judge={
     name:"",
     username:"",
@@ -237,6 +238,22 @@ const gameSlice = createSlice({
 
             }
 
+
+
+            const players = [...state.players]
+            players.sort((a,b) =>{
+                if (a.score > b.score) {
+                    return -1;
+                }
+                if (a.score < b.score) {
+                    return 1;
+                }
+                return 0;
+            });
+
+            state.players = players;
+
+
             console.log(JSON.parse(JSON.stringify(state.board)));
 
         },incorrectAnswer(state, action) {
@@ -255,6 +272,18 @@ const gameSlice = createSlice({
                 }
             }
 
+            const players = [...state.players]
+            players.sort((a,b) =>{
+                if (a.score > b.score) {
+                    return -1;
+                }
+                if (a.score < b.score) {
+                    return 1;
+                }
+                return 0;
+            });
+
+            state.players = players;
 
         },notAttempted(state, action){
 
