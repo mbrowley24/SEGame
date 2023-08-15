@@ -10,10 +10,12 @@ const BoardForm = props => {
     return(
         <form onSubmit={submit}>
             <div className={'w-15 m-auto'}>
-                <label htmlFor="">board name</label>
+                <label htmlFor=""
+                    className={'form-label-sm text-center text-capitalize text-jeopardy-yellow fw-bold'}
+                >board name</label>
                 <input type="text"
                        value={board.name}
-                       className={'form-control-sm text-center'}
+                       className={'form-control-sm text-center input-jeopardy-blue'}
                         name={'name'}
                         onChange={(e) =>inputChange(e)}
                 />
@@ -21,7 +23,7 @@ const BoardForm = props => {
             <BoardQAndA/>
             <div className={'py-2'}>
                 <button
-                    className={'btn btn-sm btn-success'}
+                    className={'btn btn-sm button-jeopardy-orange'}
                     disabled={!validateBoard(board)}
                 >submit
                 </button>

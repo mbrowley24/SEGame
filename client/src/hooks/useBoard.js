@@ -319,7 +319,7 @@ const useBoard = () => {
     const checkNode = (name, question, board) =>{
         const error = 'd-flex height100  m-auto border justify-content-center overflow-auto p-1 bg-danger';
         const success = 'd-flex height100  m-auto border justify-content-center overflow-auto p-1 bg-success';
-        const empty = 'd-flex height100  m-auto border justify-content-center overflow-auto p-1 bg-warning';
+        const empty = 'd-flex height100  m-auto border justify-content-center overflow-auto p-1 background-jeopardy';
 
         if(!question){
             return empty;

@@ -10,7 +10,7 @@ const {Server} = require("socket.io");
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(cors({credentials: true, origin: 'https://theaveragese.com'}));
+app.use(cors({credentials: true, origin: 'http://localhost:3000'})) //'https://theaveragese.com'
 app.use(cookieParser());
 
 require('./config/config');
@@ -29,28 +29,39 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: "https://theaveragese.com",
+        origin: "https://theaveragese.com", //"https://theaveragese.com" "http://localhost:3000"
         methods: ["GET", "POST"],
     }
 })
 
 
 const jeopardyNameSpace = io.of(/^\/jeopardy-[a-zA-Z0-9]{5,35}$/);
+
+
 jeopardyNameSpace.on("connection", (socket) => {
+
+
+    socket.on("lobby_full", (data) =>{
+        console.log("lobby_full event received on server side");
+        console.log(data);
+        socket.to(data).emit("lobby_full_update");
+    })
+
 
     socket.on("show_answer", (data) =>{
         console.log("show_answer event received on server side");
-        console.log(data.room);
+        //console.log(data);
 
-        socket.to(data.room).emit("show_answer_update");
+        socket.to(data.room).emit("show_answer_update", data.show);
     })
 
     socket.on("join_game", (data) =>{
 
         console.log("join game event received on server side");
-        console.log(data);
+        console.log(data.room);
         socket.join(data.room);
-        socket.to(data.room).emit("lobby", data.player);
+
+        socket.to(data.room).emit("lobby", { player : data.player, socketId: socket.id});
 
     })
 
@@ -59,27 +70,47 @@ jeopardyNameSpace.on("connection", (socket) => {
         socket.to(data.room).emit("remove_player_update", data.player);
     });
 
-    socket.on("update_participants", (data) =>{
-        console.log("update_participants event received on server side");
+    socket.on("host_update", (data) =>{
+        console.log("update_host event received on server side");
 
-        console.log(data.game);
-        console.log(data.game.players);
+        socket.to(data.room).emit("player_update", {player: data.player, socket: socket.id} );
 
-        socket.to(data.room).emit("host_update", data.game);
+    });
+
+
+    socket.on("player_in_lobby", (data) =>{
+        console.log("player_in_lobby event received on server side");
+
+        socket.to(data.room).emit("lobby", {player: data.player, socketId: socket.id});
+    })
+
+    socket.on("lobby_update", (data) =>{
+
+        console.log("lobby_update event received on server side");
+        console.log(data);
+
+        socket.to(data.socketId).emit("update", data.game);
     });
 
     socket.on("add_player", (data) =>{
 
         console.log("add_player event received on server side");
+
         console.log(data);
-        socket.to(data.room).emit("player", {players: data.players, game: data.game });
+        socket.to(data.room).emit("update", {players: data.players, game: data.game });
     })
 
-    socket.on("join_game_host", (data) =>{
-        console.log("join_game_host event received on server side");
+    socket.on("game_host", (data) =>{
+        console.log("game_host event received on server side");
 
         socket.join(data.room);
-        socket.to(data.room).emit("host", data.game);
+        socket.to(data.room).emit("update", {game : data.game, players: []});
+    })
+
+    socket.on("update_players", (data) =>{
+        console.log("update_players event received on server side");
+        console.log(data.game);
+        socket.to(data.room).emit("update", data.game);
     })
 
     socket.on("correct_answer", (data)=>{

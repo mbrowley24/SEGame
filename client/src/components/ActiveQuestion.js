@@ -29,9 +29,15 @@ const ActiveQuestion = props => {
             dispatch(gameActions.setBuzzer(data));
         });
 
-        socket.on("show_answer_update", () => {
-            console.log("correct_answer_update");
-            dispatch(qAndAActions.showAnswer());
+        socket.on("show_answer_update", (data) => {
+
+            if(!isHost) {
+                console.log("show_answer_update");
+                console.log(data)
+                dispatch(qAndAActions.showAnswer(data));
+                console.log(showAnswer)
+            }
+
         });
 
         socket.on("incorrect_answer_update", (data) => {
@@ -45,7 +51,10 @@ const ActiveQuestion = props => {
             dispatch(qAndAActions.resetQAndA());
         });
 
+
     }, [socket]);
+
+    useEffect(() => {}, [showAnswer]);
 
     return(
         <div className={'p-2 border-1 border-dark height600px bg-primary'}>
@@ -55,7 +64,7 @@ const ActiveQuestion = props => {
                     height300Px border-3 rounded-1 border-dark`}
             >
                 <div className={'p-1 text-md-center align-self-center'}>
-                    <h3 className={'text-warning'}>{question.question}</h3>
+                    <h1 className={'text-warning'}>{question.question}</h1>
                 </div>
             </div>
             }
@@ -66,7 +75,7 @@ const ActiveQuestion = props => {
                 height300Px border-3 rounded-1 border-dark`}
                 >
                     <div className={'p-1 text-md-center align-self-center'}>
-                        <h3 className={'text-warning'}>{question.answer}</h3>
+                        <h1 className={'text-warning'}>{question.answer}</h1>
                     </div>
                 </div>
             }
@@ -80,8 +89,8 @@ const ActiveQuestion = props => {
                     <div className={'p-1 text-md-center align-self-center'}>
                         {!show && <p className={'text-light small'}>Question: (hover mouse over for answer)</p>}
                         {show && <p className={'text-light small '}>Answer</p>}
-                        {!show && <h5 className={'text-center text-warning'}>{question.question}</h5>}
-                        {show && <h5 className={'text-center text-warning'}>{question.answer}</h5>}
+                        {!show && <h1 className={'text-center text-warning'}>{question.question}</h1>}
+                        {show && <h1 className={'text-center fs-3 text-warning'}>{question.answer}</h1>}
                     </div>
                 </div>
             }

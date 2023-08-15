@@ -8,7 +8,7 @@ const ActiveGameBoardCategory = props => {
     return(
         <div className={'col height800px '}>
             <div className={'height50px d-flex bg-dark justify-content-center border rounded'}>
-                <h6 className={'text-capitalize text-warning bg-dark fw-bold align-self-center'}>{data.name}</h6>
+                <h4 className={'text-capitalize text-warning bg-dark fw-bold align-self-center'}>{data.name}</h4>
             </div>
             <div>
                 <ActiveGameBoardQandA data={data} value={200} id={id}/>

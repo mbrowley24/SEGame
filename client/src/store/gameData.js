@@ -39,6 +39,7 @@ const category={
     }
 }
 
+
 const judge={
     name:"",
     username:"",
@@ -69,6 +70,7 @@ const gameData = {
         category6: category,
     },
     lobby:[],
+    game_full:false,
     host:{
         name:"",
         username:"",
@@ -98,16 +100,17 @@ const gameSlice = createSlice({
             }
         },addLobby(state, action) {
 
-            console.log(action.payload);
+            //console.log(action.payload);
             const lobbyList = JSON.parse(JSON.stringify(state.lobby));
             let username = action.payload.username;
 
-            let usernameCheck = lobbyList.filter((player) => player.username === username);
+            const player_username_check = state.lobby.filter((player) => player.username === username);
+            const usernameCheck = state.players.filter((player) => player.username === username);
+            const user_count = state.lobby.length + state.players.length;
 
-            if(usernameCheck.length === 0){
+            if(usernameCheck.length === 0 && player_username_check.length === 0 && user_count < 3){
 
                 function filterName(player){
-
 
                     if(player.name === action.payload.name){
                         return true
@@ -126,14 +129,13 @@ const gameSlice = createSlice({
                 }
 
                 const filteredLobby = lobbyList.filter(filterName);
-                console.log("filteredLobby")
-                console.log(filteredLobby);
 
                 if(filteredLobby.length === 0){
 
                     const newPlayer = {
                         name: action.payload.name,
                         username: username,
+                        socketId : action.payload.socketId,
                         score: 0
                     }
 
@@ -156,6 +158,7 @@ const gameSlice = createSlice({
                     const newPlayer = {
                         name: name,
                         username: username,
+                        socketId : action.payload.socketId,
                         score: 0
                     }
 
@@ -164,6 +167,9 @@ const gameSlice = createSlice({
                     state.lobby = lobbyList;
                 }
             }
+
+
+            state.gameFull = state.lobby.length + state.players.length > 19;
 
 
         },
@@ -237,6 +243,22 @@ const gameSlice = createSlice({
 
             }
 
+
+
+            const players = [...state.players]
+            players.sort((a,b) =>{
+                if (a.score > b.score) {
+                    return -1;
+                }
+                if (a.score < b.score) {
+                    return 1;
+                }
+                return 0;
+            });
+
+            state.players = players;
+
+
             console.log(JSON.parse(JSON.stringify(state.board)));
 
         },incorrectAnswer(state, action) {
@@ -255,6 +277,18 @@ const gameSlice = createSlice({
                 }
             }
 
+            const players = [...state.players]
+            players.sort((a,b) =>{
+                if (a.score > b.score) {
+                    return -1;
+                }
+                if (a.score < b.score) {
+                    return 1;
+                }
+                return 0;
+            });
+
+            state.players = players;
 
         },notAttempted(state, action){
 
@@ -386,7 +420,13 @@ const gameSlice = createSlice({
 
             state.players = players.filter(player => player.username !== action.payload);
 
-        },
+        },gameFull(state) {
+
+            state.game_full = true;
+        }, gameFullReset(state) {
+
+            state.game_full = false;
+        }
     }
 })
 

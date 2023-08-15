@@ -150,13 +150,33 @@ const useCategory = props => {
 
     }
 
+    const categoryFillBox = (condition) =>{
+
+        const empty =  'form-control w-50 m-auto text-center text-jeopardy-yellow complement-board-bg'
+        const filled = 'form-control w-50 m-auto text-center input-jeopardy-blue'
+
+        return condition? filled: empty;
+    }
+
+    const qAndACss = (condition) =>{
+
+        const noDup = 'd-flex height150Px w-75 m-auto border border-dark justify-content-center overflow-auto p-1';
+        const dup = 'd-flex height150Px border border-danger w-75 m-auto border justify-content-center overflow-auto p-1';
+
+        return condition? noDup: dup;
+
+    }
+
+
 
     return(
         {
             categoryNameValidation,
             categoryInputRegex,
             categoryInitialState,
+            categoryFillBox,
             duplicate,
+            qAndACss,
             questionCheck,
             questionValidation,
         }

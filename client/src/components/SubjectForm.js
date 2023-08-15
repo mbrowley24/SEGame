@@ -65,14 +65,16 @@ const SubjectForm = props => {
 
     return(
         <form onSubmit={submitSubject} className={''}>
-            <label htmlFor="subject">Subject</label><br/>
+            <label htmlFor="subject"
+                className={'text-jeopardy-yellow fw-bold'}
+            >Subject</label><br/>
             <input type="text"
                    name="subject"
-                   className={'form-control-sm w-100'}
+                   className={'form-control-sm w-100 background-jeopardy text-jeopardy-yellow'}
                    onChange={(e) => inputChange(e)} value={subject.payload}/><br/>
             <span className={'text-danger'}>{subjectError}</span><br/>
             <button type="submit"
-                    className={'btn btn-primary btn-sm'}
+                    className={'btn button-jeopardy-orange'}
                     disabled={!subjectValidation(subject.payload)}
             >Submit</button>
         </form>

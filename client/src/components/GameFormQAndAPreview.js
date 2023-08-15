@@ -38,12 +38,12 @@ const GameFormQAndAPreview = props => {
                                 </UpdatePopOver>
                             }
             >
-                <div className={'border d-flex height100Px justify-content-center align-items-center p-1'}
+                <div className={'border border-dark d-flex height100Px justify-content-center align-items-center p-1'}
                      onMouseEnter={() => setShow(true)}
                      onMouseLeave={() => setShow(false)}
                 >
                     {data[value].question?
-                        <p className={'text-small text-wrap'}>
+                        <p className={'text-small fw-bolder text-wrap text-jeopardy-yellow'}>
                             {data[value].question}
                         </p> :
                         <p>${value}</p>}

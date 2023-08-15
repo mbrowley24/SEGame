@@ -35,8 +35,12 @@ const GameTableBody = props => {
 
                 return(
                     <tr key={index}>
-                        <td className={'text-capitalize'}><Link to={`/games/${data.id}`}>{data.name}</Link></td>
-                        <td className={'text-capitalize'} >{data.created_by}</td>
+                        <td className={'text-capitalize'}>
+                            <Link to={`/games/${data.id}`}
+                                  className={'text-jeopardy-yellow'}
+                            >{data.name}
+                        </Link></td>
+                        <td className={'text-capitalize text-jeopardy-yellow'} >{data.created_by}</td>
                     </tr>
                 )
             })

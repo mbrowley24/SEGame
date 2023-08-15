@@ -13,10 +13,71 @@
     background-color: #006494;
 }
 
+.background-jeopardy{
+    background-color: #0D6EFD;
+}
+
+.background-color-jeopardy-orange{
+    background-color: #FD9D0D
+}
+
+.button-jeopardy-orange{
+    background-color: #FD9D0D;
+}
+
+.button-jeopardy-orange:hover{
+    background-color: #FDED0D;
+    font-weight: bolder;
+}
+
+.border-jeopardy-orange{
+    border: 3px solid #FD9D0D;
+}
+
+.complement-board-bg{
+    background-color: #2054E8;
+}
+
+
+.text-jeopardy-yellow{
+    color: #FDED0D;
+}
+
+.text-jeopardy-yellow:hover{
+    color: #FD9D0D;
+    font-weight: bolder;
+}
+
+.text-jeopardy-yellow-static{
+    color: #FD9D0D;
+}
+
+.text-jeopardy-orange{
+    color: #FD9D0D;
+}
+
 /* Works on Firefox */
 * {
     scrollbar-width: thin;
     scrollbar-color: black grey;
+}
+
+.input-jeopardy-blue{
+    background-color: #2054E8;
+    color: #FDED0D;
+}
+
+.input-jeopardy-blue:focus{
+    background-color: #0D6EFD;
+    color: #FDED0D;
+
+}
+
+
+
+.jeopardy-scrollbar{
+    scrollbar-width: thin;
+    scrollbar-color: #FD9D0D #FDED0D;
 }
 
 /* Works on Chrome, Edge, and Safari */
@@ -82,12 +143,28 @@
     height: 800px;
 }
 
+.height825x{
+    height: 825px;
+}
+
+.height841px{
+    height: 841px;
+}
+
 .height850px{
     height: 850px;
 }
 
+
+.height875px{
+    height: 875px;
+}
+
 .height900px{
     height: 900px;
+}
+.height925px{
+    height: 930px;
 }
 
 
@@ -133,4 +210,14 @@
 }
 .game_question:hover{
     border: yellow  3px solid;
+}
+
+.game_btn{
+    border: none;
+    color: #FDED0D;
+}
+
+.game_btn:hover{
+    border: none;
+    outline: none;
 }

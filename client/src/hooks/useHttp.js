@@ -19,6 +19,8 @@ const useHttp = () =>{
                 withCredentials: true,
             })
 
+            //`http://localhost:8080/api/v1/${requestConfig.url}`
+            //`https://theaveragese.com/api/v1/${requestConfig.url}`
 
             // console.log(requestConfig)
             if(httpResponse.status === 200){

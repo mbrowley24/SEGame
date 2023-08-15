@@ -1,47 +1,37 @@
-import React, {useContext, useCallback} from "react";
-import {useDispatch} from "react-redux";
+import React, {useContext, useCallback, useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import SocketContext from "../context/SocketContext";
 import {gameActions} from "../store/gameData";
-import PlayerPanelListItem from "./PlayerPanelListItem";
+import {playerActions} from "../store/playerData";
+import {useNavigate} from "react-router-dom";
+import PlayerPanelList from "./PlayerPanelList";
 
 const PlayersPanel = props => {
-    const {game, id} = props;
+    const {game, id, isHost} = props;
+
     const dispatch = useDispatch();
     const {socket} = useContext(SocketContext);
-    const removePlayer = useCallback((player) => {
+    const navigate = useNavigate();
+    const myData = useSelector(state => state.playerData);
 
-        if(id){
+    useEffect(()=>{
 
-            dispatch(gameActions.removePlayer(player));
+        socket.on("my_update", (data) => {
 
-            socket.emit('remove_player', {room:id, player:player});
-        }
+            dispatch(playerActions.setSocketId(data));
+        });
 
-    },[]);
+        socket.on("lobby_full_update", () => {
+
+            dispatch(gameActions.gameFull());
+            navigate('/join')
+        })
+
+    },[socket]);
 
 
     return(
-        <React.Fragment>
-
-
-            <ul className={'list-group w-75 my-2 m-auto'}>
-                {
-                    game.players.map((player, i) => {
-
-
-                        return(
-
-                                player.name.length > 0?
-                                    <React.Fragment key={i}>
-                                        <PlayerPanelListItem player={player} i={i} remove={removePlayer} game={game}/>
-                                    </React.Fragment>
-
-                                    : null
-                        )
-                    })
-                }
-            </ul>
-        </React.Fragment>
+        <PlayerPanelList game={game} id={id} socket={socket} myData={myData} isHost={isHost}/>
     )
 };
 export default PlayersPanel;

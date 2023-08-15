@@ -37,14 +37,14 @@ const NewGameView = props => {
     return(
         <div>
             <NavBar/>
-            <div className={'container my-4'}>
+            <div className={'container height875px'}>
                 <div className={'d-flex'}>
                     <div className={'w-25 me-2'}>
-                        <h2 className={'text-center'}>boards</h2>
+                        <h2 className={'text-center text-capitalize text-jeopardy-yellow'}>boards</h2>
                         <BoardGameTable/>
                     </div>
-                    <div className={'w-75 m-auto border ms-2'}>
-                        <h1 className={'text-center'}>New Game</h1>
+                    <div className={'w-75 m-auto border ms-2 height800px overflow-auto'}>
+                        <h1 className={'text-center text-jeopardy-yellow background-jeopardy m-auto w-50 rounded-2'}>New Game</h1>
                         <GameForm submit={submitHandler}/>
                     </div>
                 </div>

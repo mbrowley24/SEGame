@@ -37,9 +37,11 @@ const CategoryTableBody = props => {
                     <tr key={index}>
 
                         <td className={'text-capitalize text-center'}>
-                            <Link to={`/categories/${category.id}`}>{category.name}</Link>
+                            <Link to={`/categories/${category.id}`}
+                                  className={'text-jeopardy-yellow'}
+                            >{category.name}</Link>
                         </td>
-                        <td className={'text-capitalize text-center'}>
+                        <td className={'text-capitalize text-center text-jeopardy-yellow '}>
                             {category.created_by}
                         </td>
                     </tr>

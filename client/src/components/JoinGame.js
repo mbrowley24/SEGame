@@ -5,11 +5,13 @@ import {playerActions} from "../store/playerData";
 import {useNavigate} from "react-router-dom";
 import useGame from "../hooks/useGame";
 import SocketContext from "../context/SocketContext";
+import {gameActions} from "../store/gameData";
 const JoinGame = props => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const player = useSelector(state => state.playerData);
+    const gameFull = useSelector(state => state.gameData.game_full);
     const [validGame, setValidGame] = useState(false);
     const {getHttpRequest} = useHttp();
     const {socket, id, setId} = useContext(SocketContext);
@@ -22,9 +24,12 @@ const JoinGame = props => {
         dispatch(playerActions.setData({name:name, value:value}))
     },[]);
 
+
     const inputChange = useCallback(e => {
         const {value} = e.target;
         setId(value);
+        dispatch(gameActions.gameFullReset());
+
     },[]);
 
     const joinGame = () =>{
@@ -74,12 +79,14 @@ const JoinGame = props => {
     }, [id]);
 
 
+    console.log(gameFull);
+
     return(
         <React.Fragment>
-            <div>
+            <div className={''}>
                 <div>
                     <div>
-                        <label className={'text-capitalize'}>
+                        <label className={'text-capitalize text-jeopardy-yellow fw-bold'}>
                             name
                         </label><br/>
                         <input type={'text'}
@@ -90,16 +97,17 @@ const JoinGame = props => {
                         />
                     </div>
                 </div>
-                <label>Game ID</label><br/>
+                <label className={'text-capitalize text-jeopardy-yellow fw-bold'}>Game ID</label><br/>
                 <input type="text"
                       className={'form-control'}
                        value={id}
                        onChange={(e)=>inputChange(e)}
                 />
                 <div className={'py-2'}>
+                    {gameFull && <p className={'text-danger fw-bolder text-capitalize'}>game is full</p>}
                     <button
-                        className={'btn btn-primary text-capitalize'}
-                        disabled={!validGame || !passUserData}
+                        className={'btn text-capitalize button-jeopardy-orange'}
+                        disabled={!validGame || !passUserData || gameFull}
                         onClick={()=>joinGame()}
                     >
                         join game

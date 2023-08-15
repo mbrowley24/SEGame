@@ -42,9 +42,9 @@ const NewBoardView = () => {
     };
 
     return(
-        <div className={'container'}>
+        <div className={'container height925px'}>
             <NavBar/>
-            <h1>New Board</h1>
+            <h1 className={'text-jeopardy-yellow'}>Create New Board</h1>
             <div className={'d-flex'}>
                 <div className={'w-15 height600px border-3 rounded-2 '}>
                     <CategorySelectionTable/>

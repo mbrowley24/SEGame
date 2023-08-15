@@ -20,18 +20,19 @@ const StartGameButton = props => {
 
     const startGame = () => {
 
+        console.log("game data");
         const gameUpdate = updateHost(game, {name, username});
-        console.log(gameUpdate);
+
         dispatch(gameActions.setGame(gameUpdate));
 
-        socket.emit("join_game_host", {room:id, game: gameUpdate});
+        socket.emit("game_host", {room:id, game: gameUpdate});
 
         navigate(`/games/${game.id}/game`);
     };
 
 
     return(
-        <button className={'btn btn-success'}
+        <button className={'btn button-jeopardy-orange text-capitalize'}
             onClick={()=>startGame()}
         >
             Start Game

@@ -98,15 +98,20 @@ const useGame = () => {
 
         let returnValue = false;
 
-        if(host.length > 0){
+        if(host.username.length > 0){
             if(username.length > 0){
-                returnValue = host === username;
+                returnValue = host.username === username;
             }
         }
 
         return returnValue;
     }
     const hostJoined = (host) => {
+
+        if(host === undefined || host === null){
+            console.log('host undefined');
+            return false;
+        }
 
         console.log(host);
         let returnValue = false;
@@ -160,10 +165,10 @@ const useGame = () => {
 
     const playerPanelCss = (buzzed, attempted) => {
 
-        let returnedCss = 'list-group-item list-group-item-success' ;
+        let returnedCss = 'list-group-item background-jeopardy';
 
         if(buzzed){
-            returnedCss = 'list-group-item list-group-item-warning';
+            returnedCss = 'list-group-item list-group-item-dark bg-dark';
         }
 
         if(attempted){
@@ -174,12 +179,37 @@ const useGame = () => {
         return returnedCss;
     }
 
+    const inGame = (myUsername, game) => {
+
+        let returnValue = false;
+        // console.log(game.lobby);
+        // console.log(myUsername);
+
+        const inLobby = game.lobby.filter(player => player.username === myUsername);
+
+        if(inLobby.length === 1){
+            console.log('in lobby');
+            returnValue = true;
+        }
+
+        const inPlayerPool = game.players.filter(player => player.username === myUsername);
+
+        if(inPlayerPool.length === 1){
+            console.log('in player pool');
+            returnValue = true;
+        }
+
+        console.log(returnValue);
+        return returnValue;
+    }
+
     return(
         {
             addPlayer,
             anonymousPlayers,
             getPlayers,
             isHostCheck,
+            inGame,
             canJoin,
             hostJoined,
             playerFull,

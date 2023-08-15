@@ -12,6 +12,8 @@ const whiteSpaceCheck = (string) => {
 const player={
     name:"",
     username:"",
+    score:0,
+    socketId:"",
 }
 
 
@@ -51,6 +53,9 @@ const playerSlice = createSlice({
             state.name="";
             state.username="";
         },
+        setSocketId(state, action){
+            state.socketId = action.payload;
+        }
     }
 });
 

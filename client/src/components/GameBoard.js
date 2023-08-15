@@ -1,6 +1,6 @@
 import React from "react";
 import GameFormCategory from "./GameFormCategory";
-
+import "../css/generalCss.css"
 
 
 const GameBoard = props => {
@@ -9,7 +9,7 @@ const GameBoard = props => {
 
 
     return(
-        <div className={'d-flex p-2 '}>
+        <div className={'d-flex p-2 container-fluid'}>
             <GameFormCategory data={data.category1}/>
             <GameFormCategory data={data.category2}/>
             <GameFormCategory data={data.category3}/>

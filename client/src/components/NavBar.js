@@ -1,9 +1,10 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useHttp from "../hooks/useHttp";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {playerActions} from "../store/playerData";
 import {gameActions} from "../store/gameData";
+import '../css/navBarCss.css';
 const NavBar = props =>{
     const {postHttpRequest} = useHttp();
     const navigate = useNavigate();
@@ -27,8 +28,8 @@ const NavBar = props =>{
     }
 
     return(
-        <div className="container-fluid">
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="">
+            <nav className="navbar navbar-expand-lg navbar-light bg-nav container-fluid">
                 <div className ="container-fluid">
                     <Link to="/dashboard" className="navbar-brand">Dashboard</Link>
                     <button className ="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

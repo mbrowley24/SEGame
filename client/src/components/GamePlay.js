@@ -16,79 +16,36 @@ const GamePlay = props => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [viewLobby, setViewLobby] = useState(false);
-    const [checkin, setCheckin] = useState(false);
     const {socket} = useContext(SocketContext);
     const {hostJoined, isHostCheck} = useGame();
     const game = useSelector(state => state.gameData);
     const myData = useSelector(state => state.playerData);
     const players = useMemo(() => game.players.length > 1, [game.players]);
     const host = useMemo(() => hostJoined(game.host) , [game.host]);
-    const isHost = useMemo(() => isHostCheck(game.host.username,myData.username), [host, myData]);
+    const isHost = useMemo(() => isHostCheck(game.host, myData.username), [host, myData]);
 
     const showLobby = () => setViewLobby(true);
     const hideLobby = () => setViewLobby(false);
 
     useEffect(()=>{
 
-        socket.on('player', data => {
+        socket.on('lobby', (data) => {
+            dispatch(gameActions.addLobby(data.player));
+
+        });
+
+        socket.on('disconnect_me', (data) => {
+            console.log('disconnect_me');
+            console.log(data);
+            socket.emit('leave', id);
+        });
+
+        socket.on('update', (data) => {
 
             dispatch(gameActions.setPlayers(data));
-
         });
-
-        socket.on("remove_player_update", data => {
-            console.log('remove_player_update');
-            dispatch(gameActions.removePlayer(data));
-        })
-
-        socket.on('host', data =>{
-            console.log(data);
-            dispatch(gameActions.setGame(data));
-
-            socket.emit('join_game', {room:id, player:myData});
-        });
-
-
-        socket.on('host_update', data => {
-
-                dispatch(gameActions.setGame(data));
-
-        });
-
 
     }, [socket]);
-
-
-    useEffect(() => {
-
-        if(myData.username.length === 0){
-            navigate('/')
-        }
-
-        if(game.host.username !== ""){
-            return
-        }
-
-        if(game.lobby.length === 0){
-            return
-        }
-
-        const timer = setTimeout(() => {
-            socket.emit('join_game', {room:id, player:myData});
-        }, 1000);
-
-        if(checkin){
-            setCheckin(false)
-        }else{
-            setCheckin(true);
-        }
-
-        console.log('checkin', checkin);
-
-
-        return () => clearTimeout(timer);
-
-    }, [checkin, myData, id]);
 
     return(
         <div className={'container-fluid height700Px'}>
@@ -100,7 +57,7 @@ const GamePlay = props => {
                     <h6 className={'text-capitalize'}>host: {game.host.name}</h6>
 
 
-                    {!isHost && <PlayersPanel game={game}/>}
+                    {!isHost && <PlayersPanel game={game} id={id} isHost={isHost}/>}
                     { isHost && <GamePlayHostPanel show={showLobby}
                                                    hide={hideLobby}
                                                    viewLobby={viewLobby}
@@ -109,7 +66,7 @@ const GamePlay = props => {
 
 
                 </div>
-                <div className={'m-auto w-75 ms-2 height800px'}>
+                <div className={'m-auto w-75 ms-2 height841px'}>
                     {players && host && <PlayGame data={game} id={id}/>}
                     {!players && host && <h1 className={'text-center'}>Waiting for players to join</h1>}
                     {!players && !host && <h1 className={'text-center'}>Waiting for host</h1>}
