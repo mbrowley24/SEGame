@@ -10,7 +10,6 @@ const PlayerPanelList = props => {
     const {game, id, socket, myData, isHost} = props;
     const [hostTimer, setHostTimer] = useState(false);
     const dispatch = useDispatch();
-    const {inGame} = useGame();
 
     const removePlayer = useCallback((player) => {
 
@@ -24,6 +23,14 @@ const PlayerPanelList = props => {
     },[]);
 
     useEffect(() => {
+
+        const player = game.players.filter((player) => player.username === myData.username);
+
+        if(player.length > 0){
+            console.log('player exists');
+            return
+        }
+
         const timer = setTimeout(() => {
 
             if(!isHost){
@@ -35,12 +42,11 @@ const PlayerPanelList = props => {
 
             }
 
-        }, 20000);
+        }, 30000);
 
         return () => {
             clearTimeout(timer);
         };
-
     }, [hostTimer, socket, isHost, game]);
 
     return(

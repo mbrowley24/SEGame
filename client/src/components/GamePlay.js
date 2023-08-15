@@ -39,8 +39,6 @@ const GamePlay = props => {
 
 
         socket.on('update', (data) => {
-            console.log(data);
-            console.log('update');
 
             dispatch(gameActions.setPlayers(data));
         });
