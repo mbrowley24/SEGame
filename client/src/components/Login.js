@@ -57,39 +57,38 @@ const Login = props =>{
 
 
     return(
-        <div className={'height925px border login-background px-3'}>
-            <div className={'m-auto w-100 height100'}>
-                <h1 className="pt-5 text-jeopardy-yellow">SE Jeopardy</h1>
-            </div>
-            <div className=" overflow-hidden m-auto earth"></div>
-            <div className="m-auto w-25 my-5 py-5 ">
-                    <div className="w-50 m-auto">
-                        <label className="text-jeopardy-yellow fw-bold">Username</label>
-                        <input className={'form-control form-control-sm'}
-                            name={"username"}
-                            value={login.username}
-                            onChange={(e)=>inputChange(e)}
-                        />
+        <div className={'height925px border d-flex login-background px-3'}>
+            <div className="m-auto w-25 align-self-center ">
+                <div className={'m-auto w-100 height100'}>
+                    <h1 className=" text-jeopardy-yellow">SE Jeopardy</h1>
+                </div>
+                <div className="w-50 m-auto">
+                    <label className="text-jeopardy-yellow fw-bold">Username</label>
+                    <input className={'form-control form-control-sm'}
+                        name={"username"}
+                        value={login.username}
+                        onChange={(e)=>inputChange(e)}
+                    />
+                </div>
+                <div className="w-50 m-auto">
+                    <label className="text-jeopardy-yellow fw-bold"
+                    >Password</label>
+                    <input className={'form-control form-control-sm'}
+                        type={'password'}
+                        name={'password'}
+                        value={login.password}
+                        onChange={(e)=>inputChange(e)}
+                    />
+                </div>
+                <div className="text-center m-auto my-3 ">
+                    <button className="m-auto btn btn-sm button-jeopardy-orange" label={'Login'} onClick={(e)=>submitLogin(e)} >Login</button><br/>
+                    <div className={'p-3'}>
+                         <Link
+                            className={"text-capitalize text-jeopardy-yellow"}
+                             to={'/join'}
+                         >join game</Link>
                     </div>
-                    <div className="w-50 m-auto">
-                        <label className="text-jeopardy-yellow fw-bold"
-                        >Password</label>
-                        <input className={'form-control form-control-sm'}
-                            type={'password'}
-                            name={'password'}
-                            value={login.password}
-                            onChange={(e)=>inputChange(e)}
-                        />
-                    </div>
-                    <div className="text-center m-auto my-3 ">
-                        <button className="m-auto btn btn-sm button-jeopardy-orange" label={'Login'} onClick={(e)=>submitLogin(e)} >Login</button><br/>
-                        <div className={'p-3'}>
-                             <Link
-                                className={"text-capitalize text-jeopardy-yellow"}
-                                 to={'/join'}
-                             >join game</Link>
-                        </div>
-                    </div>
+                </div>
             </div>
             
         </div>

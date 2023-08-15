@@ -1,28 +1,48 @@
-import React, {useEffect, useContext} from "react";
+import React, {useEffect, useContext, useMemo} from "react";
 import PlayersPanel from "./PlayersPanel";
 import LobbyPanel from "./lobbyPanel";
 import SocketContext from "../context/SocketContext";
 import {gameActions} from "../store/gameData";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import useGame from "../hooks/useGame";
 
 
 
 const GamePlayHostPanel = props => {
-        const {show, hide, game, viewLobby, id} = props
+        const {show, hide, viewLobby, id, game} = props
         const dispatch = useDispatch();
         const {socket} = useContext(SocketContext);
 
-
+    console.log('game');
+        console.log(game);
     useEffect(() => {
 
-        socket.on('lobby', data => {
-            console.log(data);
-            console.log("lobby");
-            dispatch(gameActions.addLobby(data));
+        // socket.on('player_update', (data) => {
+        //
+        //     const count = playerCount + lobbyCount;
+        //     //console.log('player_update');
+        //     // console.log(count);
+        //     // console.log(data.player);
+        //
+        //     if (count  < 3) {
+        //
+        //
+        //
+        //
+        //     }else{
+        //
+        //             console.log('lobby_full');
+        //             socket.emit('lobby_full',  data.socket);
+        //     }
+        //
+        //
+        // });
 
-        });
+
+
 
         return () => {};
+
     }, [socket]);
 
 
@@ -44,7 +64,7 @@ const GamePlayHostPanel = props => {
                     </button>
                 </li>
             </ul>
-            {!viewLobby &&  <PlayersPanel game={game} id={id}/>}
+            {!viewLobby &&  <PlayersPanel game={game} id={id} isHost={true}/>}
             {viewLobby && <LobbyPanel show={viewLobby} id={id} game={game}/>}
         </React.Fragment>
 

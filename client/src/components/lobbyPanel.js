@@ -38,7 +38,6 @@ const LobbyPanel = props => {
 
     const addPlayers = useCallback(() => {
 
-        console.log(game);
         const playersState = [...players];
         dispatch(gameActions.setPlayers({players:playersState}));
         socket.emit('add_player', {room:id, players : playersState, game:game});

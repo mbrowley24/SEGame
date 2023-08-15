@@ -9,7 +9,7 @@ const JoinGameView = props => {
     return(
         <div className={'d-flex justify-content-center height925px'}>
             <div className={'align-self-center'}>
-                <h1>Join Game</h1>
+                <h1 className={'text-jeopardy-orange rounded fw-bold'}>Join Game</h1>
                 <JoinGame/>
                 <div>
                     <Link
