@@ -32,9 +32,7 @@ const GamePlay = props => {
     useEffect(()=>{
 
         socket.on('lobby', (data) => {
-            console.log(data);
             dispatch(gameActions.addLobby(data.player));
-            console.log(game);
 
         });
 
