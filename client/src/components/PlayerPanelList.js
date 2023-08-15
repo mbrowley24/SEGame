@@ -15,9 +15,9 @@ const PlayerPanelList = props => {
 
         if(id){
 
-            dispatch(gameActions.removePlayer(player));
+            dispatch(gameActions.removePlayer(player.username));
 
-            socket.emit('remove_player', {room:id, player:player});
+            socket.emit('remove_player', player);
         }
 
     },[]);
@@ -39,10 +39,9 @@ const PlayerPanelList = props => {
                 socket.emit('player_in_lobby', {room: id, player : myData});
                 setHostTimer((timer)=> !timer);
 
-
             }
 
-        }, 30000);
+        }, 20000);
 
         return () => {
             clearTimeout(timer);

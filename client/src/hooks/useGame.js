@@ -165,10 +165,10 @@ const useGame = () => {
 
     const playerPanelCss = (buzzed, attempted) => {
 
-        let returnedCss = 'list-group-item list-group-item-success' ;
+        let returnedCss = 'list-group-item background-jeopardy';
 
         if(buzzed){
-            returnedCss = 'list-group-item list-group-item-warning';
+            returnedCss = 'list-group-item list-group-item-dark bg-dark';
         }
 
         if(attempted){

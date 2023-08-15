@@ -10,7 +10,7 @@ import useGame from "../hooks/useGame";
 
 const GamePlayHostPanel = props => {
         const {show, hide, viewLobby, id, game} = props
-        const dispatch = useDispatch();
+        const lobby = useMemo(() => game.lobby.length > 0, [game.lobby]);
         const {socket} = useContext(SocketContext);
 
     console.log('game');

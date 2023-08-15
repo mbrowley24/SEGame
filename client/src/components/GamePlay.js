@@ -16,7 +16,6 @@ const GamePlay = props => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [viewLobby, setViewLobby] = useState(false);
-    const [checkin, setCheckin] = useState(false);
     const {socket} = useContext(SocketContext);
     const {hostJoined, isHostCheck} = useGame();
     const game = useSelector(state => state.gameData);
@@ -25,7 +24,6 @@ const GamePlay = props => {
     const host = useMemo(() => hostJoined(game.host) , [game.host]);
     const isHost = useMemo(() => isHostCheck(game.host, myData.username), [host, myData]);
 
-    console.log(game);
     const showLobby = () => setViewLobby(true);
     const hideLobby = () => setViewLobby(false);
 
@@ -36,17 +34,18 @@ const GamePlay = props => {
 
         });
 
-
+        socket.on('disconnect_me', (data) => {
+            console.log('disconnect_me');
+            console.log(data);
+            socket.emit('leave', id);
+        });
 
         socket.on('update', (data) => {
 
             dispatch(gameActions.setPlayers(data));
         });
 
-
     }, [socket]);
-
-
 
     return(
         <div className={'container-fluid height700Px'}>
@@ -67,7 +66,7 @@ const GamePlay = props => {
 
 
                 </div>
-                <div className={'m-auto w-75 ms-2 height800px'}>
+                <div className={'m-auto w-75 ms-2 height841px'}>
                     {players && host && <PlayGame data={game} id={id}/>}
                     {!players && host && <h1 className={'text-center'}>Waiting for players to join</h1>}
                     {!players && !host && <h1 className={'text-center'}>Waiting for host</h1>}

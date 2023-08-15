@@ -112,7 +112,6 @@ const gameSlice = createSlice({
 
                 function filterName(player){
 
-
                     if(player.name === action.payload.name){
                         return true
                     }
@@ -136,6 +135,7 @@ const gameSlice = createSlice({
                     const newPlayer = {
                         name: action.payload.name,
                         username: username,
+                        socketId : action.payload.socketId,
                         score: 0
                     }
 
@@ -158,6 +158,7 @@ const gameSlice = createSlice({
                     const newPlayer = {
                         name: name,
                         username: username,
+                        socketId : action.payload.socketId,
                         score: 0
                     }
 

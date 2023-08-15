@@ -48,6 +48,10 @@
     font-weight: bolder;
 }
 
+.text-jeopardy-yellow-static{
+    color: #FD9D0D;
+}
+
 .text-jeopardy-orange{
     color: #FD9D0D;
 }
@@ -142,6 +146,11 @@
 .height825x{
     height: 825px;
 }
+
+.height841px{
+    height: 841px;
+}
+
 .height850px{
     height: 850px;
 }
@@ -201,4 +210,14 @@
 }
 .game_question:hover{
     border: yellow  3px solid;
+}
+
+.game_btn{
+    border: none;
+    color: #FDED0D;
+}
+
+.game_btn:hover{
+    border: none;
+    outline: none;
 }

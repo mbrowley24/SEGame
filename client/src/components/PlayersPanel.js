@@ -14,28 +14,20 @@ const PlayersPanel = props => {
     const navigate = useNavigate();
     const myData = useSelector(state => state.playerData);
 
-
-
     useEffect(()=>{
 
         socket.on("my_update", (data) => {
 
-            console.log('my_update');
             dispatch(playerActions.setSocketId(data));
         });
 
         socket.on("lobby_full_update", () => {
-            console.log('lobby_full__update');
+
             dispatch(gameActions.gameFull());
             navigate('/join')
         })
 
-
-
     },[socket]);
-
-
-
 
 
     return(
