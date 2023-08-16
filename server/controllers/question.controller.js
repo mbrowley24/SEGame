@@ -67,12 +67,12 @@ module.exports = {
         
         const decodedJWT = jwt.decode(req.cookies.usertoken, process.env.JWT_SECRET);
 
-        const userId = decodedJWT._id;
-        if(userId.length > 0){
+        const username = decodedJWT.username;
+        if(username.length > 0){
 
             try{
 
-                const player = await Player.findOne({_id: userId});
+                const player = await Player.findOne({'username': username});
 
                 question.submitted_by = `${player.first_name} ${player.last_name}`;
 

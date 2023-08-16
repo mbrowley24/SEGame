@@ -9,7 +9,7 @@ module.exports = {
 
         const decodedJwt = jwt.decode(req.cookies.usertoken, {complete: true});
 
-        const player_id = decodedJwt.payload._id;
+        const username = decodedJwt.payload.username;
 
         const category = new Category(req.body);
 
@@ -28,11 +28,11 @@ module.exports = {
                 count = Category.find().count({public_id: category.public_id});
             }
 
-            if(player_id.length > 0){
+            if(username.length > 0){
 
                 try{
 
-                    const player = await Player.findOne({_id: player_id})
+                    const player = await Player.findOne({"username": username})
 
 
                     category.created_by.username = player.username;
@@ -41,6 +41,8 @@ module.exports = {
                     category.edited_by.name = `${player.first_name} ${player.last_name}`;
 
                     category.save()
+
+                    res.status(200).json({message: "Successfully created a new category"});
 
                 }catch(err){
                     console.log("Failed to find player", err);
