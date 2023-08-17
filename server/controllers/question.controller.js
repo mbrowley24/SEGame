@@ -6,6 +6,61 @@ const jwt = require('jsonwebtoken');
 
 module.exports = {
 
+    update_question: async (req, res) => {
+
+            console.log(req.body);
+            console.log("update")
+            try{
+
+                const question_updates = {
+                    'question' : req.body.question,
+                    'answer' : req.body.answer,
+                }
+
+                await Question.findOneAndUpdate({"public_id": req.params.id}, question_updates, {
+                    new: true,
+                    runValidators: true
+                });
+
+
+
+
+                res.status(200).json("Question updated");
+
+            }catch(err){
+
+                console.log("Failed to update question", err);
+                res.status(400).json(err);
+
+            }
+    },
+
+    get_question: async (req, res) => {
+
+        console.log(req.params.id);
+            try{
+
+                const questionEntity = await Question.findOne({"public_id": req.params.id},
+                    'question answer public_id -_id').populate('answer', 'question');
+
+                const questionAndAnswer = {
+                    question: questionEntity.question,
+                    answer: questionEntity.answer,
+                    id : questionEntity.public_id
+                }
+
+                console.log(questionAndAnswer);
+
+                res.status(200).json(questionAndAnswer);
+
+            }catch(err){
+
+                console.log("Failed to get questions", err);
+                res.status(400).json(err);
+
+            }
+    },
+
     get_subjects: async (req, res) => {
 
         const returnSubjects = [];
