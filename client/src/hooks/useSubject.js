@@ -17,7 +17,7 @@ const useSubject = () => {
                 return false;
         }
 
-        const pattern = /^([A-Za-z0-9\s%^$#@+()!]){0,50}$/;
+        const pattern = /^([A-Za-z0-9\s\-'%^$#@+()!]){0,50}$/;
 
         return pattern.test(text);
     }
@@ -34,7 +34,7 @@ const useSubject = () => {
                 return false;
         }
 
-        const pattern = /^([A-Za-z0-9\s%^$#@+()!]){2,50}$/;
+        const pattern = /^([A-Za-z0-9\s\-'%^$#@+()!]){2,50}$/;
 
         return pattern.test(text);
     }

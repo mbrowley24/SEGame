@@ -13,7 +13,7 @@ const PlayerPanelListItem = props => {
     const buzzed = useMemo(() => game.buzzer.player === player.username, [game.buzzer, player]);
     const myData = useSelector(state => state.playerData);
     const me = useMemo(() => myData.username === player.username, [game.buzzer, myData]);
-    const playerCss = useMemo(() => playerPanelCss(buzzed, attempted), [buzzed, attempted]);
+    const playerCss = useMemo(() => playerPanelCss(buzzed, attempted, me), [buzzed, attempted]);
     const isHost = useMemo(() => game.host.username === myData.username, [game.host, myData]);
 
 
@@ -22,10 +22,10 @@ const PlayerPanelListItem = props => {
         <li key={player.username} className={playerCss}>
 
             {buzzed &&  <RiAlarmWarningLine color={'red'}/>}
-            <span className={'w-50 fs-4 text-jeopardy-yellow-static text-capitalize fw-bold'}
-                >{player.name.length > 10?`${player.name}`: `${player.name.substring(0, 10)} : ${player.score}`}
+            <span className={'w-50 fs-4 text-jeopardy-yellow-static text-capitalize fw-bold'}>
+                {player.name.length > 10?`${player.name}`: `${player.name.substring(0, 10)} : ${player.score}`}
             </span>
-            <small className={'text-jeopardy-orange'}>{me && ' ( you )'}</small>
+
             {attempted && <FaSadCry/>}
             {/*{*/}
             {/*    isHost &&*/}
