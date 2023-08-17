@@ -98,7 +98,7 @@ const useCategory = props => {
             return false;
         }
 
-        const pattern = /^([A-Za-z0-9\s%^&$#@+()!]){0,50}$/;
+        const pattern = /^([A-Za-z0-9\s%^&$'\-#@+(),!]){0,50}$/;
 
         return pattern.test(text);
     }
@@ -115,7 +115,7 @@ const useCategory = props => {
             return false;
         }
 
-        const pattern = /^([A-Za-z0-9\s%^&$#@+()!]){2,25}$/;
+        const pattern = /^([A-Za-z0-9\s%^&$'\-#@+(),!]){2,25}$/;
 
         return pattern.test(text);
     }

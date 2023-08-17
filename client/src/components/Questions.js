@@ -53,7 +53,7 @@ const Questions = props => {
                     questionData.questions.map((question, index) => {
                         console.log(question)
                         return(
-                            <QuestionsPanel key={`${index}/${question.id}`} question={question}/>
+                            <QuestionsPanel key={`${index}/${question.id}`} id={id} question={question}/>
                         )
                     })
                 }
