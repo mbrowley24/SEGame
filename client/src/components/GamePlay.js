@@ -53,7 +53,7 @@ const GamePlay = props => {
 
     return(
         <div className={'container-fluid height700Px'}>
-            <NavBar/>
+            {isHost && <NavBar/>}
             <div className={'d-flex w-100 py-3 border justify-content-start bg-primary'}>
                 <div className={`w-15 m-auto height800px p-1 me-2 border border-dark overflow-auto 
                     rounded-2 align-self-start background-Lapis-lazuli`}
