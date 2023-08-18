@@ -41,7 +41,7 @@ const PlayerPanelList = props => {
 
             }
 
-        }, 20000);
+        }, 10000);
 
         return () => {
             clearTimeout(timer);
