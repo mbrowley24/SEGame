@@ -21,7 +21,7 @@ function App() {
         <SocketProvider>
           <Router>
               <Routes>
-                  <Route path="/join" element={<JoinGameView/>} />
+                <Route path="/join" element={<JoinGameView/>} />
                 <Route path="/" element={<Login/>} />
                 <Route path="/dashboard" element={<Dashboard/>} />
                 <Route path={"/subjects"}>

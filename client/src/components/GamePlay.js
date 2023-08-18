@@ -4,6 +4,7 @@ import {useParams, useNavigate} from "react-router-dom";
 import {useDispatch,useSelector} from "react-redux";
 import PlayersPanel from "./PlayersPanel";
 import {gameActions} from "../store/gameData";
+import {playerActions} from "../store/playerData";
 import PlayGame from "./PlayGame";
 import useGame from "../hooks/useGame";
 import '../css/generalCss.css'
@@ -16,7 +17,7 @@ const GamePlay = props => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [viewLobby, setViewLobby] = useState(false);
-    const {socket} = useContext(SocketContext);
+    const {socket, setId} = useContext(SocketContext);
     const {hostJoined, isHostCheck} = useGame();
     const game = useSelector(state => state.gameData);
     const myData = useSelector(state => state.playerData);
@@ -34,10 +35,13 @@ const GamePlay = props => {
 
         });
 
-        socket.on('disconnect_me', (data) => {
-            console.log('disconnect_me');
-            console.log(data);
-            socket.emit('leave', id);
+        socket.on('exit_game_update', () => {
+
+            socket.disconnect(true);
+            dispatch(gameActions.resetGame());
+            dispatch(playerActions.resetData());
+            setId('');
+            navigate('/join');
         });
 
         socket.on('update', (data) => {
