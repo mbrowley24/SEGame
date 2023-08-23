@@ -39,34 +39,34 @@ const LobbyPanel = props => {
     const addPlayers = useCallback(() => {
 
         const playersState = [...players];
+
         dispatch(gameActions.setPlayers({players:playersState}));
-        socket.emit('add_player', {room:id, players : playersState, game:game});
+        socket.emit('add_player', {room:game.room, players : playersState, game:game});
         resetPlayers();
 
     },[players]);
 
     return(
-    show &&
-        <React.Fragment>
+        show && <div>
             <button
                 className={'text-warning btn'}
                 disabled={players.length === 0}
                 onClick={addPlayers}
             >add players
             </button>
-            <ul className={'list-group'}>
+            <ul className={'list-group bg-primary height50 overflow-auto'}>
                 {
                     lobbyPersonnel.map((person, i) => {
 
                         return (
                             <React.Fragment key={i}>
-                                <LobbyListItem person={person} inputChange={inputChange} i={i}/>
+                                <LobbyListItem person={person} inputChange={inputChange} players={players} i={i}/>
                             </React.Fragment>
                         )
                     })
                 }
             </ul>
-        </React.Fragment>
+        </div>
 
 
     )

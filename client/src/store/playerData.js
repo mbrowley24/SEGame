@@ -29,16 +29,16 @@ const playerSlice = createSlice({
                 state.username = Math.random().toString(36).substring(2,10);
             }
 
-            if(name === "name"){
 
-                if(!whiteSpaceCheck(value)){
-                    if(namePattern.test(value)){
 
-                        state.name = value;
-                    }
+            if(!whiteSpaceCheck(value)){
+                if(namePattern.test(value)){
+
+                    state.name = value;
                 }
-
             }
+
+
 
         },
         setPlayer(state,action){

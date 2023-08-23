@@ -56,6 +56,7 @@ const gameData = {
     name:"",
     timer: 5,
     finalTimer:30,
+    room:"",
     buzzer:{
         buzz: false,
         player:""
@@ -70,7 +71,6 @@ const gameData = {
         category6: category,
     },
     lobby:[],
-    game_full:false,
     host:{
         name:"",
         username:"",
@@ -88,7 +88,6 @@ const gameSlice = createSlice({
             state.finalTimer = gameData.finalTimer;
             state.buzzer = gameData.buzzer;
             state.board = gameData.board;
-            state.judges = gameData.judges;
             state.players = gameData.players;
 
 
@@ -177,6 +176,7 @@ const gameSlice = createSlice({
             console.log(action.payload);
             state.name = action.payload.name;
             state.id = action.payload.id
+            state.room = action.payload.room
             state.board.name = action.payload.board.name
             state.board.category1 = action.payload.board.category1
             state.board.category2 = action.payload.board.category2
@@ -381,15 +381,35 @@ const gameSlice = createSlice({
         setGame(state, action) {
 
             console.log(action.payload)
+            const players = [...action.payload.game.players];
+            const newPlayers = action.payload.players? [...action.payload.players] : [];
+
+            function playerCheck(player){
+
+                    const filterPlayers = players.filter(newPlayer => newPlayer.username === player.username);
+
+                    return filterPlayers.length === 0;
+            }
+
+            if (players.length === 0) {
+
+                state.players = [...newPlayers];
+
+            }else{
+                const filterPlayers = players.filter(playerCheck);
+                state.players = players.concat(filterPlayers);
+            }
 
 
-            state.name = action.payload.name;
-            state.timer = action.payload.timer;
-            state.finalTimer = action.payload.finalTimer;
-            state.buzzer = action.payload.buzzer;
-            state.board = action.payload.board;
-            state.host = action.payload.host;
-            state.players = action.payload.players;
+
+
+
+
+            state.name = action.payload.game.name;
+            state.board = action.payload.game.board;
+            state.host = action.payload.game.host;
+
+            state.room = action.payload.game.room;
 
             console.log(JSON.parse(JSON.stringify(state)))
 

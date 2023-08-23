@@ -203,10 +203,17 @@ const useGame = () => {
             console.log('in player pool');
             returnValue = true;
         }
-
-        console.log(returnValue);
         return returnValue;
     }
+
+
+    const playerInGame = (players, player) => {
+
+        return players.filter(p => p.username === player.username).length === 1;
+
+    }
+
+
 
     return(
         {
@@ -219,6 +226,7 @@ const useGame = () => {
             hostJoined,
             playerFull,
             playerPanelCss,
+            playerInGame,
             updateHost,
             questionAttempted,
             validateGame,

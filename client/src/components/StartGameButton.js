@@ -1,32 +1,32 @@
-import React, {useContext, useLayoutEffect} from "react";
+import React, {useContext, useEffect, useLayoutEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {gameActions} from "../store/gameData";
 import {useNavigate} from "react-router-dom";
 import SocketContext from "../context/SocketContext";
 import useGame from "../hooks/useGame";
 const StartGameButton = props => {
-    const {game, id} = props;
+    const {game} = props;
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {updateHost} = useGame();
-    const {socket, setId} = useContext(SocketContext);
+    const {socket, setId, id} = useContext(SocketContext);
     const {name, username} = useSelector(state => state.playerData);
 
-    useLayoutEffect(() => {
-        if(id){
-            setId(id);
-        }
-    }, [id]);
+
+    useEffect(() => {
+        setId(game.room);
+    }, [game]);
 
     const startGame = () => {
 
         console.log("game data");
         const gameUpdate = updateHost(game, {name, username});
 
-        dispatch(gameActions.setGame(gameUpdate));
+        dispatch(gameActions.setGame({game:gameUpdate}));
 
-        socket.emit("game_host", {room:id, game: gameUpdate});
-
+        console.log(gameUpdate.room);
+        socket.emit("game_host", {room:gameUpdate.room, game: gameUpdate});
+        console.log(id);
         navigate(`/games/${game.id}/game`);
     };
 

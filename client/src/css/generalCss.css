@@ -17,6 +17,12 @@
     background-color: #0D6EFD;
 }
 
+.page_container{
+
+    max-height: 500vh;
+    min-height: 100vh;
+}
+
 .background-color-jeopardy-orange{
     background-color: #FD9D0D
 }
@@ -187,14 +193,29 @@
 .text-small{
     font-size: 0.7rem;
 }
+.height20{
+    height: 20vh;
+}
+.height30{
+    height: 30vh;
+}
+.height50{
+    height: 50vh;
+}
+
+.height60{
+    height: 60vh;
+}
+
+.height100{
+    height: 100vh;
+}
 
 .height200{
     height: 200vh;
 }
 
-.height30{
-    height: 30vh;
-}
+
 
 
 .w-10{
