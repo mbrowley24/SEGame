@@ -152,33 +152,33 @@ const useGame = () => {
 
     };
 
-    const questionAttempted = (data, value, id) => {
+    const questionAttempted = (data, value, room) => {
 
         return {
             question: data[value].question,
             answer: data[value].answer,
             value: value,
             attempt: true,
-            room: id
+            room: room
         };
     };
 
     const playerPanelCss = (buzzed, attempted, me) => {
 
-        let returnedCss = 'list-group-item background-jeopardy';
+        let returnedCss = 'd-inline-block w-10 complement-board-bg border border-dark rounded p-1';
 
         console.log(me);
 
         if(me){
-            returnedCss = 'list-group-item list-group-item-dark bg-secondary';
+            returnedCss = 'd-inline-block w-10 complement-board-bg border border-dark rounded';
         }
 
         if(buzzed){
-            returnedCss = 'list-group-item list-group-item-secondary bg-dark';
+            returnedCss = 'd-inline-block w-10 bg-dark complement-board-bg border border-dark rounded';
         }
 
         if(attempted){
-            returnedCss = 'list-group-item list-group-item-danger text-decoration-line-through';
+            returnedCss = 'd-inline-block w-10 text-decoration-line-through complement-board-bg border border-dark rounded p-1';
         }
 
         return returnedCss;

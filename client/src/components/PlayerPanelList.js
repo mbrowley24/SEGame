@@ -2,12 +2,12 @@ import React, {useCallback, useEffect, useMemo, useState} from "react";
 import PlayerPanelListItem from "./PlayerPanelListItem";
 import {gameActions} from "../store/gameData";
 import {useDispatch} from "react-redux";
-import useGame from "../hooks/useGame";
+import "../css/playerPanelCss.css"
 
 
 
 const PlayerPanelList = props => {
-    const {game, id, socket, myData, isHost} = props;
+    const {game, id, socket, myData} = props;
     const [hostTimer, setHostTimer] = useState(false);
     const dispatch = useDispatch();
 
@@ -22,35 +22,9 @@ const PlayerPanelList = props => {
 
     },[]);
 
-    useEffect(() => {
-
-        const player = game.players.filter((player) => player.username === myData.username);
-
-        if(player.length > 0){
-            console.log('player exists');
-            return
-        }
-
-        const timer = setTimeout(() => {
-
-            if(!isHost){
-
-                dispatch(gameActions.addLobby(myData));
-                socket.emit('player_in_lobby', {room: id, player : myData});
-                setHostTimer((timer)=> !timer);
-
-            }
-
-        }, 10000);
-
-        return () => {
-            clearTimeout(timer);
-        };
-    }, [hostTimer, socket, isHost, game]);
-
     return(
         <React.Fragment>
-            <ul className={'list-group w-75 my-2 m-auto'}>
+            <div className={'w-75 my-2 m-auto'}>
                 {
                     game.players.map((player, i) => {
 
@@ -66,7 +40,7 @@ const PlayerPanelList = props => {
                         )
                     })
                 }
-            </ul>
+            </div>
         </React.Fragment>
     )
 };

@@ -5,7 +5,7 @@ import {gameActions} from "../store/gameData";
 import SocketContext from "../context/SocketContext";
 const LobbyPanel = props => {
 
-    const {id, game, show} = props;
+    const {game, show} = props;
     const {socket} = useContext(SocketContext);
     const lobbyPersonnel = useSelector(state => state.gameData.lobby);
     const dispatch = useDispatch();

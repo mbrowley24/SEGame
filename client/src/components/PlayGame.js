@@ -5,6 +5,7 @@ import ActiveQuestion from "./ActiveQuestion";
 import SocketContext from "../context/SocketContext";
 import {qAndAActions} from "../store/questionAndAnswerData";
 import {gameActions} from "../store/gameData";
+import HostActiveQuestion from "./HostActiveQuestion";
 
 const PlayGame = props => {
     const {data, id} = props;
@@ -14,9 +15,7 @@ const PlayGame = props => {
 
     useEffect(() => {
 
-        socket.on('question', data => {
-            dispatch(qAndAActions.setQAndA(data));
-        });
+
 
         socket.on("correct_answer_update", (data) => {
 
@@ -24,7 +23,15 @@ const PlayGame = props => {
             dispatch(qAndAActions.resetQAndA());
         });
 
+        socket.on("incorrect_answer_update", (data) => {
 
+            dispatch(gameActions.incorrectAnswer(data));
+        });
+
+        socket.on("not_attempted_update", (data) => {
+            dispatch(gameActions.notAttempted(data));
+            dispatch(qAndAActions.resetQAndA());
+        });
 
         return () => {};
     }, [socket]);
@@ -32,7 +39,7 @@ const PlayGame = props => {
     return(
         <React.Fragment>
             {!attempt && <ActiveGameBoard data={data} id={id}/>}
-            {attempt && <ActiveQuestion  id={id}/>}
+            {attempt && <HostActiveQuestion id={id}/>}
         </React.Fragment>
     )
 };

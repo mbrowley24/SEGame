@@ -103,9 +103,6 @@
 
 
 
-.height100{
-    height: 100vh;
-}
 
 .height10px{
     height: 10px;
@@ -193,6 +190,19 @@
 .text-small{
     font-size: 0.7rem;
 }
+
+.height5{
+    height: 5vh;
+}
+
+.height10{
+    height: 10vh;
+}
+
+.height15{
+    height: 15vh;
+}
+
 .height20{
     height: 20vh;
 }
@@ -207,8 +217,36 @@
     height: 60vh;
 }
 
+.height70{
+    height: 70vh;
+}
+
+.height80{
+    height: 80vh;
+}
+
+.height85{
+    height: 85vh;
+}
+
+.height90{
+    height: 90vh;
+}
+
+.height94{
+    height: 94vh;
+}
+
+.height95{
+    height: 95vh;
+}
+
 .height100{
     height: 100vh;
+}
+
+.height150{
+    height: 150vh;
 }
 
 .height200{
@@ -216,7 +254,13 @@
 }
 
 
+.text-size-1{
+    font-size: 1.4vw;
+}
 
+.text-size-2{
+    font-size: 2vw;
+}
 
 .w-10{
     width: 10%;

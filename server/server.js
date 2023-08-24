@@ -50,10 +50,17 @@ jeopardyNameSpace.on("connection", (socket) => {
 
     socket.on("show_answer", (data) =>{
         console.log("show_answer event received on server side");
-        //console.log(data);
+        console.log(data);
 
-        socket.to(data.room).emit("show_answer_update", data.show);
+        socket.to(data.room).emit("show_answer_update", {});
     })
+
+    socket.on("hide_answer", (data) =>{
+        console.log("hide_answer event received on server side");
+        console.log(data);
+
+        socket.to(data.room).emit("hide_answer_update", {});
+    });
 
     socket.on("exit_game", (data) =>{
 
@@ -145,7 +152,9 @@ jeopardyNameSpace.on("connection", (socket) => {
     socket.on("attempted_question", (data) =>{
         console.log("attempted_question event received on server side");
 
-        socket.to(data.room).emit("question", data);
+        console.log(data);
+
+        socket.to(data.room).emit("question", data.question);
 
     });
 

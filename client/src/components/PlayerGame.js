@@ -5,6 +5,8 @@ import {useSelector, useDispatch} from "react-redux";
 import SocketContext from "../context/SocketContext";
 import {gameActions} from "../store/gameData";
 import useGame from "../hooks/useGame";
+import {qAndAActions} from "../store/questionAndAnswerData";
+import PlayerGameBoard from "./PlayerGameBoard";
 const PlayerGame = props => {
     const {id} = useParams();
     const [update, setUpdate] = useState(false);
@@ -23,11 +25,13 @@ const PlayerGame = props => {
 
     useEffect(() => {
 
+        socket.on('question', data => {
+            console.log(data);
+            dispatch(qAndAActions.setQAndA(data));
+        });
+
         socket.on('update', data => {
 
-            console.log("update");
-
-            console.log(data);
             dispatch(gameActions.setGame(data));
 
         });
@@ -54,14 +58,12 @@ const PlayerGame = props => {
         return () => {}
     }, [update, inGame]);
 
-    console.log(game);
-    console.log(game.host.username.length);
 
     return(
         <div className={'page_container py-4'}>
             <h2 className={'text-capitalize'}>Host: {game.host.name}</h2>
             <div className={'p-4'}>
-                {inGame && <PlayGame data={game} id={id}/>}
+                {inGame && <PlayerGameBoard/>}
                 {!inGame && <h1 className={'text-capitalize'}>waiting in lobby</h1>}
             </div>
         </div>

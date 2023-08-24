@@ -7,31 +7,16 @@ import {useNavigate} from "react-router-dom";
 import PlayerPanelList from "./PlayerPanelList";
 
 const PlayersPanel = props => {
-    const {game, id, isHost} = props;
+    const {game, id} = props;
 
     const dispatch = useDispatch();
     const {socket} = useContext(SocketContext);
     const navigate = useNavigate();
     const myData = useSelector(state => state.playerData);
 
-    useEffect(()=>{
-
-        socket.on("my_update", (data) => {
-
-            dispatch(playerActions.setSocketId(data));
-        });
-
-        socket.on("lobby_full_update", () => {
-
-            dispatch(gameActions.gameFull());
-            navigate('/join')
-        })
-
-    },[socket]);
-
 
     return(
-        <PlayerPanelList game={game} id={id} socket={socket} myData={myData} isHost={isHost}/>
+        <PlayerPanelList game={game} id={id} socket={socket} myData={myData}/>
     )
 };
 export default PlayersPanel;

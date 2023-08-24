@@ -7,6 +7,7 @@ import PlayGame from "./PlayGame";
 import '../css/generalCss.css'
 import SocketContext from "../context/SocketContext";
 import HostPanelPopOut from "./HostPanelPopOut";
+import PlayersPanel from "./PlayersPanel";
 const GamePlay = props => {
 
     const {id} = useParams();
@@ -31,11 +32,12 @@ const GamePlay = props => {
     return(
         <div className={'page_container'}>
             <NavBar/>
-            <div className={'d-flex w-100 px-3 py-4 m-auto'}>
+            <div className={'d-flex w-100 px-3 pt-4 m-auto height80 border'}>
                 <HostPanelPopOut id={id} game={game}/>
-                <div className={'m-auto w-100 d-flex justify-content-center px-3'}>
-                    <PlayGame data={game} id={id}/>
-                </div>
+                <PlayGame data={game} id={id}/>
+            </div>
+            <div className={'border border-danger'}>
+                <PlayersPanel game={game} id={id}/>
             </div>
         </div>
     )

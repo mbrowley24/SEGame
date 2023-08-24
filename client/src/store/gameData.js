@@ -400,11 +400,6 @@ const gameSlice = createSlice({
                 state.players = players.concat(filterPlayers);
             }
 
-
-
-
-
-
             state.name = action.payload.game.name;
             state.board = action.payload.game.board;
             state.host = action.payload.game.host;
