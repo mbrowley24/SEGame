@@ -18,7 +18,7 @@ const Buzzer = props => {
 
     const buzzer = useCallback(() => {
 
-            socket.emit('buzzer', {room: id, username: myData.username});
+            socket.emit('buzzer', {room: game.room, username: myData.username});
 
             dispatch(gameActions.setBuzzer(myData.username));
 

@@ -15,8 +15,6 @@ const PlayGame = props => {
 
     useEffect(() => {
 
-
-
         socket.on("correct_answer_update", (data) => {
 
             dispatch(gameActions.correctAnswer(data));
@@ -31,6 +29,11 @@ const PlayGame = props => {
         socket.on("not_attempted_update", (data) => {
             dispatch(gameActions.notAttempted(data));
             dispatch(qAndAActions.resetQAndA());
+        });
+
+        socket.on('buzzed', data => {
+            console.log(data);
+            dispatch(gameActions.setBuzzer(data));
         });
 
         return () => {};

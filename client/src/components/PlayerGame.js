@@ -36,6 +36,18 @@ const PlayerGame = props => {
 
         });
 
+        socket.on('buzzed', data => {
+            console.log(data);
+            dispatch(gameActions.setBuzzer(data));
+        });
+
+        socket.on('correct_answer_update', data => {
+            console.log("show_answer_update");
+            console.log(data);
+            dispatch(gameActions.correctAnswer(data));
+            dispatch(qAndAActions.resetQAndA());
+        });
+
         return () => {};
 
     }, [socket]);

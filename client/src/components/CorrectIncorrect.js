@@ -11,13 +11,8 @@ const CorrectIncorrect = props => {
     const {socket} = useContext(SocketContext);
     const buzzedPlayer = useSelector(state => state.gameData.buzzer.player);
     const game = useSelector(state => state.gameData);
+
     const showAnswerHandler = useCallback(async () => {
-
-        // console.log(showAnswer)
-        // console.log(qAndAData);
-        // console.log(qAndAData.showAnswer);
-        console.log(question);
-
 
         if(question.showAnswer){
             console.log("hide_answer");

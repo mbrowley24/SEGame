@@ -160,7 +160,7 @@ jeopardyNameSpace.on("connection", (socket) => {
 
     socket.on("buzzer", (data) =>{
         console.log("buzzer event received on server side");
-
+        console.log(data);
         socket.to(data.room).emit("buzzed", data.username);
     });
 

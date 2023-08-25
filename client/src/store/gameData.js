@@ -198,7 +198,7 @@ const gameSlice = createSlice({
 
         },correctAnswer(state, action) {
 
-            console.log(action.payload);
+            //console.log(action.payload);
             const username = state.buzzer.player;
 
             for(let i = 0; i < state.players.length; i++){
@@ -259,7 +259,7 @@ const gameSlice = createSlice({
             state.players = players;
 
 
-            console.log(JSON.parse(JSON.stringify(state.board)));
+            //console.log(JSON.parse(JSON.stringify(state.board)));
 
         },incorrectAnswer(state, action) {
 

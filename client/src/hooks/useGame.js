@@ -170,15 +170,15 @@ const useGame = () => {
         console.log(me);
 
         if(me){
-            returnedCss = 'd-inline-block w-10 complement-board-bg border border-dark rounded';
+            returnedCss = 'd-inline-block w-10 complement-board-bg border border-dark rounded p-1';
         }
 
         if(buzzed){
-            returnedCss = 'd-inline-block w-10 bg-dark complement-board-bg border border-dark rounded';
+            returnedCss = 'd-inline-block w-10 bg-danger border border-danger rounded p-1';
         }
 
         if(attempted){
-            returnedCss = 'd-inline-block w-10 text-decoration-line-through complement-board-bg border border-dark rounded p-1';
+            returnedCss = 'd-inline-block w-10 bg-warning border border-dark rounded p-1';
         }
 
         return returnedCss;
