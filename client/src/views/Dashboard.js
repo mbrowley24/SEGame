@@ -8,7 +8,7 @@ const Dashboard = props => {
     return(
         <div className={'background-jeopardy height925px'}>
             <NavBar/>
-            <h1 className={'py-3 my-2 text-jeopardy-yellow-static'}>Jeopardy Dashboard</h1>
+            <h1 className={'py-3 my-2 text-jeopardy-yellow-static_fixed'}>Jeopardy Dashboard</h1>
             <div className="container border border-dark border-2 rounded">
                 <DashboardTopRow/>
                 <DashboardBottomRow/>

@@ -1,7 +1,7 @@
 
 
 const useBoard = () => {
-    const namePattern = /^[a-zA-Z\s.\-?";:{}()&*%!@$,]{2,25}$/
+    const namePattern = /^[a-zA-Z0-9\s.\-?";:{}()&*%!@$,]{2,25}$/
 
 
     const filterCategoryKeys= (category) =>{

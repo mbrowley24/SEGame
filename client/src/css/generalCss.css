@@ -58,6 +58,10 @@
     color: #FD9D0D;
 }
 
+.text-jeopardy-yellow-static_fixed{
+    color: #FD9D0D;
+}
+
 .text-jeopardy-yellow-static:hover{
     color: white;
 }
