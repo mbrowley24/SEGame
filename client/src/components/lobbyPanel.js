@@ -49,10 +49,10 @@ const LobbyPanel = props => {
     return(
         show && <div>
             <button
-                className={'text-warning btn'}
+                className={'text-warning btn text-capitalize'}
                 disabled={players.length === 0}
                 onClick={addPlayers}
-            >add players
+            >add to game
             </button>
             <ul className={'list-group bg-primary height50 overflow-auto'}>
                 {

@@ -8,6 +8,8 @@ import '../css/generalCss.css'
 import SocketContext from "../context/SocketContext";
 import HostPanelPopOut from "./HostPanelPopOut";
 import PlayersPanel from "./PlayersPanel";
+import HostQuitGame from "./HostQuitGame";
+import HostPanel from "./HostPanel";
 const GamePlay = props => {
 
     const {id} = useParams();
@@ -21,8 +23,7 @@ const GamePlay = props => {
     useEffect(()=>{
 
         socket.on('lobby', (data) => {
-            console.log("lobby");
-            console.log(data);
+
             dispatch(gameActions.addLobby(data));
 
         });
@@ -33,7 +34,7 @@ const GamePlay = props => {
         <div className={'page_container'}>
             <NavBar/>
             <div className={'d-flex w-100 px-3 pt-4 m-auto height80'}>
-                <HostPanelPopOut id={id} game={game}/>
+                <HostPanel game={game} id={id}/>
                 <PlayGame data={game} id={id}/>
             </div>
             <div className={''}>

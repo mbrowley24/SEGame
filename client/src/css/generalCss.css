@@ -58,9 +58,15 @@
     color: #FD9D0D;
 }
 
+.text-jeopardy-yellow-static:hover{
+    color: white;
+}
+
 .text-jeopardy-orange{
     color: #FD9D0D;
 }
+
+
 
 /* Works on Firefox */
 * {
@@ -254,12 +260,20 @@
 }
 
 
+.text-size-0{
+    font-size: 0.9vw;
+}
+
 .text-size-1{
     font-size: 1.4vw;
 }
 
 .text-size-2{
     font-size: 2vw;
+}
+
+.w-5{
+    width: 6%;
 }
 
 .w-10{

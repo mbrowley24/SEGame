@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from "react";
 import {useSelector, useDispatch} from "react-redux";
 import ActiveGameBoard from "./ActiveGameBoard";
-import ActiveQuestion from "./ActiveQuestion";
+import {useNavigate} from "react-router-dom";
 import SocketContext from "../context/SocketContext";
 import {qAndAActions} from "../store/questionAndAnswerData";
 import {gameActions} from "../store/gameData";
@@ -9,11 +9,14 @@ import HostActiveQuestion from "./HostActiveQuestion";
 
 const PlayGame = props => {
     const {data, id} = props;
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const attempt  = useSelector(state => state.qAndAData.attempt);
     const {socket} = useContext(SocketContext);
 
     useEffect(() => {
+
+
 
         socket.on("correct_answer_update", (data) => {
             dispatch(gameActions.correctAnswer(data));
