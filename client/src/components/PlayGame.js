@@ -16,13 +16,11 @@ const PlayGame = props => {
     useEffect(() => {
 
         socket.on("correct_answer_update", (data) => {
-
             dispatch(gameActions.correctAnswer(data));
             dispatch(qAndAActions.resetQAndA());
         });
 
         socket.on("incorrect_answer_update", (data) => {
-
             dispatch(gameActions.incorrectAnswer(data));
         });
 
@@ -32,7 +30,6 @@ const PlayGame = props => {
         });
 
         socket.on('buzzed', data => {
-            console.log(data);
             dispatch(gameActions.setBuzzer(data));
         });
 

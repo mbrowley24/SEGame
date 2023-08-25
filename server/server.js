@@ -10,7 +10,7 @@ const {Server} = require("socket.io");
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(cors({credentials: true, origin: 'http://localhost:3000'})) //'https://theaveragese.com'
+app.use(cors({credentials: true, origin: 'https://theaveragese.com'})) //'https://theaveragese.com' http://localhost:3000
 app.use(cookieParser());
 
 require('./config/config');
@@ -29,7 +29,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:3000", //"https://theaveragese.com" "http://localhost:3000"
+        origin: "https://theaveragese.com", //"https://theaveragese.com" "http://localhost:3000"
         methods: ["GET", "POST"],
     }
 })
@@ -43,21 +43,20 @@ jeopardyNameSpace.on("connection", (socket) => {
 
     socket.on("lobby_full", (data) =>{
         console.log("lobby_full event received on server side");
-        console.log(data);
+
         socket.to(data).emit("lobby_full_update");
     })
 
 
     socket.on("show_answer", (data) =>{
         console.log("show_answer event received on server side");
-        console.log(data);
 
         socket.to(data.room).emit("show_answer_update", {});
     })
 
     socket.on("hide_answer", (data) =>{
         console.log("hide_answer event received on server side");
-        console.log(data);
+
 
         socket.to(data.room).emit("hide_answer_update", {});
     });
@@ -70,7 +69,7 @@ jeopardyNameSpace.on("connection", (socket) => {
 
     socket.on("leave", (data) =>{
         console.log("leave event received on server side");
-        console.log(data);
+
         socket.leave(data);
     })
 
@@ -83,15 +82,14 @@ jeopardyNameSpace.on("connection", (socket) => {
         // console.log(data);
 
         const player =  {...data.player, socketId: socket.id};
-        console.log(data.room);
         socket.to(data.room).emit("lobby",  player);
 
     })
 
     socket.on("remove_player", (data) =>{
         console.log("remove_player event received on server side");
-        console.log(data);
-        socket.to(data.socketId).emit("disconnect_me", data);
+
+        socket.to(data.player.socketId).emit("leave_game", data);
     });
 
     socket.on("host_update", (data) =>{
@@ -117,7 +115,6 @@ jeopardyNameSpace.on("connection", (socket) => {
     socket.on("add_player", (data) =>{
         console.log("add_player event received on server side");
 
-        console.log(data);
         socket.to(data.room).emit("update", {players: data.players, game: data.game });
     })
 
@@ -152,15 +149,12 @@ jeopardyNameSpace.on("connection", (socket) => {
     socket.on("attempted_question", (data) =>{
         console.log("attempted_question event received on server side");
 
-        console.log(data);
-
         socket.to(data.room).emit("question", data.question);
 
     });
 
     socket.on("buzzer", (data) =>{
         console.log("buzzer event received on server side");
-        console.log(data);
         socket.to(data.room).emit("buzzed", data.username);
     });
 

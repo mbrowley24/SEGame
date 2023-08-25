@@ -1,14 +1,15 @@
 import React, {useContext, useEffect, useMemo, useState} from "react";
-import PlayGame from "./PlayGame";
-import {useParams} from "react-router-dom";
+import {useNavigate ,useParams} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
 import SocketContext from "../context/SocketContext";
 import {gameActions} from "../store/gameData";
 import useGame from "../hooks/useGame";
 import {qAndAActions} from "../store/questionAndAnswerData";
 import PlayerGameBoard from "./PlayerGameBoard";
+import {playerActions} from "../store/playerData";
 const PlayerGame = props => {
     const {id} = useParams();
+    const navigate = useNavigate();
     const [update, setUpdate] = useState(false);
     const {socket, setId} = useContext(SocketContext);
     const dispatch = useDispatch();
@@ -26,7 +27,6 @@ const PlayerGame = props => {
     useEffect(() => {
 
         socket.on('question', data => {
-            console.log(data);
             dispatch(qAndAActions.setQAndA(data));
         });
 
@@ -37,15 +37,21 @@ const PlayerGame = props => {
         });
 
         socket.on('buzzed', data => {
-            console.log(data);
             dispatch(gameActions.setBuzzer(data));
         });
 
         socket.on('correct_answer_update', data => {
-            console.log("show_answer_update");
-            console.log(data);
             dispatch(gameActions.correctAnswer(data));
             dispatch(qAndAActions.resetQAndA());
+        });
+
+        socket.on('leave_game', () => {
+            console.log("leave game");
+            dispatch(gameActions.resetGame());
+            setId('');
+            socket.disconnect();
+            dispatch(playerActions.resetData());
+            navigate('/join')
         });
 
         return () => {};
@@ -69,7 +75,6 @@ const PlayerGame = props => {
 
         return () => {}
     }, [update, inGame]);
-
 
     return(
         <div className={'page_container py-4'}>

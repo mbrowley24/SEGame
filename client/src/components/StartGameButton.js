@@ -19,15 +19,12 @@ const StartGameButton = props => {
 
     const startGame = () => {
 
-        console.log("game data");
         const gameUpdate = updateHost(game, {name, username});
 
         dispatch(gameActions.setGame({game:gameUpdate}));
 
-        console.log(gameUpdate.room);
         socket.emit("game_host", {room:gameUpdate.room, game: gameUpdate});
-        console.log(id);
-        navigate(`/games/${game.id}/game`);
+                navigate(`/games/${game.id}/game`);
     };
 
 

@@ -7,24 +7,19 @@ import "../css/playerPanelCss.css"
 
 
 const PlayerPanelList = props => {
-    const {game, id, socket, myData} = props;
-    const [hostTimer, setHostTimer] = useState(false);
+    const {game, socket} = props;
     const dispatch = useDispatch();
 
     const removePlayer = useCallback((player) => {
 
-        if(id){
-
             dispatch(gameActions.removePlayer(player.username));
+            socket.emit('remove_player', {room: game.room, player: player});
 
-            socket.emit('remove_player', player);
-        }
-
-    },[]);
+            },[game]);
 
     return(
         <React.Fragment>
-            <div className={'w-75 my-2 m-auto'}>
+            <div className={'w-75 my-2 m-auto overflow-auto'}>
                 {
                     game.players.map((player, i) => {
 

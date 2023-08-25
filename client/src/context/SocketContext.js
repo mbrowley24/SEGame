@@ -6,7 +6,7 @@ const SocketContext = createContext({});
 
 export const SocketProvider = ({children}) => {
     //"http://localhost:8080/jeopardy-"
-    const [url, setUrl] = useState("http://localhost:8080/jeopardy-"); //"https://theaveragese.com/jeopardy-"
+    const [url, setUrl] = useState("https://theaveragese.com/jeopardy-"); //"https://theaveragese.com/jeopardy-"
     const [id, setId] = useState("");
     const socketUrl = useMemo(() => `${url}${id}`, [url, id]);
     const socket = io(socketUrl, {autoConnect: true});

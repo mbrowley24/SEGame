@@ -167,8 +167,6 @@ const useGame = () => {
 
         let returnedCss = 'd-inline-block w-10 complement-board-bg border border-dark rounded p-1';
 
-        console.log(me);
-
         if(me){
             returnedCss = 'd-inline-block w-10 complement-board-bg border border-dark rounded p-1';
         }
@@ -193,7 +191,7 @@ const useGame = () => {
         const inLobby = game.lobby.filter(player => player.username === myUsername);
 
         if(inLobby.length === 1){
-            console.log('in lobby');
+
             returnValue = true;
         }
 

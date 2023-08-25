@@ -263,7 +263,7 @@ const gameSlice = createSlice({
 
         },incorrectAnswer(state, action) {
 
-            console.log(action.payload);
+            //console.log(action.payload);
             const username = state.buzzer.player;
 
             for(let i = 0; i < state.players.length; i++){
@@ -324,14 +324,14 @@ const gameSlice = createSlice({
 
         },setPlayers(state, action) {
 
-            console.log(action.payload);
+            //console.log(action.payload);
             let currentPlayers = JSON.parse(JSON.stringify(state.players));
             const newPlayers = [...action.payload.players];
 
             function filterPlayer(player) {
 
                 const filterPlayers = currentPlayers.filter(newPlayer => newPlayer.username === player.username);
-                console.log(player.username)
+                //console.log(player.username)
                 return filterPlayers.length === 0;
             }
 
@@ -362,21 +362,18 @@ const gameSlice = createSlice({
 
                     state.lobby = state.lobby.filter(filterLobby);
                     state.players = newPlayers;
-                    console.log(JSON.parse(JSON.stringify(state)))
+                    //console.log(JSON.parse(JSON.stringify(state)))
 
             }else{
 
                 state.lobby = state.lobby.filter(filterLobby);
                 const addPlayers = newPlayers.filter(filterPlayer);
-                console.log(addPlayers);
-                console.log(currentPlayers);
+
                 state.players = currentPlayers.concat(addPlayers);
 
             }
 
-
-
-            console.log(JSON.parse(JSON.stringify(state)))
+            //console.log(JSON.parse(JSON.stringify(state)))
         },
         setGame(state, action) {
 
@@ -406,22 +403,20 @@ const gameSlice = createSlice({
 
             state.room = action.payload.game.room;
 
-            console.log(JSON.parse(JSON.stringify(state)))
+            //console.log(JSON.parse(JSON.stringify(state)))
 
         },setHost(state, action) {
 
-            console.log(action.payload.name)
-            console.log(action.payload.username)
             state.host.name = action.payload.name;
             state.host.username = action.payload.username;
 
-            console.log(JSON.parse(JSON.stringify(state)))
+            //console.log(JSON.parse(JSON.stringify(state)))
         },
         setBuzzer(state, action) {
 
             state.buzzer.buzz = true;
             state.buzzer.player = action.payload;
-            console.log(JSON.parse(JSON.stringify(state)))
+            //console.log(JSON.parse(JSON.stringify(state)))
 
         },resetBuzzer(state) {
             state.buzzer.buzz = false;

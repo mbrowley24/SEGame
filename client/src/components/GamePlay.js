@@ -32,11 +32,11 @@ const GamePlay = props => {
     return(
         <div className={'page_container'}>
             <NavBar/>
-            <div className={'d-flex w-100 px-3 pt-4 m-auto height80 border'}>
+            <div className={'d-flex w-100 px-3 pt-4 m-auto height80'}>
                 <HostPanelPopOut id={id} game={game}/>
                 <PlayGame data={game} id={id}/>
             </div>
-            <div className={'border border-danger'}>
+            <div className={''}>
                 <PlayersPanel game={game} id={id}/>
             </div>
         </div>
