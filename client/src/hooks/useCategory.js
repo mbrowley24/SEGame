@@ -72,6 +72,8 @@ const useCategory = props => {
 
     const questionValidation = (category)=>{
 
+        const keys = Object.keys(category);
+
         const categoryKeys = Object.keys(category);
 
         //console.log(category)

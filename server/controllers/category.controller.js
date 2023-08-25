@@ -214,5 +214,43 @@ module.exports = {
             console.log("Player must be logged in required");
             res.status(400).json({message: "Player ID is required"});
         }
-    }
+    },
+    delete_category: async (req, res) => {
+
+        const id = req.params.id;
+        const decodedJwt = jwt.decode(req.cookies.usertoken, {complete: true});
+        const username = decodedJwt.payload.username;
+
+        try{
+
+            console.log("Deleting category: ", id);
+
+            const category = await Category.findOne({public_id: id});
+            console.log("Category: ", category);
+            // console.log(category.created_by.username);
+            // console.log(username);
+            if(category.created_by.username === username){
+
+                console.log("Delete category");
+
+                await Category.deleteOne({public_id: id});
+
+                res.status(200).json({message: "Category deleted"});
+
+            }else{
+
+                console.log("Failed to delete category");
+                res.status(400).json({message: "Failed to delete category"});
+            }
+
+
+
+        }catch(err){
+
+            console.log("Failed to delete category", err);
+            res.status(400).json(err);
+
+        }
+
+    },
 };

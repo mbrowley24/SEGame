@@ -8,4 +8,5 @@ module.exports = app => {
     app.post('/api/v1/myCategories', authenticate, CategoryController.new_category);
     app.get('/api/v1/myCategories/:id', authenticate, CategoryController.get_category);
     app.put('/api/v1/myCategories/:id', authenticate, CategoryController.update_category);
+    app.delete('/api/v1/myCategories/:id', authenticate, CategoryController.delete_category);
 }
