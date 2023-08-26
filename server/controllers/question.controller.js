@@ -129,7 +129,7 @@ module.exports = {
 
                 const player = await Player.findOne({'username': username});
 
-                question.submitted_by = `${player.first_name} ${player.last_name}`;
+                question.submitted_by = player.username;
 
                 try{
 
@@ -239,5 +239,27 @@ module.exports = {
                 console.log("Failed to get subject with public_id: " + req.params.id, err);
                 res.status(400).json(err);
         }
+    },
+    delete_question: async (req, res) => {
+
+            try{
+
+                const decodedJwt = jwt.decode(req.cookies.usertoken, {complete: true});
+                console.log(decodedJwt.payload.username);
+                const username = decodedJwt.payload.username;
+
+                const player = await Player.findOne({'username': username});
+
+                const question = await Question.findOne({public_id: req.params.id});
+                 b
+
+                res.status(200).json({message: "Question deleted"});
+
+            }catch(err){
+
+                console.log("Failed to delete question", err);
+                res.status(400).json(err);
+
+            }
     },
 };
