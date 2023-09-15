@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2e870250-64ae-4a44-a1d7-2a4253e66194" name="Changes" comment="before delete board function">
+      <change beforePath="$PROJECT_DIR$/client/src/context/SocketContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/context/SocketContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/useHttp.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/useHttp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="tsconfig.json" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="test" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="test" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/client/src/store/store.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/server/controllers/categoryController.js" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2QynX36ZKpc8cHrw8BV3fErswpJ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "front__end__changes",
+    "javascript.nodejs.core.library.configured.version": "18.16.0",
+    "javascript.nodejs.core.library.typings.version": "18.16.0",
+    "last_opened_file_path": "C:/Users/micha/current_react/discovery_frontent",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\micha\current_react\SEGame\client" />
+      <recent name="C:\Users\micha\current_react\SEGame\client\src\components" />
+      <recent name="C:\Users\micha\current_react\SEGame\client\src" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\micha\current_react\SEGame\client\src\hooks" />
+      <recent name="C:\Users\micha\current_react\SEGame\client\src\store" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2e870250-64ae-4a44-a1d7-2a4253e66194" name="Changes" comment="" />
+      <created>1686334725049</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1686334725049</updated>
+      <workItem from="1686334726065" duration="24553000" />
+      <workItem from="1686578434050" duration="69950000" />
+      <workItem from="1686747384839" duration="150435000" />
+      <workItem from="1687288001781" duration="28259000" />
+      <workItem from="1687396099769" duration="180338000" />
+      <workItem from="1687902853188" duration="8253000" />
+      <workItem from="1687915449541" duration="30693000" />
+      <workItem from="1688002490033" duration="131000" />
+      <workItem from="1688002649143" duration="1725000" />
+      <workItem from="1688004549531" duration="681000" />
+      <workItem from="1688005366403" duration="424000" />
+      <workItem from="1688005822147" duration="33010000" />
+      <workItem from="1688079990456" duration="328000" />
+      <workItem from="1688744657481" duration="8000" />
+      <workItem from="1690950795350" duration="455000" />
+      <workItem from="1691019659361" duration="637000" />
+      <workItem from="1691675690086" duration="321000" />
+      <workItem from="1691676610465" duration="125049000" />
+      <workItem from="1692281509949" duration="25511000" />
+      <workItem from="1692625355278" duration="89513000" />
+      <workItem from="1693086743081" duration="47000" />
+    </task>
+    <task id="LOCAL-00001" summary="add subject working">
+      <created>1686613847221</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1686613847221</updated>
+    </task>
+    <task id="LOCAL-00002" summary="can add questions and subjects">
+      <created>1686678443937</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1686678443937</updated>
+    </task>
+    <task id="LOCAL-00003" summary="can drag and drop question to category form">
+      <created>1686716093835</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1686716093835</updated>
+    </task>
+    <task id="LOCAL-00004" summary="working on game board">
+      <created>1686834441124</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1686834441124</updated>
+    </task>
+    <task id="LOCAL-00005" summary="setting up game boar form">
+      <created>1687010521071</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1687010521071</updated>
+    </task>
+    <task id="LOCAL-00006" summary="added start game screen">
+      <created>1687290816952</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1687290816952</updated>
+    </task>
+    <task id="LOCAL-00061" summary="before test">
+      <option name="closed" value="true" />
+      <created>1688051910653</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1688051910653</updated>
+    </task>
+    <task id="LOCAL-00062" summary="before test">
+      <option name="closed" value="true" />
+      <created>1688052322552</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1688052322552</updated>
+    </task>
+    <task id="LOCAL-00063" summary="before test">
+      <option name="closed" value="true" />
+      <created>1688052672391</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1688052672391</updated>
+    </task>
+    <task id="LOCAL-00064" summary="before test">
+      <option name="closed" value="true" />
+      <created>1688055259609</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1688055259609</updated>
+    </task>
+    <task id="LOCAL-00065" summary="before can kick players">
+      <option name="closed" value="true" />
+      <created>1688056618483</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1688056618484</updated>
+    </task>
+    <task id="LOCAL-00066" summary="before can kick players">
+      <option name="closed" value="true" />
+      <created>1688058037639</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1688058037639</updated>
+    </task>
+    <task id="LOCAL-00067" summary="before can kick players">
+      <option name="closed" value="true" />
+      <created>1688058727855</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1688058727855</updated>
+    </task>
+    <task id="LOCAL-00068" summary="before can kick players">
+      <option name="closed" value="true" />
+      <created>1688064972312</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1688064972312</updated>
+    </task>
+    <task id="LOCAL-00069" summary="before can kick players">
+      <option name="closed" value="true" />
+      <created>1688067535235</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1688067535235</updated>
+    </task>
+    <task id="LOCAL-00070" summary="before can kick players">
+      <option name="closed" value="true" />
+      <created>1691692205630</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1691692205630</updated>
+    </task>
+    <task id="LOCAL-00071" summary="before can kick players">
+      <option name="closed" value="true" />
+      <created>1691692277287</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1691692277287</updated>
+    </task>
+    <task id="LOCAL-00072" summary="before can kick players">
+      <option name="closed" value="true" />
+      <created>1691706425659</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1691706425659</updated>
+    </task>
+    <task id="LOCAL-00073" summary="before can kick players">
+      <option name="closed" value="true" />
+      <created>1691706462189</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1691706462189</updated>
+    </task>
+    <task id="LOCAL-00074" summary="before can kick players">
+      <option name="closed" value="true" />
+      <created>1691706472921</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1691706472921</updated>
+    </task>
+    <task id="LOCAL-00075" summary="before can kick players">
+      <option name="closed" value="true" />
+      <created>1691762145794</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1691762145794</updated>
+    </task>
+    <task id="LOCAL-00076" summary="before can kick players">
+      <option name="closed" value="true" />
+      <created>1691763177080</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1691763177080</updated>
+    </task>
+    <task id="LOCAL-00077" summary="game color for start game">
+      <option name="closed" value="true" />
+      <created>1691765127335</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1691765127335</updated>
+    </task>
+    <task id="LOCAL-00078" summary="update date dashboard color scheme">
+      <option name="closed" value="true" />
+      <created>1691768606765</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1691768606765</updated>
+    </task>
+    <task id="LOCAL-00079" summary="update top row color scheme">
+      <option name="closed" value="true" />
+      <created>1691778949445</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1691778949445</updated>
+    </task>
+    <task id="LOCAL-00080" summary="update top row color scheme">
+      <option name="closed" value="true" />
+      <created>1691783900192</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1691783900192</updated>
+    </task>
+    <task id="LOCAL-00081" summary="update top row color scheme">
+      <option name="closed" value="true" />
+      <created>1691784213480</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1691784213480</updated>
+    </task>
+    <task id="LOCAL-00082" summary="update top row color scheme">
+      <option name="closed" value="true" />
+      <created>1691787863126</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1691787863126</updated>
+    </task>
+    <task id="LOCAL-00083" summary="update top row color scheme">
+      <option name="closed" value="true" />
+      <created>1691793661381</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1691793661382</updated>
+    </task>
+    <task id="LOCAL-00084" summary="order players by score">
+      <option name="closed" value="true" />
+      <created>1691794512546</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1691794512546</updated>
+    </task>
+    <task id="LOCAL-00085" summary="game working with two players">
+      <option name="closed" value="true" />
+      <created>1692109203804</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1692109203804</updated>
+    </task>
+    <task id="LOCAL-00086" summary="fix network files for testing">
+      <option name="closed" value="true" />
+      <created>1692109436575</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1692109436575</updated>
+    </task>
+    <task id="LOCAL-00087" summary="fix network files for testing">
+      <option name="closed" value="true" />
+      <created>1692130330611</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1692130330611</updated>
+    </task>
+    <task id="LOCAL-00088" summary="fix network files for testing">
+      <option name="closed" value="true" />
+      <created>1692130843837</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1692130843837</updated>
+    </task>
+    <task id="LOCAL-00089" summary="fix network files for testing">
+      <option name="closed" value="true" />
+      <created>1692141210696</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1692141210696</updated>
+    </task>
+    <task id="LOCAL-00090" summary="fix network files for testing">
+      <option name="closed" value="true" />
+      <created>1692196664686</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1692196664686</updated>
+    </task>
+    <task id="LOCAL-00091" summary="fix network files for testing">
+      <option name="closed" value="true" />
+      <created>1692197641193</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1692197641193</updated>
+    </task>
+    <task id="LOCAL-00092" summary="fix network files for testing">
+      <option name="closed" value="true" />
+      <created>1692299004794</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1692299004794</updated>
+    </task>
+    <task id="LOCAL-00093" summary="fix network files for testing">
+      <option name="closed" value="true" />
+      <created>1692307061841</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1692307061841</updated>
+    </task>
+    <task id="LOCAL-00094" summary="fix network files for testing">
+      <option name="closed" value="true" />
+      <created>1692372991449</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1692372991449</updated>
+    </task>
+    <task id="LOCAL-00095" summary="fix network files for testing">
+      <option name="closed" value="true" />
+      <created>1692374214922</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1692374214922</updated>
+    </task>
+    <task id="LOCAL-00096" summary="different host/player interfaces">
+      <option name="closed" value="true" />
+      <created>1692833376254</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1692833376255</updated>
+    </task>
+    <task id="LOCAL-00097" summary="different host/player interfaces">
+      <option name="closed" value="true" />
+      <created>1692919589515</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1692919589515</updated>
+    </task>
+    <task id="LOCAL-00098" summary="different host/player interfaces">
+      <option name="closed" value="true" />
+      <created>1692974962511</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1692974962511</updated>
+    </task>
+    <task id="LOCAL-00099" summary="different host/player interfaces">
+      <option name="closed" value="true" />
+      <created>1692985772105</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1692985772105</updated>
+    </task>
+    <task id="LOCAL-00100" summary="different host/player interfaces">
+      <option name="closed" value="true" />
+      <created>1692995437943</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1692995437944</updated>
+    </task>
+    <task id="LOCAL-00101" summary="different host/player interfaces">
+      <option name="closed" value="true" />
+      <created>1692997376700</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1692997376700</updated>
+    </task>
+    <task id="LOCAL-00102" summary="can delete categories">
+      <option name="closed" value="true" />
+      <created>1693003204451</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1693003204452</updated>
+    </task>
+    <task id="LOCAL-00103" summary="before delete board function">
+      <option name="closed" value="true" />
+      <created>1693083222792</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1693083222792</updated>
+    </task>
+    <option name="localTasksCounter" value="104" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="javascript:npm:react" />
+    <option featureType="dependencySupport" implementationName="executable:docker" />
+    <option featureType="dependencySupport" implementationName="executable:kubectl" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/front_end_changes" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="can add questions and subjects" />
+    <MESSAGE value="can drag and drop question to category form" />
+    <MESSAGE value="working on game board" />
+    <MESSAGE value="can save game boards" />
+    <MESSAGE value="setting up game boar form" />
+    <MESSAGE value="added start game screen" />
+    <MESSAGE value="socket working using dynamic name space" />
+    <MESSAGE value="can add players to game" />
+    <MESSAGE value="q and A working on board with basic functions. can answer and remove question if answeredCorrectly" />
+    <MESSAGE value="question timer working" />
+    <MESSAGE value="Q and A working correct, incorrect not attempted" />
+    <MESSAGE value="game working" />
+    <MESSAGE value="can add players" />
+    <MESSAGE value="player adding function works" />
+    <MESSAGE value="before test" />
+    <MESSAGE value="before can kick players" />
+    <MESSAGE value="game color for start game" />
+    <MESSAGE value="update date dashboard color scheme" />
+    <MESSAGE value="update top row color scheme" />
+    <MESSAGE value="order players by score" />
+    <MESSAGE value="game working with two players" />
+    <MESSAGE value="fix network files for testing" />
+    <MESSAGE value="different host/player interfaces" />
+    <MESSAGE value="can delete categories" />
+    <MESSAGE value="before delete board function" />
+    <option name="LAST_COMMIT_MESSAGE" value="before delete board function" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/client/src/components/HostPanelPopOut.js</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

@@ -10,7 +10,7 @@ const {Server} = require("socket.io");
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(cors({credentials: true, origin: 'https://theaveragese.com'})) //'https://theaveragese.com' http://localhost:3000
+app.use(cors({credentials: true, origin: 'http://localhost:3000'})) //'https://theaveragese.com' http://localhost:3000
 app.use(cookieParser());
 
 require('./config/config');
@@ -29,7 +29,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: "https://theaveragese.com", //"https://theaveragese.com" "http://localhost:3000"
+        origin: "http://localhost:3000", //"https://theaveragese.com" "http://localhost:3000"
         methods: ["GET", "POST"],
     }
 })
@@ -59,18 +59,22 @@ jeopardyNameSpace.on("connection", (socket) => {
 
 
         socket.to(data.room).emit("hide_answer_update", {});
+
     });
 
-    socket.on("exit_game", (data) =>{
 
-        socket.to(data).emit("exit_game_update");
-        socket.leave(data);
-    })
+    socket.on("disconnect", () =>{
 
-    socket.on("leave", (data) =>{
-        console.log("leave event received on server side");
+        console.log("disconnect event received on server side");
+        console.log(socket.rooms);
+    });
 
-        socket.leave(data);
+    socket.on("end_game", (data) =>{
+        console.log("end-game event received on server side");
+
+        console.log(data);
+        socket.to(data.room).emit("exit_game_update");
+        socket.leave(data.room);
     })
 
     socket.on("join_game", (data) =>{

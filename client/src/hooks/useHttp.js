@@ -14,7 +14,7 @@ const useHttp = () =>{
         //  console.log(token)
         try{
             setIsLoading(true);
-            const httpResponse = await  axios.get(`https://theaveragese.com/api/v1/${requestConfig.url}`, {
+            const httpResponse = await  axios.get(`http://localhost:8080/api/v1/${requestConfig.url}`, {
                 signal: requestConfig.signal,
                 withCredentials: true,
             })
@@ -51,7 +51,7 @@ const useHttp = () =>{
         console.log(requestConfig)
         try{
             setIsLoading(true);
-            const httpResponse = await  axios.post(`https://theaveragese.com/api/v1/${requestConfig.url}`, requestConfig.data , {
+            const httpResponse = await  axios.post(`http://localhost:8080/api/v1/${requestConfig.url}`, requestConfig.data , {
                 withCredentials: true,
 
             })
@@ -85,7 +85,7 @@ const useHttp = () =>{
 
         try{
             setIsLoading(true);
-            const httpResponse = await  axios.put(`https://theaveragese.com/api/v1/${requestConfig.url}`, requestConfig.data , {
+            const httpResponse = await  axios.put(`http://localhost:8080/api/v1/${requestConfig.url}`, requestConfig.data , {
                 withCredentials: true,
 
             })
@@ -114,8 +114,38 @@ const useHttp = () =>{
 
     },[navigate])
 
+    const deleteHttpRequest = useCallback(async(requestConfig, applyData)=>{
+
+        try{
+            setIsLoading(true);
+            const httpResponse = await  axios.delete(`http://localhost:8080/api/v1/${requestConfig.url}`, {
+            withCredentials: true
+            })
+
+            if(httpResponse.status === 200){
+                applyData(httpResponse);
+                setIsLoading(false)
+            }
+
+        }catch(error){
+            console.log(error)
+            if(error && error.response){
+
+                if(error.response.status === 403){
+
+                    navigate('/')
+                }else{
+
+                    applyData(error);
+                }
+
+            }
+        }
+    },[navigate])
+
     return(
         {
+            deleteHttpRequest,
             getHttpRequest,
             postHttpRequest,
             putHttpRequest,

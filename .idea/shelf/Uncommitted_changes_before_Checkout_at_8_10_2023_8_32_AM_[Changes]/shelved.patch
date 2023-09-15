@@ -1,0 +1,64 @@
+Index: client/src/hooks/useHttp.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import {useState, useCallback} from 'react'\r\nimport axios from 'axios';\r\nimport {useNavigate} from \"react-router-dom\"\r\nimport {useSelector} from \"react-redux\";\r\n\r\n\r\nconst useHttp = () =>{\r\n    const navigate = useNavigate();\r\n    const [isLoading, setIsLoading] = useState(false);\r\n    const myData = useSelector(state => state.playerData);\r\n\r\n    const getHttpRequest = useCallback(async(requestConfig, applyData)=>{\r\n        // console.log(requestConfig);\r\n        //  console.log(token)\r\n        try{\r\n            setIsLoading(true);\r\n            const httpResponse = await  axios.get(`https://urchin-app-voqyy.ondigitalocean.app/se-game/api/v1/${requestConfig.url}`, {\r\n                signal: requestConfig.signal,\r\n                withCredentials: true,\r\n            })\r\n\r\n\r\n            // console.log(requestConfig)\r\n            if(httpResponse.status === 200){\r\n                applyData(httpResponse);\r\n                setIsLoading(false)\r\n            }\r\n\r\n\r\n            \r\n        }catch(error){\r\n              console.log(error)\r\n            if(error && error.response){\r\n\r\n                if(error.response.status === 403){\r\n\r\n                    navigate('/')\r\n                }else{\r\n\r\n                    applyData(error);\r\n                }\r\n\r\n            }\r\n        }\r\n\r\n    }, [ navigate])\r\n\r\n    const postHttpRequest = useCallback(async(requestConfig, applyData)=>{\r\n        console.log(requestConfig)\r\n        try{\r\n            setIsLoading(true);\r\n            const httpResponse = await  axios.post(`https://urchin-app-voqyy.ondigitalocean.app/se-game/api/v1/${requestConfig.url}`, requestConfig.data , {\r\n                withCredentials: true,\r\n\r\n            })\r\n\r\n\r\n            console.log(requestConfig)\r\n            if(httpResponse.status === 200){\r\n                applyData(httpResponse);\r\n                setIsLoading(false)\r\n            }\r\n\r\n\r\n\r\n        }catch(error){\r\n            console.log(error)\r\n            if(error && error.response){\r\n\r\n                if(error.response.status === 403){\r\n\r\n                    navigate('/')\r\n                }else{\r\n\r\n                    applyData(error);\r\n                }\r\n\r\n            }\r\n        }\r\n\r\n    },[navigate])\r\n    const putHttpRequest = useCallback(async(requestConfig, applyData)=>{\r\n\r\n        try{\r\n            setIsLoading(true);\r\n            const httpResponse = await  axios.put(`https://urchin-app-voqyy.ondigitalocean.app/se-game/api/v1/${requestConfig.url}`, requestConfig.data , {\r\n                withCredentials: true,\r\n\r\n            })\r\n\r\n\r\n            // console.log(requestConfig)\r\n            if(httpResponse.status === 200){\r\n                applyData(httpResponse);\r\n                setIsLoading(false)\r\n            }\r\n\r\n        }catch(error){\r\n            console.log(error)\r\n            if(error && error.response){\r\n\r\n                if(error.response.status === 403){\r\n\r\n                    navigate('/')\r\n                }else{\r\n\r\n                    applyData(error);\r\n                }\r\n\r\n            }\r\n        }\r\n\r\n    },[navigate])\r\n\r\n    return(\r\n        {\r\n            getHttpRequest,\r\n            postHttpRequest,\r\n            putHttpRequest,\r\n            isLoading\r\n        }\r\n    )\r\n\r\n}\r\n\r\n\r\nexport default useHttp;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/hooks/useHttp.js b/client/src/hooks/useHttp.js
+--- a/client/src/hooks/useHttp.js	
++++ b/client/src/hooks/useHttp.js	
+@@ -49,7 +49,7 @@
+         console.log(requestConfig)
+         try{
+             setIsLoading(true);
+-            const httpResponse = await  axios.post(`https://urchin-app-voqyy.ondigitalocean.app/se-game/api/v1/${requestConfig.url}`, requestConfig.data , {
++            const httpResponse = await  axios.post(`http://localhost:8080/api/v1/${requestConfig.url}`, requestConfig.data , {
+                 withCredentials: true,
+ 
+             })
+Index: client/Dockerfile
+===================================================================
+diff --git a/client/Dockerfile b/client/Dockerfile
+new file mode 100644
+--- /dev/null	
++++ b/client/Dockerfile	
+@@ -0,0 +1,19 @@
++FROM node:current-alpine3.17
++
++WORKDIR /usr/src/app
++COPY package*.json ./
++
++RUN npm install
++COPY . .
++
++# Install dependencies (npm ci makes sure the exact versions in the lockfile gets installed)
++RUN npm i
++# Build the app
++RUN npm run build
++# ==== RUN =======
++# Set the env to "production"
++
++# Expose the port on which the app will be running (3000 is the default that `serve` uses)
++EXPOSE 3000
++# Start the app
++CMD [ "npx", "serve", "build" ]
+\ No newline at end of file
+Index: server/Dockerfile
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>FROM node:current-alpine3.17\r\n\r\nWORKDIR /usr/src/app\r\nCOPY package*.json ./\r\n\r\nRUN npm install\r\nCOPY . .\r\n\r\nCOPY env .\r\n\r\nEXPOSE 8080\r\n\r\nCMD [ \"node\", \"server.js\"]
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/server/Dockerfile b/server/Dockerfile
+--- a/server/Dockerfile	
++++ b/server/Dockerfile	
+@@ -6,7 +6,6 @@
+ RUN npm install
+ COPY . .
+ 
+-COPY env .
+ 
+ EXPOSE 8080
+ 
