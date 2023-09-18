@@ -44,7 +44,7 @@ const StartGameView = props => {
         }
 
 
-    },[]);
+    },[dispatch, getHttpRequest, id]);
 
 
     return(

@@ -34,7 +34,7 @@ const ActiveGameBoardQandA = props => {
 
                 {
                     isHost ?
-                            <button className={'btn text-warning fw-bold game_btn fs-1'}
+                            <button className={'bg-transparent text-warning fw-bold game_btn fs-1'}
                                     onClick={attemptedQuestions}
                             >
                                 {`$${value}`}

@@ -264,16 +264,37 @@
 }
 
 
+
 .text-size-0{
     font-size: 0.9vw;
 }
 
+.text-size-05{
+    font-size: 0.9vh;
+}
+
 .text-size-1{
-    font-size: 1.4vw;
+    font-size: 1vh;
+}
+
+.text-size-12{
+    font-size: 1.2vh;
+}
+
+.text-size-14{
+    font-size: 1.4vh;
+}
+
+.text-size-16{
+    font-size: 1.6vh;
+}
+
+.text-size-18{
+    font-size: 1.8vh;
 }
 
 .text-size-2{
-    font-size: 2vw;
+    font-size: 2vh;
 }
 
 .w-5{
@@ -282,6 +303,15 @@
 
 .w-10{
     width: 10%;
+}
+
+
+.bg-transparent{
+    background-color: transparent;
+}
+
+.button-background{
+    background-color: #1565c0;
 }
 
 .w-15{

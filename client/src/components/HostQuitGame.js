@@ -31,33 +31,32 @@ const HostPanelPopOut = props => {
 
     return(
         <React.Fragment>
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show}
+                    onHide={handleClose}
+                    backdrop="static"
+                    className="bg-dark"
+                    
+                    >
                 <Modal.Header closeButton>
                     <Modal.Title>Quite Current Game</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Quit Current Game</Modal.Body>
+                <Modal.Body>Quit Current Game?</Modal.Body>
                 <Modal.Footer>
                     <button className={'btn btn-secondary'} onClick={handleClose}>
                         Cancel
                     </button>
-                    <button className={'btn btn-danger'} onClick={()=>endGame()}>
+                    <button className={'btn btn-danger'} onClick={endGame}>
                         quit
                     </button>
                 </Modal.Footer>
             </Modal>
-            <div className={` w-75 px-1 me-2 border border-dark overflow-auto 
-                    rounded-2 align-self-start background-Lapis-lazuli mt-2 m-auto bg-danger`}
+            
+            <button
+                className={'btn button-background fw-bold text-size-0 text-light text-capitalize text-center'}
+                onClick={()=>handleShow()}
             >
-
-                <button
-                    className={'btn fw-bold text-size-0 text-jeopardy-yellow-static text-capitalize text-center btn-link bg-danger'}
-                    onClick={()=>handleShow()}
-                >
-                    end game
-                </button>
-
-            </div>
-
+                end game
+            </button>
         </React.Fragment>
 
     )

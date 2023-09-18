@@ -9,7 +9,7 @@ const ActiveGameBoardCategory = props => {
         <div className={'col-sm-2 height80 overflow-hidden'}>
             <div className={'height5 overflow-hidden d-flex bg-dark justify-content-center border rounded'}>
                 <h4 className={'text-capitalize text-warning bg-dark ' +
-                    'text-size-1 fw-bold align-self-center overflow-hidden'}>{data.name}</h4>
+                    'text-size-18 text-nowrap fw-bold align-self-center overflow-hidden'}>{data.name}</h4>
             </div>
             <div>
                 <ActiveGameBoardQandA data={data} value={200} id={id}/>

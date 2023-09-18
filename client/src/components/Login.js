@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react";
 import useHttp from "../hooks/useHttp";
 import { useNavigate, Link } from "react-router-dom";
-import {useDispatch } from "react-redux";
+import {useDispatch, useSelector } from "react-redux";
 import {playerActions} from "../store/playerData";
-import {gameActions} from "../store/gameData";
 import "../css/generalCss.css"
 
 const Login = props =>{
@@ -11,6 +10,7 @@ const Login = props =>{
     const navigate = useNavigate();
     const {postHttpRequest} = useHttp();
     const [login, setLogin] = useState({username: "", password: ""})
+    const player = useSelector(state => state.playerData);
 
     const inputChange = (e) =>{
 
@@ -23,18 +23,16 @@ const Login = props =>{
 
     useEffect(() => {
 
-        dispatch(gameActions.resetGame());
-        dispatch(playerActions.resetData());
-
-        return () => {};
-
-    }, []);
+        if(player.username.length > 0){
+            window.location.reload(true);
+            console.log("reset game and player data");
+        }
+    },[]);
 
 
     const submitLogin = async(e) =>{
         e.preventDefault()
 
-        console.log(login);
         const requestConfig= {
             url: "login",
             data: login,
@@ -42,12 +40,9 @@ const Login = props =>{
         }
 
         const handleLogin = (res) =>{
-            console.log(res);
-
+        
             if(res.status === 200){
-                console.log(res.data.userLoggedIn);
                 dispatch(playerActions.setPlayer(res.data.userLoggedIn));
-                // console.log(res.headers.authorization);
                 navigate("/dashboard")
             }
         }
@@ -83,10 +78,10 @@ const Login = props =>{
                 <div className="text-center m-auto my-3 ">
                     <button className="m-auto btn btn-sm button-jeopardy-orange" label={'Login'} onClick={(e)=>submitLogin(e)} >Login</button><br/>
                     <div className={'p-3'}>
-                         <Link
-                            className={"text-capitalize text-jeopardy-yellow"}
-                             to={'/join'}
-                         >join game</Link>
+                        <Link
+                        className={"text-capitalize text-jeopardy-yellow"}
+                            to={'/join'}
+                        >join game</Link>
                     </div>
                 </div>
             </div>

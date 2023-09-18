@@ -7,12 +7,12 @@ import {useSelector} from "react-redux";
 const useHttp = () =>{
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
-    const myData = useSelector(state => state.playerData);
 
     const getHttpRequest = useCallback(async(requestConfig, applyData)=>{
         // console.log(requestConfig);
         //  console.log(token)
         try{
+            
             setIsLoading(true);
             const httpResponse = await  axios.get(`http://localhost:8080/api/v1/${requestConfig.url}`, {
                 signal: requestConfig.signal,
@@ -27,11 +27,9 @@ const useHttp = () =>{
                 applyData(httpResponse);
                 setIsLoading(false)
             }
-
-
             
         }catch(error){
-              console.log(error)
+            console.log(error)
             if(error && error.response){
 
                 if(error.response.status === 403){

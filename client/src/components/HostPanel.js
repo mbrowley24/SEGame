@@ -9,7 +9,7 @@ import '../css/generalCss.css'
 const HostPanel = props => {
     const {id, game} = props;
     return(
-        <div className={'w-10 overflow-auto p-1'}>
+        <div className={'w-10 overflow-auto p-1 '}>
             <HostPanelPopOut id={id} game={game}/>
             <HostQuitGame game={game}/>
         </div>

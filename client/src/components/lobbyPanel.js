@@ -47,14 +47,15 @@ const LobbyPanel = props => {
     },[players]);
 
     return(
-        show && <div>
+        show && 
+        <div className="">
             <button
-                className={'text-warning btn text-capitalize'}
+                className={'text-warning btn-small text-capitalize'}
                 disabled={players.length === 0}
                 onClick={addPlayers}
             >add to game
             </button>
-            <ul className={'list-group bg-primary height50 overflow-auto'}>
+            <ul className={'list-group bg-primary height50 overflow-auto mt-2'}>
                 {
                     lobbyPersonnel.map((person, i) => {
 
