@@ -31,7 +31,7 @@ const NavBar = props =>{
             <div className="">
                 <nav className="navbar navbar-expand-lg navbar-light bg-nav container-fluid">
                     <div className ="container-fluid">
-                        <Link to="/dashboard" className="navbar-brand">Dashboard</Link>
+                        <Link to="/dashboard" className="navbar-brand text-light">Choose Game</Link>
                         <button className ="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className ="navbar-toggler-icon"></span>
                         </button>
@@ -55,9 +55,12 @@ const NavBar = props =>{
                             {/*        /!*</li>*!/*/}
                             {/*    </ul>*/}
                             {/*</li>*/}
-                            {/*<li className ="nav-item">*/}
-                            {/*<Link className ="nav-link active text-capitalize" to={"/dashboard"} aria-current="page">accounts</Link>*/}
-                            {/*</li>*/}
+                            <li className ="nav-item">
+                            <Link className ="nav-link active text-capitalize text-light" 
+                                    to={"/jeopardy/dashboard"} aria-current="page">
+                                        jeopardy
+                            </Link>
+                            </li>
                             {/*<li className ="nav-item">*/}
                             {/*<Link to={"/leads"} className ="nav-link text-capitalize" >leads</Link>*/}
                             {/*</li>*/}
@@ -77,7 +80,7 @@ const NavBar = props =>{
                             {/*</li> *!/*/}
                         </ul>
                         <form className="d-flex">
-                            <button className="btn btn-outline-success"
+                            <button className="btn btn-outline-light"
                                     type="submit"
                                     onClick={logout}
                             >LogOut</button>

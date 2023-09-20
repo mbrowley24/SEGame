@@ -1,4 +1,4 @@
-import React, {useCallback} from "react";
+import React, {useCallback, useEffect} from "react";
 import NavBar from "../components/NavBar";
 import BoardForm from "../components/BoardForm";
 import CategorySelectionTable from "../components/CategorySelectionTable";
@@ -19,6 +19,11 @@ const NewBoardView = () => {
         dispatch(boardActions.setName(value));
 
     },[]);
+
+    useEffect(() => {
+        dispatch(boardActions.boardReset());
+        return () =>{};
+    }, []);
 
     const submit = async (e) => {
         e.preventDefault();

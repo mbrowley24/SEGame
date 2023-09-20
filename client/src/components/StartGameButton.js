@@ -24,7 +24,7 @@ const StartGameButton = props => {
         dispatch(gameActions.setGame({game:gameUpdate}));
 
         socket.emit("game_host", {room:gameUpdate.room, game: gameUpdate});
-                navigate(`/games/${game.id}/game`);
+                navigate(`/jeopardy/games/${game.id}/game`);
     };
 
 

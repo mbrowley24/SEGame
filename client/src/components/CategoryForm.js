@@ -8,18 +8,18 @@ const CategoryForm = props => {
     const {questionValidation, categoryFillBox} = useCategory();
     const validCategory = useMemo(()=>questionValidation(category),[category])
     return(
-        <form onSubmit={submit} className={'background-jeopardy w-75 m-auto border p-2 border-dark border-2 rounded-2'}>
+        <form onSubmit={submit} className={'bg-dark-green w-75 m-auto border p-2 border-dark border-2 rounded-2'}>
             <div>
                 <label htmlFor=""
-                         className={'text-jeopardy-yellow fw-bold'}
+                        className={'text-jeopardy-yellow fw-bold'}
                 >Name</label>
                 <input type="text"
-                       name={'name'}
-                       maxLength={25}
-                       minLength={2}
-                       value={category.name}
-                       className={categoryFillBox(category.name.length===0)}
-                        onChange={(e)=>inputChange(e)}
+                    name={'name'}
+                    maxLength={25}
+                    minLength={2}
+                    value={category.name}
+                    className={categoryFillBox(category.name.length===0)}
+                    onChange={(e)=>inputChange(e)}
                 />
             </div>
             <div className={'height600px overflow-auto py-2 jeopardy-scrollbar'}>
@@ -35,7 +35,7 @@ const CategoryForm = props => {
                 </div>
                 <div>
                     <label htmlFor=""
-                           className={'text-jeopardy-yellow fw-bold'}
+                        className={'text-jeopardy-yellow fw-bold'}
                     >$400</label>
                     <CategoryQAndA
                         data={category}
@@ -45,7 +45,7 @@ const CategoryForm = props => {
                 </div>
                 <div>
                     <label htmlFor=""
-                           className={'text-jeopardy-yellow fw-bold'}
+                        className={'text-jeopardy-yellow fw-bold'}
                     >$600</label>
                     <CategoryQAndA
                         data={category}
@@ -55,7 +55,7 @@ const CategoryForm = props => {
                 </div>
                 <div>
                     <label htmlFor=""
-                           className={'text-jeopardy-yellow fw-bold'}
+                        className={'text-jeopardy-yellow fw-bold'}
                     >$800</label>
                     <CategoryQAndA
                         data={category}
@@ -66,7 +66,7 @@ const CategoryForm = props => {
                 </div>
                 <div>
                     <label htmlFor=""
-                           className={'text-jeopardy-yellow fw-bold'}
+                        className={'text-jeopardy-yellow fw-bold'}
                     >$1000</label>
                     <CategoryQAndA
                         data={category}

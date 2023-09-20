@@ -44,6 +44,25 @@
     background-color: #2054E8;
 }
 
+.bg-light-gray{
+    background-color: lightgray;
+}
+
+.bg-dark-pink{
+    background-color: #896279;
+}
+
+.bg-pink{
+    background-color: #9c7ca5;
+}
+
+.bg-green{
+    background-color: #519e8a;
+}
+
+.bg-dark-green{
+    background-color: #476a6f;
+}
 
 .text-jeopardy-yellow{
     color: #FDED0D;
@@ -55,15 +74,22 @@
 }
 
 .text-jeopardy-yellow-static{
-    color: #FD9D0D;
+    color: #FDED0D;;
 }
 
+.text-jeopardy-yellow-static-fixed{
+    color: #FDED0D;;
+}
 .text-jeopardy-yellow-static_fixed{
     color: #FD9D0D;
 }
 
 .text-jeopardy-yellow-static:hover{
-    color: white;
+    color: black;
+}
+
+.dark-green{
+    color: #476a6f;
 }
 
 .text-jeopardy-orange{
@@ -106,9 +132,9 @@
 }
 
 *::-webkit-scrollbar-thumb {
-    background-color: black;
+    background-color: #476a6f;
     border-radius: 100px;
-    border: 3px solid black;
+    border: 1px solid black;
 }
 
 
@@ -223,6 +249,20 @@
     height: 50vh;
 }
 
+.no_decoration_light{
+    text-decoration: none;
+    color: #f5f5f5;
+}
+
+.no_border{
+    border: none;
+}
+
+.no_decoration_light:hover{
+    text-decoration: none;
+    color: #519e8a;
+}
+
 .height60{
     height: 60vh;
 }
@@ -251,7 +291,7 @@
     height: 95vh;
 }
 
-.height100{
+.height101{
     height: 100vh;
 }
 
@@ -314,12 +354,30 @@
     background-color: #1565c0;
 }
 
+.no_decoration_light
+
 .w-15{
     width: 15%;
 }
 
 .w-20{
     width: 20%;
+}
+
+.color_green{
+    color: #519e8a;
+}
+
+.color_light{
+    color: #f5f5f5;
+}
+
+.bg-pink{
+    background-color: #f48fb1;
+}
+
+.color_pink{
+    color: #f48fb1;
 }
 
 .w-85{

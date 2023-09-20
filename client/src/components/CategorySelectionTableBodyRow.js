@@ -29,7 +29,7 @@ const CategorySelectionTableBodyRow = props => {
                     {data.name}
                 </td>
             </tr>
-            <Overlay target={target.current} show={show} placement={'left'}>
+            <Overlay target={target.current} show={show} placement={'right'}>
                 {(props) => (
                     <Tooltip id="overlay-example" {...props}>
                         <CategoryToolTip data={data}/>

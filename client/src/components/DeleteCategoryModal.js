@@ -39,9 +39,10 @@ const DeleteCategoryModal = props => {
     return(
         <React.Fragment>
             <Modal show={show} onHide={handleClose}
-                   {...props}
+                    {...props}
                 size="sm"
-               contentClassName={'bg-dark text-white'}
+                contentClassName={'text-dark'}
+                className="bg-dark text-white"
             >
                 <Modal.Header closeButton>
                     <Modal.Title>Delete Category</Modal.Title>

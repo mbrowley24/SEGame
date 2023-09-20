@@ -42,14 +42,14 @@ const SubjectTableBody = props => {
 
                 return(
                     <tr key={index}>
-                        <td className={'text-jeopardy-yellow'}>
+                        <td className={''}>
                             <Link
-                                to={`/subjects/${subject.public_id}/questions/subject`}
-                                className={'text-jeopardy-yellow'}
+                                to={`/jeopardy/subjects/${subject.public_id}/questions/subject`}
+                                className={'text-capitalize text-dark'}
                             >
                                 {subject.name}</Link>
                         </td>
-                        <td className={'text-jeopardy-yellow'}>{subject.questions}</td>
+                        <td className={''}>{subject.questions}</td>
                     </tr>
                 )
             })

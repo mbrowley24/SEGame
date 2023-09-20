@@ -21,7 +21,7 @@ const HostPanelPopOut = props => {
         handleClose();
         dispatch(qAndAActions.resetQAndA());
         dispatch(gameActions.resetGame());
-        navigate('/dashboard')
+        navigate('/jeopardy/dashboard')
 
     },[]);
 

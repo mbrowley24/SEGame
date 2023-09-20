@@ -15,6 +15,7 @@ import {SocketProvider} from "./context/SocketContext";
 import EditBoardView from "./views/EditBoardView";
 import QuestionEditView from "./views/QuestionEditView";
 import PlayerGame from "./components/PlayerGame";
+import GameSelection from './views/GameSelection';
 
 function App() {
   return (
@@ -22,32 +23,35 @@ function App() {
         <SocketProvider>
           <Router>
               <Routes>
-                
                 <Route path="/">
                   <Route path="" element={<Login/>} />
-                  <Route path="dashboard" element={<Dashboard/>} />
                   <Route path="join" element={<JoinGameView/>} />
+                  <Route path="dashboard" element={<GameSelection/>} />
                 </Route>
-                <Route path={"/subjects"}>
+                <Route path={"/jeopardy"}>
+                  <Route path="dashboard" element={<Dashboard/>} />
+                  <Route path={"subjects"}>
                     <Route path={''} element={<SubjectsView/>} />
                     <Route path={':id/questions'} element={<SubjectsView/>} />
                     <Route path={':id/questions/subject'} element={<QuestionView/>}/>
                     <Route path={':id/questions/subject/:subjectId'} element={<QuestionEditView/>}/>
-                </Route>
-                <Route path={'/categories'}>
+                  </Route>
+                <Route path={'categories'}>
                     <Route path={''} element={<CategoryView/>}/>
                     <Route path={':id'} element={<CategoryEditView/>}/>
                 </Route>
-                  <Route path={'/board'}>
+                  <Route path={'board'}>
                       <Route path={''} element={<NewBoardView/>}/>
                       <Route path={':id'} element={<EditBoardView/>}/>
                   </Route>
-                  <Route path={'/games'}>
+                  <Route path={'games'}>
                         <Route path={''} element={<NewGameView/>}/>
                         <Route path={':id'} element={<StartGameView/>}/>
                         <Route path={':id/game'} element={<GamePlay/>}/>
                         <Route path={'join/:id'} element={<PlayerGame/>}/>
                   </Route>
+                </Route>
+                
               </Routes>
           </Router>
         </SocketProvider>

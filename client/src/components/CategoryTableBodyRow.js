@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import DeleteCategoryModal from "./DeleteCategoryModal";
-import {RiDeleteBin6Fill} from "react-icons/ri";
+import '../css/generalCss.css'
 
 
 
@@ -18,18 +18,20 @@ const CategoryTableHeader = props => {
         <tr>
 
             <td className={'text-capitalize text-center'}>
-                <Link to={`/categories/${category.id}`}
-                      className={'text-jeopardy-yellow'}
+                <Link to={`/jeopardy/categories/${category.id}`}
+                    className={'text-capitalize text-dark'}
                 >{category.name}</Link>
             </td>
-            <td className={'text-capitalize text-center text-jeopardy-yellow '}>
+            <td className={'text-capitalize text-center text-capitalize text-dark '}>
                 {category.created_by}
             </td>
-            <td className={'text-capitalize text-center text-jeopardy-yellow'}>
+            <td className={'text-capitalize text-center text-jeopardy-yellow-statix'}>
                 <DeleteCategoryModal show={show} handleClose={handleClose}
-                                     category={category} setCategories={setCategories}
+                                    category={category} setCategories={setCategories}
                 />
-                <button className={'btn btn-sm btn-danger'} onClick={handleShow}><RiDeleteBin6Fill/></button>
+                <button className={'btn btn-small bg-dark-green'} onClick={handleShow}>
+                    <i className="material-icons text-danger">delete_forever</i>
+                </button>
             </td>
         </tr>
     )

@@ -36,11 +36,11 @@ const GameTableBody = props => {
                 return(
                     <tr key={index}>
                         <td className={'text-capitalize'}>
-                            <Link to={`/games/${data.id}`}
-                                  className={'text-jeopardy-yellow'}
+                            <Link to={`/jeopardy/games/${data.id}`}
+                                className={'text-dark'}
                             >{data.name}
                         </Link></td>
-                        <td className={'text-capitalize text-jeopardy-yellow'} >{data.created_by}</td>
+                        <td className={'text-capitalize text-dark'} >{data.created_by}</td>
                     </tr>
                 )
             })
@@ -49,7 +49,7 @@ const GameTableBody = props => {
         {game.length === 0 &&
 
             <tr>
-                <td colSpan={2} className={'text-center'}>No Games Found</td>
+                <td colSpan={2} className={'text-center text-dark'}>No Games Found</td>
             </tr>
         }
         </tbody>

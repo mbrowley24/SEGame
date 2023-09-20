@@ -8,16 +8,16 @@ const BoardForm = props => {
     const board  = useSelector(state => state.boardData);
     const {validateBoard} = useBoard();
     return(
-        <form onSubmit={submit}>
+        <form onSubmit={submit} className={'bg-dark-green border rounded-3'}>
             <div className={'w-15 m-auto'}>
                 <label htmlFor=""
                     className={'form-label-sm text-center text-capitalize text-jeopardy-yellow fw-bold'}
                 >board name</label>
                 <input type="text"
-                       value={board.name}
-                       className={'form-control-sm text-center input-jeopardy-blue'}
-                        name={'name'}
-                        onChange={(e) =>inputChange(e)}
+                    value={board.name}
+                    className={'form-control-sm text-center input-jeopardy-blue'}
+                    name={'name'}
+                    onChange={(e) =>inputChange(e)}
                 />
             </div>
             <BoardQAndA/>

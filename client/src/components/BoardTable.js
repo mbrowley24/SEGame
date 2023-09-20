@@ -6,7 +6,7 @@ import BoardTableBody from "./BoardTableBody";
 const BoardTable = (props) => {
 
     return(
-        <table className={'table tableFixHead'}>
+        <table className={'responsive-table highlight centered tableFixHead'}>
             <BoardTableHeader/>
             <BoardTableBody/>
         </table>

@@ -20,16 +20,13 @@ const BoardCategory = props => {
 
     return(
         <div ref={drop} className={'p-1'}>
-            <h6 className={'py-1 text-jeopardy-yellow fw-bold'}>
-                {data.name? data.name: "add Category"}
+            <h6 className={'py-1 text-jeopardy-yellow-static-fixed fw-bold'}>
+                {data.name? data.name: "add Category no_border"}
                 {data.name?
-                    <button className={'btn btn-sm btn-link'}
+                    <button className={'bg-dark-green btn-link text-danger no_border'}
                         onClick={() => dispatch(delAction())}
                     >
-                        <IconContext.Provider value={{ color: "red", size: ".75em" }}>
-                            <BsXSquareFill/>
-                        </IconContext.Provider>
-
+                        <i className="material-icons">delete_forever</i>
                     </button>
                     : null}
             </h6>
