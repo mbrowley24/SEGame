@@ -1,6 +1,7 @@
 import React,{useMemo, useState} from "react";
 import CategoryQAndA from "./CategoryQAndA";
 import useCategory from "../hooks/useCategory";
+import "../css/generalCss.css"
 
 
 const CategoryForm = props => {
@@ -11,7 +12,7 @@ const CategoryForm = props => {
         <form onSubmit={submit} className={'bg-dark-green w-75 m-auto border p-2 border-dark border-2 rounded-2'}>
             <div>
                 <label htmlFor=""
-                        className={'text-jeopardy-yellow fw-bold'}
+                        className={'text-jeopardy-yellow-static-fixed fw-bold'}
                 >Name</label>
                 <input type="text"
                     name={'name'}
@@ -25,7 +26,7 @@ const CategoryForm = props => {
             <div className={'height600px overflow-auto py-2 jeopardy-scrollbar'}>
                 <div className={""}>
                     <label htmlFor=""
-                        className={'text-jeopardy-yellow fw-bold'}
+                        className={'text-jeopardy-yellow-static-fixed fw-bold'}
                     >$200</label>
                     <CategoryQAndA
                         data={category}
@@ -35,7 +36,7 @@ const CategoryForm = props => {
                 </div>
                 <div>
                     <label htmlFor=""
-                        className={'text-jeopardy-yellow fw-bold'}
+                        className={'text-jeopardy-yellow-static-fixed fw-bold'}
                     >$400</label>
                     <CategoryQAndA
                         data={category}
@@ -45,7 +46,7 @@ const CategoryForm = props => {
                 </div>
                 <div>
                     <label htmlFor=""
-                        className={'text-jeopardy-yellow fw-bold'}
+                        className={'text-jeopardy-yellow-static-fixed fw-bold'}
                     >$600</label>
                     <CategoryQAndA
                         data={category}
@@ -55,7 +56,7 @@ const CategoryForm = props => {
                 </div>
                 <div>
                     <label htmlFor=""
-                        className={'text-jeopardy-yellow fw-bold'}
+                        className={'text-jeopardy-yellow-static-fixed fw-bold'}
                     >$800</label>
                     <CategoryQAndA
                         data={category}
@@ -66,7 +67,7 @@ const CategoryForm = props => {
                 </div>
                 <div>
                     <label htmlFor=""
-                        className={'text-jeopardy-yellow fw-bold'}
+                        className={'text-jeopardy-yellow-static-fixed fw-bold'}
                     >$1000</label>
                     <CategoryQAndA
                         data={category}

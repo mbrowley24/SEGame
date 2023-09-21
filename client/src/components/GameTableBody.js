@@ -17,7 +17,7 @@ const GameTableBody = props => {
             };
 
             const applyData = (res) =>{
-
+                
                 setGame(res.data);
             }
 
@@ -31,7 +31,7 @@ const GameTableBody = props => {
     return(
         <tbody>
         {
-            game.length > 0 && game.map((data, index) => {
+            game.length > 0?  game.map((data, index) => {
 
                 return(
                     <tr key={index}>
@@ -44,14 +44,13 @@ const GameTableBody = props => {
                     </tr>
                 )
             })
-        }
 
-        {game.length === 0 &&
-
-            <tr>
-                <td colSpan={2} className={'text-center text-dark'}>No Games Found</td>
-            </tr>
+            :
+                <tr>
+                    <td colSpan={'2'} className={'text-center text-dark'}>No Games Found</td>
+                </tr>
         }
+        
         </tbody>
     )
 };

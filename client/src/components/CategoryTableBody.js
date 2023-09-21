@@ -31,16 +31,21 @@ const CategoryTableBody = props => {
 
     },[])
 
-    console.log(categories)
 
     return(
         <tbody>
 
-            {categories.map((category, index) => {
+            { categories.length > 0? categories.map((category, index) => {
                 return(
                     <CategoryTableBodyRow key={index} category={category} setCategories={setCategories}/>
                 )
                 })
+
+                : 
+                <tr>
+                    
+                    <td colSpan="4">No categories found!!</td>
+                </tr>
             }
         </tbody>
     )

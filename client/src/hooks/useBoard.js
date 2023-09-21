@@ -317,9 +317,9 @@ const useBoard = () => {
     }
 
     const checkNode = (name, question, board) =>{
-        const error = 'd-flex height100  m-auto border justify-content-center overflow-auto p-1 bg-danger';
-        const success = 'd-flex height100  m-auto border justify-content-center overflow-auto p-1 bg-success';
-        const empty = 'd-flex height100  m-auto border justify-content-center overflow-auto p-1 background-jeopardy';
+        const error = 'd-flex height100  m-auto border justify-content-center overflow-auto p-1 bg-danger rounded-3';
+        const success = 'd-flex height100  m-auto border justify-content-center overflow-auto p-1 bg-success rounded-3';
+        const empty = 'd-flex height100 rounded-3  m-auto border justify-content-center overflow-auto p-1 text-jeopardy-yellow-static-fixed bg-green';
 
         if(!question){
             return empty;

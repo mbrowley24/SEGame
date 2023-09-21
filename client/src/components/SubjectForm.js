@@ -42,6 +42,7 @@ const SubjectForm = props => {
             }
 
             const applyData = (res) => {
+
                 if(res.response.status === 400){
 
                     if(res.response.data.message){
@@ -55,6 +56,7 @@ const SubjectForm = props => {
                     }
 
                 }
+                
                 dispatch(miscDataActions.setUpdate());
             }
 
@@ -64,14 +66,14 @@ const SubjectForm = props => {
     }
 
     return(
-        <form onSubmit={submitSubject} className={''}>
+        <form onSubmit={submitSubject} className={'bg-dark-green rounded-3'}>
             <label htmlFor="subject"
                 className={'text-jeopardy-yellow fw-bold'}
             >Subject</label><br/>
             <input type="text"
-                   name="subject"
-                   className={'form-control-sm w-100 background-jeopardy text-jeopardy-yellow'}
-                   onChange={(e) => inputChange(e)} value={subject.payload}/><br/>
+                name="subject"
+                className={'form-control-sm w-100 background-jeopardy text-jeopardy-yellow-static-fixed text-center'}
+                onChange={(e) => inputChange(e)} value={subject.payload}/><br/>
             <span className={'text-danger'}>{subjectError}</span><br/>
             <button type="submit"
                     className={'btn button-jeopardy-orange'}

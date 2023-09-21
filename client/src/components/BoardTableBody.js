@@ -36,7 +36,7 @@ const BoardTableBody = (props) => {
     return(
         <tbody>
         {
-            boards.map((board, index) => {
+          boards.length > 0? boards.map((board, index) => {
 
                 return(
                     <tr key={index}>
@@ -50,6 +50,11 @@ const BoardTableBody = (props) => {
                     </tr>
                 )
             })
+
+            :
+                <tr>
+                    <td colSpan={'2'} className={'text-center text-dark'}>No Boards Found</td>
+                </tr>
         }
 
         </tbody>

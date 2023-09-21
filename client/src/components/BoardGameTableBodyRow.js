@@ -14,7 +14,7 @@ const BoardGameTableBodyRow = props => {
     return(
         <React.Fragment>
             <tr ref={drag}>
-                <td className={'text-capitalize text-jeopardy-yellow'}>{data.name}</td>
+                <td className={'text-capitalize text-jeopardy-yellow-static-fixed'}>{data.name}</td>
             </tr>
 
         </React.Fragment>

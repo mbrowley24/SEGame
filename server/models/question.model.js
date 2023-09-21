@@ -24,7 +24,10 @@ const QuestionSchema = new mongoose.Schema({
     required: [true, "Submitted by is required"],
     },
 
-
+    ownerId:{
+        type: String,
+        required: [true, "Owner ID is required"],
+    },
     public_id: {
         type: String,
         required: [true, "Public ID is required"],

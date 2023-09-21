@@ -8,8 +8,7 @@ module.exports = {
 
     update_question: async (req, res) => {
 
-            console.log(req.body);
-            console.log("update")
+            
             try{
 
                 const question_updates = {
@@ -21,9 +20,6 @@ module.exports = {
                     new: true,
                     runValidators: true
                 });
-
-
-
 
                 res.status(200).json("Question updated");
 
@@ -37,81 +33,121 @@ module.exports = {
 
     get_question: async (req, res) => {
 
-        console.log(req.params.id);
-            try{
+        try{
 
-                const questionEntity = await Question.findOne({"public_id": req.params.id},
-                    'question answer public_id -_id').populate('answer', 'question');
+            const questionEntity = await Question.findOne({"public_id": req.params.id},
+                'question answer public_id -_id').populate('answer', 'question');
 
-                const questionAndAnswer = {
-                    question: questionEntity.question,
-                    answer: questionEntity.answer,
-                    id : questionEntity.public_id
-                }
-
-                console.log(questionAndAnswer);
-
-                res.status(200).json(questionAndAnswer);
-
-            }catch(err){
-
-                console.log("Failed to get questions", err);
-                res.status(400).json(err);
-
+            const questionAndAnswer = {
+                question: questionEntity.question,
+                answer: questionEntity.answer,
+                id : questionEntity.public_id
             }
+
+            console.log(questionAndAnswer);
+
+            res.status(200).json(questionAndAnswer);
+
+        }catch(err){
+
+            console.log("Failed to get questions", err);
+            res.status(400).json(err);
+
+        }
     },
 
     get_subjects: async (req, res) => {
 
         const returnSubjects = [];
 
+        const decodedJWT = jwt.decode(req.cookies.usertoken, process.env.JWT_SECRET);
+        const username = decodedJWT.username;
+
         try{
 
-            const subjectsResult = await Subject.find({}, 'name public_id -_id', {sort: {name: 1}}).populate('public_id', 'name');
-
-
-            let subjects = [...subjectsResult];
-
-            for(let i = 0; i < subjects.length; i++){
-
-                try{
-
-                    const result = await Question.find({subject: subjects[i].name}, 'question answer difficulty public_id -_id', {sort: {difficulty: 1}}).populate('public_id', 'name');
-
-                    const subject={
-                        name: subjects[i].name,
-                        public_id: subjects[i].public_id,
-                        questions: result.length
-                    }
-
-
-                    returnSubjects.push(subject);
-
-                }catch (err){
-                    console.log("Failed to get questions for subject: " + subjects[i].name, err);
-                    res.status(400).json(err);
-                }
-
+            const player = await Player.findOne({username: username})
+            
+            if(player == null){
+                    
+                    console.log("Player not found");
+                    res.status(400).json({message: "Player not found"});
+                    return;
             }
 
-            res.json({subjects: returnSubjects});
+            try{
+
+                const subjectsResult = await Subject.find({ownerId: player._id}, 'name public_id -_id', {sort: {name: 1}}).populate('public_id', 'name');
+    
+    
+                let subjects = [...subjectsResult];
+    
+                for(let i = 0; i < subjects.length; i++){
+    
+                    try{
+    
+                        const result = await Question.find({subject: subjects[i].name}, 'question answer difficulty public_id -_id', {sort: {difficulty: 1}}).populate('public_id', 'name');
+    
+                        const subject={
+                            name: subjects[i].name,
+                            public_id: subjects[i].public_id,
+                            questions: result.length
+                        }
+    
+    
+                        returnSubjects.push(subject);
+    
+                    }catch (err){
+                        console.log("Failed to get questions for subject: " + subjects[i].name, err);
+                        res.status(400).json(err);
+                    }
+    
+                }
+    
+                res.json({subjects: returnSubjects});
+    
+            }catch(err){
+    
+                console.log("Failed to get subjects", err);
+                res.status(400).json(err);
+    
+            }
 
         }catch(err){
 
-            console.log("Failed to get subjects", err);
+            console.log("Failed to get player", err);
             res.status(400).json(err);
-
         }
+
+        
 
     },
     subject_questions: async (req, res) => {
 
+        const decodedJWT = jwt.decode(req.cookies.usertoken, process.env.JWT_SECRET);
+        const username = decodedJWT.username;
 
+        try{
 
-        const questions = await Question.find({subject: req.params.subject})
+            const player = await Player.findOne({'username': username});
+
+            
+
+            if(player == null){
+                    
+                    console.log("Player not found");
+                    res.status(400).json({message: "Player not found"});
+                    return;
+            }
+
+            const questions = await Question.find({subject: req.params.subject, ownerId: player._id})
                     .skip(1)
                     .limit(10)
-                    .sort({difficulty: 1});
+
+
+        }catch(err){
+
+            console.log("Failed to get questions", err);
+        }
 
     },
     new_question: async (req, res) => {
@@ -123,6 +159,7 @@ module.exports = {
         const decodedJWT = jwt.decode(req.cookies.usertoken, process.env.JWT_SECRET);
 
         const username = decodedJWT.username;
+        
         if(username.length > 0){
 
             try{
@@ -130,6 +167,7 @@ module.exports = {
                 const player = await Player.findOne({'username': username});
 
                 question.submitted_by = player.username;
+                question.ownerId = player._id;
 
                 try{
 
@@ -190,68 +228,89 @@ module.exports = {
     },
 
     get_questions_by_subject: async (req, res) => {
-
-
+        
+        const decodedJWT = jwt.decode(req.cookies.usertoken, process.env.JWT_SECRET);
+        const username = decodedJWT.username;
+        
         try{
 
-            const subject = await Subject.findOne({public_id: req.params.id});
+            const player = await Player.findOne({'username': username});
+
+            if(player == null){
+                        
+                console.log("Player not found");
+                res.status(400).json({message: "Player not found"});
+                return;
+            }
 
             try{
-                const questions =
-                    await Question.find({subject: subject.name}, 'question answer public_id -_id');
 
-                const question_results = [...questions];
-
-                const question_obj_list = [];
-
-                for(let i = 0; i < question_results.length; i++){
-
-                        const question_obj = {
-                            question: question_results[i].question,
-                            answer: question_results[i].answer,
-                            id: question_results[i].public_id
-                        }
-
-                        question_obj_list.push(question_obj);
-
+                const subject = await Subject.findOne({public_id: req.params.id, ownerId: player._id});
+    
+                try{
+                    const questions =
+                        await Question.find({subject: subject.name}, 'question answer public_id -_id');
+    
+                    const question_results = [...questions];
+    
+                    const question_obj_list = [];
+    
+                    for(let i = 0; i < question_results.length; i++){
+    
+                            const question_obj = {
+                                question: question_results[i].question,
+                                answer: question_results[i].answer,
+                                id: question_results[i].public_id
+                            }
+    
+                            question_obj_list.push(question_obj);
+    
+                    }
+    
+                    const questionData={
+                        subject: {
+                            name: subject.name,
+                            id: subject.public_id
+                        },
+                        questions: question_obj_list
+    
+                    }
+    
+                    res.status(200).json(questionData);
+    
+                }catch(err){
+    
+                    console.log("Failed to get questions for subject: " + subject.name, err);
+                    res.status(400).json(err);
+    
                 }
-
-                const questionData={
-                    subject: {
-                        name: subject.name,
-                        id: subject.public_id
-                    },
-                    questions: question_obj_list
-
-                }
-
-                res.status(200).json(questionData);
-
+    
             }catch(err){
-
-                console.log("Failed to get questions for subject: " + subject.name, err);
-                res.status(400).json(err);
-
+    
+                    console.log("Failed to get subject with public_id: " + req.params.id, err);
+                    res.status(400).json(err);
             }
 
         }catch(err){
-
-                console.log("Failed to get subject with public_id: " + req.params.id, err);
-                res.status(400).json(err);
+            console.log("Failed to get player", err);
+            res.status(400).json(err);
         }
+        
     },
     delete_question: async (req, res) => {
-
-            try{
-
+        
+        try{
+            
                 const decodedJwt = jwt.decode(req.cookies.usertoken, {complete: true});
-                console.log(decodedJwt.payload.username);
+                
                 const username = decodedJwt.payload.username;
 
                 const player = await Player.findOne({'username': username});
 
-                const question = await Question.findOne({public_id: req.params.id});
-                 b
+
+            try{
+
+                const question = await Question.findOneAndDelete({public_id: req.params.id, ownerId: player._id});
 
                 res.status(200).json({message: "Question deleted"});
 
@@ -261,5 +320,13 @@ module.exports = {
                 res.status(400).json(err);
 
             }
+
+        }catch(err){
+
+            console.log("Failed to find user", err);
+            res.status(400).json(err);
+        }
+
+            
     },
 };

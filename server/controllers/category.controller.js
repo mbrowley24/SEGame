@@ -67,41 +67,33 @@ module.exports = {
         const decodedJwt = jwt.decode(req.cookies.usertoken, {complete: true});
 
         const username = decodedJwt.payload.username;
+        
+        try{
 
+            const categories = await Category.find({"created_by.username": username}, "name created_by public_id",{});
 
-        if(username.length > 0){
+            const categoryResults = [...categories];
+            const results = [];
 
-            try{
+            for(let i = 0; i < categoryResults.length; i++){
 
-                const categories = await Category.find({"created_by.username": username}, "name created_by public_id",{});
-
-                const categoryResults = [...categories];
-                const results = [];
-
-                for(let i = 0; i < categoryResults.length; i++){
-
-                    const categoryObj = {
-                        name: categoryResults[i].name,
-                        created_by: categoryResults[i].created_by.name,
-                        id: categoryResults[i].public_id,
-                    }
-
-                    results.push(categoryObj);
+                const categoryObj = {
+                    name: categoryResults[i].name,
+                    created_by: categoryResults[i].created_by.name,
+                    id: categoryResults[i].public_id,
                 }
 
-                // console.log("Found categories: ", results);
-                res.status(200).json(results);
-
-            }catch(err){
-                console.log("Failed to find player", err);
-                res.status(400).json(err);
+                results.push(categoryObj);
             }
 
+            // console.log("Found categories: ", results);
+            res.status(200).json(results);
 
-        }else{
-            console.log("Player must be logged in required");
-            res.status(400).json({message: "Player ID is required"});
+        }catch(err){
+            console.log("Failed to find player", err);
+            res.status(400).json(err);
         }
+
     },
     get_category: async (req, res) => {
 

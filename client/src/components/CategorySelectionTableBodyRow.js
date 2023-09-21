@@ -24,12 +24,12 @@ const CategorySelectionTableBodyRow = props => {
                 onMouseEnter={() => setShow(true)}
                 onMouseLeave={() => setShow(false)}
             >
-                <td ref={drag} className={'complement-board-bg text-jeopardy-yellow'}
+                <td ref={drag} className={'complement-board-bg text-jeopardy-yellow-static-fixed'}
                 >
                     {data.name}
                 </td>
             </tr>
-            <Overlay target={target.current} show={show} placement={'right'}>
+            <Overlay target={target.current} show={show} placement={'left'}>
                 {(props) => (
                     <Tooltip id="overlay-example" {...props}>
                         <CategoryToolTip data={data}/>

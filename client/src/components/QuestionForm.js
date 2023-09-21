@@ -19,7 +19,7 @@ const QuestionForm = props => {
                     cols="4"
                     rows="30"
                     value={question.question}
-                    className="materialize-textarea"
+                    className="materialize-textarea text-jeopardy-yellow-static-fixed"
                     onChange={(e)=>inputChange(e)}
                 ></textarea>
             </div>
@@ -33,7 +33,7 @@ const QuestionForm = props => {
                     cols="4"
                     rows="10"
                     value={question.answer}
-                    className={"materialize-textarea"}
+                    className={"materialize-textarea text-jeopardy-yellow-static-fixed"}
                     onChange={(e)=>inputChange(e)}
                 ></textarea>
             </div>

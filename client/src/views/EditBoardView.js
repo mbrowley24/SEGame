@@ -85,7 +85,7 @@ const EditBoardView = props => {
                     reset form
                 </button>
             </div>
-            <div className={'d-flex p-2'}>
+            <div className={'container d-flex p-2'}>
                 <div className={'w-15 height600px border-3 rounded-2 '}>
                     <CategorySelectionTable/>
                 </div>

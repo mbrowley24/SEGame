@@ -26,7 +26,7 @@ const Questions = props => {
 
 
             const applyData = (res) => {
-                console.log(res.data);
+            
                 setQuestionData(res.data);
             }
 
@@ -51,7 +51,7 @@ const Questions = props => {
                 }
                 {
                     questionData.questions.map((question, index) => {
-                        console.log(question)
+                        
                         return(
                             <QuestionsPanel key={`${index}/${question.id}`}
                                             id={id}

@@ -96,15 +96,15 @@ module.exports = {
 
     get_game: async (req, res) => {
 
-         const public_id = req.params.id;
+        const public_id = req.params.id;
 
 
-         try{
+        try{
 
 
-             const result = await Game.findOne({public_id: public_id})
+            const result = await Game.findOne({public_id: public_id})
 
-             const gameData = {
+            const gameData = {
                     id: result.public_id,
                     name: result.name,
                     room: result.join_code,
@@ -118,16 +118,16 @@ module.exports = {
                         category6: JSON.parse(JSON.stringify(result.board.category6)),
                     },
 
-             };
+            };
 
                 console.log('game found');
                 res.status(200).json(gameData);
 
-         }catch(err){
+        }catch(err){
         console.log(err);
-         console.log("game not found");
+        console.log("game not found");
             res.status(400).json(err);
-         }
+        }
 
 
     },game_exists: async (req, res) => {

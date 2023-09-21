@@ -12,28 +12,11 @@ const BoardQuestion = props => {
     const showAnswer = () => setView(true);
     const hideAnswer = () => setView(false);
 
-    // const check = () =>{
-    //     const error = 'd-flex height100  m-auto border justify-content-center overflow-auto p-1 bg-danger';
-    //     const success = 'd-flex height100  m-auto border justify-content-center overflow-auto p-1 bg-success';
-    //     const empty = 'd-flex height100  m-auto border justify-content-center overflow-auto p-1 bg-warning';
-    //
-    //     if(!data[value].question){
-    //         return empty;
-    //     }
-    //
-    //     if(categoryQuestionsCheck(name, data[value].question, board)){
-    //         return success;
-    //     }else{
-    //         return error;
-    //     }
-    //
-    // }
-
     return(
         <div className={nodeCheck}
         >
             <div className={view?"": "align-self-center"} hidden={view}>
-                <p className={'text-center small'}>{data[value].question}</p>
+                <p className={'text-center text-size-12'}>{data[value].question}</p>
             </div>
             <div className={!view? "": "align-self-center"} hidden={!view}>
                 <p className={'text-center small'}>{data[value].answer}</p>

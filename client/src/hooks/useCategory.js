@@ -31,7 +31,6 @@ const useCategory = props => {
 
         const keys = Object.keys(category);
 
-        console.log(category);
         for(let i= 0; i < keys.length; i++){
 
             if(keys[i] === 'name' || keys[i] === 'id'){
@@ -154,8 +153,8 @@ const useCategory = props => {
 
     const categoryFillBox = (condition) =>{
 
-        const empty =  'form-control w-50 m-auto text-center text-jeopardy-yellow complement-board-bg'
-        const filled = 'form-control w-50 m-auto text-center input-jeopardy-blue'
+        const empty =  'form-control w-50 m-auto text-center text-jeopardy-yellow-static-fixed'
+        const filled = 'form-control w-50 m-auto text-center text-jeopardy-yellow-static-fixed'
 
         return condition? filled: empty;
     }
