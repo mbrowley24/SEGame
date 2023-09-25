@@ -13,7 +13,7 @@ const useHttp = () =>{
         //  console.log(token)
         try{
             
-            setIsLoading(true);
+            setIsLoading(true);                         
             const httpResponse = await  axios.get(`http://localhost:8080/api/v1/${requestConfig.url}`, {
                 signal: requestConfig.signal,
                 withCredentials: true,
@@ -29,7 +29,7 @@ const useHttp = () =>{
             }
             
         }catch(error){
-            console.log(error)
+            //console.log(error)
             if(error && error.response){
 
                 if(error.response.status === 403){

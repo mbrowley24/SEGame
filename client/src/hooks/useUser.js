@@ -4,7 +4,12 @@ import useGeneralValidation from "./useGeneralValidation";
 
 
 const useUser = () =>{
-    const {emailInputValidation, usernameInputValidation, passwordInputValidation, nameInputValidation} = useGeneralValidation()
+    const {emailInputValidation, usernameInputValidation,
+            passwordInputValidation, nameInputValidation,
+            emailValidation, nameValidation, usernameValidation, 
+            } = useGeneralValidation()
+
+
     const userRegistration={
         username: '',
         email: '',
@@ -12,7 +17,6 @@ const useUser = () =>{
         last_name: '',
         password: '',
         confirm_password: '',
-
     }
 
     const USER_FIELDS={
@@ -22,6 +26,7 @@ const useUser = () =>{
         EMAIL: "email",
         PASSWORD : 'password',
         CONFIRM_PASSWORD: 'confirm_password',
+        RESET : 'reset',
 
     }
 
@@ -31,7 +36,7 @@ const useUser = () =>{
 
     const userReducer = (userState, action)=>{
 
-        const userObj = JSON.parse(JSON.stringify(userState));
+        let userObj = JSON.parse(JSON.stringify(userState));
 
         switch (action.type){
 
@@ -61,8 +66,6 @@ const useUser = () =>{
                     userObj.email = action.payload;
 
                 }
-
-                console.log(userObj)
                 return userObj
 
             case USER_FIELDS.PASSWORD:
@@ -73,7 +76,6 @@ const useUser = () =>{
                     userObj.password = action.payload
                 }
 
-                console.log(userObj);
                 return userObj;
 
 
@@ -95,26 +97,6 @@ const useUser = () =>{
                 }
 
                 return userObj
-            case USER_FIELDS.PHONE_DESCRIPTION:
-
-                if(phoneNumberDescriptionInputValidation(action.payload)){
-
-                    userObj.tempFields.phone_number.description = action.payload;
-                }
-
-                console.log(userObj);
-                return userObj;
-
-            case USER_FIELDS.PHONE_NUMBERS:
-
-                if(phoneNumberValidation(action.password)){
-
-                    userObj.phone_numbers.push(userObj.tempFields.phone_number)
-
-                    userObj.tempFields.phone_number = {...userRegistration.tempFields.phone_number}
-                }
-
-                return userObj;
 
             case USER_FIELDS.USERNAME:
 
@@ -124,6 +106,11 @@ const useUser = () =>{
                 }
 
                 return userObj;
+            
+            case USER_FIELDS.RESET:
+
+                userObj = {...userRegistration}
+            
 
             default:
                 return userObj
@@ -131,11 +118,40 @@ const useUser = () =>{
 
     }
 
+
+    const userValidation = (user) =>{
+        let isValid = true;
+
+        console.log("userValidation", user);
+
+        if(!nameValidation(user.first_name)){
+
+            isValid = false;
+        }
+
+        if(!nameValidation(user.last_name)){
+            isValid = false;
+        }
+
+        if(!emailValidation(user.email)){
+            isValid = false;
+        }
+
+        if(!usernameValidation(user.username)){
+            isValid = false;
+        }
+
+
+        return isValid;
+    };
+
     return({
         USER_FIELDS,
         userReducer,
         userRegistration,
-
+        userValidation,
     })
 }
+
+export default useUser;
 

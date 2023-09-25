@@ -10,14 +10,14 @@ const publicIdValidation = (publicId) =>{
 
 const useGeneralValidation = () =>{
 
-     const usernameInputValidation = (username) =>{
+    const usernameInputValidation = (username) =>{
 
         const pattern = /^[a-zA-Z0-9]{0,30}$/
         return pattern.test(username)
     }
 
 
-     const usernameValidation = (username) =>{
+    const usernameValidation = (username) =>{
 
         const pattern = /^[a-zA-Z0-9]{5,30}$/
         return pattern.test(username)
@@ -121,6 +121,7 @@ const useGeneralValidation = () =>{
 
         return regex.test(email)
     }
+
 
     const addIndexToList = (index) =>{
 

@@ -13,6 +13,7 @@ import "../css/generalCss.css"
 const QuestionView = props => {
     const {id} = useParams();
     const dispatch = useDispatch();
+    const [error, setrError] = useState("");
     const {questionValidation, questionInputRegex, questionInitShape} = useQuestion();
     const [question, setQuestion] = useState(questionInitShape);
     const {postHttpRequest} = useHttp();
@@ -40,9 +41,16 @@ const QuestionView = props => {
             }
 
             const applyData = (res) => {
-                console.log(res)
-                setQuestion(questionInitShape);
-                dispatch(miscDataActions.setUpdate());
+                
+                if(res.status === 200){
+                    setQuestion(questionInitShape);
+                    dispatch(miscDataActions.setUpdate());
+                }
+                
+                if(res.status === 400){
+                    console.log(res.data);
+                    setrError(res.data);
+                }
             };
 
             await postHttpRequest(requestConfig, applyData);
@@ -55,6 +63,7 @@ const QuestionView = props => {
             <NavBar/>
             <div className={'d-flex p-2 align-items-center justify-content-evenly'}>
                 <div className={'w-50 p-3'}>
+                    
                     <QuestionForm
                         question={question}
                         submit={submit}

@@ -25,64 +25,81 @@ module.exports = {
 
             try{
 
-                let result = await Subject.findOne({name: {$regex: `^${req.body.payload}$`, $options: "i"}, ownerId: player._id });
-    
-                if(result !== null) {
-    
-                    console.log("Subject already exists");
-                    res.status(400).json({message: "Subject already exists"});
-    
-                }else{
-    
-                    try{
-    
-                        let resultPublicId = await Subject.findOne({public_id: public_id});
-    
-                        while(resultPublicId !== null) {
-    
-                            public_id = randomString(30);
-                            resultPublicId = await Subject.findOne({public_id: public_id});
-                        }
-    
-    
+                const subjects = await Subject.find({ownerId: player._id});
+
+                if(subjects.length > 20){
+                        
+                        console.log("Maximum number of subjects reached");
+                        res.status(400).json({message: "Maximum number of subjects reached"});
+                        return;
+
+                }
+
+                try{
+
+                    let result = await Subject.findOne({name: {$regex: `^${req.body.payload}$`, $options: "i"}, ownerId: player._id });
+        
+                    if(result !== null) {
+        
+                        console.log("Subject already exists");
+                        res.status(400).json({message: "Subject already exists"});
+        
+                    }else{
+        
                         try{
-    
-                            console.log(req.body.payload)
-                            await Subject.create({
-                                name: req.body.payload,
-                                public_id: public_id,
-                                ownerId: player._id
-                            })
-    
-                            console.log("Successfully created a new subject");
-                            res.status(200).json({});
-    
-    
-                        }catch(error){
-    
-                            console.log("duplicate");
+        
+                            let resultPublicId = await Subject.findOne({public_id: public_id});
+        
+                            while(resultPublicId !== null) {
+        
+                                public_id = randomString(30);
+                                resultPublicId = await Subject.findOne({public_id: public_id});
+                            }
+        
+        
+                            try{
+        
+                                console.log(req.body.payload)
+                                await Subject.create({
+                                    name: req.body.payload,
+                                    public_id: public_id,
+                                    ownerId: player._id
+                                })
+        
+                                console.log("Successfully created a new subject");
+                                res.status(200).json({});
+        
+        
+                            }catch(error){
+        
+                                console.log("duplicate");
+                            }
+        
+                        }catch(err){
+                            console.log(req.body)
+                            console.log("Failed to create a new subject");
+                            console.log(err);
+                            res.status(400).json(err);
                         }
-    
-                    }catch(err){
-                        console.log(req.body)
-                        console.log("Failed to create a new subject");
-                        console.log(err);
-                        res.status(400).json(err);
+        
+        
                     }
-    
-    
+        
+                }catch (err){
+        
+                    console.log("error generating public id");
+                    console.log(err);
+                    res.status(400).json(err);
                 }
     
-            }catch (err){
+            }catch(err){
     
-                console.log("error generating public id");
-                console.log(err);
-                res.status(400).json(err);
+            }
+            }catch(err){
+
             }
 
-        }catch(err){
-
-        }
+            
         
         
     },
@@ -142,5 +159,41 @@ module.exports = {
             res.status(400).json(err);
         }
             
+    },
+    get_subjects_count: async (req, res) => {
+
+        console.log("get subjects count");
+        try{
+            const decodedJWT = jwt.decode(req.cookies.usertoken, process.env.JWT_SECRET);
+            const username = decodedJWT.username;
+            const player = await Player.findOne({'username': username});
+
+                
+            try{    
+                
+                const subjects = await Subject.countDocuments({ownerId: player._id});
+                
+                if(subjects  > 19){
+
+                    console.log("Player not found");
+                    res.status(400).json({message: "Player not found"});
+                    return;
+                }
+                console.log("Successfully retrieved all subjects");
+                res.status(200).json(subjects);
+
+            }catch(err){
+                
+                    const message = "Failed to count subjects";
+                    console.log("Failed to count subjects");
+                    console.log(err);
+                    res.status(400).json({message: message});
+            }
+
+        }catch(err){
+
+            console.log("Player not found");
+            res.status(400).json({message: "Player not found"});
+        }
     },
 };

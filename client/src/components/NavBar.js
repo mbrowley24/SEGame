@@ -1,5 +1,6 @@
 import React, {useCallback} from "react";
 import { Link, useNavigate } from "react-router-dom";
+import AddUser from "./AddUser";
 import useHttp from "../hooks/useHttp";
 import '../css/navBarCss.css';
 const NavBar = props =>{
@@ -37,47 +38,13 @@ const NavBar = props =>{
                         </button>
                         <div className ="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className ="navbar-nav me-auto mb-2 mb-lg-0">
-                            {/*<li className="nav-item dropdown">*/}
-                            {/*    <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"*/}
-                            {/*       data-bs-toggle="dropdown" aria-expanded="false">*/}
-                            {/*        Accounts*/}
-                            {/*    </a>*/}
-                            {/*    <ul className="dropdown-menu" aria-labelledby="navbarDropdown">*/}
-                            {/*        <li>*/}
-                            {/*            <Link className="dropdown-item text-capitalize" to={'/accounts'}>*/}
-                            {/*                accounts dashboard*/}
-                            {/*            </Link>*/}
-                            {/*        </li>*/}
-                            {/*        /!*<li>*!/*/}
-                            {/*        /!*    <Link className="dropdown-item text-capitalize" to={'/accounts/new'}>*!/*/}
-                            {/*        /!*        accounts*!/*/}
-                            {/*        /!*    </Link>*!/*/}
-                            {/*        /!*</li>*!/*/}
-                            {/*    </ul>*/}
-                            {/*</li>*/}
                             <li className ="nav-item">
-                            <Link className ="nav-link active text-capitalize text-light" 
-                                    to={"/jeopardy/dashboard"} aria-current="page">
-                                        jeopardy
-                            </Link>
+                                <Link className ="nav-link active text-capitalize text-light" 
+                                        to={"/jeopardy/dashboard"} aria-current="page">
+                                            jeopardy
+                                </Link>
                             </li>
-                            {/*<li className ="nav-item">*/}
-                            {/*<Link to={"/leads"} className ="nav-link text-capitalize" >leads</Link>*/}
-                            {/*</li>*/}
-                            {/*/!* <li className ="nav-item dropdown">*/}
-                            {/*<Link to={"/"} className ="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">*/}
-                            {/*    Dropdown*/}
-                            {/*</Link>*/}
-                            {/*<ul className="dropdown-menu" aria-labelledby="navbarDropdown">*/}
-                            {/*    <li><Link to={"/"} className ="dropdown-item">Action</Link></li>*/}
-                            {/*    <li><Link to={"/"} className ="dropdown-item" href="#">Another action</Link></li>*/}
-                            {/*    <li><hr className ="dropdown-divider"/></li>*/}
-                            {/*    <li><Link to={"/"} className ="dropdown-item" href="#">Something else here</Link></li>*/}
-                            {/*</ul>*/}
-                            {/*</li> *!/*/}
-                            {/*/!* <li className="nav-item">*/}
-                            {/*<Link to={"/"} className="nav-link disabled" tabIndex="-1" aria-disabled="true">Disabled</Link>*/}
-                            {/*</li> *!/*/}
+                            <AddUser/>
                         </ul>
                         <form className="d-flex">
                             <button className="btn btn-outline-light"
