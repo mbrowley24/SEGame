@@ -21,8 +21,6 @@ const PlayerSchema = new mongoose.Schema({
     },
     password: {type:String,
         required: [true, "password required"],
-        minlength: [8, "Password must be at least 8 characters long"],
-        maxlength: [16, "Password cannot be more than 16 characters long"],
     },
     role: {
         type: String,

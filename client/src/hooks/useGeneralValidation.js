@@ -82,7 +82,9 @@ const useGeneralValidation = () =>{
         const specialCharacters = /[.+*#$!@]/
 
         if(numbers.test(password)){
+
             if(uppercase.test(password)){
+                
                 if(specialCharacters.test(password)){
 
                     returnValue.errors = []

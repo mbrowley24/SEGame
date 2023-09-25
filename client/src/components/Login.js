@@ -3,6 +3,7 @@ import useHttp from "../hooks/useHttp";
 import { useNavigate, Link } from "react-router-dom";
 import {useDispatch, useSelector } from "react-redux";
 import {playerActions} from "../store/playerData";
+import {passwordActions}  from "../store/resetPassword";
 import "../css/generalCss.css"
 
 const Login = props =>{
@@ -42,8 +43,24 @@ const Login = props =>{
         const handleLogin = (res) =>{
         
             if(res.status === 200){
-                dispatch(playerActions.setPlayer(res.data.userLoggedIn));
-                navigate("/dashboard")
+
+                const {name, username} = res.data.userLoggedIn;
+                console.log(res.data.userLoggedIn);
+                dispatch(playerActions.setPlayer({name: name, username: username, score:0}));
+                console.log(res.data.userLoggedIn);
+                if(res.data.userLoggedIn.reset_password){
+                    console.log("reset password");
+                    const {password} = login
+                    console.log(password);
+                    dispatch(passwordActions.setPassword(password));
+                    navigate("/reset_password");
+
+                }else{
+                    
+                    navigate("/dashboard");
+                }
+
+                
             }
         }
 
@@ -52,23 +69,23 @@ const Login = props =>{
 
 
     return(
-        <div className={'height925px border d-flex login-background px-3'}>
+        <div className={'height101 border d-flex bg-light-gray px-3'}>
             <div className="m-auto w-25 align-self-center ">
                 <div className={'m-auto w-100 height100'}>
-                    <h1 className=" text-jeopardy-yellow">SE Jeopardy</h1>
+                    <h1 className=" text-dark">SE Games</h1>
                 </div>
-                <div className="w-50 m-auto">
-                    <label className="text-jeopardy-yellow fw-bold">Username</label>
-                    <input className={'form-control form-control-sm'}
+                <div className="w-50 m-auto input-field">
+                    <label className="fw-bold">Username</label>
+                    <input className={''}
+                        type={'text'}
                         name={"username"}
                         value={login.username}
                         onChange={(e)=>inputChange(e)}
                     />
                 </div>
-                <div className="w-50 m-auto">
-                    <label className="text-jeopardy-yellow fw-bold"
-                    >Password</label>
-                    <input className={'form-control form-control-sm'}
+                <div className="w-50 m-auto input-field">
+                    <label className="fw-bold">Password</label>
+                    <input className={''}
                         type={'password'}
                         name={'password'}
                         value={login.password}
@@ -76,10 +93,10 @@ const Login = props =>{
                     />
                 </div>
                 <div className="text-center m-auto my-3 ">
-                    <button className="m-auto btn btn-sm button-jeopardy-orange" label={'Login'} onClick={(e)=>submitLogin(e)} >Login</button><br/>
+                    <button className="m-auto btn-small" label={'Login'} onClick={(e)=>submitLogin(e)} >Login</button><br/>
                     <div className={'p-3'}>
                         <Link
-                        className={"text-capitalize text-jeopardy-yellow"}
+                        className={"text-capitalize text-dark"}
                             to={'/join'}
                         >join game</Link>
                     </div>

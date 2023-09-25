@@ -35,7 +35,7 @@ const JoinGame = props => {
     const joinGame = () =>{
 
         socket.emit("join_game", {room: id, player:player});
-        navigate(`/games/join/${id}`);
+        navigate(`/jeopardy/games/join/${id}`);
 
     }
 
@@ -87,18 +87,18 @@ const JoinGame = props => {
                             name
                         </label><br/>
                         <input type={'text'}
-                               className={'form-control'}
-                               value={player.name}
-                               name={'name'}
-                               onChange={(e)=>changeName(e)}
+                            className={'form-control'}
+                            value={player.name}
+                            name={'name'}
+                            onChange={(e)=>changeName(e)}
                         />
                     </div>
                 </div>
                 <label className={'text-capitalize text-jeopardy-yellow fw-bold'}>Game ID</label><br/>
                 <input type="text"
-                      className={'form-control'}
-                       value={id}
-                       onChange={(e)=>inputChange(e)}
+                    className={'form-control'}
+                    value={id}
+                    onChange={(e)=>inputChange(e)}
                 />
                 <div className={'py-2'}>
                     {gameFull && <p className={'text-danger fw-bolder text-capitalize'}>game is full</p>}

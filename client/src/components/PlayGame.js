@@ -33,10 +33,13 @@ const PlayGame = props => {
         });
 
         socket.on('buzzed', data => {
+
             dispatch(gameActions.setBuzzer(data));
+        
         });
 
         return () => {};
+
     }, [socket]);
 
     return(

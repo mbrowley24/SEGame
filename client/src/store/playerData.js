@@ -42,10 +42,10 @@ const playerSlice = createSlice({
 
         },
         setPlayer(state,action){
-            const {name,username, score} = action.payload;
+            const {name, username, score} = action.payload;
             state.name = name;
             state.username = username;
-            state.score = score?score:0;
+            state.score = score? score:0;
 
             //console.log("playerSlice setPlayer",JSON.parse(JSON.stringify(state)));
         },

@@ -32,9 +32,7 @@ module.exports = {
         try{
             const playerRecord = await Player.findOne({username: req.body.username});
 
-            console.log("Player record: ");
-            console.log(playerRecord);
-
+    
             if(playerRecord === null){
 
                 console.log("Username not found");
@@ -46,9 +44,12 @@ module.exports = {
                 try{
                     const passwordIsValid = await bcrypt.compare(req.body.password, playerRecord.password);
 
+                    console.log("Password is valid: ", passwordIsValid);
+                    console.log("Password: ", req.body.password);
                     if(passwordIsValid) {
 
                         console.log("Password is valid!");
+                        console.log(playerRecord.change_password);
                         res.cookie("usertoken",
 
                             jwt.sign({
@@ -66,11 +67,13 @@ module.exports = {
                                 message: "Successfully logged in!",
                                 userLoggedIn: {
                                     username: playerRecord.username,
-                                    name : `${playerRecord.first_name} ${playerRecord.last_name}`
+                                    name : `${playerRecord.first_name} ${playerRecord.last_name}`,
+                                    reset_password: playerRecord.change_password
                                 }
                             })
 
                     }else{
+                        
                         console.log("Password is invalid");
                         res.status(400).json({message: "Invalid login attempt"});
                     }
@@ -172,8 +175,7 @@ module.exports = {
                 });
 
                 const savedPlayer = await newPlayer.save();
-
-                const success = "player created"
+                
                 
                 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
                 
@@ -258,5 +260,59 @@ module.exports = {
             console.log("Error finding player", err);
             res.status(400).json(err);
         }
-    }
+    },
+
+    resetPassword : async (req, res) => {
+            
+            const decodedJWT = jwt.decode(req.cookies.usertoken, {complete: true});
+            const username = decodedJWT.payload.username;
+            const {password, confirmPassword} = req.body;
+
+            if(username === undefined || username === null || username.trim() === ""){
+                res.status(400).json({message: "Login required"});
+            }
+
+        
+            try{
+                
+                if(password !== confirmPassword){
+                    res.status(400).json({message: "Passwords don't match"});
+                }
+
+                const player = await Player.findOne({username: username});
+                console.log("Resetting password");
+            
+                player.password = password;
+                player.confirmPassword = confirmPassword;
+                player.change_password = false;
+                const savedPlayer = await player.save();
+
+                sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+                const msg={
+                    to: savedPlayer.email,
+                    from: 'yeoman@yeomanswork.net',
+                    subject: 'The Average SE: password changed!',
+                    text: `Your password has been changed ${player.first_name} ${player.last_name}!`,
+                    html: `<p>If you didn't change your password please contact yeomanAdmin! 
+                            <a href="mailto:yeoman@yeomanswork.net?subject=password change!">Email admin</a></p>`
+                }
+                sgMail.send(msg).then(()=>{
+                    
+                    if(savedPlayer!== null){
+                        console.log("Password reset successful");
+                        res.status(200).json("Password reset successful");
+                    
+                    }
+
+                }).catch((err)=>{
+                    console.log("Error sending email", err);
+                    res.status(400).json(err);
+                })
+                
+        
+            }catch(err){
+                console.log("Error resetting password", err);
+                res.status(400).json(err);
+            }
+    },
 }

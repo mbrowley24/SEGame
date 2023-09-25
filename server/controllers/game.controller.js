@@ -106,6 +106,7 @@ module.exports = {
 
             const gameData = {
                     id: result.public_id,
+                    joinId: result.join_code,
                     name: result.name,
                     room: result.join_code,
                     board:{

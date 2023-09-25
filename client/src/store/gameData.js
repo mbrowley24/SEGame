@@ -54,6 +54,8 @@ const player={
 const gameData = {
 
     name:"",
+    id:"",
+    joinId:"",
     timer: 5,
     finalTimer:30,
     room:"",
@@ -89,6 +91,7 @@ const gameSlice = createSlice({
             state.buzzer = gameData.buzzer;
             state.board = gameData.board;
             state.players = gameData.players;
+            state.gameId = gameData.gameId;
 
 
         },
@@ -176,6 +179,7 @@ const gameSlice = createSlice({
             console.log(action.payload);
             state.name = action.payload.name;
             state.id = action.payload.id
+            state.joinId = action.payload.joinId
             state.room = action.payload.room
             state.board.name = action.payload.board.name
             state.board.category1 = action.payload.board.category1

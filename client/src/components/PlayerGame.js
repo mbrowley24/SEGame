@@ -7,6 +7,7 @@ import useGame from "../hooks/useGame";
 import {qAndAActions} from "../store/questionAndAnswerData";
 import PlayerGameBoard from "./PlayerGameBoard";
 import {playerActions} from "../store/playerData";
+
 const PlayerGame = props => {
     const {id} = useParams();
     const navigate = useNavigate();

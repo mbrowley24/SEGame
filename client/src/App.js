@@ -17,6 +17,7 @@ import QuestionEditView from "./views/QuestionEditView";
 import PlayerGame from "./components/PlayerGame";
 import GameSelection from './views/GameSelection';
 import AddUser from './views/AddUser';
+import ResetPassword from './views/ResetPassword';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
                   <Route path="" element={<Login/>} />
                   <Route path="join" element={<JoinGameView/>} />
                   <Route path="dashboard" element={<GameSelection/>} />
+                  <Route path="reset_password" element={<ResetPassword/>} />
                   <Route path="admin">
                     <Route path={'users'} element={<AddUser/>}/>
                   </Route>
