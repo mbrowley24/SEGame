@@ -44,12 +44,11 @@ const Login = props =>{
         
             if(res.status === 200){
 
-                const {name, username} = res.data.userLoggedIn;
+                const {name, username, role} = res.data.userLoggedIn;
                 console.log(res.data.userLoggedIn);
-                dispatch(playerActions.setPlayer({name: name, username: username, score:0}));
-                console.log(res.data.userLoggedIn);
+                dispatch(playerActions.setPlayer({name: name, username: username, score:0, role:role}));
                 if(res.data.userLoggedIn.reset_password){
-                    console.log("reset password");
+                    
                     const {password} = login
                     console.log(password);
                     dispatch(passwordActions.setPassword(password));
@@ -92,7 +91,10 @@ const Login = props =>{
                         onChange={(e)=>inputChange(e)}
                     />
                 </div>
-                <div className="text-center m-auto my-3 ">
+                <div className="text-center m-auto">
+                    <div className="mb-3">
+                        <Link to={'/password-recovery'}>Forgot Password?</Link>
+                    </div>
                     <button className="m-auto btn-small" label={'Login'} onClick={(e)=>submitLogin(e)} >Login</button><br/>
                     <div className={'p-3'}>
                         <Link

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import AddUser from "./AddUser";
 import useHttp from "../hooks/useHttp";
 import '../css/navBarCss.css';
+
 const NavBar = props =>{
     const {postHttpRequest} = useHttp();
     const navigate = useNavigate();
@@ -45,7 +46,13 @@ const NavBar = props =>{
                                 </Link>
                             </li>
                             <AddUser/>
+                            <li className="nav-item">
+                                <a className="nav-link text-light"
+                                    href="mailto:yeoman@yeomanswork.net?subject=Bug Report!"
+                                >Report Bug</a>
+                            </li>
                         </ul>
+                        
                         <form className="d-flex">
                             <button className="btn btn-outline-light"
                                     type="submit"

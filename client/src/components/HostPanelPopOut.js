@@ -15,7 +15,7 @@ const HostPanelPopOut = props => {
             : 'm-auto me-2 overflow-auto rounded-2 align-self-start bg-transparent '}
         >
             <div className="mb-2">
-                <button className={'btn button-background text-light text-size-0 text-capitalize text-center'}
+                <button className={'btn-small text-light text-size-0 text-capitalize text-center'}
                         onClick={expandSwitch}
                 >
                     {expand ? <React.Fragment> Lobby <RiRewindLine/>  </React.Fragment>: <React.Fragment> Lobby ({game.lobby.length})</React.Fragment> }

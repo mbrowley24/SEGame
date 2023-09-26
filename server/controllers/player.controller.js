@@ -67,6 +67,7 @@ module.exports = {
                                 message: "Successfully logged in!",
                                 userLoggedIn: {
                                     username: playerRecord.username,
+                                    role: playerRecord.role,
                                     name : `${playerRecord.first_name} ${playerRecord.last_name}`,
                                     reset_password: playerRecord.change_password
                                 }
@@ -181,12 +182,12 @@ module.exports = {
                 
                 const msg={
                     to: email,
-                    from: 'yeoman@yeomanswork.net',
+                    from: 'no-rely@yeomanswork.net',
                     subject: 'Welcome to The Average SE!',
                     text: `Welcome to The Average SE ${first_name} ${last_name}!
                             Your temporary password is: ${newPlayer.password}`,
                     html: `<p>Welcome to The Average SE ${first_name} ${last_name}!
-                    Your temporary password is: ${tempPassword}</p>`
+                    Your temporary password is: ${tempPassword} <a href="https://theaveragese.com/">theAverageSE</a></p>`
                 }
 
                 sgMail.send(msg).then(()=>{
@@ -290,7 +291,7 @@ module.exports = {
                 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
                 const msg={
                     to: savedPlayer.email,
-                    from: 'yeoman@yeomanswork.net',
+                    from: 'no-rely@yeomanswork.net',
                     subject: 'The Average SE: password changed!',
                     text: `Your password has been changed ${player.first_name} ${player.last_name}!`,
                     html: `<p>If you didn't change your password please contact yeomanAdmin! 
@@ -314,5 +315,49 @@ module.exports = {
                 console.log("Error resetting password", err);
                 res.status(400).json(err);
             }
+    },
+
+    recoverPassword: async (req, res) => {
+        console.log("Recovering password");
+        const {email} = req.body;
+        console.log(email);
+        console.log(req.body);
+        try{
+
+            const player = await Player.findOne({email: email});
+            console.log(player);
+            if(player){
+                console.log("Player found");
+                const tempPassword = randomString(10);
+
+                player.password = tempPassword;
+                player.confirmPassword = tempPassword;
+                const savedPlayer = await player.save();
+
+                sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+                const msg={
+                    to: savedPlayer.email,
+                    from: 'no-rely@yeomanswork.net',
+                    subject: 'The Average SE: password changed!',
+                    text: `Your password has been changed ${player.first_name} ${player.last_name}!`,
+                    html: `<p>Your temp password is: ${tempPassword}</p>
+                            <br/>
+                            <p>If you didn't change your password please contact yeomanAdmin! 
+                            <a href="mailto:yeoman@yeomanswork.net?subject=password change!">Email admin</a></p>`
+                }
+
+                sgMail.send(msg).then(()=>{
+                    res.status(200).json("");
+                }).catch((err)=>{
+                    console.log("Error sending email", err);
+                    res.status(400).json(err);
+                });
+            }else{
+                res.status(200).json("");
+            }
+        }catch(err){
+            
+            res.status(400).json(err);
+        }
     },
 }

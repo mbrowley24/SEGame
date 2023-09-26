@@ -35,7 +35,7 @@ const JoinGame = props => {
     const joinGame = () =>{
 
         socket.emit("join_game", {room: id, player:player});
-        navigate(`/jeopardy/games/join/${id}`);
+        navigate(`/join/jeopardy/${id}`);
 
     }
 
@@ -82,28 +82,30 @@ const JoinGame = props => {
         <React.Fragment>
             <div className={''}>
                 <div>
-                    <div>
-                        <label className={'text-capitalize text-jeopardy-yellow fw-bold'}>
+                    <div className="input-field">
+                        <label className={'text-capitalize text-dark fw-bold'}>
                             name
                         </label><br/>
                         <input type={'text'}
-                            className={'form-control'}
+                            className={''}
                             value={player.name}
                             name={'name'}
                             onChange={(e)=>changeName(e)}
                         />
                     </div>
                 </div>
-                <label className={'text-capitalize text-jeopardy-yellow fw-bold'}>Game ID</label><br/>
-                <input type="text"
-                    className={'form-control'}
-                    value={id}
-                    onChange={(e)=>inputChange(e)}
-                />
+                <div className={'input-field'}>
+                    <label className={'text-capitalize text-dark fw-bold'}>Game ID</label><br/>
+                    <input type="text"
+                        className={''}
+                        value={id}
+                        onChange={(e)=>inputChange(e)}
+                    />
+                </div>
                 <div className={'py-2'}>
                     {gameFull && <p className={'text-danger fw-bolder text-capitalize'}>game is full</p>}
                     <button
-                        className={'btn text-capitalize button-jeopardy-orange'}
+                        className={'btn-small text-capitalize '}
                         disabled={!validGame || !passUserData || gameFull}
                         onClick={()=>joinGame()}
                     >

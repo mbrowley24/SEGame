@@ -249,6 +249,10 @@
     height: 50vh;
 }
 
+.clickable{
+    cursor: pointer;
+}
+
 .no_decoration_light{
     text-decoration: none;
     color: #f5f5f5;
@@ -256,6 +260,10 @@
 
 .no_border{
     border: none;
+}
+
+.selected_border{
+    border: 5px solid #519e8a;
 }
 
 .no_decoration_light:hover{
@@ -335,6 +343,14 @@
 
 .text-size-2{
     font-size: 2vh;
+}
+
+.text-size-3{
+    font-size: 3vh;
+}
+
+.text-size-4{
+    font-size: 4vh;
 }
 
 .w-5{

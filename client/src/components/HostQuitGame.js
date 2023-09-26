@@ -52,7 +52,7 @@ const HostPanelPopOut = props => {
             </Modal>
             
             <button
-                className={'btn button-background fw-bold text-size-0 text-light text-capitalize text-center'}
+                className={'btn-small  fw-bold text-size-0 text-light text-capitalize text-center'}
                 onClick={()=>handleShow()}
             >
                 end game
