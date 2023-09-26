@@ -7,8 +7,8 @@ const BoardTableHeader = (props) => {
     return(
         <thead>
             <tr>
-                <th className={' text-capitalize text-jeopardy-yellow fw-bold'} scope="col">board</th>
-                <th className={' text-capitalize text-jeopardy-yellow fw-bold'} scope="col">created by</th>
+                <th className={' text-capitalize color_light fw-bold'} scope="col">board</th>
+                <th className={' text-capitalize color_light fw-bold'} scope="col">created by</th>
             </tr>
         </thead>
     )

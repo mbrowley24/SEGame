@@ -152,33 +152,31 @@ const useGame = () => {
 
     };
 
-    const questionAttempted = (data, value, id) => {
+    const questionAttempted = (data, value, room) => {
 
         return {
             question: data[value].question,
             answer: data[value].answer,
             value: value,
             attempt: true,
-            room: id
+            room: room
         };
     };
 
     const playerPanelCss = (buzzed, attempted, me) => {
 
-        let returnedCss = 'list-group-item background-jeopardy';
-
-        console.log(me);
+        let returnedCss = 'd-inline-block w-10 complement-board-bg border border-dark rounded p-1';
 
         if(me){
-            returnedCss = 'list-group-item list-group-item-dark bg-secondary';
+            returnedCss = 'd-inline-block w-10 complement-board-bg border border-dark rounded p-1';
         }
 
         if(buzzed){
-            returnedCss = 'list-group-item list-group-item-secondary bg-dark';
+            returnedCss = 'd-inline-block w-10 bg-danger border border-danger rounded p-1';
         }
 
         if(attempted){
-            returnedCss = 'list-group-item list-group-item-danger text-decoration-line-through';
+            returnedCss = 'd-inline-block w-10 bg-warning border border-dark rounded p-1';
         }
 
         return returnedCss;
@@ -193,7 +191,7 @@ const useGame = () => {
         const inLobby = game.lobby.filter(player => player.username === myUsername);
 
         if(inLobby.length === 1){
-            console.log('in lobby');
+
             returnValue = true;
         }
 
@@ -203,10 +201,17 @@ const useGame = () => {
             console.log('in player pool');
             returnValue = true;
         }
-
-        console.log(returnValue);
         return returnValue;
     }
+
+
+    const playerInGame = (players, player) => {
+
+        return players.filter(p => p.username === player.username).length === 1;
+
+    }
+
+
 
     return(
         {
@@ -219,6 +224,7 @@ const useGame = () => {
             hostJoined,
             playerFull,
             playerPanelCss,
+            playerInGame,
             updateHost,
             questionAttempted,
             validateGame,

@@ -14,6 +14,7 @@ const player={
     username:"",
     score:0,
     socketId:"",
+    role:""
 }
 
 
@@ -29,23 +30,24 @@ const playerSlice = createSlice({
                 state.username = Math.random().toString(36).substring(2,10);
             }
 
-            if(name === "name"){
 
-                if(!whiteSpaceCheck(value)){
-                    if(namePattern.test(value)){
 
-                        state.name = value;
-                    }
+            if(!whiteSpaceCheck(value)){
+                if(namePattern.test(value)){
+
+                    state.name = value;
                 }
-
             }
+
+
 
         },
         setPlayer(state,action){
-            const {name,username, score} = action.payload;
+            const {name, username, score, role} = action.payload;
             state.name = name;
             state.username = username;
-            state.score = score?score:0;
+            state.score = score? score:0;
+            state.role = role;
 
             //console.log("playerSlice setPlayer",JSON.parse(JSON.stringify(state)));
         },

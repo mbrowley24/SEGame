@@ -17,7 +17,7 @@ const GameTableBody = props => {
             };
 
             const applyData = (res) =>{
-
+                
                 setGame(res.data);
             }
 
@@ -31,27 +31,26 @@ const GameTableBody = props => {
     return(
         <tbody>
         {
-            game.length > 0 && game.map((data, index) => {
+            game.length > 0?  game.map((data, index) => {
 
                 return(
                     <tr key={index}>
                         <td className={'text-capitalize'}>
-                            <Link to={`/games/${data.id}`}
-                                  className={'text-jeopardy-yellow'}
+                            <Link to={`/jeopardy/games/${data.id}`}
+                                className={'text-dark'}
                             >{data.name}
                         </Link></td>
-                        <td className={'text-capitalize text-jeopardy-yellow'} >{data.created_by}</td>
+                        <td className={'text-capitalize text-dark'} >{data.created_by}</td>
                     </tr>
                 )
             })
-        }
 
-        {game.length === 0 &&
-
-            <tr>
-                <td colSpan={2} className={'text-center'}>No Games Found</td>
-            </tr>
+            :
+                <tr>
+                    <td colSpan={'2'} className={'text-center text-dark'}>No Games Found</td>
+                </tr>
         }
+        
         </tbody>
     )
 };

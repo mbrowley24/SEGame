@@ -33,19 +33,18 @@ const qAndAData={
         },
         attemptedBy(state, action){
             state.attempted_by.push(action.payload);
-            console.log(JSON.parse(JSON.stringify(state)));
+            //console.log(JSON.parse(JSON.stringify(state)));
         },
-        hostShowAnswer(state){
-
-            state.showAnswer = !state.showAnswer;
-
-            console.log(JSON.parse(JSON.stringify(state)));
-        },
-        showAnswer(state, action){
+        showAnswer(state){
             console.log("showAnswer");
 
-            state.showAnswer = !!action.payload;
+            state.showAnswer = true;
+            //console.log(JSON.parse(JSON.stringify(state.showAnswer)));
+        },hideAnswer(state, action){
+            console.log("hideAnswer");
 
+            state.showAnswer = false;
+            //console.log(JSON.parse(JSON.stringify(state.showAnswer)));
         }
     },
  });

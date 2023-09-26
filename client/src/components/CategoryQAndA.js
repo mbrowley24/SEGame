@@ -35,10 +35,10 @@ const QuestionQAndA= props => {
                 onMouseLeave={()=>setView(false)}
         >
             <div className={view?"": "align-self-center"} hidden={view}>
-                <p className={'text-center text-jeopardy-yellow'}>{data[value].question}</p>
+                <p className={'text-center text-jeopardy-yellow-static-fixed'}>{data[value].question}</p>
             </div>
             <div className={!view? "": "align-self-center"} hidden={!view}>
-                <p className={'text-center text-jeopardy-yellow'}>{data[value].answer}</p>
+                <p className={'text-center text-jeopardy-yellow-static-fixed'}>{data[value].answer}</p>
             </div>
         </div>
     )

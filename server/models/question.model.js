@@ -18,11 +18,16 @@ const QuestionSchema = new mongoose.Schema({
     minlength: [2, "Answer must be at least 10 characters long"],
     maxlength: [150, "Answer must be less than 100 characters long"],},
 
+
     submitted_by: {
     type: String,
     required: [true, "Submitted by is required"],
     },
 
+    ownerId:{
+        type: String,
+        required: [true, "Owner ID is required"],
+    },
     public_id: {
         type: String,
         required: [true, "Public ID is required"],

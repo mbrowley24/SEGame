@@ -8,43 +8,42 @@ import {useDispatch, useSelector} from "react-redux";
 import {gameActions} from "../store/gameData";
 
 const NewGameView = props => {
-     const {postHttpRequest} = useHttp();
-     const dispatch = useDispatch();
-     const navigate = useNavigate();
-     const game = useSelector(state => state.gameData);
+    const {postHttpRequest} = useHttp();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const game = useSelector(state => state.gameData);
 
     const submitHandler = async (e) => {
         e.preventDefault();
-     const configRequest = {
-        url:"game",
-         data: game
-     };
+        const configRequest = {
+            url:"game",
+            data: game
+        };
 
-     const applyData = (res) =>{
-
+        const applyData = (res) =>{
 
             if(res.status === 200){
                 dispatch(gameActions.resetGame());
-                navigate('/dashboard');
+                navigate('/jeopardy/dashboard');
             }
-     }
+        }
 
 
-     await postHttpRequest(configRequest, applyData);
- };
+        await postHttpRequest(configRequest, applyData);
+    };
 
 
     return(
-        <div>
+        <div className="height101 bg-light-gray">
             <NavBar/>
-            <div className={'container height875px'}>
-                <div className={'d-flex'}>
-                    <div className={'w-25 me-2'}>
-                        <h2 className={'text-center text-capitalize text-jeopardy-yellow'}>boards</h2>
+            <div className="px-2 bg-light-gray">
+                <div className={'d-flex p-2'}>
+                    <div className={'w-25 me-2 bg-dark-green rounded-3'}>
+                        <h2 className={'text-center text-capitalize text-jeopardy-yellow-static-fixed'}>boards</h2>
                         <BoardGameTable/>
                     </div>
-                    <div className={'w-75 m-auto border ms-2 height800px overflow-auto'}>
-                        <h1 className={'text-center text-jeopardy-yellow background-jeopardy m-auto w-50 rounded-2'}>New Game</h1>
+                    <div className={'w-75 m-auto border ms-2 overflow-auto bg-dark-green rounded-3'}>
+                        <h1 className={'text-center text-jeopardy-yellow bg-dark-green m-auto w-50 rounded-2'}>New Game</h1>
                         <GameForm submit={submitHandler}/>
                     </div>
                 </div>

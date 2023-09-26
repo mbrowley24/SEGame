@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 
-const namePattern = /^[a-zA-Z\s.\-?";:{}()&*%!@$,]{0,25}$/
+const namePattern = /^[a-zA-Z0-9\s.\-?";:'{}()&*%!@$,]{0,25}$/
 
 const boardData = {
 

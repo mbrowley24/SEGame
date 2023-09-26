@@ -73,7 +73,7 @@ const CategoryEditView = props => {
 
 
     return(
-        <div>
+        <div className="bg-light-gray height101">
             <NavBar/>
             <h1 className={'text-center py-2 my-2'}>Category View</h1>
             <div className={'d-flex justify-content-center'}>

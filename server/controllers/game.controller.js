@@ -21,6 +21,15 @@ module.exports = {
                 currentGame = await Game.findOne({public_id: public_id});
             }
 
+            let join_code = randomString(6);
+
+            let find_join_code = await Game.findOne({join_code: join_code});
+
+            while (find_join_code){
+                join_code = randomString(6);
+                find_join_code = await Game.findOne({join_code: join_code});
+            }
+
             try{
 
                 console.log(game);
@@ -29,8 +38,7 @@ module.exports = {
                 game['created_by']['username'] = username;
                 game['updated_by']['name'] = `${first_name} ${last_name}`;
                 game['updated_by']['username'] = username;
-                game['judges'][1]['name'] = `${first_name} ${last_name}`;
-                game['judges'][1]['username'] = username;
+                game['join_code'] = join_code;
 
                 game.public_id = public_id;
 
@@ -88,19 +96,19 @@ module.exports = {
 
     get_game: async (req, res) => {
 
-         const public_id = req.params.id;
+        const public_id = req.params.id;
 
 
-         try{
+        try{
 
 
-             const result = await Game.findOne({public_id: public_id})
+            const result = await Game.findOne({public_id: public_id})
 
-             const gameData = {
+            const gameData = {
                     id: result.public_id,
+                    joinId: result.join_code,
                     name: result.name,
-                    timer: result.timer,
-                    finalTimer: result.finalTimer,
+                    room: result.join_code,
                     board:{
                         name: result.board.name,
                         category1: JSON.parse(JSON.stringify(result.board.category1)),
@@ -110,27 +118,26 @@ module.exports = {
                         category5: JSON.parse(JSON.stringify(result.board.category5)),
                         category6: JSON.parse(JSON.stringify(result.board.category6)),
                     },
-                    players: JSON.parse(JSON.stringify(result.players)),
-                    judges: JSON.parse(JSON.stringify(result.judges)),
-             };
+
+            };
 
                 console.log('game found');
                 res.status(200).json(gameData);
 
-         }catch(err){
+        }catch(err){
         console.log(err);
-         console.log("game not found");
+        console.log("game not found");
             res.status(400).json(err);
-         }
+        }
 
 
     },game_exists: async (req, res) => {
 
-            const public_id = req.params.id;
+            const join_code = req.params.id;
 
             try{
 
-                const result = await Game.findOne({public_id: public_id})
+                const result = await Game.findOne({'join_code': join_code})
 
                 if(result){
 

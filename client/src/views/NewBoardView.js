@@ -1,4 +1,4 @@
-import React, {useCallback} from "react";
+import React, {useCallback, useEffect} from "react";
 import NavBar from "../components/NavBar";
 import BoardForm from "../components/BoardForm";
 import CategorySelectionTable from "../components/CategorySelectionTable";
@@ -20,6 +20,11 @@ const NewBoardView = () => {
 
     },[]);
 
+    useEffect(() => {
+        dispatch(boardActions.boardReset());
+        return () =>{};
+    }, []);
+
     const submit = async (e) => {
         e.preventDefault();
 
@@ -33,7 +38,7 @@ const NewBoardView = () => {
 
             if(res.status === 200){
                 dispatch(boardActions.boardReset());
-                navigate('/dashboard');
+                navigate('/jeopardy/dashboard');
             }
 
         }
@@ -42,14 +47,14 @@ const NewBoardView = () => {
     };
 
     return(
-        <div className={'container height925px'}>
+        <div className={'height101 bg-light-gray'}>
             <NavBar/>
-            <h1 className={'text-jeopardy-yellow'}>Create New Board</h1>
-            <div className={'d-flex'}>
+            <h1 className={''}>Create New Board</h1>
+            <div className={'d-flex container'}>
                 <div className={'w-15 height600px border-3 rounded-2 '}>
                     <CategorySelectionTable/>
                 </div>
-                <div className={"w-100 ms-3 border"}>
+                <div className={"w-100 ms-3 border rounded-3"}>
                     <BoardForm
                         inputChange={inputChange}
                         submit={submit}

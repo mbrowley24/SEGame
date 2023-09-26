@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import useHttp from "../hooks/useHttp";
 import { useNavigate, Link } from "react-router-dom";
-import {useDispatch } from "react-redux";
+import {useDispatch, useSelector } from "react-redux";
 import {playerActions} from "../store/playerData";
-import {gameActions} from "../store/gameData";
+import {passwordActions}  from "../store/resetPassword";
 import "../css/generalCss.css"
 
 const Login = props =>{
@@ -11,6 +11,7 @@ const Login = props =>{
     const navigate = useNavigate();
     const {postHttpRequest} = useHttp();
     const [login, setLogin] = useState({username: "", password: ""})
+    const player = useSelector(state => state.playerData);
 
     const inputChange = (e) =>{
 
@@ -23,18 +24,16 @@ const Login = props =>{
 
     useEffect(() => {
 
-        dispatch(gameActions.resetGame());
-        dispatch(playerActions.resetData());
-
-        return () => {};
-
-    }, []);
+        if(player.username.length > 0){
+            window.location.reload(true);
+            console.log("reset game and player data");
+        }
+    },[]);
 
 
     const submitLogin = async(e) =>{
         e.preventDefault()
 
-        console.log(login);
         const requestConfig= {
             url: "login",
             data: login,
@@ -42,13 +41,25 @@ const Login = props =>{
         }
 
         const handleLogin = (res) =>{
-            console.log(res);
-
+        
             if(res.status === 200){
+
+                const {name, username, role} = res.data.userLoggedIn;
                 console.log(res.data.userLoggedIn);
-                dispatch(playerActions.setPlayer(res.data.userLoggedIn));
-                // console.log(res.headers.authorization);
-                navigate("/dashboard")
+                dispatch(playerActions.setPlayer({name: name, username: username, score:0, role:role}));
+                if(res.data.userLoggedIn.reset_password){
+                    
+                    const {password} = login
+                    console.log(password);
+                    dispatch(passwordActions.setPassword(password));
+                    navigate("/reset_password");
+
+                }else{
+                    
+                    navigate("/dashboard");
+                }
+
+                
             }
         }
 
@@ -57,36 +68,39 @@ const Login = props =>{
 
 
     return(
-        <div className={'height925px border d-flex login-background px-3'}>
+        <div className={'height101 border d-flex bg-light-gray px-3'}>
             <div className="m-auto w-25 align-self-center ">
                 <div className={'m-auto w-100 height100'}>
-                    <h1 className=" text-jeopardy-yellow">SE Jeopardy</h1>
+                    <h1 className=" text-dark">SE Games</h1>
                 </div>
-                <div className="w-50 m-auto">
-                    <label className="text-jeopardy-yellow fw-bold">Username</label>
-                    <input className={'form-control form-control-sm'}
+                <div className="w-50 m-auto input-field">
+                    <label className="fw-bold">Username</label>
+                    <input className={''}
+                        type={'text'}
                         name={"username"}
                         value={login.username}
                         onChange={(e)=>inputChange(e)}
                     />
                 </div>
-                <div className="w-50 m-auto">
-                    <label className="text-jeopardy-yellow fw-bold"
-                    >Password</label>
-                    <input className={'form-control form-control-sm'}
+                <div className="w-50 m-auto input-field">
+                    <label className="fw-bold">Password</label>
+                    <input className={''}
                         type={'password'}
                         name={'password'}
                         value={login.password}
                         onChange={(e)=>inputChange(e)}
                     />
                 </div>
-                <div className="text-center m-auto my-3 ">
-                    <button className="m-auto btn btn-sm button-jeopardy-orange" label={'Login'} onClick={(e)=>submitLogin(e)} >Login</button><br/>
+                <div className="text-center m-auto">
+                    <div className="mb-3">
+                        <Link to={'/password-recovery'}>Forgot Password?</Link>
+                    </div>
+                    <button className="m-auto btn-small" label={'Login'} onClick={(e)=>submitLogin(e)} >Login</button><br/>
                     <div className={'p-3'}>
-                         <Link
-                            className={"text-capitalize text-jeopardy-yellow"}
-                             to={'/join'}
-                         >join game</Link>
+                        <Link
+                        className={"text-capitalize text-dark"}
+                            to={'/join'}
+                        >join game</Link>
                     </div>
                 </div>
             </div>

@@ -28,7 +28,7 @@ const StartGameView = props => {
             const applyData = (res) => {
 
                 if(res.status === 200){
-                    //console.log(res.data);
+                    console.log(res.data);
                     dispatch(gameActions.setBoard(res.data));
                 }
 
@@ -44,7 +44,7 @@ const StartGameView = props => {
         }
 
 
-    },[]);
+    },[dispatch, getHttpRequest, id]);
 
 
     return(
