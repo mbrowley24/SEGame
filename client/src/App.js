@@ -30,14 +30,13 @@ function App() {
               <Routes>
                 <Route path="/">
                   <Route path="" element={<Login/>} />
-                  <Route path="" element={<PasswordRecovery/>} />
+                  <Route path="password-recovery" element={<PasswordRecovery/>} />
                   <Route path={'join'}>
                     <Route path="" element={<PlayerGameSelect/>} />
                     <Route path={'jeopardy'}>
                       <Route path={''} element={<JoinGameView/>}/>
                       <Route path={':id'} element={<PlayerGame/>}/>
                     </Route>
-                    
                   </Route>
                   <Route path="dashboard" element={<GameSelection/>}/>
                   <Route element={<RequireAuth roles={['admin']}/>}>
