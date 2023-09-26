@@ -1,6 +1,6 @@
 import React from "react";
 import ActiveGameBoardCategory from "./ActiveGameBoardCategory";
-
+import "../css/generalCss.css"
 
 
 
@@ -8,7 +8,7 @@ const ActiveGameBoard = props => {
     const {data, id} = props;
 
     return(
-        <div className={'d-flex m-auto'}
+        <div className={'d-flex overflow-auto height90 container-fluid m-auto'}
         >
             <ActiveGameBoardCategory data={data.board.category1} id={id}/>
             <ActiveGameBoardCategory data={data.board.category2} id={id}/>

@@ -36,7 +36,7 @@ const CategoryView = props => {
         const applyData = (res)=>{
             console.log(res);
             setCategory(categoryInitialState);
-            navigate('/dashboard');
+            navigate('/jeopardy/dashboard');
 
         }
 
@@ -46,11 +46,11 @@ const CategoryView = props => {
 
 
     return(
-        <div>
+        <div className={'height925px bg-light-gray'}>
             <NavBar/>
-            <h1 className={'text-center py-2 my-2'}>Category View</h1>
+            <h1 className={'text-center py-2 my-2 text-dark'}>Category View</h1>
             <div className={'d-flex justify-content-center'}>
-                <div className={'w-25 p-2 m-2 bg-secondary border-2 rounded-2'}>
+                <div className={'w-25 p-2 m-2 border border-dark bg-green  rounded-2'}>
                     <CategoryForm
                         submit={submit}
                         category={category}
@@ -58,7 +58,7 @@ const CategoryView = props => {
                         setCategory={setCategory}
                     />
                 </div>
-                <div className={'w-25 p-2 m-2 bg-secondary border-2 rounded-2'}>
+                <div className={'w-25 p-2 m-2 bg-green border border-dark rounded-2'}>
                     <QuestionsFromCategory/>
                 </div>
             </div>

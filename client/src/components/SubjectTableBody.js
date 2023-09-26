@@ -24,7 +24,7 @@ const SubjectTableBody = props => {
             }
 
 
-           await getHttpRequest(configRequest, applyData)
+            await getHttpRequest(configRequest, applyData)
 
         })();
 
@@ -38,15 +38,25 @@ const SubjectTableBody = props => {
     return(
         <tbody>
         {
-            subjects.map((subject, index) => {
+         subjects.length > 0?   subjects.map((subject, index) => {
 
                 return(
                     <tr key={index}>
-                        <td><Link to={`/subjects/${subject.public_id}/questions/subject`}>{subject.name}</Link></td>
-                        <td>{subject.questions}</td>
+                        <td className={''}>
+                            <Link
+                                to={`/jeopardy/subjects/${subject.public_id}/questions/subject`}
+                                className={'text-capitalize text-dark'}
+                            >
+                                {subject.name}</Link>
+                        </td>
+                        <td className={''}>{subject.questions}</td>
                     </tr>
                 )
             })
+            :
+            <tr>
+                <td className={''} colSpan={'4'}>No Subjects</td>
+            </tr>
         }
         </tbody>
     )

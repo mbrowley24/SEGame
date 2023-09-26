@@ -6,6 +6,7 @@ import {gameActions} from "../store/gameData";
 import GameBoard from "../components/GameBoard";
 import {useParams} from "react-router-dom";
 import StartGameButton from "../components/StartGameButton";
+import "../css/generalCss.css"
 
 const StartGameView = props => {
     const {id} = useParams();
@@ -27,7 +28,7 @@ const StartGameView = props => {
             const applyData = (res) => {
 
                 if(res.status === 200){
-                    //console.log(res.data);
+                    console.log(res.data);
                     dispatch(gameActions.setBoard(res.data));
                 }
 
@@ -43,15 +44,14 @@ const StartGameView = props => {
         }
 
 
-    },[]);
+    },[dispatch, getHttpRequest, id]);
 
 
     return(
-        <div>
+        <div className={'background-jeopardy height925px overflow-hidden'}>
             <NavBar/>
-            <div className={'w-75 m-auto'}>
-                <h1>Start Game</h1>
-                <h6 className={'text-capitalize'}> game: {game.name}</h6>
+            <div className={'w-75 m-auto mt-3 py-2 complement-board-bg border border-dark rounded height800px overflow-auto '}>
+                <h1 className={'text-capitalize text-jeopardy-yellow py-1 my-2'}> game: {game.name}</h1>
                 <GameBoard data={game.board}/>
                 <div>
                     <StartGameButton game={game} id={id}/>

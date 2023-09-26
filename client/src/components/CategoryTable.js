@@ -7,7 +7,7 @@ const CategoryTable = props => {
 
 
     return(
-        <table className={'table tableFixHead'}>
+        <table className={'responsive-table highlight centered tableFixHead'}>
             <CategoryTableHeader/>
             <CategoryTableBody/>
         </table>

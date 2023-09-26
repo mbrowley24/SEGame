@@ -5,7 +5,7 @@ import {gameActions} from "../store/gameData";
 import SocketContext from "../context/SocketContext";
 const LobbyPanel = props => {
 
-    const {id, game, show} = props;
+    const {game, show} = props;
     const {socket} = useContext(SocketContext);
     const lobbyPersonnel = useSelector(state => state.gameData.lobby);
     const dispatch = useDispatch();
@@ -38,36 +38,36 @@ const LobbyPanel = props => {
 
     const addPlayers = useCallback(() => {
 
-        console.log(game);
         const playersState = [...players];
+
         dispatch(gameActions.setPlayers({players:playersState}));
-        socket.emit('add_player', {room:id, players : playersState, game:game});
+        socket.emit('add_player', {room:game.room, players : playersState, game:game});
         resetPlayers();
 
     },[players]);
 
     return(
-    show &&
-        <React.Fragment>
+        show && 
+        <div className="">
             <button
-                className={'text-warning btn'}
+                className={'text-warning btn-small text-capitalize'}
                 disabled={players.length === 0}
                 onClick={addPlayers}
-            >add players
+            >add to game
             </button>
-            <ul className={'list-group'}>
+            <ul className={'list-group bg-primary height50 overflow-auto mt-2'}>
                 {
                     lobbyPersonnel.map((person, i) => {
 
                         return (
                             <React.Fragment key={i}>
-                                <LobbyListItem person={person} inputChange={inputChange} i={i}/>
+                                <LobbyListItem person={person} inputChange={inputChange} players={players} i={i}/>
                             </React.Fragment>
                         )
                     })
                 }
             </ul>
-        </React.Fragment>
+        </div>
 
 
     )

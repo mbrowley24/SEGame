@@ -6,33 +6,32 @@ import useGame from "../hooks/useGame";
 import {GiBootKick} from "react-icons/gi"
 
 const PlayerPanelListItem = props => {
-    const {player, i, game, remove } = props;
+    const {player, i, game, remove} = props;
     const {playerPanelCss} = useGame();
     const attempts = useSelector(state => state.qAndAData.attempted_by);
     const attempted = useMemo(() => attempts.includes(player.username), [attempts, player]);
     const buzzed = useMemo(() => game.buzzer.player === player.username, [game.buzzer, player]);
     const myData = useSelector(state => state.playerData);
     const me = useMemo(() => myData.username === player.username, [game.buzzer, myData]);
-    const playerCss = useMemo(() => playerPanelCss(buzzed, attempted), [buzzed, attempted]);
-    const isHost = useMemo(() => game.host.username === myData.username, [game.host, myData]);
+    const playerCss = useMemo(() => playerPanelCss(buzzed, attempted, me), [buzzed, attempted]);
+
 
 
 
     return(
-        <li key={player.username} className={playerCss}>
-
-            {buzzed &&  <RiAlarmWarningLine/>}
-            <span className={'text-capitalize'}>{` ${player.name}`}</span> {`: ${player.score}`}
-            <small>{me && '(you)'}</small>
-            {attempted && <FaSadCry/>}
-            {
-                isHost &&
+        <div key={player.username} className={playerCss}>
+            <p className={'text-dark bg-light border border-dark rounded w-75 m-auto p-1 fw-bold'}>{`$ ${player.score}`}</p>
+            <h6 className={'text-light text-capitalize fw-bolder w-10 background-jeopardy m-auto w-75 border border-dark rounded p-1'}>
+                {player.name.length < 10?`${player.name}`: `${player.name.substring(0, 5)}...`}
+            </h6>
+            <div>
                 <button
-                    className={'btn btn-sm float-end'}
-                    onClick={()=>remove(player.username)}
+                    className={'btn btn-sm float-end text-jeopardy-yellow-static'}
+                    onClick={()=>remove(player)}
                 >{<GiBootKick/>}</button>
-            }
-        </li>
+            </div>
+
+        </div>
     )
 };
 

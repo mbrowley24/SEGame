@@ -98,15 +98,20 @@ const useGame = () => {
 
         let returnValue = false;
 
-        if(host.length > 0){
+        if(host.username.length > 0){
             if(username.length > 0){
-                returnValue = host === username;
+                returnValue = host.username === username;
             }
         }
 
         return returnValue;
     }
     const hostJoined = (host) => {
+
+        if(host === undefined || host === null){
+            console.log('host undefined');
+            return false;
+        }
 
         console.log(host);
         let returnValue = false;
@@ -147,32 +152,66 @@ const useGame = () => {
 
     };
 
-    const questionAttempted = (data, value, id) => {
+    const questionAttempted = (data, value, room) => {
 
         return {
             question: data[value].question,
             answer: data[value].answer,
             value: value,
             attempt: true,
-            room: id
+            room: room
         };
     };
 
-    const playerPanelCss = (buzzed, attempted) => {
+    const playerPanelCss = (buzzed, attempted, me) => {
 
-        let returnedCss = 'list-group-item list-group-item-success' ;
+        let returnedCss = 'd-inline-block w-10 complement-board-bg border border-dark rounded p-1';
+
+        if(me){
+            returnedCss = 'd-inline-block w-10 complement-board-bg border border-dark rounded p-1';
+        }
 
         if(buzzed){
-            returnedCss = 'list-group-item list-group-item-warning';
+            returnedCss = 'd-inline-block w-10 bg-danger border border-danger rounded p-1';
         }
 
         if(attempted){
-            returnedCss = 'list-group-item list-group-item-danger text-decoration-line-through';
+            returnedCss = 'd-inline-block w-10 bg-warning border border-dark rounded p-1';
         }
-
 
         return returnedCss;
     }
+
+    const inGame = (myUsername, game) => {
+
+        let returnValue = false;
+        // console.log(game.lobby);
+        // console.log(myUsername);
+
+        const inLobby = game.lobby.filter(player => player.username === myUsername);
+
+        if(inLobby.length === 1){
+
+            returnValue = true;
+        }
+
+        const inPlayerPool = game.players.filter(player => player.username === myUsername);
+
+        if(inPlayerPool.length === 1){
+            console.log('in player pool');
+            returnValue = true;
+        }
+        return returnValue;
+    }
+
+
+    const playerInGame = (players, player) => {
+
+        return players.filter(p => p.username === player.username).length === 1;
+
+    }
+
+
 
     return(
         {
@@ -180,10 +219,12 @@ const useGame = () => {
             anonymousPlayers,
             getPlayers,
             isHostCheck,
+            inGame,
             canJoin,
             hostJoined,
             playerFull,
             playerPanelCss,
+            playerInGame,
             updateHost,
             questionAttempted,
             validateGame,

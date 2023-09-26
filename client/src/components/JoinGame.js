@@ -5,11 +5,13 @@ import {playerActions} from "../store/playerData";
 import {useNavigate} from "react-router-dom";
 import useGame from "../hooks/useGame";
 import SocketContext from "../context/SocketContext";
+import {gameActions} from "../store/gameData";
 const JoinGame = props => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const player = useSelector(state => state.playerData);
+    const gameFull = useSelector(state => state.gameData.game_full);
     const [validGame, setValidGame] = useState(false);
     const {getHttpRequest} = useHttp();
     const {socket, id, setId} = useContext(SocketContext);
@@ -22,15 +24,18 @@ const JoinGame = props => {
         dispatch(playerActions.setData({name:name, value:value}))
     },[]);
 
+
     const inputChange = useCallback(e => {
         const {value} = e.target;
         setId(value);
+        dispatch(gameActions.gameFullReset());
+
     },[]);
 
     const joinGame = () =>{
 
         socket.emit("join_game", {room: id, player:player});
-        navigate(`/games/${id}/game`);
+        navigate(`/join/jeopardy/${id}`);
 
     }
 
@@ -57,12 +62,9 @@ const JoinGame = props => {
                         }
                     }
 
-
                     await getHttpRequest(configRequest, applyData);
                 })();
             }
-
-
 
         }, 300);
 
@@ -74,32 +76,37 @@ const JoinGame = props => {
     }, [id]);
 
 
+    console.log(gameFull);
+
     return(
         <React.Fragment>
-            <div>
+            <div className={''}>
                 <div>
-                    <div>
-                        <label className={'text-capitalize'}>
+                    <div className="input-field">
+                        <label className={'text-capitalize text-dark fw-bold'}>
                             name
                         </label><br/>
                         <input type={'text'}
-                               className={'form-control'}
-                               value={player.name}
-                               name={'name'}
-                               onChange={(e)=>changeName(e)}
+                            className={''}
+                            value={player.name}
+                            name={'name'}
+                            onChange={(e)=>changeName(e)}
                         />
                     </div>
                 </div>
-                <label>Game ID</label><br/>
-                <input type="text"
-                      className={'form-control'}
-                       value={id}
-                       onChange={(e)=>inputChange(e)}
-                />
+                <div className={'input-field'}>
+                    <label className={'text-capitalize text-dark fw-bold'}>Game ID</label><br/>
+                    <input type="text"
+                        className={''}
+                        value={id}
+                        onChange={(e)=>inputChange(e)}
+                    />
+                </div>
                 <div className={'py-2'}>
+                    {gameFull && <p className={'text-danger fw-bolder text-capitalize'}>game is full</p>}
                     <button
-                        className={'btn btn-primary text-capitalize'}
-                        disabled={!validGame || !passUserData}
+                        className={'btn-small text-capitalize '}
+                        disabled={!validGame || !passUserData || gameFull}
                         onClick={()=>joinGame()}
                     >
                         join game

@@ -9,7 +9,7 @@ const GameTable = props => {
 
 
     return(
-        <table className={'table tableFixHead'}>
+        <table className={'responsive-table highlight centered tableFixHead'}>
             <GameTableHeader/>
             <GameTableBody/>
         </table>

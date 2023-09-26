@@ -13,7 +13,11 @@ const SubjectSchema = new mongoose.Schema({
     public_id: {
         type: String,
         required: [true, "Public ID is required"],
-    }
+    },
+    ownerId: {
+        type: String,
+        required: [true, "Owner ID is required"],
+    },
 
 }, {timestamps: true});
 

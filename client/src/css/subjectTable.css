@@ -7,20 +7,29 @@
 
 
 .tableFixHead{
-
+    background-color: #f5f5f5;
 }
 
-.tableFixHead thead th{
+.tableFixHead thead tr{
     position: sticky;
-    background-color: #fff;
-    opacity: 1;
+    opacity: 2;
+    background-color: #476a6f;
+    height: 1vh;
     top: 0;
+}
+
+.delete_button{
+    background-color: #476a6f;
+    
+}
+
+.tableFixHead tbody tr{
+    background-color: #519e8a;
 }
 
 .sticky{
     position: sticky;
     top: auto;
-    background-color: #fff;
     opacity: 1;
 }
 

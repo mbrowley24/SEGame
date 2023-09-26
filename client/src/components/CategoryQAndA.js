@@ -5,7 +5,7 @@ import useCategory from "../hooks/useCategory";
 import {useSelector} from "react-redux";
 const QuestionQAndA= props => {
     const {data, value, setCategory} = props;
-    const {duplicate} = useCategory();
+    const {duplicate, qAndACss} = useCategory();
     const types = useSelector(state => state.miscData.types);
     const [view, setView] = useState(false);
     const duplicateQuestion = useMemo(()=>duplicate(data, value), [data]);
@@ -29,19 +29,16 @@ const QuestionQAndA= props => {
 
     return(
         <div ref={drop}
-             className={duplicateQuestion?
-             'd-flex height150Px w-75 m-auto border justify-content-center overflow-auto p-1'
-                 :
-            'd-flex height150Px border border-danger w-75 m-auto border justify-content-center overflow-auto p-1'
-        }
+             className={qAndACss(duplicateQuestion)}
+
                 onMouseEnter={()=>setView(true)}
                 onMouseLeave={()=>setView(false)}
         >
             <div className={view?"": "align-self-center"} hidden={view}>
-                <p className={'text-center'}>{data[value].question}</p>
+                <p className={'text-center text-jeopardy-yellow-static-fixed'}>{data[value].question}</p>
             </div>
             <div className={!view? "": "align-self-center"} hidden={!view}>
-                <p className={'text-center'}>{data[value].answer}</p>
+                <p className={'text-center text-jeopardy-yellow-static-fixed'}>{data[value].answer}</p>
             </div>
         </div>
     )

@@ -7,7 +7,7 @@ import SubjectTableBody from "./SubjectTableBody";
 const SubjectTable = props => {
     const {update} = props;
     return(
-        <table className={'table tableFixHead'}>
+        <table className={'responsive-table highlight centered tableFixHead'}>
             <SubjectTableHeader/>
             <SubjectTableBody update={update}/>
         </table>

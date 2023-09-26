@@ -143,20 +143,15 @@ const GameSchema = new mongoose.Schema({
         type:String,
         required:[true, "Game name is required"],
     },
-    timer:{
-        type:Number,
-        required:[true, "Timer is required"],
-        default: 30,
-    },
-    finalTimer:{
-        type:Number,
-        required:[true, "Final Timer is required"],
-        default: 30,
-    },
     public_id:{
         type:String,
         required:[true, "Public ID is required"],
     },
+    join_code:{
+        type:String,
+        required:[true, "Join Code is required"],
+        unique: true,
+    } ,
     board:{
         name:{
             type:String,
@@ -169,33 +164,6 @@ const GameSchema = new mongoose.Schema({
         category5: category,
         category6: category,
 
-    },
-    judges:{
-        1:judge,
-        2:judge,
-        3:judge,
-    },
-    players:{
-        1:player,
-        2:player,
-        3:player,
-        4:player,
-        5:player,
-        6:player,
-        7:player,
-        8:player,
-        9:player,
-        10:player,
-        11:player,
-        12:player,
-        13:player,
-        14:player,
-        15:player,
-        16:player,
-        17:player,
-        18:player,
-        19:player,
-        20:player,
     },
     created_by:{
         name:{

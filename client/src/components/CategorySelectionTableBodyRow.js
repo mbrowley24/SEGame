@@ -24,7 +24,10 @@ const CategorySelectionTableBodyRow = props => {
                 onMouseEnter={() => setShow(true)}
                 onMouseLeave={() => setShow(false)}
             >
-                <td ref={drag}>{data.name}</td>
+                <td ref={drag} className={'complement-board-bg text-jeopardy-yellow-static-fixed'}
+                >
+                    {data.name}
+                </td>
             </tr>
             <Overlay target={target.current} show={show} placement={'left'}>
                 {(props) => (

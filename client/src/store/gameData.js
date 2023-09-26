@@ -39,6 +39,7 @@ const category={
     }
 }
 
+
 const judge={
     name:"",
     username:"",
@@ -53,8 +54,11 @@ const player={
 const gameData = {
 
     name:"",
+    id:"",
+    joinId:"",
     timer: 5,
     finalTimer:30,
+    room:"",
     buzzer:{
         buzz: false,
         player:""
@@ -73,7 +77,7 @@ const gameData = {
         name:"",
         username:"",
     },
-    players:[]
+    players:[],
 };
 
 const gameSlice = createSlice({
@@ -86,8 +90,8 @@ const gameSlice = createSlice({
             state.finalTimer = gameData.finalTimer;
             state.buzzer = gameData.buzzer;
             state.board = gameData.board;
-            state.judges = gameData.judges;
             state.players = gameData.players;
+            state.gameId = gameData.gameId;
 
 
         },
@@ -98,16 +102,17 @@ const gameSlice = createSlice({
             }
         },addLobby(state, action) {
 
-            console.log(action.payload);
+            //console.log(action.payload);
             const lobbyList = JSON.parse(JSON.stringify(state.lobby));
             let username = action.payload.username;
 
-            let usernameCheck = lobbyList.filter((player) => player.username === username);
+            const player_username_check = state.lobby.filter((player) => player.username === username);
+            const usernameCheck = state.players.filter((player) => player.username === username);
+            const user_count = state.lobby.length + state.players.length;
 
-            if(usernameCheck.length === 0){
+            if(usernameCheck.length === 0 && player_username_check.length === 0 && user_count < 3){
 
                 function filterName(player){
-
 
                     if(player.name === action.payload.name){
                         return true
@@ -126,14 +131,13 @@ const gameSlice = createSlice({
                 }
 
                 const filteredLobby = lobbyList.filter(filterName);
-                console.log("filteredLobby")
-                console.log(filteredLobby);
 
                 if(filteredLobby.length === 0){
 
                     const newPlayer = {
                         name: action.payload.name,
                         username: username,
+                        socketId : action.payload.socketId,
                         score: 0
                     }
 
@@ -156,6 +160,7 @@ const gameSlice = createSlice({
                     const newPlayer = {
                         name: name,
                         username: username,
+                        socketId : action.payload.socketId,
                         score: 0
                     }
 
@@ -166,11 +171,16 @@ const gameSlice = createSlice({
             }
 
 
+            state.gameFull = state.lobby.length + state.players.length > 19;
+
+
         },
         setBoard(state, action) {
             console.log(action.payload);
             state.name = action.payload.name;
             state.id = action.payload.id
+            state.joinId = action.payload.joinId
+            state.room = action.payload.room
             state.board.name = action.payload.board.name
             state.board.category1 = action.payload.board.category1
             state.board.category2 = action.payload.board.category2
@@ -192,7 +202,7 @@ const gameSlice = createSlice({
 
         },correctAnswer(state, action) {
 
-            console.log(action.payload);
+            //console.log(action.payload);
             const username = state.buzzer.player;
 
             for(let i = 0; i < state.players.length; i++){
@@ -237,11 +247,27 @@ const gameSlice = createSlice({
 
             }
 
-            console.log(JSON.parse(JSON.stringify(state.board)));
+
+
+            const players = [...state.players]
+            players.sort((a,b) =>{
+                if (a.score > b.score) {
+                    return -1;
+                }
+                if (a.score < b.score) {
+                    return 1;
+                }
+                return 0;
+            });
+
+            state.players = players;
+
+
+            //console.log(JSON.parse(JSON.stringify(state.board)));
 
         },incorrectAnswer(state, action) {
 
-            console.log(action.payload);
+            //console.log(action.payload);
             const username = state.buzzer.player;
 
             for(let i = 0; i < state.players.length; i++){
@@ -255,6 +281,18 @@ const gameSlice = createSlice({
                 }
             }
 
+            const players = [...state.players]
+            players.sort((a,b) =>{
+                if (a.score > b.score) {
+                    return -1;
+                }
+                if (a.score < b.score) {
+                    return 1;
+                }
+                return 0;
+            });
+
+            state.players = players;
 
         },notAttempted(state, action){
 
@@ -290,14 +328,14 @@ const gameSlice = createSlice({
 
         },setPlayers(state, action) {
 
-            console.log(action.payload);
+            //console.log(action.payload);
             let currentPlayers = JSON.parse(JSON.stringify(state.players));
             const newPlayers = [...action.payload.players];
 
             function filterPlayer(player) {
 
                 const filterPlayers = currentPlayers.filter(newPlayer => newPlayer.username === player.username);
-                console.log(player.username)
+                //console.log(player.username)
                 return filterPlayers.length === 0;
             }
 
@@ -328,51 +366,61 @@ const gameSlice = createSlice({
 
                     state.lobby = state.lobby.filter(filterLobby);
                     state.players = newPlayers;
-                    console.log(JSON.parse(JSON.stringify(state)))
+                    //console.log(JSON.parse(JSON.stringify(state)))
 
             }else{
 
                 state.lobby = state.lobby.filter(filterLobby);
                 const addPlayers = newPlayers.filter(filterPlayer);
-                console.log(addPlayers);
-                console.log(currentPlayers);
+
                 state.players = currentPlayers.concat(addPlayers);
 
             }
 
-
-
-            console.log(JSON.parse(JSON.stringify(state)))
+            //console.log(JSON.parse(JSON.stringify(state)))
         },
         setGame(state, action) {
 
             console.log(action.payload)
+            const players = [...action.payload.game.players];
+            const newPlayers = action.payload.players? [...action.payload.players] : [];
 
+            function playerCheck(player){
 
-            state.name = action.payload.name;
-            state.timer = action.payload.timer;
-            state.finalTimer = action.payload.finalTimer;
-            state.buzzer = action.payload.buzzer;
-            state.board = action.payload.board;
-            state.host = action.payload.host;
-            state.players = action.payload.players;
+                    const filterPlayers = players.filter(newPlayer => newPlayer.username === player.username);
 
-            console.log(JSON.parse(JSON.stringify(state)))
+                    return filterPlayers.length === 0;
+            }
+
+            if (players.length === 0) {
+
+                state.players = [...newPlayers];
+
+            }else{
+                const filterPlayers = players.filter(playerCheck);
+                state.players = players.concat(filterPlayers);
+            }
+
+            state.name = action.payload.game.name;
+            state.board = action.payload.game.board;
+            state.host = action.payload.game.host;
+
+            state.room = action.payload.game.room;
+
+            //console.log(JSON.parse(JSON.stringify(state)))
 
         },setHost(state, action) {
 
-            console.log(action.payload.name)
-            console.log(action.payload.username)
             state.host.name = action.payload.name;
             state.host.username = action.payload.username;
 
-            console.log(JSON.parse(JSON.stringify(state)))
+            //console.log(JSON.parse(JSON.stringify(state)))
         },
         setBuzzer(state, action) {
 
             state.buzzer.buzz = true;
             state.buzzer.player = action.payload;
-            console.log(JSON.parse(JSON.stringify(state)))
+            //console.log(JSON.parse(JSON.stringify(state)))
 
         },resetBuzzer(state) {
             state.buzzer.buzz = false;
@@ -386,6 +434,12 @@ const gameSlice = createSlice({
 
             state.players = players.filter(player => player.username !== action.payload);
 
+        },gameFull(state) {
+
+            state.game_full = true;
+        }, gameFullReset(state) {
+
+            state.game_full = false;
         }
     }
 })

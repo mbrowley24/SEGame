@@ -1,0 +1,56 @@
+Index: server/server.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>require('dotenv').config();\r\nconst express = require('express');\r\nconst app = express();\r\nconst http = require('http');\r\nconst cors = require('cors');\r\nconst cookieParser = require('cookie-parser');\r\nconst {Server} = require(\"socket.io\");\r\n\r\n\r\n\r\napp.use(express.json());\r\napp.use(express.urlencoded({extended: true}));\r\napp.use(cors({credentials: true, origin: 'https://theaveragese.com'}));\r\napp.use(cookieParser());\r\n\r\nrequire('./config/config');\r\n\r\n\r\nrequire('./routes/player.routes')(app);\r\nrequire('./routes/question.routes')(app);\r\nrequire('./routes/subject.routes')(app);\r\nrequire('./routes/category.routes')(app);\r\nrequire('./routes/board.routes')(app);\r\nrequire('./routes/game.routes')(app);\r\n\r\n\r\nconst server = http.createServer(app);\r\n\r\n\r\nconst io = new Server(server, {\r\n    cors: {\r\n        origin: \"https://theaveragese.com\",\r\n        methods: [\"GET\", \"POST\"],\r\n    }\r\n})\r\n\r\n\r\nconst jeopardyNameSpace = io.of(/^\\/jeopardy-[a-zA-Z0-9]{5,35}$/);\r\njeopardyNameSpace.on(\"connection\", (socket) => {\r\n\r\n    socket.on(\"join_game\", (data) =>{\r\n\r\n        console.log(\"join game event received on server side\");\r\n        console.log(data);\r\n        socket.join(data.room);\r\n        socket.to(data.room).emit(\"lobby\", data.player);\r\n\r\n    })\r\n\r\n    socket.on(\"remove_player\", (data) =>{\r\n\r\n        socket.to(data.room).emit(\"remove_player_update\", data.player);\r\n    });\r\n\r\n    socket.on(\"update_participants\", (data) =>{\r\n        console.log(\"update_participants event received on server side\");\r\n\r\n        console.log(data.game);\r\n        console.log(data.game.players);\r\n\r\n        socket.to(data.room).emit(\"host_update\", data.game);\r\n    });\r\n\r\n    socket.on(\"add_player\", (data) =>{\r\n\r\n        console.log(\"add_player event received on server side\");\r\n        console.log(data);\r\n        socket.to(data.room).emit(\"player\", {players: data.players, game: data.game });\r\n    })\r\n\r\n    socket.on(\"join_game_host\", (data) =>{\r\n        console.log(\"join_game_host event received on server side\");\r\n\r\n        socket.join(data.room);\r\n        socket.to(data.room).emit(\"host\", data.game);\r\n    })\r\n\r\n    socket.on(\"correct_answer\", (data)=>{\r\n\r\n        console.log(\"correct_answer event received on server side\");\r\n\r\n        console.log(data);\r\n\r\n        socket.to(data.room).emit(\"correct_answer_update\", data.question);\r\n    })\r\n\r\n    socket.on(\"incorrect_answer\", (data)=>{\r\n\r\n        console.log(\"incorrect_answer event received on server side\");\r\n        console.log(data);\r\n\r\n        socket.to(data.room).emit(\"incorrect_answer_update\", {question :data.question, player: data.player});\r\n    })\r\n\r\n    socket.on(\"not_attempted\", (data) =>{\r\n\r\n        socket.to(data.room).emit(\"not_attempted_update\", data.question);\r\n    });\r\n\r\n    socket.on(\"attempted_question\", (data) =>{\r\n\r\n        console.log(\"attempted_question event received on server side\");\r\n        console.log(data.room)\r\n        socket.to(data.room).emit(\"question\", data);\r\n\r\n    });\r\n\r\n    socket.on(\"buzzer\", (data) =>{\r\n        console.log(\"buzzer event received on server side\");\r\n        console.log(data);\r\n        socket.to(data.room).emit(\"buzzed\", data.username);\r\n    });\r\n\r\n     // console.log(\"server side socket id: \", socket.id);\r\n})\r\n\r\n\r\nserver.listen(process.env.PORT || 8080, () => {\r\n    console.log(`Listening on port ${process.env.PORT}`);\r\n});
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/server/server.js b/server/server.js
+--- a/server/server.js	
++++ b/server/server.js	
+@@ -10,7 +10,7 @@
+ 
+ app.use(express.json());
+ app.use(express.urlencoded({extended: true}));
+-app.use(cors({credentials: true, origin: 'https://theaveragese.com'}));
++app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+ app.use(cookieParser());
+ 
+ require('./config/config');
+Index: client/src/hooks/useHttp.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import {useState, useCallback} from 'react'\r\nimport axios from 'axios';\r\nimport {useNavigate} from \"react-router-dom\"\r\nimport {useSelector} from \"react-redux\";\r\n\r\n\r\nconst useHttp = () =>{\r\n    const navigate = useNavigate();\r\n    const [isLoading, setIsLoading] = useState(false);\r\n    const myData = useSelector(state => state.playerData);\r\n\r\n    const getHttpRequest = useCallback(async(requestConfig, applyData)=>{\r\n        // console.log(requestConfig);\r\n        //  console.log(token)\r\n        try{\r\n            setIsLoading(true);\r\n            const httpResponse = await  axios.get(`https://theaveragese.com/api/v1/${requestConfig.url}`, {\r\n                signal: requestConfig.signal,\r\n                withCredentials: true,\r\n            })\r\n\r\n\r\n            // console.log(requestConfig)\r\n            if(httpResponse.status === 200){\r\n                applyData(httpResponse);\r\n                setIsLoading(false)\r\n            }\r\n\r\n\r\n            \r\n        }catch(error){\r\n              console.log(error)\r\n            if(error && error.response){\r\n\r\n                if(error.response.status === 403){\r\n\r\n                    navigate('/')\r\n                }else{\r\n\r\n                    applyData(error);\r\n                }\r\n\r\n            }\r\n        }\r\n\r\n    }, [ navigate])\r\n\r\n    const postHttpRequest = useCallback(async(requestConfig, applyData)=>{\r\n        console.log(requestConfig)\r\n        try{\r\n            setIsLoading(true);\r\n            const httpResponse = await  axios.post(`https://theaveragese.com/api/v1/${requestConfig.url}`, requestConfig.data , {\r\n                withCredentials: true,\r\n\r\n            })\r\n\r\n\r\n            console.log(requestConfig)\r\n            if(httpResponse.status === 200){\r\n                applyData(httpResponse);\r\n                setIsLoading(false)\r\n            }\r\n\r\n\r\n\r\n        }catch(error){\r\n            console.log(error)\r\n            if(error && error.response){\r\n\r\n                if(error.response.status === 403){\r\n\r\n                    navigate('/')\r\n                }else{\r\n\r\n                    applyData(error);\r\n                }\r\n\r\n            }\r\n        }\r\n\r\n    },[navigate])\r\n    const putHttpRequest = useCallback(async(requestConfig, applyData)=>{\r\n\r\n        try{\r\n            setIsLoading(true);\r\n            const httpResponse = await  axios.put(`https://theaveragese.com/api/v1/${requestConfig.url}`, requestConfig.data , {\r\n                withCredentials: true,\r\n\r\n            })\r\n\r\n\r\n            // console.log(requestConfig)\r\n            if(httpResponse.status === 200){\r\n                applyData(httpResponse);\r\n                setIsLoading(false)\r\n            }\r\n\r\n        }catch(error){\r\n            console.log(error)\r\n            if(error && error.response){\r\n\r\n                if(error.response.status === 403){\r\n\r\n                    navigate('/')\r\n                }else{\r\n\r\n                    applyData(error);\r\n                }\r\n\r\n            }\r\n        }\r\n\r\n    },[navigate])\r\n\r\n    return(\r\n        {\r\n            getHttpRequest,\r\n            postHttpRequest,\r\n            putHttpRequest,\r\n            isLoading\r\n        }\r\n    )\r\n\r\n}\r\n\r\n\r\nexport default useHttp;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/client/src/hooks/useHttp.js b/client/src/hooks/useHttp.js
+--- a/client/src/hooks/useHttp.js	
++++ b/client/src/hooks/useHttp.js	
+@@ -14,7 +14,7 @@
+         //  console.log(token)
+         try{
+             setIsLoading(true);
+-            const httpResponse = await  axios.get(`https://theaveragese.com/api/v1/${requestConfig.url}`, {
++            const httpResponse = await  axios.get(`http://localhost:8080/api/v1/${requestConfig.url}`, {
+                 signal: requestConfig.signal,
+                 withCredentials: true,
+             })
+@@ -49,7 +49,7 @@
+         console.log(requestConfig)
+         try{
+             setIsLoading(true);
+-            const httpResponse = await  axios.post(`https://theaveragese.com/api/v1/${requestConfig.url}`, requestConfig.data , {
++            const httpResponse = await  axios.post(`http://localhost:8080/api/v1/${requestConfig.url}`, requestConfig.data , {
+                 withCredentials: true,
+ 
+             })
+@@ -83,7 +83,7 @@
+ 
+         try{
+             setIsLoading(true);
+-            const httpResponse = await  axios.put(`https://theaveragese.com/api/v1/${requestConfig.url}`, requestConfig.data , {
++            const httpResponse = await  axios.put(`http://localhost:8080/api/v1/${requestConfig.url}`, requestConfig.data , {
+                 withCredentials: true,
+ 
+             })

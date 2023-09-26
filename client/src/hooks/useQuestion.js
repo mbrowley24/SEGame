@@ -16,12 +16,16 @@ const useQuestion = () => {
             return false;
         }
 
-        const pattern = /^([A-Za-z0-9\s%^,.\-$#@+()!]){0,100}$/;
+        const pattern = /^([A-Za-z0-9\s%^,.\-$'#@+()!]){0,150}$/;
 
         return pattern.test(text);
     }
 
     const questionValidation = (question) => {
+
+        if(!question){
+            return false;
+        }
 
         const testAnswer = question.answer.trim();
         const testQuestion = question.question.trim();
@@ -39,7 +43,7 @@ const useQuestion = () => {
             return false;
         }
 
-        const pattern = /^([A-Za-z0-9\s%^,.\-$#@+()!]){2,100}$/;
+        const pattern = /^([A-Za-z0-9\s%^,.\-$#'@+()!]){2,150}$/;
 
         return pattern.test(question.answer) && pattern.test(question.question);
     }

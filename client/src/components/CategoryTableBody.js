@@ -1,16 +1,18 @@
 import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
 import useHttp from "../hooks/useHttp";
+import CategoryTableBodyRow from "./CategoryTableBodyRow";
 
 
 const CategoryTableBody = props => {
     const [categories, setCategories] = useState([]);
     const {getHttpRequest}= useHttp();
 
+
+
     useEffect(() => {
 
         const controller = new AbortController();
-
+        console.log('CategoryTableBody useEffect');
         (async () => {
 
             const configRequest={
@@ -29,22 +31,21 @@ const CategoryTableBody = props => {
 
     },[])
 
+
     return(
         <tbody>
 
-            {categories.map((category, index) => {
+            { categories.length > 0? categories.map((category, index) => {
                 return(
-                    <tr key={index}>
-
-                        <td className={'text-capitalize text-center'}>
-                            <Link to={`/categories/${category.id}`}>{category.name}</Link>
-                        </td>
-                        <td className={'text-capitalize text-center'}>
-                            {category.created_by}
-                        </td>
-                    </tr>
+                    <CategoryTableBodyRow key={index} category={category} setCategories={setCategories}/>
                 )
                 })
+
+                : 
+                <tr>
+                    
+                    <td colSpan="4">No categories found!!</td>
+                </tr>
             }
         </tbody>
     )

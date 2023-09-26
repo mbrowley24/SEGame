@@ -31,7 +31,6 @@ const useCategory = props => {
 
         const keys = Object.keys(category);
 
-        console.log(category);
         for(let i= 0; i < keys.length; i++){
 
             if(keys[i] === 'name' || keys[i] === 'id'){
@@ -72,6 +71,8 @@ const useCategory = props => {
 
     const questionValidation = (category)=>{
 
+        const keys = Object.keys(category);
+
         const categoryKeys = Object.keys(category);
 
         //console.log(category)
@@ -98,7 +99,7 @@ const useCategory = props => {
             return false;
         }
 
-        const pattern = /^([A-Za-z0-9\s%^&$#@+()!]){0,50}$/;
+        const pattern = /^([A-Za-z0-9\s%^&$'\-#@+(),!]){0,50}$/;
 
         return pattern.test(text);
     }
@@ -115,7 +116,7 @@ const useCategory = props => {
             return false;
         }
 
-        const pattern = /^([A-Za-z0-9\s%^&$#@+()!]){2,25}$/;
+        const pattern = /^([A-Za-z0-9\s%^&$'\-#@+(),!]){2,25}$/;
 
         return pattern.test(text);
     }
@@ -150,13 +151,33 @@ const useCategory = props => {
 
     }
 
+    const categoryFillBox = (condition) =>{
+
+        const empty =  'form-control w-50 m-auto text-center text-jeopardy-yellow-static-fixed'
+        const filled = 'form-control w-50 m-auto text-center text-jeopardy-yellow-static-fixed'
+
+        return condition? filled: empty;
+    }
+
+    const qAndACss = (condition) =>{
+
+        const noDup = 'd-flex height150Px w-75 m-auto border border-dark justify-content-center overflow-auto p-1';
+        const dup = 'd-flex height150Px border border-danger w-75 m-auto border justify-content-center overflow-auto p-1';
+
+        return condition? noDup: dup;
+
+    }
+
+
 
     return(
         {
             categoryNameValidation,
             categoryInputRegex,
             categoryInitialState,
+            categoryFillBox,
             duplicate,
+            qAndACss,
             questionCheck,
             questionValidation,
         }

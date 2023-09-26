@@ -75,17 +75,17 @@ const EditBoardView = props => {
     };
 
     return(
-        <div className={'container'}>
+        <div className={'height101 bg-light-gray'}>
             <NavBar/>
             <h1>Edit Board</h1>
             <div>
-                <button className={'btn btn-link text-capitalize'}
+                <button className={'btn-small text-capitalize'}
                         onClick={resetBoard}
                 >
                     reset form
                 </button>
             </div>
-            <div className={'d-flex'}>
+            <div className={'container d-flex p-2'}>
                 <div className={'w-15 height600px border-3 rounded-2 '}>
                     <CategorySelectionTable/>
                 </div>

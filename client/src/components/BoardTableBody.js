@@ -36,17 +36,25 @@ const BoardTableBody = (props) => {
     return(
         <tbody>
         {
-            boards.map((board, index) => {
+          boards.length > 0? boards.map((board, index) => {
 
                 return(
                     <tr key={index}>
                         <td className={'text-capitalize text-center'} scope="row">
-                            <Link to={`/board/${board.id}`}>{board.name}</Link>
+                            <Link to={`/jeopardy/board/${board.id}`}
+                                    className={'text-capitalize text-dark'}
+                            >{board.name}</Link>
                         </td>
-                        <td className={'text-capitalize text-center'} scope="row">{board.created_by}</td>
+                        <td className={'text-capitalize text-center text-dark '} scope="row"
+                        >{board.created_by}</td>
                     </tr>
                 )
             })
+
+            :
+                <tr>
+                    <td colSpan={'2'} className={'text-center text-dark'}>No Boards Found</td>
+                </tr>
         }
 
         </tbody>

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import useHttp from "../hooks/useHttp";
 
 const SubjectSelect = props => {
-    const {inputChange} = props;
+    const {inputChange, name} = props;
     const [subject, setSubjects] = useState([])
     const {getHttpRequest} = useHttp();
 
@@ -32,8 +32,8 @@ const SubjectSelect = props => {
 
     return(
         <React.Fragment>
-            <select name="subject"
-                    className={'form-select w-50 m-auto'}
+            <select name={name}
+                    className={'w-50 form-select m-auto bg-dark-green text-jeopardy-yellow-static-fixed'}
                     onChange={(e)=>inputChange(e)}>
                 <option className={'text-center text-capitalize'}
                         value=""

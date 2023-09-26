@@ -34,10 +34,10 @@ const CategorySelectionTableBody = props => {
             categories.map((category, index) => {
 
                 return(
-                   <CategorySelectionTableBodyRow
-                       key={`${index}/${category.id}`}
-                       data={category}
-                   />
+                    <CategorySelectionTableBodyRow
+                        key={`${index}/${category.id}`}
+                        data={category}
+                    />
                 )
             })
         }

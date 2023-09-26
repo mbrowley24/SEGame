@@ -8,7 +8,7 @@ const BoardGameTableHeader = props => {
     return(
         <thead>
             <tr>
-                <th>name</th>
+                <th className={'text-capitalize text-jeopardy-yellow-static-fixed fw-bold'}>name</th>
             </tr>
         </thead>
     )

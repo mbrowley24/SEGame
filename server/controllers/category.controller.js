@@ -9,7 +9,7 @@ module.exports = {
 
         const decodedJwt = jwt.decode(req.cookies.usertoken, {complete: true});
 
-        const player_id = decodedJwt.payload._id;
+        const username = decodedJwt.payload.username;
 
         const category = new Category(req.body);
 
@@ -28,11 +28,11 @@ module.exports = {
                 count = Category.find().count({public_id: category.public_id});
             }
 
-            if(player_id.length > 0){
+            if(username.length > 0){
 
                 try{
 
-                    const player = await Player.findOne({_id: player_id})
+                    const player = await Player.findOne({"username": username})
 
 
                     category.created_by.username = player.username;
@@ -41,6 +41,8 @@ module.exports = {
                     category.edited_by.name = `${player.first_name} ${player.last_name}`;
 
                     category.save()
+
+                    res.status(200).json({message: "Successfully created a new category"});
 
                 }catch(err){
                     console.log("Failed to find player", err);
@@ -65,42 +67,33 @@ module.exports = {
         const decodedJwt = jwt.decode(req.cookies.usertoken, {complete: true});
 
         const username = decodedJwt.payload.username;
+        
+        try{
 
+            const categories = await Category.find({"created_by.username": username}, "name created_by public_id",{});
 
-        if(username.length > 0){
+            const categoryResults = [...categories];
+            const results = [];
 
-            try{
+            for(let i = 0; i < categoryResults.length; i++){
 
-                const categories = await Category.find({"created_by.username": username}, "name created_by public_id",{});
-
-                const categoryResults = [...categories];
-                const results = [];
-
-                for(let i = 0; i < categoryResults.length; i++){
-
-                    console.log("Category: ", categoryResults[i]);
-                    const categoryObj = {
-                        name: categoryResults[i].name,
-                        created_by: categoryResults[i].created_by.name,
-                        id: categoryResults[i].public_id,
-                    }
-
-                    results.push(categoryObj);
+                const categoryObj = {
+                    name: categoryResults[i].name,
+                    created_by: categoryResults[i].created_by.name,
+                    id: categoryResults[i].public_id,
                 }
 
-                // console.log("Found categories: ", results);
-                res.status(200).json(results);
-
-            }catch(err){
-                console.log("Failed to find player", err);
-                res.status(400).json(err);
+                results.push(categoryObj);
             }
 
+            // console.log("Found categories: ", results);
+            res.status(200).json(results);
 
-        }else{
-            console.log("Player must be logged in required");
-            res.status(400).json({message: "Player ID is required"});
+        }catch(err){
+            console.log("Failed to find player", err);
+            res.status(400).json(err);
         }
+
     },
     get_category: async (req, res) => {
 
@@ -213,5 +206,43 @@ module.exports = {
             console.log("Player must be logged in required");
             res.status(400).json({message: "Player ID is required"});
         }
-    }
+    },
+    delete_category: async (req, res) => {
+
+        const id = req.params.id;
+        const decodedJwt = jwt.decode(req.cookies.usertoken, {complete: true});
+        const username = decodedJwt.payload.username;
+
+        try{
+
+            console.log("Deleting category: ", id);
+
+            const category = await Category.findOne({public_id: id});
+            console.log("Category: ", category);
+            // console.log(category.created_by.username);
+            // console.log(username);
+            if(category.created_by.username === username){
+
+                console.log("Delete category");
+
+                await Category.deleteOne({public_id: id});
+
+                res.status(200).json({message: "Category deleted"});
+
+            }else{
+
+                console.log("Failed to delete category");
+                res.status(400).json({message: "Failed to delete category"});
+            }
+
+
+
+        }catch(err){
+
+            console.log("Failed to delete category", err);
+            res.status(400).json(err);
+
+        }
+
+    },
 };

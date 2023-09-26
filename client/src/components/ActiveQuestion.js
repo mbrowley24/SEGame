@@ -20,6 +20,7 @@ const ActiveQuestion = props => {
     const myData = useSelector(state => state.playerData);
     const isHost = useMemo(() => game.host.username === myData.username, [game.host, myData]);
     const timer = useMemo(() => game.buzzer.buzz, [game.buzzer.buzz]);
+    const showAnswer = useSelector(state => state.qAndAData.showAnswer);
 
     useEffect(() => {
 
@@ -28,8 +29,16 @@ const ActiveQuestion = props => {
             dispatch(gameActions.setBuzzer(data));
         });
 
-        socket.on("correct_answer_update", (data) => {
+        socket.on("show_answer_update", (data) => {
+            console.log("show_answer_update");
 
+            dispatch(qAndAActions.showAnswer());
+        });
+
+        socket.on("hide_answer_update", () => {
+            console.log("hide_answer_update");
+
+            dispatch(qAndAActions.hideAnswer());
         });
 
         socket.on("incorrect_answer_update", (data) => {
@@ -43,52 +52,37 @@ const ActiveQuestion = props => {
             dispatch(qAndAActions.resetQAndA());
         });
 
+
     }, [socket]);
 
-    console.log(myData);
-    console.log(game.host);
+    useEffect(() => {}, [showAnswer]);
 
-    console.log(game.buzzer.buzz);
     return(
         <div className={'p-2 border-1 border-dark height600px bg-primary'}>
-            { !isHost &&
-            <div
-                className={`d-flex justify-content-center bg-primary
-                    height300Px border-3 rounded-1 border-dark`}
-            >
-                <div className={'p-1 text-md-center align-self-center'}>
-                    <h3 className={'text-warning'}>{question.question}</h3>
-                </div>
-            </div>
-            }
-
-            {
-                isHost &&
+            { !showAnswer &&
                 <div
                     className={`d-flex justify-content-center bg-primary
-                        height300Px`}
-                    onMouseEnter={() => {setShow(true)}} onMouseLeave={() => {setShow(false)}}
+                        height300Px border-3 rounded-1 border-dark`}
                 >
                     <div className={'p-1 text-md-center align-self-center'}>
-                        {!show && <p className={'text-light small'}>Question: (hover mouse over for answer)</p>}
-                        {show && <p className={'text-light small '}>Answer</p>}
-                        {!show && <h5 className={'text-center text-warning'}>{question.question}</h5>}
-                        {show && <h5 className={'text-center text-warning'}>{question.answer}</h5>}
+                        <h1 className={'text-warning'}>{question.question}</h1>
                     </div>
                 </div>
+                }
+            {
+                showAnswer &&
+                    <div
+                      className={`d-flex justify-content-center bg-primary height300Px border-3 rounded-1 border-dark`}
+                    >
+                        <div className={'p-1 text-md-center align-self-center'}>
+                            <h1 className={'text-warning'}>{question.answer}</h1>
+                        </div>
+                    </div>
             }
-            {isHost &&
-                <div className={!timer? 'height60px p-2 border-2 bg-warning' :
-                    'height60px p-2 border-2'
-                }>
-                {!timer && <CorrectIncorrect id={id} question={question}/>}
-                {timer && <Counter/>}
-                </div>
-            }
-            {!isHost && <div className={'p-5 m-5'}>
+            <div className={'p-5 m-5'}>
                 {!timer && <Buzzer/>}
                 {timer && <Counter/>}
-            </div>}
+            </div>
         </div>
 
     )

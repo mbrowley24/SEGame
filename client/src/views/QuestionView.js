@@ -7,9 +7,13 @@ import useQuestion from "../hooks/useQuestion";
 import useHttp from "../hooks/useHttp";
 import {useDispatch} from "react-redux";
 import {miscDataActions} from "../store/miscData";
+import "../css/generalCss.css"
+
+
 const QuestionView = props => {
     const {id} = useParams();
     const dispatch = useDispatch();
+    const [error, setrError] = useState("");
     const {questionValidation, questionInputRegex, questionInitShape} = useQuestion();
     const [question, setQuestion] = useState(questionInitShape);
     const {postHttpRequest} = useHttp();
@@ -37,9 +41,16 @@ const QuestionView = props => {
             }
 
             const applyData = (res) => {
-                console.log(res)
-                setQuestion(questionInitShape);
-                dispatch(miscDataActions.setUpdate());
+                
+                if(res.status === 200){
+                    setQuestion(questionInitShape);
+                    dispatch(miscDataActions.setUpdate());
+                }
+                
+                if(res.status === 400){
+                    console.log(res.data);
+                    setrError(res.data);
+                }
             };
 
             await postHttpRequest(requestConfig, applyData);
@@ -48,10 +59,11 @@ const QuestionView = props => {
 
 
     return(
-        <div>
+        <div className="height101 bg-light-gray">
             <NavBar/>
-            <div className={'container d-flex justify-content-center'}>
-                <div className={'w-25 border'}>
+            <div className={'d-flex p-2 align-items-center justify-content-evenly'}>
+                <div className={'w-50 p-3'}>
+                    
                     <QuestionForm
                         question={question}
                         submit={submit}
@@ -59,7 +71,7 @@ const QuestionView = props => {
                         inputChange={inputChange}
                     />
                 </div>
-                <div className={'w-75 border p-2'}>
+                <div className={'w-75 border-start border-dark p-2'}>
                     <Questions id={id}/>
                 </div>
             </div>

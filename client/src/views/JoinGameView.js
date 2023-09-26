@@ -7,13 +7,13 @@ const JoinGameView = props => {
      const {getHttpRequest} = useHttp();
 
     return(
-        <div className={'d-flex justify-content-center height600px'}>
+        <div className={'d-flex justify-content-center height101 bg-light-gray'}>
             <div className={'align-self-center'}>
-                <h1>Join Game</h1>
+                <h1 className={'text-dark rounded fw-bold'}>Join Game</h1>
                 <JoinGame/>
                 <div>
                     <Link
-                        className={'text-capitalize'}
+                        className={'text-capitalize text-dark'}
                         to={"/"}
                     >login</Link>
                 </div>
