@@ -21,6 +21,7 @@ import ResetPassword from './views/ResetPassword';
 import PlayerGameSelect from './views/PlayerGameSelect';
 import RequireAuth from './components/RequireAuth';
 import PasswordRecovery from './views/PasswordRecovery';
+import TalkTrackRow from './components/talkTrackDashboard/TalkTrackRow';
 
 function App() {
   return (
@@ -37,7 +38,6 @@ function App() {
                       <Route path={''} element={<JoinGameView/>}/>
                       <Route path={':id'} element={<PlayerGame/>}/>
                     </Route>
-                    
                   </Route>
                   <Route path="dashboard" element={<GameSelection/>}/>
                   <Route element={<RequireAuth roles={['admin']}/>}>
@@ -69,6 +69,9 @@ function App() {
                           <Route path={':id'} element={<StartGameView/>}/>
                           <Route path={':id/game'} element={<GamePlay/>}/>
                     </Route>
+                  </Route>
+                  <Route path={'talktrack'}>
+                    <Route path={''} element={<TalkTrackRow/>}/>
                   </Route>
                 </Route>
               </Routes>
