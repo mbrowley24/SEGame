@@ -10,7 +10,7 @@ const {Server} = require("socket.io");
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(cors({credentials: true, origin: 'https://theaveragese.com'})) //'https://theaveragese.com' http://localhost:3000
+app.use(cors({credentials: true, origin: process.env.BACKEND_URL })) //'https://theaveragese.com' http://localhost:3000
 app.use(cookieParser());
 
 require('./config/config');
@@ -22,6 +22,7 @@ require('./routes/subject.routes')(app);
 require('./routes/category.routes')(app);
 require('./routes/board.routes')(app);
 require('./routes/game.routes')(app);
+require('./routes/jeopardy_game.routes')(app);
 
 
 const server = http.createServer(app);
@@ -29,7 +30,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: "https://theaveragese.com" , //"https://theaveragese.com" "http://localhost:3000"
+        origin: process.env.BACKEND_URL , //"https://theaveragese.com" "http://localhost:3000"
         methods: ["GET", "POST"],
     }
 })
