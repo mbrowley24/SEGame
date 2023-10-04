@@ -13,7 +13,7 @@ const useHttp = () =>{
         try{
             
             setIsLoading(true);                         
-            const httpResponse = await  axios.get(`http://localhost:8080/api/v1/${requestConfig.url}`, {
+            const httpResponse = await  axios.get(`https://theaveragese.com/api/v1/${requestConfig.url}`, {
                 signal: requestConfig.signal,
                 withCredentials: true,
             })
@@ -48,7 +48,7 @@ const useHttp = () =>{
         console.log(requestConfig)
         try{
             setIsLoading(true);
-            const httpResponse = await  axios.post(`http://localhost:8080/api/v1/${requestConfig.url}`, requestConfig.data , {
+            const httpResponse = await  axios.post(`https://theaveragese.com/api/v1/${requestConfig.url}`, requestConfig.data , {
                 withCredentials: true,
 
             })
@@ -82,7 +82,7 @@ const useHttp = () =>{
 
         try{
             setIsLoading(true);
-            const httpResponse = await  axios.put(`http://localhost:8080/api/v1/${requestConfig.url}`, requestConfig.data , {
+            const httpResponse = await  axios.put(`https://theaveragese.com/api/v1/${requestConfig.url}`, requestConfig.data , {
                 withCredentials: true,
 
             })
@@ -115,7 +115,7 @@ const useHttp = () =>{
 
         try{
             setIsLoading(true);
-            const httpResponse = await  axios.delete(`http://localhost:8080/api/v1/${requestConfig.url}`, {
+            const httpResponse = await  axios.delete(`https://theaveragese.com/api/v1/${requestConfig.url}`, {
             withCredentials: true
             })
 
