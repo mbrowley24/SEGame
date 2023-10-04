@@ -25,5 +25,7 @@ const talk_track_question_ratingSchema = new mongoose.Schema({
             required: [true, "Rated by is required"],
         },
     
-    }, {timestamps: true});
-});
+}, {timestamps: true});
+
+export const Talk_Track_Question_Rating = mongoose.model('Talk_Track_Question_Rating', talk_track_question_ratingSchema);
+module.exports = Talk_Track_Question_Rating;

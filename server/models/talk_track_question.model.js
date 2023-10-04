@@ -29,7 +29,7 @@ const talk_track_questionSchema = new mongoose.Schema({
     },
     
     type: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         required: [true, "Type is required"],
     },
 

@@ -44,8 +44,6 @@ module.exports = {
                 try{
                     const passwordIsValid = await bcrypt.compare(req.body.password, playerRecord.password);
 
-                    console.log("Password is valid: ", passwordIsValid);
-                    console.log("Password: ", req.body.password);
                     if(passwordIsValid) {
 
                         console.log("Password is valid!");
@@ -96,15 +94,16 @@ module.exports = {
         res.json({message: "You have successfully logged out!"});
     },
     isAdmin : async (req, res) => {
-        console.log("Checking if user is admin");
+        
         const decodedJWT = jwt.decode(req.cookies.usertoken, {complete: true});
         const username = decodedJWT.payload.username;
+
         try{
 
             const player = await Player.findOne({username: username});
 
             const isAdmin = player.role === "admin";
-            console.log("Is admin: ", isAdmin);
+            
             res.status(200).json(isAdmin);
 
         }catch(err){
