@@ -38,7 +38,7 @@ const SubjectTableBody = props => {
     return(
         <tbody>
         {
-         subjects.length > 0?   subjects.map((subject, index) => {
+            subjects.length > 0?   subjects.map((subject, index) => {
 
                 return(
                     <tr key={index}>
