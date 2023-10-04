@@ -10,7 +10,7 @@ module.exports = {
                     console.log(err);
                     res.status(403).json({ verified: false })
                 } else {
-                    console.log("You are authenticated");
+                    
                     next();
                 }
             }
