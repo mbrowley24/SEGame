@@ -21,6 +21,9 @@ import ResetPassword from './views/ResetPassword';
 import PlayerGameSelect from './views/PlayerGameSelect';
 import RequireAuth from './components/RequireAuth';
 import PasswordRecovery from './views/PasswordRecovery';
+import TalkTrackRow from './components/talkTrackDashboard/TalkTrackRow';
+import TalkTrackDashboard from './views/TalkTrackDashboard';
+import NewTalkTrackQuestion from './components/talkTrackQuestion/NewTalkTrackQuestion';
 
 function App() {
   return (
@@ -31,6 +34,7 @@ function App() {
                 <Route path="/">
                   <Route path="" element={<Login/>} />
                   <Route path="password-recovery" element={<PasswordRecovery/>} />
+                  <Route path="reset_password" element={<ResetPassword/>} />
                   <Route path={'join'}>
                     <Route path="" element={<PlayerGameSelect/>} />
                     <Route path={'jeopardy'}>
@@ -68,6 +72,10 @@ function App() {
                           <Route path={':id'} element={<StartGameView/>}/>
                           <Route path={':id/game'} element={<GamePlay/>}/>
                     </Route>
+                  </Route>
+                  <Route path={'/talktrack'}>
+                    <Route path={''} element={<TalkTrackDashboard/>}/>
+                    <Route path={'new'} element={<NewTalkTrackQuestion/>}/>
                   </Route>
                 </Route>
               </Routes>

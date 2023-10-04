@@ -22,6 +22,7 @@ require('./routes/subject.routes')(app);
 require('./routes/category.routes')(app);
 require('./routes/board.routes')(app);
 require('./routes/game.routes')(app);
+require('./routes/talktrack.routes')(app);
 
 
 const server = http.createServer(app);
@@ -29,7 +30,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: "https://theaveragese.com" , //"https://theaveragese.com" "http://localhost:3000"
+        origin: "https://theaveragese.com", //"https://theaveragese.com" "http://localhost:3000"
         methods: ["GET", "POST"],
     }
 })
