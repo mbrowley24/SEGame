@@ -4,9 +4,9 @@ import useHttp from "../../hooks/useHttp";
 
 
 const TalkTrackCategory = props => {
-    const {inputChange, name} = props;
+    const {inputChange, name, value} = props;
     const {getHttpRequest} = useHttp();
-    const [categories, setCategories] = useState([{id:"2", name:"name"}]);
+    const [categories, setCategories] = useState([]);
 
     useEffect(()=>{
 
@@ -18,6 +18,7 @@ const TalkTrackCategory = props => {
 
             const applyData = (res)=>{
                 console.log(res);
+                setCategories(res.data);
             };
 
             await getHttpRequest(configRequest, applyData);
@@ -28,12 +29,19 @@ const TalkTrackCategory = props => {
     
     return(
 
-        <select className="form-select">
-            <option value="">Select a Category</option>
+        <select className="form-select text-center text-uppercase"
+                name={name}
+                onChange={(e)=>inputChange(e)}
+                value={value}
+        >
+            <option value="" className="text-center">choose a Category</option>
             {
                 categories.map((category, idx)=>{
                     return(
-                        <option key={idx} value={category.id}>{category.name}</option>
+                        <option key={idx}
+                                value={category.id}
+                                className="text-center text-uppercase"
+                                >{category.name}</option>
                     )
                 })
             }

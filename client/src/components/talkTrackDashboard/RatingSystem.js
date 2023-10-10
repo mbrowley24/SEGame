@@ -1,40 +1,88 @@
-import React, {useEffect, useState} from 'react';
-import {Rating} from '@mui/material';
+import React, {useCallback, useEffect, useState} from 'react';
+import {Rating} from 'react-simple-star-rating';
 import useHttp from '../../hooks/useHttp';
+import '../../css/generalCss.css'
 
 
 
 const RatingSystem = props => {
-    const {id} = props;
-    const [rated, setRated] = useState(false);
-    const [rating, setRating] = useState(0);
-    const [disabled, setDisabled] = useState(false);
-    const {getHttpRequest} = useHttp();
+    const {id, ratingValue} = props;
+
+    const [update, setUpdate] = useState(false); // [update, setUpdate 
+    const [rated, setRated] = useState(true);
+    const [rating, setRating] = useState(1);
+    const {getHttpRequest, postHttpRequest} = useHttp();
     
+
+    const onPointerMove = (value) => {
+        setRating(value);  
+    };
+
+
+    useEffect(() => {
+        if(ratingValue){
+            
+            if(ratingValue > 0){
+                setRating(ratingValue);;
+            }
+        }
+    }, []);
+
     useEffect(() => {
             
             (async () => {
     
                 const configRequest = {
-                    url: 'talktracks/ratings',
-                    params: {
-                        public_id: id,
-                    },
+                    url: `talktrackratings/${id}`,
                 };
     
                 const applyData = (res) => {
-                    console.log("TalkTrackTableRow");
-                    console.log(res.data);
-                    setRated(res.data);
+                    console.log(res.data.isRated);
+                    setRated(res.data.isRated);
                 };
     
                 await getHttpRequest(configRequest, applyData);
     
             })();
-    }, []);
+    }, [update]);
+
+    const submitRating = async (e) => {
+        e.preventDefault();
+
+        const configRequest = {
+            url: `talktrackratings/${id}`,
+            data: {rating: rating}
+        };
+        const applyData = (res) => {
+            console.log(res);
+
+            if(res.status === 200){
+                console.log("rated");
+                
+                setUpdate(update => !update)
+            }
+        };
+
+        await postHttpRequest(configRequest, applyData);
+    };
 
     return(
-        <Rating name="rating" value={rating} disabled={disabled} />
+        <React.Fragment>
+            <Rating name="rating"
+                size={20}
+                onPointerMove={onPointerMove}
+                initialValue={rating}
+                readonly={rated}
+            />
+            {!rated && 
+                <button className="btn-small ms-3" 
+                        onClick={submitRating}
+                        disabled={rating === 0}
+                >
+                    Rate Me
+                </button>}
+        </React.Fragment>
+        
     )
 };
 export default RatingSystem;

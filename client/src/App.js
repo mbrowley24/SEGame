@@ -12,6 +12,7 @@ import StartGameView from "./views/StartGameView";
 import GamePlay from "./components/GamePlay";
 import JoinGameView from "./views/JoinGameView";
 import {SocketProvider} from "./context/SocketContext";
+import {QuestionTableProvider} from "./context/QuestionContext"
 import EditBoardView from "./views/EditBoardView";
 import QuestionEditView from "./views/QuestionEditView";
 import PlayerGame from "./components/PlayerGame";
@@ -24,11 +25,14 @@ import PasswordRecovery from './views/PasswordRecovery';
 import TalkTrackRow from './components/talkTrackDashboard/TalkTrackRow';
 import TalkTrackDashboard from './views/TalkTrackDashboard';
 import NewTalkTrackQuestion from './components/talkTrackQuestion/NewTalkTrackQuestion';
+import TalkTrackQuestionsView from './views/TalkTrackQuestionsView';
+
 
 function App() {
   return (
     <div className="App">
         <SocketProvider>
+          <QuestionTableProvider>
           <Router>
               <Routes>
                 <Route path="/">
@@ -74,12 +78,13 @@ function App() {
                     </Route>
                   </Route>
                   <Route path={'/talktrack'}>
-                    <Route path={''} element={<TalkTrackDashboard/>}/>
-                    <Route path={'new'} element={<NewTalkTrackQuestion/>}/>
+                    <Route path={'questions'} element={<TalkTrackQuestionsView/>}/>
+                    <Route path={'questions/new'} element={<NewTalkTrackQuestion/>}/>
                   </Route>
                 </Route>
               </Routes>
           </Router>
+          </QuestionTableProvider>
         </SocketProvider>
     </div>
   );

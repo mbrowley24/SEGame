@@ -23,12 +23,12 @@ const talk_track_questionSchema = new mongoose.Schema({
         required: [true, "Rating is required"],
     },
 
-    createc_by: {
+    created_by: {
         type: String,
         required: [true, "Created by is required"],
     },
     
-    type: {
+    category: {
         type: mongoose.Schema.Types.ObjectId,
         required: [true, "Type is required"],
     },

@@ -29,7 +29,7 @@ const GameSelection = props => {
                     <div className={`d-flex align-items-center height30 justify-content-around border rounded-3 bg-green`}>
                     <div className="">
                             <Link className="text-nowrap no_decoration_light text-bold"
-                                to={'/talktrack'}
+                                to={'/talktrack/questions'}
                             >
                                 <h3 className="display-3">Talk Track</h3>
                             </Link>
