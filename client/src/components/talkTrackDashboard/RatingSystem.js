@@ -18,15 +18,19 @@ const RatingSystem = props => {
         setRating(value);  
     };
 
+    
+
 
     useEffect(() => {
+
         if(ratingValue){
             
             if(ratingValue > 0){
                 setRating(ratingValue);;
             }
         }
-    }, []);
+
+    }, [id]);
 
     useEffect(() => {
             
@@ -37,14 +41,13 @@ const RatingSystem = props => {
                 };
     
                 const applyData = (res) => {
-                    console.log(res.data.isRated);
                     setRated(res.data.isRated);
                 };
     
                 await getHttpRequest(configRequest, applyData);
     
             })();
-    }, [update]);
+    }, [update, id]);
 
     const submitRating = async (e) => {
         e.preventDefault();
@@ -65,7 +68,7 @@ const RatingSystem = props => {
 
         await postHttpRequest(configRequest, applyData);
     };
-
+    
     return(
         <React.Fragment>
             <Rating name="rating"

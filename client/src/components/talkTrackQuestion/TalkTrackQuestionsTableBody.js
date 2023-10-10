@@ -52,6 +52,7 @@ const TalkTrackQuestionsTableBody = props => {
                 {
                     questionState.questions.length > 0 &&
                     questionState.questions.map((talktrack, index) => {
+                        //console.log(talktrack);
                         return(
                             <tr key={index} className="">
                                 <td className="text-center text-truncate">{talktrack.question}</td>
