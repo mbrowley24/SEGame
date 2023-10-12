@@ -66,6 +66,7 @@ module.exports = {
     },
     // get all questions
     get_questions: async (req, res) => {
+        
         console.log("getQuestions");
         const decodedJwt = jwt.decode(req.cookies.usertoken, {complete: true});
         
@@ -125,6 +126,57 @@ module.exports = {
             return;
         }
 
+
+    },
+    //talk track questions
+    getTalkTrackQuestions : async (req, res) => {
+        const {page, limit} = req.params;
+        const skip = (page + 1) * limit;
+        
+        try{
+
+            const responseData = {
+                questionResponses: [],
+                page: page,
+                totalPages: 0,
+                firstPage: true,
+                lastPage: false,
+                totalQuestions: 0,
+            }
+            
+
+            const questionCount = await Question.countDocuments({});
+            
+            responseData.totalQuestions = questionCount;
+            responseData.totalPages = Math.ceil(questionCount/Number(limit));
+            responseData.firstPage = Number(page)=== 0? true:false;
+            responseData.lastPage = page === (Math.ceil(questionCount/Number(limit))-1)?true:false;
+            responseData.page = Number(page);
+
+            const questions = await Question.find({}).sort({rating: 1}).skip(skip).limit(limit).exec();
+            
+            for(let i = 0; i < questions.length; i++){
+                
+                const questionResponse = {
+                    question: questions[i].question,
+                    rating: questions[i].rating,
+                    id: questions[i].public_id,
+                }
+
+                responseData.questionResponses.push(questionResponse);
+            }
+
+            console.log(responseData);
+            res.status(200).json(responseData);
+
+        }catch(err){
+
+            console.log('error getting talk track questions');
+            console.log(err);
+            res.status(400).json({message: "error getting questions"});
+
+        }
+        
 
     },
     // rate question 

@@ -6,7 +6,7 @@ import '../../css/generalCss.css'
 
 
 const RatingSystem = props => {
-    const {id, ratingValue} = props;
+    const {id, ratingValue, url} = props;
 
     const [update, setUpdate] = useState(false); // [update, setUpdate 
     const [rated, setRated] = useState(true);
@@ -17,8 +17,6 @@ const RatingSystem = props => {
     const onPointerMove = (value) => {
         setRating(value);  
     };
-
-    
 
 
     useEffect(() => {
@@ -37,7 +35,7 @@ const RatingSystem = props => {
             (async () => {
     
                 const configRequest = {
-                    url: `talktrackratings/${id}`,
+                    url: url,
                 };
     
                 const applyData = (res) => {
@@ -53,7 +51,7 @@ const RatingSystem = props => {
         e.preventDefault();
 
         const configRequest = {
-            url: `talktrackratings/${id}`,
+            url: url,
             data: {rating: rating}
         };
         const applyData = (res) => {

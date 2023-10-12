@@ -59,8 +59,8 @@ const NavBar = props =>{
                                         >Questions</Link>
                                     </li>
                                     <li>
-                                        <Link class="dropdown-item" 
-                                                to={''}
+                                        <Link className="dropdown-item" 
+                                                to={'/talktrack/collections'}
                                         >TalkTracks
                                         </Link>
                                     </li>

@@ -59,7 +59,10 @@ const TalkTrackQuestionsTableBody = props => {
                                 <td className="text-center text-uppercase">{talktrack.category}</td>
                                 <td className="text-center">{talktrack.created_by}</td>
                                 <td colSpan={1} className="text-center">
-                                    <RatingSystem id={talktrack.id}  ratingValue={talktrack.rating}/>
+                                    <RatingSystem id={talktrack.id}
+                                        ratingValue={talktrack.rating}
+                                        url={`talktrackratings/${talktrack.id}`}
+                                    />
                                 </td>
                             </tr>
                         )

@@ -25,7 +25,8 @@ require('./routes/game.routes')(app);
 require('./routes/talktrack.routes')(app);
 require('./routes/talktrackcategory.routes')(app);
 require('./routes/talktrack_rating.routes')(app);
-
+require('./routes/talktrackcollection.routes')(app);
+require('./routes/talk_track_collection_rating.routes')(app);
 
 const server = http.createServer(app);
 

@@ -6,5 +6,6 @@ module.exports = (app) => {
     //check if user rated question
     app.get('/api/v1/talktracks/:page/:limit', authenticate, TalkTrackController.get_questions);
     app.post('/api/v1/talktracks', authenticate, TalkTrackController.createQuestion);
+    app.get('/api/v1/talktracks/questions/forms/:page/:limit', authenticate, TalkTrackController.getTalkTrackQuestions);
     
 };
