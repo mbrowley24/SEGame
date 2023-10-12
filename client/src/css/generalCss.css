@@ -262,6 +262,7 @@
     border: none;
 }
 
+
 .selected_border{
     border: 5px solid #519e8a;
 }
@@ -400,6 +401,11 @@
     width: 85%;
 }
 
+.no-resize{
+    resize: none;
+    height: 10%;
+}
+
 .game_question{
 
 }
@@ -415,4 +421,8 @@
 .game_btn:hover{
     border: none;
     outline: none;
+}
+
+.drop-down{
+    height: 3vh;
 }

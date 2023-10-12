@@ -3,10 +3,6 @@ const mongoose = require('mongoose');
 
 const talk_track_question_ratingSchema = new mongoose.Schema({
     
-        public_id:{
-            type: String,
-            required: [true, "Public id is required"],
-        },
         
         question: {
             type: mongoose.Schema.Types.ObjectId,
@@ -27,5 +23,5 @@ const talk_track_question_ratingSchema = new mongoose.Schema({
     
 }, {timestamps: true});
 
-export const Talk_Track_Question_Rating = mongoose.model('Talk_Track_Question_Rating', talk_track_question_ratingSchema);
+const Talk_Track_Question_Rating = mongoose.model('Talk_Track_Question_Rating', talk_track_question_ratingSchema);
 module.exports = Talk_Track_Question_Rating;

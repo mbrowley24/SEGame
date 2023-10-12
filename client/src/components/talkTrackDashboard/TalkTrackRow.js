@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import TalkTrackQuestions from "./TalkTrackQuestions";
 import NewTalkTrackQuestion from "../talkTrackQuestion/NewTalkTrackQuestion";
+import '../../css/generalCss.css';
 
 const TalkTrackRow = () => {
     const [newQuestion, setNewQuestion] = useState(false);
@@ -14,9 +15,9 @@ const TalkTrackRow = () => {
                 <h4 className={'text-center text-light text-capitalize p-2 m-auto my-1 p-1 w-50 rounded-3' +
                     ' fw-bolder sticky'}>
                     questions 
-                    <button onClick={handleShow} className="" >
+                    <div onClick={handleShow} className="d-inline-block clickable" >
                         <i className="material-icons">add_box</i>
-                    </button> 
+                    </div> 
                 </h4>
                 <div className={'height30 overflow-auto skinny_black_scroll_bar rounded-3'}>
                     <TalkTrackQuestions/>

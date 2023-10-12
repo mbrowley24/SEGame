@@ -45,6 +45,27 @@ const NavBar = props =>{
                                             jeopardy
                                 </Link>
                             </li>
+                            <li className="nav-item dropdown text-center">
+                                <Link className="nav-link dropdown-toggle text-light" 
+                                        to={''} id="navbarDropdown"
+                                        role="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                >Talk Track
+                                </Link>
+                                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><Link className="dropdown-item text-center" 
+                                                to={'/talktrack/questions'}
+                                        >Questions</Link>
+                                    </li>
+                                    <li>
+                                        <Link className="dropdown-item disabled" 
+                                                to={'/talktrack/collections'}
+                                        >TalkTracks
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </li>
                             <AddUser/>
                             <li className="nav-item">
                                 <a className="nav-link text-light"
@@ -52,7 +73,6 @@ const NavBar = props =>{
                                 >Report Bug</a>
                             </li>
                         </ul>
-                        
                         <form className="d-flex">
                             <button className="btn btn-outline-light"
                                     type="submit"

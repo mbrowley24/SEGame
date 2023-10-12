@@ -1,4 +1,4 @@
-const TalkTrackCategoryController = require('../controllers/talktrackcategory.controller');
+const TalkTrackCategoryController = require('../controllers/talk_track_category.controller');
 
 
 module.exports = app => {

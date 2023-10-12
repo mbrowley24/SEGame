@@ -16,7 +16,7 @@ const AddUser = props =>{
 
 
             const applyData = res =>{
-                console.log(res.data);
+                
                 setIsAdmin(res.data);
             };
 

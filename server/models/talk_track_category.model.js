@@ -17,5 +17,5 @@ const talk_track_categorySchema = new mongoose.Schema({
     
 }, {timestamps: true});
 
-const Talk_Track_Category = mongoose.model('Talk_Track_Category', talk_track_categorySchema);
+const Talk_Track_Category = mongoose.model('talk_track_category', talk_track_categorySchema);
 module.exports = Talk_Track_Category;
