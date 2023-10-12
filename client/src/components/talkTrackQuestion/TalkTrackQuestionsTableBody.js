@@ -1,49 +1,51 @@
 import React, {useContext, useEffect, useState} from "react";
 import useHttp from "../../hooks/useHttp";
 import RatingSystem from "../talkTrackDashboard/RatingSystem";
-import QuestionTablePaginationContext from "../../context/QuestionContext";
+import QuestionContext from "../../context/QuestionContext";
 
 
 const TalkTrackQuestionsTableBody = props => {
     const {update} = props;
     const {getHttpRequest, isLoading} = useHttp();
-    const {questionState, setQuestionState} = useContext(QuestionTablePaginationContext);
+    const {questionState, setQuestionState, page, 
+            setPage, numOfItems, setNumOfItems
+        } = useContext(QuestionContext);
 
     
-    useEffect(() => {
+    // useEffect(() => {
 
-        (async () => {
+    //     (async () => {
             
-            const configRequest = {
-                url: `talktracks/${0}/${10}`,
-            };
+    //         const configRequest = {
+    //             url: `talktracks/${page}/${numOfItems}`,
+    //         };
 
-            const applyData = (res) => {
+    //         const applyData = (res) => {
                 
-                if(res.status === 200){
-                    setQuestionState((prevState) => {
+    //             if(res.status === 200){
+    //                 setQuestionState((prevState) => {
                     
-                        return{
-                            ...prevState,
-                            questions: res.data.questionResponses,
-                            page: res.data.page,
-                            totalPages: res.data.totalPages,
-                            firstPage: res.data.firstPage,
-                            lastPage: res.data.lastPage, 
-                        }
-                    });
+    //                     return{
+    //                         ...prevState,
+    //                         questions: res.data.questionResponses,
+    //                         page: res.data.page,
+    //                         totalPages: res.data.totalPages,
+    //                         firstPage: res.data.firstPage,
+    //                         lastPage: res.data.lastPage, 
+    //                     }
+    //                 });
 
                     
-                }
+    //             }
                 
-            };
+    //         };
 
-            await getHttpRequest(configRequest, applyData);
-        })();
+    //         await getHttpRequest(configRequest, applyData);
+    //     })();
 
-        return () => {};
+    //     return () => {};
 
-    }, [update]);
+    // }, [update]);
 
     // console.log(questionState);
     return(

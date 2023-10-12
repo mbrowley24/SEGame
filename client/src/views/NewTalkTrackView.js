@@ -6,6 +6,7 @@ import '../css/generalCss.css'
 
 
 const NewTalkTrackView = props =>{
+    
 
     return(
         <div className="bg-light-gray height101">

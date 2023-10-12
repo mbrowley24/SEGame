@@ -5,9 +5,9 @@ import "../../css/generalCss.css"
 
 
 const TablePagination = props => {
-    const {page, totalPages} = props;
+    const {update} = props;
     const [currentPage, setCurrentPage] = useState([]);
-    const {questionState} = useContext(QuestionContext);
+    const {questionState, page, setPage} = useContext(QuestionContext);
     
     useLayoutEffect(() => {
 
@@ -27,16 +27,23 @@ const TablePagination = props => {
 
     }, [page]);
 
+
+    const handlePageChange = value => {
+        setPage(Number(value));
+    };
+
     return(
         <div className="w-75 border m-auto">
             <div className="text-end">
                 <button className="btn btn-link btn-sm"
-                    disabled={questionState.firstPage}    
+                    disabled={questionState.firstPage}
+                    onClick={() => handlePageChange(0)}    
                 >
                     <i className="small material-icons">first_page</i>
                 </button>
                 <button className="btn btn-link btn-sm"
                         disabled={questionState.firstPage}
+                        onClick={() => handlePageChange((questionState.page - 1))}
                 >
                     <i className="small material-icons">keyboard_arrow_left</i>
                 </button>
@@ -46,18 +53,21 @@ const TablePagination = props => {
                             <button key={index}
                                     disabled={page > questionState.totalPages }
                                     className="btn btn-sm btn-link"
+                                    onClick={() => handlePageChange(page)}
                             >{page}</button>
                         )
                     })
                 }
                 <button className="btn btn-link btn-sm"
                         disabled={questionState.lastPage || (questionState.page + 1) === questionState.totalPages}
+                        onClick={() => handlePageChange((questionState.page + 1))}
 
                 >
                     <i className="small material-icons">keyboard_arrow_right</i>
                 </button>
                 <button className="btn btn-link btn-sm"
                         disabled={questionState.lastPage || (questionState.page + 1) === questionState.totalPages}
+                        onClick={() => handlePageChange(questionState.totalPages)}  
                 >
                     <i className="small material-icons">last_page</i>
                 </button>

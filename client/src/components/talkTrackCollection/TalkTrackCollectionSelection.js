@@ -39,7 +39,7 @@ const TalkTrackCollectionSelection = props =>{
                     
                     return(
                         <div className="d-flex m-auto border border-danger" key={index}>
-                            <div className="w-50 border border-dark d-flex align-items-center justify-content-center">    
+                            <div className="w-10 border border-dark d-flex align-items-center justify-content-center">    
                                 <button className="btn-small">add</button>
                             </div>
                             <div className="border p-3 w-100">

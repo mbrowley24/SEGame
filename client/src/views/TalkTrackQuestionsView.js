@@ -28,11 +28,11 @@ const TalkTrackQuestionsView = props => {
                     </div> 
                 </h4>
                 <div className={'height70 overflow-auto skinny_black_scroll_bar rounded-3'}>
-                    <TalkTrackQuestionsTable update={update} />
+                    <TalkTrackQuestionsTable/>
                     <NewTalkTrackQuestion show={newQuestion} 
                                         setUpdate={setUpdate} 
                                         handleClose={handleClose}/>
-                    <TablePagination/>
+                    <TablePagination update={update}/>
                 </div>
             </div>
         </div>
