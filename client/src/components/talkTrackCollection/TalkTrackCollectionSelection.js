@@ -2,7 +2,6 @@ import React, {useContext, useEffect, useState} from "react";
 import TalkTrackContext from "../../context/TalkTrackContext";
 import useHttp from "../../hooks/useHttp";
 import "../../css/generalCss.css"
-import { Rating } from "react-simple-star-rating";
 import RatingSystem from "../talkTrackDashboard/RatingSystem";
 
 const TalkTrackCollectionSelection = props =>{
