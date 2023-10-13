@@ -34,7 +34,7 @@ const GameUrl = props => {
             <button className="btn-small"
                         onClick={copy}
                     >
-                    {isCopied ? "Copied!" : "Game URL"}
+                    {isCopied ? "Copied!" : "Game Code"}
             </button>
         </div>
         
